@@ -8,19 +8,23 @@ class ConnectROS : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString masterURI READ getMasterURI WRITE setMasterURI NOTIFY masterURIChanged)
+    Q_PROPERTY(QString host READ getHost WRITE setHost NOTIFY hostChanged)
 public:
     explicit ConnectROS(QObject *parent = nullptr);
 
 signals:
     void masterURIChanged(const QString &arg);
+    void hostChanged(const QString &arg);
     void retry();
     void connectSuccess();
 public slots:
     QString getMasterURI();
     void setMasterURI(const QString &arg);
-    void connectMasterURI(QString master);
-
+    QString getHost();
+    void setHost(const QString &arg);
+    void connectMasterURI(QString master, QString hostname);
 private:
     QString m_masterURI;
+    QString m_host;
 };
 #endif // CONNECTROS_H

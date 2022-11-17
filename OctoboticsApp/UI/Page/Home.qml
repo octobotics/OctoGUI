@@ -167,7 +167,7 @@ Rectangle{
                 Text {
                     id: textId
                     text: "Crawler"
-                    font: control.font
+                    font.pixelSize: 24
                     color: "#FFFFFF"
                     leftPadding: control.indicator.width + control.spacing
                 }
@@ -176,10 +176,11 @@ Rectangle{
                     text: qsTr("Arm")
                     checked:publisher.toggleValue
                     enabled: false
-
+                    width: 60
+                    height: 58
                     indicator: Rectangle {
-                        implicitWidth: 48
-                        implicitHeight: 26
+                        implicitWidth: 58
+                        implicitHeight: 28
                         x: control.leftPadding
                         y: parent.height / 2 - height / 2
                         radius: 13
@@ -188,8 +189,8 @@ Rectangle{
 
                         Rectangle {
                             x: control.checked ? parent.width - width : 0
-                            width: 26
-                            height: 26
+                            width: 28
+                            height: 28
                             radius: 13
                             color: control.down ? "#cccccc" : "#ffffff"
                             border.color: "#232F34"//control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
@@ -198,7 +199,7 @@ Rectangle{
 
                     contentItem: Text {
                         text: control.text
-                        font: control.font
+                        font.pixelSize: 24
                         verticalAlignment: Text.AlignVCenter
                         color: "#FFFFFF"
                         leftPadding: control.indicator.width + control.spacing
@@ -603,7 +604,7 @@ Rectangle{
 
                     }
                     Rectangle{
-                        width: widthScreen * 0.14
+                        width: widthScreen * 0.12
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         border.width: 2
@@ -629,9 +630,6 @@ Rectangle{
                             RowLayout{
                                 Layout.fillHeight: true
                                 width: parent.width
-                                Item {
-                                    width: 10
-                                }
                                 Item{
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true

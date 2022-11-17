@@ -4,6 +4,7 @@ ConnectROS::ConnectROS(QObject *parent)
     : QObject(parent)
 {
     m_masterURI = "http://localhost:11311";
+    m_host = "localhost";
 }
 QString ConnectROS::getMasterURI()
 {
@@ -14,12 +15,22 @@ void ConnectROS::setMasterURI(const QString &arg)
     m_masterURI = arg;
     emit masterURIChanged(arg);
 }
-void ConnectROS::connectMasterURI(QString master)
+QString ConnectROS::getHost()
+{
+    return m_host;
+}
+void ConnectROS::setHost(const QString &arg)
+{
+    m_host = arg;
+    emit hostChanged(arg);
+}
+void ConnectROS::connectMasterURI(QString master, QString hostname)
 {
     std::map<std::string, std::string> remappings;
     remappings["__master"] = master.toStdString();
-    remappings["__hostname"] = "localhost";
-    std::cout << "master started!" << master.toStdString() << std::endl;
+    remappings["__hostname"] = hostname.toStdString();
+    std::cout << "master started!"
+              << "master :: " << master.toStdString() << " host :: " << hostname.toStdString() << std::endl;
     ros::init(remappings, "octo_gui");
     if (ros::master::check())
     {
