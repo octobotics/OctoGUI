@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>UI/Page/Login.qml</file>
+        <file>UI/Page/Home.qml</file>
+        <file>UI/Page/SplashScreen.qml</file>
+        <file>UI/main.qml</file>
+        <file>UI/Components/CButton.qml</file>
+        <file>UI/Assets/fontawesome-webfont.ttf</file>
+        <file>UI/Page/ConnectMasterURI.qml</file>
+        <file>UI/Assets/Font Awesome 6 Brands-Regular-400.otf</file>
+        <file>UI/Assets/battery-status/battery-empty-solid.svg</file>
+        <file>UI/Assets/battery-status/battery-quarter-solid.svg</file>
+        <file>UI/Assets/battery-status/battery-full-solid.svg</file>
+        <file>UI/Assets/battery-status/battery-three-quarters-solid.svg</file>
+        <file>UI/Assets/battery-status/battery-half-solid.svg</file>
+        <file>UI/Assets/signal-status/wifi-signal.png</file>
+        <file>UI/Assets/signal-status/no-wifi-signal.png</file>
+        <file>UI/Assets/dashboard/settings.png</file>
+        <file>UI/Assets/dashboard/remove.png</file>
+        <file>UI/Assets/dashboard/tick.png</file>
+        <file>UI/Assets/dashboard/robotic-arm.png</file>
+        <file>UI/Assets/octobotics_logo.png</file>
+        <file>UI/Assets/dashboard/expand.png</file>
+        <file>UI/Assets/dashboard/shrink.png</file>
+        <file>UI/Assets/dashboard/capture.png</file>
+        <file>UI/Assets/dashboard/record.png</file>
+    </qresource>
+</RCC>
