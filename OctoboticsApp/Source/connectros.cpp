@@ -4,7 +4,7 @@ ConnectROS::ConnectROS(QObject *parent)
     : QObject(parent)
 {
     m_masterURI = "http://localhost:11311";
-    m_host = "localhost";
+    m_host = "octo";
 }
 QString ConnectROS::getMasterURI()
 {

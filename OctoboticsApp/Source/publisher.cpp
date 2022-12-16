@@ -20,6 +20,7 @@ void Publisher::on_pushButton_2_pressed()
 {
     emit message1("122344");
 }
+
 void Publisher::armToolCallback(int arg)
 {
     qDebug() << Q_FUNC_INFO << arg;
@@ -44,12 +45,24 @@ void Publisher::velCallback(float current_vel_linear, float current_vel_angular,
     velocity.insert("max_angular", max_angular);
     setVelocityValue(velocity);
 }
-void Publisher::utfCallback(float ut, float force)
+//void Publisher::utfCallback(float ut, float force)
+//{
+//    QVariantMap velocity;
+//    velocity.insert("ut", ut);
+//    velocity.insert("force", force);
+//    setUtFstatus(velocity);
+//}
+void Publisher::utCallback(float ut)
 {
     QVariantMap velocity;
     velocity.insert("ut", ut);
+    setUtstatus(velocity);
+}
+void Publisher::fCallback(float force)
+{
+    QVariantMap velocity;
     velocity.insert("force", force);
-    setUtFstatus(velocity);
+    setFstatus(velocity);
 }
 void Publisher::initRosThread()
 {
@@ -57,21 +70,28 @@ void Publisher::initRosThread()
     this->rost = new RosThread();
     connect(this, SIGNAL(message(QString)), this->rost, SLOT(addLine(QString)));
     connect(this, SIGNAL(message1(QString)), this->rost, SLOT(addLine(QString)));
+    connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
+    connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
+
     connect(this->rost, SIGNAL(armToolCallback(int)), this, SLOT(armToolCallback(int)));
     connect(this->rost, SIGNAL(commCallback(int)), this, SLOT(commCallback(int)));
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
     connect(this->rost, SIGNAL(velCallback(float, float, float, float)), this, SLOT(velCallback(float, float, float, float)));
-    connect(this->rost, SIGNAL(utfCallback(float, float)), this, SLOT(utfCallback(float, float)));
+//    connect(this->rost, SIGNAL(utfCallback(float, float)), this, SLOT(utfCallback(float, float)));
+    connect(this->rost, SIGNAL(utCallback(float)), this, SLOT(utCallback(float)));
+    connect(this->rost, SIGNAL(fCallback(float)), this, SLOT(fCallback(float)));
     connect(this->rost, SIGNAL(toggleCallback(bool)), this, SLOT(toggleCallback(bool)));
     connect(this->rost, SIGNAL(armCallback(bool, bool, bool, bool)), this, SLOT(armCallback(bool, bool, bool, bool)));
     connect(this->rost, SIGNAL(crawlerCallback(bool, bool, bool, bool)), this, SLOT(crawlerCallback(bool, bool, bool, bool)));
     // start begins periodically executing the run() function
+//    connect(this->rost, SIGNAL(arm))
     this->rost->start();
 }
 float Publisher::getBatteryValue()
 {
     return m_batteryValue;
 }
+
 void Publisher::setBatteryValue(float value)
 {
     m_batteryValue = value;
@@ -158,12 +178,39 @@ void Publisher::setCrawlStatus(QVariantMap value)
     m_crawlStatus = value;
     emit crawlStatusChanged(value);
 }
-QVariantMap Publisher::getUtFstatus()
+//QVariantMap Publisher::getUtFstatus()
+//{
+//    return m_utFStatus;
+//}
+//void Publisher::setUtFstatus(QVariantMap value)
+//{
+//    m_utFStatus = value;
+//    emit utFstatusChanged(value);
+//}
+QVariantMap Publisher::getUtstatus()
 {
-    return m_utFStatus;
+    return m_utStatus;
 }
-void Publisher::setUtFstatus(QVariantMap value)
+void Publisher::setUtstatus(QVariantMap value)
 {
-    m_utFStatus = value;
-    emit utFstatusChanged(value);
+    m_utStatus = value;
+    emit utstatusChanged(value);
 }
+QVariantMap Publisher::getFstatus()
+{
+    return m_FStatus;
+}
+void Publisher::setFstatus(QVariantMap value)
+{
+    m_FStatus = value;
+    emit FstatusChanged(value);
+}
+void Publisher::call_arminit()
+{
+    emit value(1);
+}
+void Publisher::call_crawlerinit()
+{
+    emit value2(1);
+}
+

@@ -29,7 +29,12 @@ Page {
         width: parent.width
         anchors.top: iconRect.bottom
         spacing: 15
+        Keys.onPressed: (event)=> {
+                if (event.key === Qt.Key_Return) {
+                  connectROS.connectMasterURI(masterUriId.text,hostname.text)
 
+                }
+                        }
         TextField {
             id: masterUriId
             placeholderText: qsTr("Master URI")
@@ -74,6 +79,12 @@ Page {
             font.pointSize: 14
             font.family: "fontawesome"
             leftPadding: 30
+            Keys.onPressed: (event)=> {
+                    if (event.key === Qt.Key_Return) {
+                      connectROS.connectMasterURI(masterUriId.text,hostname.text)
+
+                    }
+                            }
             background: Rectangle {
                 implicitWidth: 200
                 implicitHeight: 50
