@@ -140,6 +140,7 @@ Page {
         onConnectSuccess : {
             showUserInfo();
             publisher.initRosThread();
+//            cst.initRt();
         }
     }
 }

@@ -11,6 +11,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls 2.5
 import HelloCpp 1.0
 import "../../UI/Components"
+import CustomPlot 1.0
 
 Rectangle{
     color: "white"
@@ -101,14 +102,27 @@ Rectangle{
             PropertyAnimation { id: animationOne; target: statusBar;alwaysRunToEnd: true; property: "color"; to: "#fec1c1"; duration: 500
                 onStopped: animationTwo.start()}
             PropertyAnimation { id: animationTwo; target: statusBar;alwaysRunToEnd: true; property: "color"; to: "#9b0000"; duration: 300 }
+            Item {
+                id: logo
+                width: 80
+                height: 80
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
 
+            Image {
+                sourceSize.width: 80
+                sourceSize.height: 80
+                anchors.centerIn: parent
+                source: "qrc:/UI/Assets/octobotics_logo.png"
+            }
+            }
             Item {
                 id: connectionStatus
                 width: 40
                 height: 40
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.left: logo.right
+                anchors.leftMargin: 20
 
                 Image {
                     id: connectionStatusImg
@@ -268,42 +282,9 @@ Item{
             ColumnLayout{
                 anchors.centerIn: parent
                 RowLayout {
-                    Rectangle{
-                        id: logoRect
-                        width: widthScreen * 0.14
-                        height: heightScreen * 0.25
-                        border.color: "#6fda9c"
-                        color: "#344955"
-                        radius: 15
-
-                        layer.enabled: true
-                        layer.effect: OpacityMask {
-                            maskSource: Item {
-                                width: logoRect.width
-                                height: logoRect.height
-                                Rectangle {
-                                    anchors.centerIn: parent
-                                    width:  logoRect.width
-                                    height: logoRect.height
-                                    border.color: "#6fda9c"
-                                    color: "#344955"
-                                    radius: 15
-                                }
-                            }
-                        }
-
-                        Image {
-                            sourceSize.width: parent.width
-                            sourceSize.height: parent.height
-                            anchors.centerIn: parent
-                            source: "qrc:/UI/Assets/octobotics_logo.png"
-                        }
-
-
-                    }
 
                     Rectangle{
-                        width: widthScreen * 0.14
+                        width: widthScreen * 0.28
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         color: "#344955"
@@ -334,47 +315,164 @@ Item{
                                     ColumnLayout{
                                         anchors.centerIn: parent
                                         RowLayout{
-                                            Image {
-                                                id:pumpStatus
-                                                sourceSize.width: 35
-                                                sourceSize.height: 35
-                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Text {
-                                                font.pixelSize: 26
-                                                color: "#6fda9c"
-                                                text: qsTr("Pump")
-                                            }
-                                        }
-                                        RowLayout{
-                                            Image {
-                                                id:grinderStatus
-                                                sourceSize.width: 35
-                                                sourceSize.height: 35
-                                                source:  "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 26
-                                                text: qsTr("Grinder")
-                                            }
-                                        }
-                                        RowLayout{
+                                            anchors.fill: parent
+//                                                   spacing: 30
+
+                                                   // lets have some left and right margins
+//                                                   anchors.leftMargin: 20
+//                                                   anchors.rightMargin: 20
+
                                             Image {
                                                 id:magnetStatus
                                                 sourceSize.width: 35
                                                 sourceSize.height: 35
                                                 source: "qrc:/UI/Assets/dashboard/remove.png"
                                             }
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 26
-                                                text: qsTr("Magnet")
+
+                                            Button {
+                                                id: magnet
+                                                text : "Magnet"
+                                                implicitWidth : 70
+                                                implicitHeight : 30
+
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 5
+                                                    opacity: magnet.down ? 0.5 : 1
+
+                                                }
+
+                                                onClicked: {
+//                                                    magnet.text = "Done";
+                                                    publisher.toolToggle = "7"
+
+                                                }
+                                            }
+
+                                            Item{
+                                            width: 8
+                                            }
+
+
+                                            Image {
+                                                id:pumpStatus
+                                                sourceSize.width: 35
+                                                sourceSize.height: 35
+                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                                            }
+
+                                            Button {
+                                                id: pump
+                                                text : "Pump"
+                                                implicitWidth : 70
+                                                implicitHeight : 30
+//                                                anchors.centerIn: parent
+
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 5
+                                                    opacity: pump.down ? 0.5 : 1
+
+                                                }
+
+                                                onClicked: {
+                                                    publisher.toolToggle = "4"
+
+                                                }
+                                            }
+                                        Item{
+                                        width: 8
+                                        }
+                                            Image {
+                                                id:grinderStatus
+                                                sourceSize.width: 35
+                                                sourceSize.height: 35
+                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                                            }
+
+                                            Button {
+                                                id: grinder
+                                                text : "Grinder"
+                                                implicitWidth : 70
+                                                implicitHeight : 30
+
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 5
+                                                    opacity: grinder.down ? 0.5 : 1
+
+                                                }
+
+                                                onClicked: {
+                                                    publisher.toolToggle = "0"
+                                                    popup.open()
+
+                                                }
                                             }
                                         }
                                         Item {
-                                            height: 2
+                                            height:20
                                         }
+                                        RowLayout{
+
+                                            Image {
+                                                id:flightImg
+                                                sourceSize.width: 35
+                                                sourceSize.height: 35
+                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                                            }
+                                            Button {
+                                                id: flight
+                                                text : "Upper Light"
+                                                implicitWidth : 120
+                                                implicitHeight : 30
+
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 5
+                                                    opacity: flight.down ? 0.5 : 1
+
+                                                }
+
+                                                onClicked: {
+                                                    publisher.toolToggle = "6"
+
+                                                }
+                                            }
+                                            Item {
+                                                width:30
+                                            }
+
+
+
+                                            Image {
+                                                id:blightImg
+                                                sourceSize.width: 35
+                                                sourceSize.height: 35
+                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                                            }
+                                            Button {
+                                                id: blight
+                                                text : "Bottom Light"
+                                                implicitWidth : 120
+                                                implicitHeight : 30
+
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 5
+                                                    opacity: blight.down ? 0.5 : 1
+
+                                                }
+
+                                                onClicked: {
+                                                    publisher.toolToggle = "5"
+
+                                                }
+                                            }
+
+
+                                        }
+
                                     }
 
                                 }
@@ -384,7 +482,7 @@ Item{
 
                     }
                     Rectangle{
-                        width: widthScreen * 0.20
+                        width: widthScreen * 0.16
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         color: "#344955"
@@ -429,7 +527,7 @@ Item{
 
                     }
                     Rectangle{
-                        width: widthScreen * 0.20
+                        width: widthScreen * 0.16
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         color: "#344955"
@@ -474,6 +572,7 @@ Item{
 
                     }
                     Rectangle{
+                        id: crawlerr
                         width: widthScreen * 0.16
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
@@ -482,7 +581,9 @@ Item{
 
                         ColumnLayout{
                             anchors.fill: parent
-                            RowLayout{
+                            id:cr
+
+
                                 Text {
                                     Layout.fillWidth: true
                                     text: qsTr("Crawler")
@@ -493,19 +594,100 @@ Item{
                                     verticalAlignment: Text.AlignVCenter
                                     horizontalAlignment: Text.AlignHCenter
                                 }
-                                Item {
-                                    width: 20
-                                }
+
+
+                            RowLayout{
+
+
+                                SButton{
+                                    Layout.leftMargin: widthScreen * 0.16/4.5
+                                    Layout.topMargin: 15
+                                    property bool init: false
+
+                                    function init_crawler(ccw){
+
+                                          publisher.call_crawlerinit(ccw)
+
+
+                                    }
+
+                                   id: initCrawler
+                                   height: 20
+                                   name: init ?  "Stop" : "Initialize"
+                                   baseColor: init ?  "red" : mainAppColor
+                                   borderColor: mainAppColor
+                                   implicitWidth: 80
+                                   Audio {
+                                        id: playMusic
+                                        source: "qrc:/UI/Assets/err.mp3"
+                                    }
+                                   onClicked: {
+                                       init =!init
+//                                       playMusic.play()
+
+                                       init_crawler(init)
+                                       popup.open()
+                                       console.error(Math.round((dashboardId.width - 500) / 2))
+
+                                   }
+                           }
+
+                                Popup {
+                                        id: popup
+
+                                        width: 500
+                                        height: 300
+                                        x: -width/2
+                                        y: height
+                                        modal: true
+                                        focus: true
+                                        closePolicy: Popup.CloseOnEscape
+
+
+//                                        color: "#344955"
+                                            Rectangle{
+                                            color: "green"
+                                            anchors.fill: parent
+
+                                            }
+//                                          ColumnLayout{
+
+//Rectangle
+
+//                                          }
+
+                                    }
+                                SButton{
+
+                                    Layout.topMargin: 15
+                                    id: resetCrawler
+                                    height: 20
+                                    implicitWidth: 80
+
+                                    name: "Reset"
+                                    baseColor: mainAppColor
+                                    borderColor: mainAppColor
+                                    onClicked: {
+                                        resetCrawler.name = "Done"
+                                        publisher.rst_crawler(1)
+                                    }
+
                             }
+                        }
+
+
                             Item{
                                 Layout.fillHeight: true
+//                                Layout.alignment: parent.Center
+//                                Layout.vertica
                                 width: parent.width
 
                                 Rectangle{
                                     id:rectId
                                     anchors.centerIn: parent
+                                    anchors.verticalCenterOffset: 5
                                     width: widthScreen * 0.08
-                                    height: heightScreen * 0.16
+                                    height: heightScreen * 0.10
                                     color: "#232F34"
                                 }
 
@@ -565,11 +747,11 @@ Item{
 
                                 }
 
+}
 
-                            }
 
-                        }
 
+                    }
                     }
                     Rectangle{
                         width: widthScreen * 0.14
@@ -606,71 +788,123 @@ Item{
                                         anchors.centerIn: parent
                                         RowLayout{
                                             Image {
-                                                sourceSize.width: 30
-                                                sourceSize.height: 30
+                                                sourceSize.width: 20
+                                                sourceSize.height: 20
                                                 source: publisher.armStatus.base ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
                                             }
-                                            CButton{
-                                                height: 26
-                                                name: "Crawler"
-                                                baseColor: mainAppColor
-                                                borderColor: mainAppColor
-                                                onClicked: {
-//
-                                                    publisher.call_crawlerinit()
-                                                }
-
-
+                                            Text {
+                                                color: "#6fda9c"
+                                                font.pixelSize: 20
+                                                text: qsTr("Base")
                                             }
+//                                            CButton{
+//                                                height: 26
+//                                                name: "Crawler"
+//                                                baseColor: mainAppColor
+//                                                borderColor: mainAppColor
+//                                                onClicked: {
+////
+//                                                    publisher.call_crawlerinit()
+//                                                }
+
+
+//                                            }
                                         }
                                         RowLayout{
                                             Image {
-                                                sourceSize.width: 30
-                                                sourceSize.height: 30
+                                                sourceSize.width: 20
+                                                sourceSize.height: 20
                                                 source:  publisher.armStatus.shoulder? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
                                             }
-//                                            Text {
-//                                                color: "#6fda9c"
-//                                                font.pixelSize: 26
-//                                                text: qsTr("Arm")
-//                                            }
-                                            CButton{
-                                                height: 26
-                                                name: "Arm"
-                                                baseColor: mainAppColor
-                                                borderColor: mainAppColor
-                                                onClicked: {
-                                                    publisher.call_arminit()
-                                                }
+                                            Text {
+                                                color: "#6fda9c"
+                                                font.pixelSize: 20
+                                                text: qsTr("Shoulder")
+                                            }
+//                                            CButton{
+//                                                height: 26
+//                                                name: "Arm"
+//                                                baseColor: mainAppColor
+//                                                borderColor: mainAppColor
+//                                                onClicked: {
+//                                                    publisher.call_arminit()
+//                                                }
 
 
                                             }
-                                        }
-                                        /*
+//                                        }
+
                                         RowLayout{
                                             Image {
-                                                sourceSize.width: 30
-                                                sourceSize.height: 30
+                                                sourceSize.width: 20
+                                                sourceSize.height: 20
                                                 source: publisher.armStatus.elbow ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
                                             }
                                             Text {
                                                 color: "#6fda9c"
-                                                font.pixelSize: 26
+                                                font.pixelSize: 20
                                                 text: qsTr("Elbow")
                                             }
                                         }
                                         RowLayout{
                                             Image {
-                                                sourceSize.width: 30
-                                                sourceSize.height: 30
+                                                sourceSize.width: 20
+                                                sourceSize.height: 20
                                                 source: publisher.armStatus.tool  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
                                             }
                                             Text {
                                                 color: "#6fda9c"
-                                                font.pixelSize: 26
+                                                font.pixelSize: 20
                                                 text: qsTr("Tool")
                                             }
-                                        }*/
+                                        }
+
+                                        RowLayout{
+
+                                            SButton{
+//                                                Layout.topMargin: 15
+                                                property bool arm_init: false
+                                                function init_arm(am){
+
+                                                           publisher.call_arminit(am)
+
+                                                }
+
+
+                                               id: initArm
+                                               height: 20
+                                               name: arm_init ?  "Stop" : "Initialize"
+                                               baseColor: arm_init ?  "red" : mainAppColor
+                                               borderColor: mainAppColor
+                                               implicitWidth: 80
+                                               onClicked: {
+                                                   arm_init =!arm_init
+                                               }
+                                       }
+
+
+                                            SButton{
+//                                                Layout.leftMargin: widthScreen * 0.16/4.5
+
+//                                                Layout.topMargin: 15
+                                                id: resetArm
+                                                height: 20
+                                                implicitWidth: 80
+
+                                                name: "Reset"
+                                                baseColor: mainAppColor
+                                                borderColor: mainAppColor
+                                                onClicked: {
+
+                                                    publisher.rst_arm(1)
+                                                }
+
+                                        }
+
+
+
+                                        }
+
 
                                     }
 
@@ -681,7 +915,7 @@ Item{
 
                     }
                     Rectangle{
-                        width: widthScreen * 0.12
+                        width: widthScreen * 0.24
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         border.width: 2
@@ -694,14 +928,33 @@ Item{
                             RowLayout{
                                 Text {
                                     Layout.fillWidth: true
-                                    text: qsTr("UT-Force")
                                     font.family: "Tahoma"
                                     font.bold: true
-                                    font.pixelSize: 24
-                                    color: "#ffffff"
+                                    font.pixelSize: 50
+                                    color: "#6fda9c"
                                     verticalAlignment: Text.AlignVCenter
                                     horizontalAlignment: Text.AlignHCenter
-                                }
+                                    topPadding: 5
+
+                                        function calcThick()
+                                        {
+//                                                    var k = 0.0
+//                                                     k = publisher.thickness.thickness.toFixed(2)
+                                            var u= publisher.thickness.unit
+                                            var un ="NAN"
+                                            if(u===1)
+                                                 un= "mm"
+                                            else if(u===0)
+                                                 un= "in"
+                                            else
+                                                un ="NAN"
+                                         return(" "+ un)
+
+                                        }
+                                        text:   publisher.thickness.unit === -1 ? "-----" : publisher.thickness.thickness.toFixed(2) + calcThick()
+                                    }
+
+
 
                             }
                             RowLayout{
@@ -711,31 +964,203 @@ Item{
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     ColumnLayout{
-                                        anchors.centerIn: parent
+                                        anchors.left : parent
                                         RowLayout{
                                             Text {
-                                                font.pixelSize: 20
                                                 color: "#6fda9c"
-                                                text: qsTr("UT :")
+                                                font.pixelSize: 12
+                                                text: qsTr("Velocity :")
+                                                leftPadding: 10
                                             }
                                             Text {
-                                                font.pixelSize: 20
                                                 color: "#6fda9c"
 
-                                                text:  publisher.utstatus.ut === undefined ? "NAN" : publisher.utstatus.ut.toFixed(2)
+                                                font.pixelSize: 12
+                                                text: publisher.utstatus.vel === undefined ? "NAN" : publisher.utstatus.vel + " " + "m/s"
+                                            }
+                                            Text {
+                                                color: "#6fda9c"
+                                                font.pixelSize: 12
+                                                leftPadding: 10
+
+                                                text: qsTr("DeepCoat :")
+                                            }
+                                            Text {
+                                                color: "#6fda9c"
+
+                                                font.pixelSize: 12
+                                                text: publisher.utstatus.deepcoat === undefined ? "NAN" : publisher.utstatus.deepcoat
+                                            }
+
+                                            Text {
+                                                color: "#6fda9c"
+                                                font.pixelSize: 12
+                                                leftPadding: 10
+                                                text: qsTr("Echoes :")
+                                            }
+                                            Text {
+                                                color: "#6fda9c"
+
+                                                font.pixelSize: 12
+                                                text: publisher.utstatus.echo === undefined ? "NAN" : publisher.utstatus.echo
+                                            }
+
+
+                                        }
+                                        RowLayout{
+                                            Text {
+                                                color: "#6fda9c"
+                                                font.pixelSize: 20
+                                                text: qsTr("Velocity   :")
+                                                leftPadding: 10
+                                            }
+
+                                            TextField {
+                                                id: sendVel
+                                                Layout.preferredWidth: 80
+                                                Layout.alignment: Qt.AlignHCenter
+                                                color: mainTextColor
+                                                font.pointSize: 14
+                                                font.family: "fontawesome"
+                                                leftPadding: 5
+                                                activeFocusOnPress: true
+                                                Keys.onPressed: (event)=> {
+                                                        if (event.key === Qt.Key_Return) {
+                                                            publisher.utVel = text
+
+                                                        }}
+                                                background: Rectangle {
+                                                    implicitWidth:  30
+                                                    implicitHeight: 30
+                                                    radius: implicitHeight / 2
+                                                    color: "transparent"
+
+                                                    Rectangle {
+                                                        width: 80
+                                                        height: 1
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+                                                        anchors.bottom: parent.bottom
+                                                        color: mainAppColor
+                                                    }
+                                                }
+                                            }
+                                            SButton{
+                                                height: 15
+                                                name: "Send"
+                                                baseColor: mainAppColor
+                                                borderColor: mainAppColor
+                                                onClicked: {
+//
+                                                    publisher.utVel = sendVel.text
+                                                }
+
+
+                                            }
+                                        }
+                                        RowLayout{
+
+                                                Layout.fillHeight: true
+                                                width: parent.width/2
+                                            Text {
+                                                Layout.alignment: Qt.AlignCenter
+
+                                                color: "#6fda9c"
+                                                font.pixelSize: 20
+                                                leftPadding: 10
+
+                                                text: qsTr("DeepCoat :")
+                                            }
+
+                                            TextField {
+                                                id: sendDC
+                                                Layout.preferredWidth: 80
+                                                Layout.alignment: Qt.AlignHCenter
+                                                color: mainTextColor
+                                                font.pointSize: 14
+                                                font.family: "fontawesome"
+                                                leftPadding: 5
+                                                activeFocusOnPress: true
+                                                Keys.onPressed: (event)=> {
+                                                        if (event.key === Qt.Key_Return) {
+                                                            publisher.utData = sendDC.text
+
+                                                        }}
+                                                background: Rectangle {
+                                                    implicitWidth:  30
+                                                    implicitHeight: 30
+                                                    radius: implicitHeight / 2
+                                                    color: "transparent"
+
+                                                    Rectangle {
+                                                        width: 80
+                                                        height: 1
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+                                                        anchors.bottom: parent.bottom
+                                                        color: mainAppColor
+                                                    }
+                                                }
+                                            }
+                                            SButton{
+                                                height: 15
+                                                name: "Send"
+                                                baseColor: mainAppColor
+                                                borderColor: mainAppColor
+                                                onClicked: {
+//
+                                                    publisher.utData = sendDC.text
+                                                }
+
+
                                             }
                                         }
                                         RowLayout{
                                             Text {
                                                 color: "#6fda9c"
                                                 font.pixelSize: 20
-                                                text: qsTr("Force :")
+                                                leftPadding: 10
+                                                text: qsTr("XRange :")
                                             }
-                                            Text {
-                                                color: "#6fda9c"
 
-                                                font.pixelSize: 20
-                                                text: publisher.Fstatus.force  === undefined ? "NAN" : publisher.Fstatus.force.toFixed(2)
+                                            TextField {
+                                                id: sendXR
+                                                Layout.preferredWidth: 80
+                                                Layout.alignment: Qt.AlignHCenter
+                                                color: mainTextColor
+                                                font.pointSize: 14
+                                                font.family: "fontawesome"
+                                                leftPadding: 5
+                                                activeFocusOnPress: true
+                                                Keys.onPressed: (event)=> {
+                                                        if (event.key === Qt.Key_Return) {
+                                                            publisher.utData = sendXR.text
+
+                                                        }}
+                                                background: Rectangle {
+                                                    implicitWidth:  30
+                                                    implicitHeight: 30
+                                                    radius: implicitHeight / 2
+                                                    color: "transparent"
+
+                                                    Rectangle {
+                                                        width: 80
+                                                        height: 1
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+                                                        anchors.bottom: parent.bottom
+                                                        color: mainAppColor
+                                                    }
+                                                }
+                                            }
+                                            SButton{
+                                                height: 15
+                                                name: "Send"
+                                                baseColor: mainAppColor
+                                                borderColor: mainAppColor
+                                                onClicked: {
+//
+                                                    publisher.utData = sendXR.text
+                                                }
+
+
                                             }
                                         }
                                         Item {
@@ -780,7 +1205,7 @@ Item{
                         MediaPlayer {
                             id: videoPlayer
                             //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                            source: "rtsp://10.223.240.0:8554/cam1"
+                            source: "rtsp://10.223.240.0:8554/cam2"
                             muted: true
                             autoPlay: true
                         }
@@ -991,6 +1416,8 @@ Item{
                         //    height: ((heightScreen * 0.90)/2 ) - 5/2
                         implicitWidth: widthScreen * 0.42
                         implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
+
+
                    Tab{
                        title: " Cam 2  "
 
@@ -1022,7 +1449,7 @@ Item{
                            MediaPlayer {
                                id: videoPlayer1
                                //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                               source: "rtsp://10.223.240.0:8554/cam2"
+                               source: "rtsp://10.223.240.0:8554/cam1"
                                muted: true
                                autoPlay: true
                            }
@@ -1170,15 +1597,33 @@ camera1.save()
                    }
                    Tab{
                        title: " A Scan "
-                       Rectangle{
-                           id:screen4
-                           width: widthScreen * 0.42
-                           height: (heightScreen *0.90)/2 - 5/2
-                           border.color: "#6fda9c"
-                           border.width: 2
-                           color: "red"
-                           radius: 15
-                   }
+//                       Rectangle{
+//                           id:screen4
+//                           width: widthScreen * 0.42
+//                           height: (heightScreen *0.90)/2 - 5/2
+//                           border.color: "#6fda9c"
+//                           border.width: 2
+//                           color: "red"
+//                           radius: 15
+
+                           Item {
+
+                           CustomPlotItem {
+
+                               id: customPlot
+                               anchors.fill: parent
+
+                               Component.onCompleted: initCustomPlot()
+                               MouseArea{
+                                   anchors.fill: parent
+                                   onClicked: {
+                                           customPlot.saveImg()
+                                   }
+                               }
+                           }
+                           }
+
+//                   }
 
 
                    }

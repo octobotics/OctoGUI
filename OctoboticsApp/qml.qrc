@@ -25,5 +25,7 @@
         <file>UI/Assets/dashboard/capture.png</file>
         <file>UI/Assets/dashboard/record.png</file>
         <file>UI/Page/ToggleButton.qml</file>
+        <file>UI/Components/SButton.qml</file>
+        <file>UI/Assets/err.mp3</file>
     </qresource>
 </RCC>

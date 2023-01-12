@@ -1,4 +1,4 @@
-QT += quick multimedia opengl
+QT += quick multimedia opengl printsupport
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -17,11 +17,17 @@ SOURCES += \
         Source/publisher.cpp \
         Source/rosthread.cpp \
         Source/hellocpp.cpp \
+        Source/qcustomplot.cpp \
+        Source/customplotitem.cpp \
 #    gststream.cpp \
         main.cpp
 
 HEADERS += \
-       Source/hellocpp.h
+       Source/hellocpp.h \
+       Source/qcustomplot.h \
+       Source/customplotitem.h
+
+
 
 RESOURCES += qml.qrc
 
