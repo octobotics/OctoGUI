@@ -19,7 +19,7 @@ Window {
     width: 480
     height: 640
 
-    title: qsTr("Octobotics")
+    title: qsTr("Octobotics Tech")
     FontLoader {
         id: fontAwesome
         name: "fontawesome"

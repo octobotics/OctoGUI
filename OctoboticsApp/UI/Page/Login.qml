@@ -76,7 +76,14 @@ Page {
             font.pointSize: 14
             font.family: "fontawesome"
             leftPadding: 30
-            echoMode: TextField.PasswordEchoOnEdit
+            echoMode: TextField.Password
+            Keys.onPressed: (event)=> {
+                    if (event.key === Qt.Key_Return) {
+                        loginUser(loginUsername.text, loginPassword.text)
+
+                    }
+
+        }
             background: Rectangle {
                 implicitWidth: 200
                 implicitHeight: 50
@@ -118,7 +125,13 @@ Page {
                 loginUser(loginUsername.text, loginPassword.text)
             }
 
+            Keys.onPressed: (event)=> {
+                    if (event.key === Qt.Key_Return) {
+                        loginUser(loginUsername.text, loginPassword.text)
 
+                    }
+
+        }
         }
     }
 }
