@@ -4,7 +4,7 @@ import QtQuick.Controls 2.0
 Button {
     id: control1
     text: qsTr("Log In")
-    font.pointSize: 10
+    font.pointSize: 12
 
     property alias name: control1.text
     property color baseColor
@@ -14,7 +14,7 @@ Button {
         text: control1.text
         font: control1.font
         opacity: enabled ? 1.0 : 0.3
-        color: control1.down ? "#ffffff" : "#ffffff"
+        color: control1.down ? "black" : "black"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
 //        elide: Text.ElideRight

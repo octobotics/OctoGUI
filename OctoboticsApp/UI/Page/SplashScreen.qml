@@ -63,7 +63,7 @@ Window {
         interval: 100; running: true; repeat: true
         onTriggered: {
             count = count + 100
-            progressValue = (count/4000)
+            progressValue =  (count/4000)
 
             if(progressValue > 1){
 

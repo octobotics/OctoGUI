@@ -5,7 +5,7 @@
 
 class HelloCpp : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
 

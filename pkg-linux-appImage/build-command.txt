@@ -1,2 +1,0 @@
-./linuxdeployqt-5-x86_64.AppImage octo-pkg/OctoboticsApp  -qmake=/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/qmake -qmldir=/home/octo/OctoGUI/OctoboticsApp/UI -always-overwrite -appimage  -bundle-non-qt-libs 
-

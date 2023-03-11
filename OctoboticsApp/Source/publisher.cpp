@@ -10,7 +10,13 @@ Publisher::Publisher(QObject *parent)
     m_comStatus = 0;
     m_armToolStatus = 0;
     m_toggleValue = false;
-
+    m_initArmValue = 0;
+    m_rstArmValue = 0 ;
+    m_stopArmValue= 0 ;
+    m_initCrawlerValue= 0;
+    m_stopCrawlerValue=0;
+    m_rstCrawlerValue=0;
+    m_armStatus = {0,0,0,0,0,0,0,0};
 }
 Publisher::~Publisher()
 {
@@ -24,21 +30,37 @@ void Publisher::on_pushButton_2_pressed()
 {
     emit message1("122344");
 }
+void Publisher::trig_armStatus()
+{
+
+    emit trigArmStatusValueChanged();
+
+}
 
 void Publisher::armToolCallback(int arg)
 {
-    qDebug() << Q_FUNC_INFO << arg;
+//    qDebug() << Q_FUNC_INFO << arg;
     setArmToolStatus(arg);
 }
 void Publisher::commCallback(int value)
 {
-    qDebug() << Q_FUNC_INFO << value;
+//    qDebug() << Q_FUNC_INFO << value;
     setComStatus(value);
 }
 void Publisher::battCallback(float value)
 {
-    qDebug() << Q_FUNC_INFO << value;
+//    qDebug() << Q_FUNC_INFO << value;
     setBatteryValue(value);
+}
+void Publisher::errorCallback(QVector<int> value)
+{
+//    qDebug() << Q_FUNC_INFO << value;
+    setErrValue(value);
+}
+void Publisher::tempCallback(QVector<int> value)
+{
+//    qDebug() << Q_FUNC_INFO << value;
+    setTempValue(value);
 }
 void Publisher::velCallback(float current_vel_linear, float current_vel_angular, float max_linear, float max_angular)
 {
@@ -49,29 +71,18 @@ void Publisher::velCallback(float current_vel_linear, float current_vel_angular,
     velocity.insert("max_angular", max_angular);
     setVelocityValue(velocity);
 }
-//void Publisher::utfCallback(float ut, float force)
-//{
-//    QVariantMap velocity;
-//    velocity.insert("ut", ut);
-//    velocity.insert("force", force);
-//    setUtFstatus(velocity);
-//}
+
 void Publisher::utCallback(int vel, int deepcoat, int echo)
 {
     QVariantMap utstatus;
     utstatus.insert("vel", vel);
     utstatus.insert("deepcoat", deepcoat);
     utstatus.insert("echo", echo);
-    qDebug() << vel << "pub";
+    //qDebug() << vel << "pub";
 
     setUtstatus(utstatus);
 }
-//void Publisher::fCallback(float force)
-//{
-//    QVariantMap velocity;
-//    velocity.insert("force", force);
-//    setFstatus(velocity);
-//}
+
 void Publisher::initRosThread()
 {
     // Create RosThread
@@ -81,25 +92,32 @@ void Publisher::initRosThread()
     connect(this, SIGNAL(utVelChanged(QString)), this->rost, SLOT(sendUtVel(QString)));
     connect(this, SIGNAL(utDataChanged(QString)), this->rost, SLOT(sendUtData(QString)));
     connect(this, SIGNAL(toolToggleChanged(QString)), this->rost, SLOT(sendToolData(QString)));
+    connect(this, SIGNAL(trigArmStatusValueChanged ()), this->rost, SLOT(checkArmStatus()));
 
     connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
     connect(this, SIGNAL(rstArm(int)), this->rost, SLOT(reset_arm(int)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
+    connect(this->rost, SIGNAL(initArm(bool)), this, SLOT(initArm(bool)));
+    connect(this->rost, SIGNAL(rstArm(bool)), this, SLOT(rstArm(bool)));
+    connect(this->rost, SIGNAL(stopArm(bool)), this, SLOT(stopArm(bool)));
+    connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
+    connect(this->rost, SIGNAL(initCrawler(bool)), this, SLOT(initCrawler(bool)));
+    connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
+
+
 
     connect(this->rost, SIGNAL(armToolCallback(int)), this, SLOT(armToolCallback(int)));
     connect(this->rost, SIGNAL(commCallback(int)), this, SLOT(commCallback(int)));
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
     connect(this->rost, SIGNAL(velCallback(float, float, float, float)), this, SLOT(velCallback(float, float, float, float)));
-//    connect(this->rost, SIGNAL(utfCallback(float, float)), this, SLOT(utfCallback(float, float)));
     connect(this->rost, SIGNAL(utCallback(int, int, int)), this, SLOT(utCallback(int, int, int)));
-//    connect(this->rost, SIGNAL(fCallback(float)), this, SLOT(fCallback(float)));
     connect(this->rost, SIGNAL(toggleCallback(bool)), this, SLOT(toggleCallback(bool)));
-    connect(this->rost, SIGNAL(armCallback(bool, bool, bool, bool)), this, SLOT(armCallback(bool, bool, bool, bool)));
-    connect(this->rost, SIGNAL(crawlerCallback(bool, bool, bool, bool)), this, SLOT(crawlerCallback(bool, bool, bool, bool)));
+    connect(this->rost, SIGNAL(armCallback(QVector<int>)), this, SLOT(armCallback(QVector<int>)));
+    connect(this->rost, SIGNAL(crawlerCallback(bool, bool,bool,bool)), this, SLOT(crawlerCallback(bool, bool,bool,bool)));
     connect(this->rost,SIGNAL(thicknessCallback(float, float)), this , SLOT(thicknessCallback(float, float)));
-//    connect(this->rost,SIGNAL(graphCallback(QVector<int>)),this,SLOT(graphCallback(QVector<int>)));
-//    connect(this->rost,SIGNAL(graphCallback(QVector<int>)),m_cst,SLOT(graphCallback(QVector<int>)));
+    connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
+    connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
 
     this->rost->start();
 }
@@ -111,9 +129,35 @@ float Publisher::getBatteryValue()
 void Publisher::setBatteryValue(float value)
 {
     m_batteryValue = value;
-    qDebug() << "battery value" << value;
+//    qDebug() << "battery value" << value;
     emit batteryValueChanged(value);
 }
+
+QVector<int> Publisher::getTempValue()
+{
+    return m_tempValue;
+}
+
+void Publisher::setTempValue(QVector<int> value)
+{
+    m_tempValue = value;
+//    qDebug()<<"temp"<<m_tempValue;
+
+    emit tempValueChanged(value);
+}
+
+QVector<int> Publisher::getErrValue()
+{
+    return m_errValue;
+}
+
+void Publisher::setErrValue(QVector<int> value)
+{
+    m_errValue = value;
+//    qDebug()<<"error"<<m_errValue;
+    emit errValueChanged(value);
+}
+
 void Publisher::setComStatus(int value)
 {
     m_comStatus = value;
@@ -139,7 +183,7 @@ QVariantMap Publisher::getVelocityValue()
 void Publisher::setVelocityValue(QVariantMap value)
 {
     m_velocityValue = value;
-    qDebug() << m_velocityValue;
+//    qDebug() << m_velocityValue;
     emit velocityValueChanged(value);
 }
 bool Publisher::getToggleValue()
@@ -151,28 +195,25 @@ void Publisher::setToggleValue(bool flag)
     m_toggleValue = flag;
     emit toggleValueChanged(flag);
 }
+
 void Publisher::toggleCallback(bool flag)
 {
-    qDebug() << Q_FUNC_INFO << flag;
+//    qDebug() << Q_FUNC_INFO << flag;
     setToggleValue(flag);
 }
-void Publisher::armCallback(bool base, bool shoulder, bool elbow, bool tool)
+void Publisher::armCallback(QVector<int> status)
 {
-    qDebug() << Q_FUNC_INFO << "base :" << base << "shoulder :" << shoulder << "elbow :" << elbow << "tool:" << tool;
-    QVariantMap armCallback;
-    armCallback.insert("base", base);
-    armCallback.insert("shoulder", shoulder);
-    armCallback.insert("elbow", elbow);
-    armCallback.insert("tool", tool);
-    setArmStatus(armCallback);
+
+    setArmStatus(status);
 }
-QVariantMap Publisher::getArmStatus()
+QVector<int> Publisher::getArmStatus()
 {
     return m_armStatus;
 }
-void Publisher::setArmStatus(QVariantMap value)
+void Publisher::setArmStatus(QVector<int> value)
 {
     m_armStatus = value;
+//    qDebug()<<"in pub"<<(m_armStatus);
     emit armStatusChanged(m_armStatus);
 }
 void Publisher::crawlerCallback(bool frontLeft, bool frontRight, bool backrRight, bool backLeft)
@@ -185,16 +226,6 @@ void Publisher::crawlerCallback(bool frontLeft, bool frontRight, bool backrRight
     crawlerCallback.insert("backLeft", backLeft);
     setCrawlStatus(crawlerCallback);
 }
-//void Publisher::graphCallback(QVector<int> v)
-//{
-//   qDebug()<<v[0];
-//   emit graphPub(v);
-//}
-//void Publisher::graphPub(QVector<int> val)
-//{
-
-//emit graphPub(val);
-//}
 
 QVariantMap Publisher::getCrawlStatus()
 {
@@ -205,15 +236,7 @@ void Publisher::setCrawlStatus(QVariantMap value)
     m_crawlStatus = value;
     emit crawlStatusChanged(value);
 }
-//QVariantMap Publisher::getUtFstatus()
-//{
-//    return m_utFStatus;
-//}
-//void Publisher::setUtFstatus(QVariantMap value)
-//{
-//    m_utFStatus = value;
-//    emit utFstatusChanged(value);
-//}
+
 QVariantMap Publisher::getUtstatus()
 {
     return m_utStatus;
@@ -223,17 +246,10 @@ void Publisher::setUtstatus(QVariantMap value)
     m_utStatus = value;
     emit utstatusChanged(value);
 }
-//QVariantMap Publisher::getFstatus()
-//{
-//    return m_FStatus;
-//}
-//void Publisher::setFstatus(QVariantMap value)
-//{
-//    m_FStatus = value;
-//    emit FstatusChanged(value);
-//}
+
 void Publisher::call_arminit(int val)
 {
+    qDebug() << "I am at call_arminit";
     emit value(val);
 }
 void Publisher::call_crawlerinit(int val)
@@ -271,7 +287,7 @@ void Publisher::setUtVel(QString value)
 {
 
     m_utVel = value;
-    qDebug()<<m_utVel;
+//    qDebug()<<m_utVel;
 
     emit utVelChanged(value);
 }
@@ -284,7 +300,7 @@ void Publisher::setUtData(QString value)
 {
 
     m_utData = value;
-    qDebug()<<m_utVel;
+//    qDebug()<<m_utVel;
 
     emit utDataChanged(value);
 }
@@ -297,8 +313,98 @@ void Publisher::setToolToggle(QString value)
 {
 
     m_toolToggle = value;
-    qDebug()<<m_toolToggle;
+//    qDebug()<<m_toolToggle;
 
     emit toolToggleChanged(value);
 }
 
+bool Publisher::getInitArmValue()
+{
+    return m_initArmValue;
+}
+void Publisher::setInitArmValue(bool flag)
+{
+    m_initArmValue = flag;
+    emit initArmValueChanged(flag);
+}
+void Publisher::initArm(bool flag)
+{
+//    qDebug() << Q_FUNC_INFO << flag;
+    setInitArmValue(flag);
+}
+
+bool Publisher::getStopArmValue()
+{
+    return m_stopArmValue;
+}
+void Publisher::setStopArmValue(bool flag)
+{
+    m_stopArmValue = flag;
+    emit stopArmValueChanged(flag);
+}
+void Publisher::stopArm(bool flag)
+{
+//    qDebug() << Q_FUNC_INFO << flag;
+    setStopArmValue(flag);
+}
+
+bool Publisher::getRstArmValue()
+{
+    return m_rstArmValue;
+}
+void Publisher::setRstArmValue(bool flag)
+{
+    m_rstArmValue = flag;
+    emit rstArmValueChanged(flag);
+}
+void Publisher::rstArm(bool flag)
+{
+//    qDebug() << Q_FUNC_INFO << flag;
+    setRstArmValue(flag);
+}
+
+
+bool Publisher::getInitCrawlerValue()
+{
+    return m_initCrawlerValue;
+}
+void Publisher::setInitCrawlerValue(bool flag)
+{
+    m_initCrawlerValue = flag;
+    emit initCrawlerValueChanged(flag);
+}
+void Publisher::initCrawler(bool flag)
+{
+//    qDebug() << Q_FUNC_INFO << flag;
+    setInitCrawlerValue(flag);
+}
+
+bool Publisher::getStopCrawlerValue()
+{
+    return m_stopCrawlerValue;
+}
+void Publisher::setStopCrawlerValue(bool flag)
+{
+    m_stopCrawlerValue = flag;
+    emit stopCrawlerValueChanged(flag);
+}
+void Publisher::stopCrawler(bool flag)
+{
+//    qDebug() << Q_FUNC_INFO << flag;
+    setStopCrawlerValue(flag);
+}
+
+bool Publisher::getRstCrawlerValue()
+{
+    return m_rstCrawlerValue;
+}
+void Publisher::setRstCrawlerValue(bool flag)
+{
+    m_rstCrawlerValue = flag;
+    emit rstCrawlerValueChanged(flag);
+}
+void Publisher::rstCrawler(bool flag)
+{
+//    qDebug() << Q_FUNC_INFO << flag;
+    setRstCrawlerValue(flag);
+}

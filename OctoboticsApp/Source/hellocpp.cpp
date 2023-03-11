@@ -51,7 +51,6 @@ QObject(parent)
     qDebug() << " start step 1";
     g_object_set(source1, "location", "rtsp://10.223.240.0:8554/cam1", NULL);
     g_object_set(source2, "location", "rtsp://10.223.240.0:8554/cam2", NULL);
-
 //    g_object_set(source2, "location", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4", NULL);
     qDebug() << " start step 2";
     queue1 = gst_element_factory_make("queue", "queue1");

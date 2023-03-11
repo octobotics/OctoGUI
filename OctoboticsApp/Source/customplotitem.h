@@ -1,8 +1,11 @@
 #pragma once
+#include <bits/stdc++.h>
 
 #include <QtQuick>
 #include "qcustomplot.h"
-
+#include "rosthread.h"
+#include <iostream>
+#include <ctime>
 class QCustomPlot;
 
 class CustomPlotItem : public QQuickPaintedItem
@@ -12,17 +15,13 @@ class CustomPlotItem : public QQuickPaintedItem
 public:
     CustomPlotItem( QQuickItem* parent = 0 );
     virtual ~CustomPlotItem();
-//    void initRt();
-
     void paint( QPainter* painter );
+    void saveImgFun(int m);
+    void setupPlot(QCustomPlot* customPlot );
 
     Q_INVOKABLE void initCustomPlot();
-    void setupPlot(QCustomPlot* customPlot );
 protected:
     void routeMouseEvents( QMouseEvent* event );
-
-//    void setupQuadraticDemo( QVector<double> x ,QVector<double> y);
-//    void setupQuadraticDemo();
     void setupQuadraticDemo( QCustomPlot* customPlot );
 
     virtual void mousePressEvent( QMouseEvent* event );
@@ -30,27 +29,26 @@ protected:
     virtual void mouseMoveEvent( QMouseEvent* event );
     virtual void mouseDoubleClickEvent( QMouseEvent* event );
 
-
-//    RosThread *rt;
-
-//public slots:
-//    void graphCallback(QVector<int> v);
 private:
     QCustomPlot  *m_CustomPlot;
     QTimer*                 dataTimer;
-//        QVector<double>* x_data; // initialize with entries 0..100
-//        QVector<double>*  y_data; // initialize with entries 0..100
+    QTimer*                 graphTimer;
 
-
+    QImage graph_img_;
 
 public slots:
-        void graphCall(QVector<double> v);
-        void onCustomReplot();
-        void updateCustomPlotSize();
-        int printRandoms(int lower, int upper);
-        void graphClicked(QCPAbstractPlottable* plottable);
-        void realtimeDataSlot();
-        void saveImg();
+    void trigImg(int k);
+    void saveImgk(int m);
+    void graph_rpt();
+    void onCustomReplot();
+    void realtimeDataSlot();
+    void updateCustomPlotSize();
 
+    int printRandoms(int lower, int upper);
+    void graphClicked(QCPAbstractPlottable* plottable);
+    void graphCall(QVector<double> v, QVector<double> graph_arr, int64_t x_range);
+
+signals:
+    void saveImg(QString myImage);
 
 };

@@ -12,46 +12,108 @@ import QtQuick.Controls 2.5
 import HelloCpp 1.0
 import "../../UI/Components"
 import CustomPlot 1.0
+import QtQuick.Dialogs 1.1
 
 Rectangle{
+
     color: "white"
     property int iconSize: 32
+    //    property var val: Qt.vector3d("NO Error [Radhe Radhe]","value2" )
+    property int battCnt:0
+    property bool armst: false
 
+    property variant battStatus: publisher.batteryValue
+    onBattStatusChanged: {
+
+        if (battStatus<45.0 && battStatus>44.0 && battCnt===0){
+            battDialog.text = "\n\n         Battery LOW         \n\n"
+            battDialog.icon = StandardIcon.Critical
+//            console.error("Batt Low")
+            battDialog.open()
+            battCnt++
+        }
+        else if((battStatus< 44 && battCnt==1))
+        {
+            battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
+            battDialog.icon = StandardIcon.Critical
+//            console.error("Batt Critical")
+            battDialog.open()
+            battCnt++
+        }
+
+
+    }
+    property var armErr: ({   0 : "NO Error [Radhe Radhe]",
+                              6 : "Storage data error",
+                              13 : "Multi-turn calibrate error",
+                              23 : "Current temperature out of range	",
+                              24 : "Current voltage out of range",
+                              34 : "Target position out of range"
+                          })
+    property var cErr: ({   0 : "NO Error [Radhe Radhe]",
+                            1 : "Motor Stalled [Critical]",
+                            2 : "Low Pressure [Donno Dude]",
+                            3 : " Over Voltage [Moderate]",
+                            4 : "Over Current [Critical]",
+                            5 : "Power Overrun [Moderate]",
+                            6 : "Speeding [Moderate]",
+                            7 : "Empty Error 1",
+                            8 : "Empty Error 2",
+                            9 : "Empty Error 3",
+                            10 : "Very High Temperature [Moderate]",
+                            11 : "Encoder Calibration Error [Moderate]"})
+    property var cMotors: ({
+                               0 : "Front Left",
+                               1 : "Front Right",
+                               2 : "Rear Right",
+                               3 : "Rear Left"
+
+                           })
+    property var armMotors: ({
+                                 0 : "Base",
+                                 1 : "Shoulder",
+                                 2 : "Elbow",
+                                 3 : "Tool"
+
+                             })
     property variant armStatus: publisher.armStatus
     onArmStatusChanged: {
-        console.log("armStatus")
-        console.log("base",armStatus.base)
-        console.log("shoulder",armStatus.shoulder)
-        console.log("elbow",armStatus.elbow)
-        console.log("tool",armStatus.tool)
+        if(!armst)
+        {
+            armst = true
+        }
+         else{
+
+        armDialog.text =  "\n\nErrors:\n\n"+armMotors[0]+" : "+armErr[armStatus[0]]+"\n"+armMotors[1]+" : "+armErr[armStatus[1]]+"\n"+armMotors[2]+" : "+armErr[armStatus[2]]+"\n"+armMotors[3]+" : "+armErr[armStatus[3]]+"\n\n\n"+
+                "\n\nTemperature:\n\n" +armMotors[0]+" : "+armStatus[4]+" deg"+"\n"+armMotors[1]+" : "+armStatus[5]+" deg"+"\n"+armMotors[2]+" : "+armStatus[6]+" deg"+"\n"+armMotors[3]+" : "+armStatus[7]+" deg"+"\n"
+        armDialog.icon = StandardIcon.Information
+        armDialog.open()}
     }
 
     property variant crawlStatus: publisher.crawlStatus
     onCrawlStatusChanged: {
-        console.log("crawlStatus")
-        console.log("frontLeft",crawlStatus.frontLeft)
-        console.log("frontRight",crawlStatus.frontRight)
-        console.log("backrRight",crawlStatus.backrRight)
-        console.log("backLeft",crawlStatus.backLeft)
+        //        //console.log("crawlStatus")
+        //        //console.log("frontLeft",crawlStatus.frontLeft)
+        //        //console.log("frontRight",crawlStatus.frontRight)
+        //        //console.log("backrRight",crawlStatus.backrRight)
+        //        //console.log("backLeft",crawlStatus.backLeft)
     }
-
 
     property variant velocityValue: publisher.velocityValue
     onVelocityValueChanged:  {
-        console.log("velocity status")
-        console.log("current_vel_linear",velocityValue.current_vel_linear)
-        console.log("current_vel_angular",velocityValue.current_vel_angular)
-        console.log("max_linear",velocityValue.max_linear)
-        console.log("max_angular",velocityValue.max_angular)
+        //console.log("velocity status")
+        //console.log("current_vel_linear",velocityValue.current_vel_linear)
+        //console.log("current_vel_angular",velocityValue.current_vel_angular)
+        //console.log("max_linear",velocityValue.max_linear)
+        //console.log("max_angular",velocityValue.max_angular)
     }
-    property variant armTool: publisher.armToolStatus
+    property int armTool: publisher.armToolStatus
     onArmToolChanged: {
         if(armTool == 2){
             pumpStatus.source = "qrc:/UI/Assets/dashboard/remove.png"
         }else if(armTool == 1){
             pumpStatus.source =  "qrc:/UI/Assets/dashboard/tick.png"
         }
-
         if(armTool == 4){
             magnetStatus.source = "qrc:/UI/Assets/dashboard/remove.png"
         }else if(armTool == 3){
@@ -63,11 +125,171 @@ Rectangle{
             grinderStatus.source = "qrc:/UI/Assets/dashboard/tick.png"
         }
     }
+    property variant crawlerErr: publisher.errValue
+    onCrawlerErrChanged: {
+        //        //console.log("err status",crawlerErr[1])
+        if(2===crawlerErr[0] || 16===crawlerErr[0] || 2===crawlerErr[1] || 16===crawlerErr[1] || 2===crawlerErr[2] || 16===crawlerErr[2] || 2===crawlerErr[3] || 16===crawlerErr[3]){
+            crawlerDialog.text =  cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n"
+            //            crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : Temperature greater than "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : Temperature greater than "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : Temperature greater than "+crawlerTemp[3]+" deg"+"\n"
+
+            crawlerDialog.title = "Crawler Error"
+            crawlerDialog.icon = StandardIcon.Critical
+            crawlerDialog.open()
+        }
+        //        //console.log("val status",16===crawlerErr[1])
+        //        //console.log("val status",val[28])
+
+    }
+    property variant crawlerTemp: publisher.tempValue
+    onCrawlerTempChanged:  {
+        //console.log("temp status",crawlerTemp[1])
+
+        if(crawlerTemp[0]>85 || crawlerTemp[1]>85 || crawlerTemp[2]>85 || crawlerTemp[3]>85){
+            crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : Temperature greater than "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : Temperature greater than "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : Temperature greater than "+crawlerTemp[3]+" deg"+"\n"
+            crawlerDialog.title = "Crawler Temperature Error"
+            crawlerDialog.icon = StandardIcon.Critical
+            crawlerDialog.open()
+        }
+        //        //console.log("val status",16===crawlerErr[1])
+        //        //console.log("val status",val[28])
+
+    }
+    //    property variant statusArm: publisher.armCallback()
+
+
+    function initCrawler() {
+        if ( publisher.initCrawlerValue){
+            crawlerDialog.text = "\n\n         Crawler Initialized         \n\n"
+            crawlerDialog.icon = StandardIcon.Information
+        }
+
+
+        else{
+            crawlerDialog.text = "\n\n         Crawler Initialization failed        \n\n"
+            crawlerDialog.icon = StandardIcon.Critical
+        }
+        crawlerDialog.open()
+
+    }
+    function rstCrawler()  {
+        if (publisher.rstCrawlerValue){
+            crawlerDialog.text = "\n\n         Crawler Restarted         \n\n"
+            crawlerDialog.icon = StandardIcon.Information
+        }
+        else{
+            crawlerDialog.text = "\n\n         Crawler Restart Failed        \n\n"
+            crawlerDialog.icon = StandardIcon.Critical
+        }
+        crawlerDialog.open()
+
+    }
+
+    function stopCrawler()  {
+        if (publisher.stopCrawlerValue){
+            crawlerDialog.text = "\n\n         Crawler Stopped         \n\n"
+            crawlerDialog.icon = StandardIcon.Information
+        }
+        else{
+            crawlerDialog.text = "\n\n         Crawler Stopping Failed         \n\n"
+            crawlerDialog.icon = StandardIcon.Critical
+        }
+        crawlerDialog.open()
+
+    }
+
+    function initArm()  {
+        if (publisher.initArmValue){
+            armDialog.text = "\n\n         Arm Initialized         \n\n"
+            armDialog.icon = StandardIcon.Information
+        }
+        else{
+            armDialog.text = "\n\n         Arm Initialization failed        \n\n"
+            armDialog.icon = StandardIcon.Critical
+        }
+        armDialog.open()
+
+    }
+    function rstArm()  {
+        if (publisher.rstArmValue){
+            armDialog.text = "\n\n         Arm Restarted         \n\n"
+            armDialog.icon = StandardIcon.Information
+        }
+        else{
+            armDialog.text = "\n\n         Arm Restart Failed        \n\n"
+            armDialog.icon = StandardIcon.Critical
+        }
+        armDialog.open()
+
+    }
+
+    function stopArm()  {
+        if (publisher.stopArmValue){
+            armDialog.text = "\n\n         Arm Stopped         \n\n"
+            armDialog.icon = StandardIcon.Information
+        }
+        else{
+            armDialog.text = "\n\n         Arm Stopping Failed         \n\n"
+            armDialog.icon = StandardIcon.Critical
+        }
+        armDialog.open()
+    }
+
+    MessageDialog {
+        id: armDialog
+        title: "Arm"
+        text: "Arm Status"
+        onAccepted: {
+            armDialog.close()
+        }
+    }
+    MessageDialog {
+        id: crawlerDialog
+        title: "Crawler"
+        text: "Crawler Status"
+        width: 400
+        onAccepted: {
+            crawlerDialog.close()
+        }
+    }
+    MessageDialog {
+        id: battDialog
+        title: "Battery"
+        text: "Battery Status"
+        onAccepted: {
+            battDialog.close()
+        }
+    }
+    Popup {
+        id: popup
+
+        width: 500
+        height: 300
+        x: -width/2
+        y: height
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape
+
+
+        //                                        color: "#344955"
+        Rectangle{
+            color: "green"
+            anchors.fill: parent
+
+        }
+        //                                          ColumnLayout{
+
+        //Rectangle
+
+        //                                          }
+
+    }
 
     function displaybatterStatus(level)
     {
         var percentage = ((level - 44)*100) / (50 - 44);
-        console.log("percentage",percentage)
+
+        //console.log("percentage",percentage)
         if (percentage < 20)
             return "qrc:/UI/Assets/battery-status/battery-empty-solid.svg" // fa-battery-empty
         else if (percentage > 20 && percentage < 40)
@@ -80,6 +302,7 @@ Rectangle{
             return "qrc:/UI/Assets/battery-status/battery-full-solid.svg" // fa-battery-full
         else
             return "qrc:/UI/Assets/battery-status/battery-empty-solid.svg" // fa-battery-empty
+
     }
     function displayConnectionStatus(status){
         if(status === 0){
@@ -89,6 +312,11 @@ Rectangle{
             return "qrc:/UI/Assets/signal-status/wifi-signal.png" // fa-battery-full
 
         }
+    }
+    function init_crawler(ccw){
+
+        publisher.call_crawlerinit(ccw)
+
     }
 
     ColumnLayout{
@@ -109,12 +337,12 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
 
-            Image {
-                sourceSize.width: 80
-                sourceSize.height: 80
-                anchors.centerIn: parent
-                source: "qrc:/UI/Assets/octobotics_logo.png"
-            }
+                Image {
+                    sourceSize.width: 80
+                    sourceSize.height: 80
+                    anchors.centerIn: parent
+                    source: "qrc:/UI/Assets/octobotics_logo.png"
+                }
             }
             Item {
                 id: connectionStatus
@@ -142,61 +370,61 @@ Rectangle{
                     }
                 }
             }
-Item{
-//    anchors.right:  parent.right
-//    anchors.rightMargin: 100
-//    anchors.centerIn: parent.Center
-//    anchors.verticalCenter: 100
-    x: 1600
-    anchors.top: parent.top
-    anchors.topMargin: 5
-    Text {
-        id: textId
-        text: "Crawler"
-        font.pixelSize: 24
-        color: "black"
-        y:parent.height / 2+ height/2
-        //        anchors.
-        leftPadding: -control.indicator.width - 5*control.spacing+ 5
-    }
-    Switch {
-        id: control
-        text: qsTr("Arm")
-        checked:publisher.toggleValue
-        enabled: false
-        width: 60
-        height: 58
-        indicator: Rectangle {
-            implicitWidth: 58
-            implicitHeight: 28
-            x: control.leftPadding
-            y: parent.height / 2 - height / 2
-            radius: 13
-            color: control.checked ? "#17a81a" : "red"
-            border.color: "#17a81a"//control.checked ? "#17a81a" : "#cccccc"
+            Item{
+                //    anchors.right:  parent.right
+                //    anchors.rightMargin: 100
+                //    anchors.centerIn: parent.Center
+                //    anchors.verticalCenter: 100
+                x: 1600
+                anchors.top: parent.top
+                anchors.topMargin: 5
+                Text {
+                    id: textId
+                    text: "Crawler"
+                    font.pixelSize: 24
+                    color: "black"
+                    y:parent.height / 2+ height/2
+                    //        anchors.
+                    leftPadding: -control.indicator.width - 5*control.spacing+ 5
+                }
+                Switch {
+                    id: control
+                    text: qsTr("Arm")
+                    checked:publisher.toggleValue
+                    enabled: false
+                    width: 60
+                    height: 58
+                    indicator: Rectangle {
+                        implicitWidth: 58
+                        implicitHeight: 28
+                        x: control.leftPadding
+                        y: parent.height / 2 - height / 2
+                        radius: 13
+                        color: control.checked ? "#17a81a" : "red"
+                        border.color: "#17a81a"//control.checked ? "#17a81a" : "#cccccc"
 
-            Rectangle {
-                x: control.checked ? parent.width - width : 0
-                width: 28
-                height: 28
-                radius: 13
-                color: control.down ? "#cccccc" : "#ffffff"
-                border.color: "#232F34"//control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
+                        Rectangle {
+                            x: control.checked ? parent.width - width : 0
+                            width: 28
+                            height: 28
+                            radius: 13
+                            color: control.down ? "#cccccc" : "#ffffff"
+                            border.color: "#232F34"//control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
+                        }
+                    }
+
+                    contentItem: Text {
+                        text: control.text
+                        font.pixelSize: 24
+                        verticalAlignment: Text.AlignVCenter
+                        color: "black"
+                        leftPadding: control.indicator.width + control.spacing
+                    }
+                }
+
+
+
             }
-        }
-
-        contentItem: Text {
-            text: control.text
-            font.pixelSize: 24
-            verticalAlignment: Text.AlignVCenter
-            color: "black"
-            leftPadding: control.indicator.width + control.spacing
-        }
-    }
-
-
-
-}
 
             Item {
                 id: batteryStatusId
@@ -214,7 +442,7 @@ Item{
                 }
                 Text {
                     id: batteryStatusValue
-//                    text: parseInt(((publisher.batteryValue - 44)*100) / (50 - 44)) + "%"
+                    //                    text: parseInt(((publisher.batteryValue - 44)*100) / (50 - 44)) + "%"
                     text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
 
                     verticalAlignment: Text.AlignVCenter
@@ -236,47 +464,6 @@ Item{
                 anchors.right:  parent.right
                 anchors.top: parent.top
                 anchors.topMargin: 5
-//                Text {
-//                    id: textId
-//                    text: "Crawler"
-//                    font.pixelSize: 24
-//                    color: "#FFFFFF"
-//                    leftPadding: control.indicator.width + control.spacing
-//                }
-//                Switch {
-//                    id: control
-//                    text: qsTr("Arm")
-//                    checked:publisher.toggleValue
-//                    enabled: false
-//                    width: 60
-//                    height: 58
-//                    indicator: Rectangle {
-//                        implicitWidth: 58
-//                        implicitHeight: 28
-//                        x: control.leftPadding
-//                        y: parent.height / 2 - height / 2
-//                        radius: 13
-//                        color: control.checked ? "#17a81a" : "red"
-//                        border.color: "#17a81a"//control.checked ? "#17a81a" : "#cccccc"
-
-//                        Rectangle {
-//                            x: control.checked ? parent.width - width : 0
-//                            width: 28
-//                            height: 28
-//                            radius: 13
-//                            color: control.down ? "#cccccc" : "#ffffff"
-//                            border.color: "#232F34"//control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
-//                        }
-//                    }
-
-//                    contentItem: Text {
-//                        text: control.text
-//                        font.pixelSize: 24
-//                        verticalAlignment: Text.AlignVCenter
-//                        color: "#FFFFFF"
-//                        leftPadding: control.indicator.width + control.spacing
-//                    }
-//                }
             }
 
             ColumnLayout{
@@ -315,12 +502,12 @@ Item{
                                     ColumnLayout{
                                         anchors.centerIn: parent
                                         RowLayout{
-                                            anchors.fill: parent
-//                                                   spacing: 30
+                                            //                                            anchors.fill: parent
+                                            //                                                   spacing: 30
 
-                                                   // lets have some left and right margins
-//                                                   anchors.leftMargin: 20
-//                                                   anchors.rightMargin: 20
+                                            // lets have some left and right margins
+                                            //                                                   anchors.leftMargin: 20
+                                            //                                                   anchors.rightMargin: 20
 
                                             Image {
                                                 id:magnetStatus
@@ -343,14 +530,14 @@ Item{
                                                 }
 
                                                 onClicked: {
-//                                                    magnet.text = "Done";
+                                                    //                                                    magnet.text = "Done";
                                                     publisher.toolToggle = "7"
 
                                                 }
                                             }
 
                                             Item{
-                                            width: 8
+                                                width: 8
                                             }
 
 
@@ -366,7 +553,7 @@ Item{
                                                 text : "Pump"
                                                 implicitWidth : 70
                                                 implicitHeight : 30
-//                                                anchors.centerIn: parent
+                                                //                                                anchors.centerIn: parent
 
                                                 background: Rectangle {
                                                     color:"#6fda9c"
@@ -380,9 +567,9 @@ Item{
 
                                                 }
                                             }
-                                        Item{
-                                        width: 8
-                                        }
+                                            Item{
+                                                width: 8
+                                            }
                                             Image {
                                                 id:grinderStatus
                                                 sourceSize.width: 35
@@ -405,7 +592,7 @@ Item{
 
                                                 onClicked: {
                                                     publisher.toolToggle = "0"
-                                                    popup.open()
+                                                    //                                                    popup.open()
 
                                                 }
                                             }
@@ -510,8 +697,12 @@ Item{
                                     id:circularGaugeBar
                                     anchors.fill: parent
                                     antialiasing: true
+                                    style: CircularGaugeStyle {
+                                        tickmarkStepSize: 2
+                                    }
+
                                     value: publisher.velocityValue.current_vel_linear === undefined ? 0 :publisher.velocityValue.current_vel_linear
-                                    maximumValue: publisher.velocityValue.max_linear === undefined ? 100 :publisher.velocityValue.max_linear
+                                    maximumValue: publisher.velocityValue.max_linear === undefined ? 10 :publisher.velocityValue.max_linear
                                     anchors.centerIn: parent
                                     Component.onCompleted: forceActiveFocus()
                                     property bool accelerating: false
@@ -555,8 +746,11 @@ Item{
                                     id:circularGauge2Bar
                                     anchors.fill: parent
                                     antialiasing: true
+                                    style: CircularGaugeStyle {
+                                        tickmarkStepSize: 2
+                                    }
                                     value: publisher.velocityValue.current_vel_angular === undefined ? 0 :publisher.velocityValue.current_vel_angular
-                                    maximumValue: publisher.velocityValue.max_angular === undefined ? 100 :publisher.velocityValue.max_angular
+                                    maximumValue: publisher.velocityValue.max_angular === undefined ? 10 :publisher.velocityValue.max_angular
                                     anchors.centerIn: parent
                                     Component.onCompleted: forceActiveFocus()
                                     property bool accelerating: false
@@ -573,7 +767,7 @@ Item{
                     }
                     Rectangle{
                         id: crawlerr
-                        width: widthScreen * 0.16
+                        width: widthScreen * 0.24
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         color: "#344955"
@@ -584,102 +778,107 @@ Item{
                             id:cr
 
 
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: qsTr("Crawler")
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 24
-                                    color: "#ffffff"
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
+                            Text {
+                                Layout.fillWidth: true
+                                text: qsTr("Crawler")
+                                font.family: "Tahoma"
+                                font.bold: true
+                                font.pixelSize: 24
+                                color: "#ffffff"
+                                verticalAlignment: Text.AlignVCenter
+                                horizontalAlignment: Text.AlignHCenter
+                            }
 
 
                             RowLayout{
 
+                                SButton{
+                                    Layout.leftMargin: widthScreen * 0.16/10
+                                    Layout.topMargin: 10
+
+                                    id: intCrawler
+                                    height: 20
+                                    name:  "Initialize"
+                                    baseColor:  mainAppColor
+                                    borderColor: mainAppColor
+                                    implicitWidth: 70
+
+                                    onClicked: {
+
+                                        init_crawler(1)
+                                        initCrawler()
+
+                                    }
+
+
+                                }
+                                SButton{
+                                    Layout.topMargin: 10
+                                    id: stpCrawler
+                                    height: 20
+                                    name:"Stop"
+                                    baseColor:  "#FF2E2E"
+                                    borderColor: "#FF2E2E"
+                                    implicitWidth: 70
+
+                                    onClicked: {
+                                        init_crawler(0)
+                                        // crawlerDialog.text = "\n\n           Crawler Stopped             \n\n"
+                                        stopCrawler()
+                                    }
+                                }
+
+
+                                //                        }
+
+                                //                            RowLayout{
+
+
+
 
                                 SButton{
-                                    Layout.leftMargin: widthScreen * 0.16/4.5
-                                    Layout.topMargin: 15
-                                    property bool init: false
-
-                                    function init_crawler(ccw){
-
-                                          publisher.call_crawlerinit(ccw)
-
-
-                                    }
-
-                                   id: initCrawler
-                                   height: 20
-                                   name: init ?  "Stop" : "Initialize"
-                                   baseColor: init ?  "red" : mainAppColor
-                                   borderColor: mainAppColor
-                                   implicitWidth: 80
-                                   Audio {
-                                        id: playMusic
-                                        source: "qrc:/UI/Assets/err.mp3"
-                                    }
-                                   onClicked: {
-                                       init =!init
-//                                       playMusic.play()
-
-                                       init_crawler(init)
-                                       popup.open()
-                                       console.error(Math.round((dashboardId.width - 500) / 2))
-
-                                   }
-                           }
-
-                                Popup {
-                                        id: popup
-
-                                        width: 500
-                                        height: 300
-                                        x: -width/2
-                                        y: height
-                                        modal: true
-                                        focus: true
-                                        closePolicy: Popup.CloseOnEscape
-
-
-//                                        color: "#344955"
-                                            Rectangle{
-                                            color: "green"
-                                            anchors.fill: parent
-
-                                            }
-//                                          ColumnLayout{
-
-//Rectangle
-
-//                                          }
-
-                                    }
-                                SButton{
-
-                                    Layout.topMargin: 15
+                                    Layout.topMargin: 10
                                     id: resetCrawler
                                     height: 20
-                                    implicitWidth: 80
+                                    implicitWidth: 70
 
                                     name: "Reset"
                                     baseColor: mainAppColor
                                     borderColor: mainAppColor
                                     onClicked: {
-                                        resetCrawler.name = "Done"
                                         publisher.rst_crawler(1)
+                                        //                                        crawlerDialog.text = "\n\n           Crawler Restarted             \n\n"
+                                        rstCrawler()
                                     }
 
-                            }
-                        }
+                                }
+                                SButton{
+                                    Layout.topMargin: 10
 
+
+                                    id: crawlerStatus
+                                    height: 20
+                                    name:  "Status"
+                                    baseColor:  mainAppColor
+                                    borderColor: mainAppColor
+                                    implicitWidth: 70
+
+                                    onClicked: {
+
+                                        crawlerDialog.text =  "\n\nErrors:\n\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n\n\n"+
+                                                "\n\nTemperature:\n\n" +cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : "+crawlerTemp[3]+" deg"+"\n"
+                                        crawlerDialog.icon = StandardIcon.Information
+                                        crawlerDialog.open()
+
+                                    }
+                                }
+
+                            }
 
                             Item{
                                 Layout.fillHeight: true
-//                                Layout.alignment: parent.Center
-//                                Layout.vertica
+                                //                                Layout.alignment: parent.Center
+                                //                                Layout.vertica
                                 width: parent.width
 
                                 Rectangle{
@@ -689,6 +888,13 @@ Item{
                                     width: widthScreen * 0.08
                                     height: heightScreen * 0.10
                                     color: "#232F34"
+                                    Image {
+                                        anchors.centerIn: parent
+
+                                        sourceSize.width: 40
+                                        sourceSize.height: 40
+                                        source:"qrc:/UI/Assets/dashboard/arrow.png"
+                                    }
                                 }
 
                                 Item {
@@ -732,6 +938,20 @@ Item{
                                     }
 
                                 }
+                                //                                Item {
+                                //                                    width: 25
+                                //                                    height: 25
+                                //                                    x:rectId.x + rectId.width-26
+                                //                                    y:rectId.y + rectId.height-25
+                                //                                    Rectangle{
+                                //                                        id:armRectId
+
+                                //                                        width: 25
+                                //                                        height: 25
+                                //                                        color: "black"
+                                //                                    }
+
+                                //                                }
 
                                 Item {
                                     width: 25
@@ -747,14 +967,14 @@ Item{
 
                                 }
 
-}
+                            }
 
 
 
-                    }
+                        }
                     }
                     Rectangle{
-                        width: widthScreen * 0.14
+                        width: widthScreen * 0.20
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         color: "#344955"
@@ -780,142 +1000,194 @@ Item{
 
                             RowLayout{
                                 Layout.fillHeight: true
-                                width: parent.width
                                 Item{
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
+                                    //                                    ColumnLayout{
+                                    //                                        Layout.fillHeight: true
+
+                                    //anchors.centerIn: parent
                                     ColumnLayout{
-                                        anchors.centerIn: parent
-                                        RowLayout{
-                                            Image {
-                                                sourceSize.width: 20
-                                                sourceSize.height: 20
-                                                source: publisher.armStatus.base ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 20
-                                                text: qsTr("Base")
-                                            }
-//                                            CButton{
-//                                                height: 26
-//                                                name: "Crawler"
-//                                                baseColor: mainAppColor
-//                                                borderColor: mainAppColor
-//                                                onClicked: {
-////
-//                                                    publisher.call_crawlerinit()
-//                                                }
+                                        Layout.fillHeight: true
+                                        anchors.fill: parent
 
-
-//                                            }
-                                        }
-                                        RowLayout{
-                                            Image {
-                                                sourceSize.width: 20
-                                                sourceSize.height: 20
-                                                source:  publisher.armStatus.shoulder? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 20
-                                                text: qsTr("Shoulder")
-                                            }
-//                                            CButton{
-//                                                height: 26
-//                                                name: "Arm"
-//                                                baseColor: mainAppColor
-//                                                borderColor: mainAppColor
-//                                                onClicked: {
-//                                                    publisher.call_arminit()
-//                                                }
-
-
-                                            }
-//                                        }
 
                                         RowLayout{
-                                            Image {
-                                                sourceSize.width: 20
-                                                sourceSize.height: 20
-                                                source: publisher.armStatus.elbow ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 20
-                                                text: qsTr("Elbow")
-                                            }
-                                        }
-                                        RowLayout{
-                                            Image {
-                                                sourceSize.width: 20
-                                                sourceSize.height: 20
-                                                source: publisher.armStatus.tool  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 20
-                                                text: qsTr("Tool")
-                                            }
-                                        }
+                                            Layout.fillWidth: true
 
-                                        RowLayout{
+                                            RowLayout{
+                                                //                                                    Layout.fillWidth: true
+                                                Layout.leftMargin: 40
 
-                                            SButton{
-//                                                Layout.topMargin: 15
-                                                property bool arm_init: false
-                                                function init_arm(am){
 
-                                                           publisher.call_arminit(am)
+                                                Image {
+                                                    sourceSize.width: 20
+                                                    sourceSize.height: 20
+                                                    source: publisher.armStatus[0] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+                                                }
+                                                Text {
+                                                    //                                                    anchors.centerIn: parent+60
+                                                    color: "#6fda9c"
+                                                    font.pixelSize: 20
+                                                    text: qsTr("Base")
+                                                }
 
+                                            }
+                                            //                                                Item{
+                                            //                                                                                                width: 30
+                                            //                                                                                            }
+
+
+                                            //                                        }
+                                            RowLayout{
+                                                Layout.leftMargin: 32
+                                                //                                                width:widthScreen * 0.20/2
+
+
+
+                                                Image {
+                                                    sourceSize.width: 20
+                                                    sourceSize.height: 20
+                                                    source:  publisher.armStatus[1]? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+                                                }
+                                                Text {
+                                                    color: "#6fda9c"
+                                                    font.pixelSize: 20
+                                                    text: qsTr("Shoulder")
                                                 }
 
 
-                                               id: initArm
-                                               height: 20
-                                               name: arm_init ?  "Stop" : "Initialize"
-                                               baseColor: arm_init ?  "red" : mainAppColor
-                                               borderColor: mainAppColor
-                                               implicitWidth: 80
-                                               onClicked: {
-                                                   arm_init =!arm_init
-                                               }
-                                       }
+                                            }
+                                        }
+                                        RowLayout{
+                                            RowLayout{
+
+                                                Layout.leftMargin: 40
+
+                                                Image {
+                                                    sourceSize.width: 20
+                                                    sourceSize.height: 20
+                                                    source: publisher.armStatus[2] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+                                                }
+                                                Text {
+                                                    color: "#6fda9c"
+                                                    font.pixelSize: 20
+                                                    text: qsTr("Elbow")
+                                                }
+                                            }
+                                            RowLayout{
+                                                Layout.leftMargin: 20
+
+                                                Image {
+                                                    sourceSize.width: 20
+                                                    sourceSize.height: 20
+                                                    source: publisher.armStatus[3]  ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+                                                }
+                                                Text {
+                                                    color: "#6fda9c"
+                                                    font.pixelSize: 20
+                                                    text: qsTr("Tool")
+                                                }
+                                            }}
+
+                                        RowLayout{
+
+                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
+
+                                            SButton{
+                                                //                                                Layout.topMargin: 15
+
+
+                                                id: intArm
+                                                height: 20
+                                                name: "Initilize"
+                                                baseColor: mainAppColor
+                                                borderColor: mainAppColor
+                                                implicitWidth: 120
+                                                onClicked: {
+                                                    publisher.call_arminit(1)
+                                                    initArm()
+                                                }
+                                            }
 
 
                                             SButton{
-//                                                Layout.leftMargin: widthScreen * 0.16/4.5
+                                                //                                                Layout.leftMargin: widthScreen * 0.16/4.5
 
-//                                                Layout.topMargin: 15
+                                                //                                                Layout.topMargin: 15
                                                 id: resetArm
                                                 height: 20
-                                                implicitWidth: 80
+                                                implicitWidth: 120
 
                                                 name: "Reset"
                                                 baseColor: mainAppColor
                                                 borderColor: mainAppColor
                                                 onClicked: {
-
                                                     publisher.rst_arm(1)
+
+                                                    rstArm()
+
                                                 }
 
-                                        }
+                                            }
 
 
 
                                         }
 
+                                        RowLayout{
+                                            //                                            Layout.leftMargin:(widthScreen * 0.20 -150)/2
+                                            //Layout.Center: parent.horizontalCenter
+                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
 
+                                            SButton{
+                                                //                                                Layout.topMargin: 15
+
+                                                //        Layout.Center:(widthScreen * 0.20 -150)/2
+
+                                                id: stpArm
+                                                height: 20
+                                                name: "Stop"
+                                                baseColor: "red"
+                                                borderColor: "red"
+                                                implicitWidth: 120
+                                                onClicked: {
+                                                    publisher.call_arminit(0)
+
+                                                    stopArm()
+                                                }
+                                            }
+
+
+                                            SButton{
+
+                                                id: armmStatus
+                                                height: 20
+                                                name:  "Status"
+                                                baseColor:  mainAppColor
+                                                borderColor: mainAppColor
+                                                implicitWidth: 120
+
+                                                onClicked: {
+                                                    publisher.trig_armStatus()
+                                                    console.log("called in button")
+
+                                                }
+                                            }
+
+
+                                        }
                                     }
 
+                                    //                                    }
                                 }
+
                             }
 
                         }
-
                     }
                     Rectangle{
-                        width: widthScreen * 0.24
+                        width: widthScreen * 0.22
                         height: heightScreen * 0.25
                         border.color: "#6fda9c"
                         border.width: 2
@@ -936,23 +1208,23 @@ Item{
                                     horizontalAlignment: Text.AlignHCenter
                                     topPadding: 5
 
-                                        function calcThick()
-                                        {
-//                                                    var k = 0.0
-//                                                     k = publisher.thickness.thickness.toFixed(2)
-                                            var u= publisher.thickness.unit
-                                            var un ="NAN"
-                                            if(u===1)
-                                                 un= "mm"
-                                            else if(u===0)
-                                                 un= "in"
-                                            else
-                                                un ="NAN"
-                                         return(" "+ un)
+                                    function calcThick()
+                                    {
+                                        //                                                    var k = 0.0
+                                        //                                                     k = publisher.thickness.thickness.toFixed(2)
+                                        var u= publisher.thickness.unit
+                                        var un ="NAN"
+                                        if(u===1)
+                                            un= "mm"
+                                        else if(u===0)
+                                            un= "in"
+                                        else
+                                            un ="NAN"
+                                        return(" "+ un)
 
-                                        }
-                                        text:   publisher.thickness.unit === -1 ? "-----" : publisher.thickness.thickness.toFixed(2) + calcThick()
                                     }
+                                    text:   publisher.thickness.unit === -1 ? "-----" : publisher.thickness.thickness.toFixed(2) + calcThick()
+                                }
 
 
 
@@ -1025,10 +1297,10 @@ Item{
                                                 leftPadding: 5
                                                 activeFocusOnPress: true
                                                 Keys.onPressed: (event)=> {
-                                                        if (event.key === Qt.Key_Return) {
-                                                            publisher.utVel = text
+                                                                    if (event.key === Qt.Key_Return) {
+                                                                        publisher.utVel = text
 
-                                                        }}
+                                                                    }}
                                                 background: Rectangle {
                                                     implicitWidth:  30
                                                     implicitHeight: 30
@@ -1050,7 +1322,7 @@ Item{
                                                 baseColor: mainAppColor
                                                 borderColor: mainAppColor
                                                 onClicked: {
-//
+                                                    //
                                                     publisher.utVel = sendVel.text
                                                 }
 
@@ -1059,8 +1331,8 @@ Item{
                                         }
                                         RowLayout{
 
-                                                Layout.fillHeight: true
-                                                width: parent.width/2
+                                            Layout.fillHeight: true
+                                            width: parent.width/2
                                             Text {
                                                 Layout.alignment: Qt.AlignCenter
 
@@ -1081,10 +1353,10 @@ Item{
                                                 leftPadding: 5
                                                 activeFocusOnPress: true
                                                 Keys.onPressed: (event)=> {
-                                                        if (event.key === Qt.Key_Return) {
-                                                            publisher.utData = sendDC.text
+                                                                    if (event.key === Qt.Key_Return) {
+                                                                        publisher.utData = sendDC.text
 
-                                                        }}
+                                                                    }}
                                                 background: Rectangle {
                                                     implicitWidth:  30
                                                     implicitHeight: 30
@@ -1106,7 +1378,7 @@ Item{
                                                 baseColor: mainAppColor
                                                 borderColor: mainAppColor
                                                 onClicked: {
-//
+                                                    //
                                                     publisher.utData = sendDC.text
                                                 }
 
@@ -1131,10 +1403,10 @@ Item{
                                                 leftPadding: 5
                                                 activeFocusOnPress: true
                                                 Keys.onPressed: (event)=> {
-                                                        if (event.key === Qt.Key_Return) {
-                                                            publisher.utData = sendXR.text
+                                                                    if (event.key === Qt.Key_Return) {
+                                                                        publisher.utData = sendXR.text
 
-                                                        }}
+                                                                    }}
                                                 background: Rectangle {
                                                     implicitWidth:  30
                                                     implicitHeight: 30
@@ -1156,7 +1428,7 @@ Item{
                                                 baseColor: mainAppColor
                                                 borderColor: mainAppColor
                                                 onClicked: {
-//
+                                                    //
                                                     publisher.utData = sendXR.text
                                                 }
 
@@ -1186,32 +1458,41 @@ Item{
                         border.width: 2
                         color: "#344955"
                         radius: 15
-//                        layer.enabled: true
-//                        layer.effect: OpacityMask {
-//                            maskSource: Item {
-//                                width: screen1.width
-//                                height: screen1.height
-//                                Rectangle {
-//                                    anchors.centerIn: parent
-//                                    width:  screen1.width
-//                                    height: screen1.height
-//                                    border.width: 2
-//                                    color: "#344955"
-//                                    radius: 15
+                        //                        layer.enabled: true
+                        //                        layer.effect: OpacityMask {
+                        //                            maskSource: Item {
+                        //                                width: screen1.width
+                        //                                height: screen1.height
+                        //                                Rectangle {
+                        //                                    anchors.centerIn: parent
+                        //                                    width:  screen1.width
+                        //                                    height: screen1.height
+                        //                                    border.width: 2
+                        //                                    color: "#344955"
+                        //                                    radius: 15
 
-//                                }
-//                            }
-//                        }
+                        //                                }
+                        //                            }
+                        //                        }
                         MediaPlayer {
                             id: videoPlayer
                             //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
                             source: "rtsp://10.223.240.0:8554/cam2"
                             muted: true
                             autoPlay: true
-                        }
-                            HelloCpp {
-                                id: demo
+                            onPlaybackStateChanged:
+                            {
+                            if(playbackState == 0)
+                             {
+                                 source = ""
+                                 source = "rtsp://10.223.240.0:8554/cam2"
+                                 videoPlayer.play();
+                             }
                             }
+                        }
+                        HelloCpp {
+                            id: demo
+                        }
 
 
                         VideoOutput {
@@ -1222,14 +1503,14 @@ Item{
 
 
                             function save() {
-                                    console.log('Schedule Save1')
-                                    camera.grabToImage(function(result) {
-                                         var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+                                //console.log('Schedule Save1')
+                                camera.grabToImage(function(result) {
+                                    var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                                    console.log(result.saveToFile("SCREENSHOT/cam1.png_"+date+".png"));
-                                        update()
-                                                })
-                                }
+                                    //console.log(result.saveToFile("SCREENSHOT/cam1.png_"+date+".png"));
+                                    update()
+                                })
+                            }
                         }
 
 
@@ -1249,58 +1530,58 @@ Item{
                                 Layout.fillHeight: true
                                 width: 30
 
-//                                Image {
-//                                    id:record1Id
-//                                    sourceSize.width: 25
-//                                    sourceSize.height: 25
-//                                    anchors.centerIn: parent
-//                                    source: "qrc:/UI/Assets/dashboard/record.png"
+                                //                                Image {
+                                //                                    id:record1Id
+                                //                                    sourceSize.width: 25
+                                //                                    sourceSize.height: 25
+                                //                                    anchors.centerIn: parent
+                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
 
-//                                }
-//                                MouseArea{
-//                                    anchors.fill: parent
-//                                    onClicked: {
-////                                        record.play()
-//                                        demo.gstRecord("Recording...");
+                                //                                }
+                                //                                MouseArea{
+                                //                                    anchors.fill: parent
+                                //                                    onClicked: {
+                                ////                                        record.play()
+                                //                                        demo.gstRecord("Recording...");
 
-//                                    }
+                                //                                    }
 
-//                                }
-                                    Button {
-                                        id: btnON1
-                                        text : "Record"
-                                        width : 100
-                                        height : 25
-                                        anchors.centerIn: parent
+                                //                                }
+                                Button {
+                                    id: btnON1
+                                    text : "Record"
+                                    width : 100
+                                    height : 25
+                                    anchors.centerIn: parent
 
-                                        background: Rectangle {
-                                            color:"#6fda9c"
-                                            radius: 8
-                                        }
-
-                                        onClicked: {
-                                            demo.gstRecord("Recording...");
-
-                                            btnON1.text = "recording...";
-
-                                        }
+                                    background: Rectangle {
+                                        color:"#6fda9c"
+                                        radius: 8
                                     }
 
-//                                Image {
-//                                    id:stop
-//                                    sourceSize.width: 25
-//                                    sourceSize.height: 25
-//                                    anchors.centerIn: parent
-//                                    source: "qrc:/UI/Assets/dashboard/record.png"
+                                    onClicked: {
+                                        demo.gstRecord("Recording...");
 
-//                                }
-//                                MouseArea{
-//                                    anchors.fill: parent
-//                                    onClicked: {
-//                                        record.stop()
-//                                    }
+                                        btnON1.text = "recording...";
 
-//                                }
+                                    }
+                                }
+
+                                //                                Image {
+                                //                                    id:stop
+                                //                                    sourceSize.width: 25
+                                //                                    sourceSize.height: 25
+                                //                                    anchors.centerIn: parent
+                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
+
+                                //                                }
+                                //                                MouseArea{
+                                //                                    anchors.fill: parent
+                                //                                    onClicked: {
+                                //                                        record.stop()
+                                //                                    }
+
+                                //                                }
 
                             }
 
@@ -1310,53 +1591,53 @@ Item{
                             Item{
                                 Layout.fillHeight: true
                                 width: 30
-//                                Image {
-//                                    id:record4Id
-//                                    sourceSize.width: 25
-//                                    sourceSize.height: 25
-//                                    anchors.centerIn: parent
-//                                    source: "qrc:/UI/Assets/dashboard/record.png"
+                                //                                Image {
+                                //                                    id:record4Id
+                                //                                    sourceSize.width: 25
+                                //                                    sourceSize.height: 25
+                                //                                    anchors.centerIn: parent
+                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
 
-//                                }
-//                                MouseArea{
-//                                    anchors.fill: parent
-//                                    onClicked: {
-//                                                    demo.gstStop("Stop");
-//                                    }
-                                    Button {
-                                        id: btnSTOP1
-                                        text : "Stop"
-                                        width : 100
-                                        height : 25
-                                        anchors.centerIn: parent
-                                        background: Rectangle {
-                                            color:"#6fda9c"
-                                            radius: 8
-                                        }
-
-                                        onClicked: {
-
-                                            demo.gstStop("Stop");
-                                            btnON1.text = "Record";
-                                        }
+                                //                                }
+                                //                                MouseArea{
+                                //                                    anchors.fill: parent
+                                //                                    onClicked: {
+                                //                                                    demo.gstStop("Stop");
+                                //                                    }
+                                Button {
+                                    id: btnSTOP1
+                                    text : "Stop"
+                                    width : 100
+                                    height : 25
+                                    anchors.centerIn: parent
+                                    background: Rectangle {
+                                        color:"#6fda9c"
+                                        radius: 8
                                     }
 
+                                    onClicked: {
 
-//                                Image {
-//                                    id:stop
-//                                    sourceSize.width: 25
-//                                    sourceSize.height: 25
-//                                    anchors.centerIn: parent
-//                                    source: "qrc:/UI/Assets/dashboard/record.png"
+                                        demo.gstStop("Stop");
+                                        btnON1.text = "Record";
+                                    }
+                                }
 
-//                                }
-//                                MouseArea{
-//                                    anchors.fill: parent
-//                                    onClicked: {
-//                                        record.stop()
-//                                    }
 
-//                                }
+                                //                                Image {
+                                //                                    id:stop
+                                //                                    sourceSize.width: 25
+                                //                                    sourceSize.height: 25
+                                //                                    anchors.centerIn: parent
+                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
+
+                                //                                }
+                                //                                MouseArea{
+                                //                                    anchors.fill: parent
+                                //                                    onClicked: {
+                                //                                        record.stop()
+                                //                                    }
+
+                                //                                }
 
                             }
                             Item {
@@ -1411,225 +1692,235 @@ Item{
                         width: widthScreen * 0.42
                         height: heightScreen * 0.90
 
-                   TabView{
-                        //    width: widthScreen * 0.42
-                        //    height: ((heightScreen * 0.90)/2 ) - 5/2
-                        implicitWidth: widthScreen * 0.42
-                        implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
+                        TabView{
+                            //    width: widthScreen * 0.42
+                            //    height: ((heightScreen * 0.90)/2 ) - 5/2
+                            implicitWidth: widthScreen * 0.42
+                            implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
 
 
-                   Tab{
-                       title: " Cam 2  "
+                            Tab{
+                                title: " Cam 2  "
 
-                       Rectangle{
-                           id:screen2
-                           width: widthScreen * 0.42
-                           height: ((heightScreen * 0.90)/2 ) - 5/2
-                           border.color: "#6fda9c"
-                           border.width: 2
-                           color: "#344955"
-                           radius: 15
-//                            layer.enabled: true
-//                            layer.effect: OpacityMask {
-//                                maskSource: Item {
-//                                    width: screen2.width
-//                                    height: screen2.height
-//                                    Rectangle {
-//                                        anchors.centerIn: parent
-//                                        width:  screen2.width
-//                                        height: screen2.height
-//                                        border.width: 2
-//                                        color: "#344955"
-//                                        radius: 15
+                                Rectangle{
+                                    id:screen2
+                                    width: widthScreen * 0.42
+                                    height: ((heightScreen * 0.90)/2 ) - 5/2
+                                    border.color: "#6fda9c"
+                                    border.width: 2
+                                    color: "#344955"
+                                    radius: 15
+                                    //                            layer.enabled: true
+                                    //                            layer.effect: OpacityMask {
+                                    //                                maskSource: Item {
+                                    //                                    width: screen2.width
+                                    //                                    height: screen2.height
+                                    //                                    Rectangle {
+                                    //                                        anchors.centerIn: parent
+                                    //                                        width:  screen2.width
+                                    //                                        height: screen2.height
+                                    //                                        border.width: 2
+                                    //                                        color: "#344955"
+                                    //                                        radius: 15
 
-//                                    }
-//                                }
-//                            }
+                                    //                                    }
+                                    //                                }
+                                    //                            }
 
-                           MediaPlayer {
-                               id: videoPlayer1
-                               //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                               source: "rtsp://10.223.240.0:8554/cam1"
-                               muted: true
-                               autoPlay: true
-                           }
+                                    MediaPlayer {
+                                        id: videoPlayer1
+                                        //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
+                                        source: "rtsp://10.223.240.0:8554/cam1"
+                                        muted: true
+                                        autoPlay: true
+                                        onPlaybackStateChanged:
+                                        {
+                                        if(playbackState == 0)
+                                         {
+                                             source = ""
+                                             source = "rtsp://10.223.240.0:8554/cam1"
+                                             videoPlayer1.play();
+                                            console.log("cam1 reset")
+                                         }
+                                        }
+                                    }
 
-                           VideoOutput {
-                               id: camera1
-                               anchors.fill: parent
-                               source: videoPlayer1
-                               fillMode: VideoOutput.PreserveAspectCrop
-                               function save() {
-                                       console.log('Schedule Save')
-                                       camera1.grabToImage(function(result) {
-                                            var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+                                    VideoOutput {
+                                        id: camera1
+                                        anchors.fill: parent
+                                        source: videoPlayer1
+                                        fillMode: VideoOutput.PreserveAspectCrop
+                                        function save() {
+                                            //console.log('Schedule Save')
+                                            camera1.grabToImage(function(result) {
+                                                var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                                       console.log(result.saveToFile("SCREENSHOT/cam2.png_"+date+".png"));
-                                           update()
-                                                   })
-                                   }
-                           }
+                                                //console.log(result.saveToFile("SCREENSHOT/cam2.png_"+date+".png"));
+                                                update()
+                                            })
+                                        }
+                                    }
 
-                           Rectangle{
-                               id:videoToolBar2
-                               anchors.bottom: parent.bottom
-                               width: parent.width
-                               height: parent.height*0.1
-                               opacity: 0.5
-                           }
-                           RowLayout{
-                               anchors.fill:videoToolBar2
-                               Item {
-                                   width: 50
-                               }
-                               Item{
-                                   Layout.fillHeight: true
-                                   width: 30
-//                                   Image {
-//                                       id:record2Id
-//                                       sourceSize.width: 25
-//                                       sourceSize.height: 25
-//                                       anchors.centerIn: parent
-//                                       source: "qrc:/UI/Assets/dashboard/record.png"
-//                                   }
-//                                   MouseArea{
-//                                       anchors.fill: parent
-//                                       onClicked: {
+                                    Rectangle{
+                                        id:videoToolBar2
+                                        anchors.bottom: parent.bottom
+                                        width: parent.width
+                                        height: parent.height*0.1
+                                        opacity: 0.5
+                                    }
+                                    RowLayout{
+                                        anchors.fill:videoToolBar2
+                                        Item {
+                                            width: 50
+                                        }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+                                            //                                   Image {
+                                            //                                       id:record2Id
+                                            //                                       sourceSize.width: 25
+                                            //                                       sourceSize.height: 25
+                                            //                                       anchors.centerIn: parent
+                                            //                                       source: "qrc:/UI/Assets/dashboard/record.png"
+                                            //                                   }
+                                            //                                   MouseArea{
+                                            //                                       anchors.fill: parent
+                                            //                                       onClicked: {
 
-//                                       }
-//                                   }
+                                            //                                       }
+                                            //                                   }
 
-                                   Button {
-                                       id: btnON2
-                                       text : "Record"
-                                       width : 100
-                                       height : 25
-                                       anchors.centerIn: parent
+                                            Button {
+                                                id: btnON2
+                                                text : "Record"
+                                                width : 100
+                                                height : 25
+                                                anchors.centerIn: parent
 
-                                       background: Rectangle {
-                                           color:"#6fda9c"
-//                                           border.color: "black"
-                                           radius: 8
-                                       }
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    //                                           border.color: "black"
+                                                    radius: 8
+                                                }
 
-                                       onClicked: {
-                                           demo.gstRecord2("Recording...");
+                                                onClicked: {
+                                                    demo.gstRecord2("Recording...");
 
-                                           btnON2.text = "recording...";
+                                                    btnON2.text = "recording...";
 
-                                       }
-                                   }
-                               }
-                               Item {
-                                   width: 100
-                               }
-                               Item{
-                                   Layout.fillHeight: true
-                                   width: 30
-                                   Button {
-                                       id: btnSTOP2
-                                       text : "Stop"
-                                       width : 100
-                                       height : 25
-                                       anchors.centerIn: parent
-                                       background: Rectangle {
-                                           color:"#6fda9c"
-                                           radius: 8
-                                       }
+                                                }
+                                            }
+                                        }
+                                        Item {
+                                            width: 100
+                                        }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+                                            Button {
+                                                id: btnSTOP2
+                                                text : "Stop"
+                                                width : 100
+                                                height : 25
+                                                anchors.centerIn: parent
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 8
+                                                }
 
-                                       onClicked: {
+                                                onClicked: {
 
-                                           demo.gstStop2("Stop");
-                                           btnON2.text = "Record";
-                                       }
-                                   }
-                               }
-                               Item {
-                                   Layout.fillWidth: true
-                               }
-                               Item{
-                                   Layout.fillHeight: true
-                                   width: 30
-                                   Image {
-                                       id:captureIcon2Id
-                                       sourceSize.width: 25
-                                       sourceSize.height: 25
-                                       anchors.centerIn: parent
-                                       source: "qrc:/UI/Assets/dashboard/capture.png"
-                                   }
-                                   MouseArea{
-                                       anchors.fill: parent
-                                       onClicked: {
-camera1.save()
-                                       }
-                                   }
-                               }
-                               Item{
-                                   Layout.fillHeight: true
-                                   width: 30
-                                   Image {
-                                       id:screenSizeIcon2Id
-                                       sourceSize.width: 25
-                                       sourceSize.height: 25
-                                       anchors.centerIn: parent
-                                       source: "qrc:/UI/Assets/dashboard/expand.png"
-                                   }
-                                   MouseArea{
-                                       anchors.fill: parent
-                                       onClicked: {
-                                           fullScreenRect.visible = true
-                                           fullScreenView.enabled = true
-                                           fullScreenView.sourceItem = camera1
-                                       }
-                                   }
-                               }
-
-
-                               Item {
-                                   width:5
-                               }
-                           }
-
-                       }
-
-
-
-                   }
-                   Tab{
-                       title: " A Scan "
-//                       Rectangle{
-//                           id:screen4
-//                           width: widthScreen * 0.42
-//                           height: (heightScreen *0.90)/2 - 5/2
-//                           border.color: "#6fda9c"
-//                           border.width: 2
-//                           color: "red"
-//                           radius: 15
-
-                           Item {
-
-                           CustomPlotItem {
-
-                               id: customPlot
-                               anchors.fill: parent
-
-                               Component.onCompleted: initCustomPlot()
-                               MouseArea{
-                                   anchors.fill: parent
-                                   onClicked: {
-                                           customPlot.saveImg()
-                                   }
-                               }
-                           }
-                           }
-
-//                   }
+                                                    demo.gstStop2("Stop");
+                                                    btnON2.text = "Record";
+                                                }
+                                            }
+                                        }
+                                        Item {
+                                            Layout.fillWidth: true
+                                        }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+                                            Image {
+                                                id:captureIcon2Id
+                                                sourceSize.width: 25
+                                                sourceSize.height: 25
+                                                anchors.centerIn: parent
+                                                source: "qrc:/UI/Assets/dashboard/capture.png"
+                                            }
+                                            MouseArea{
+                                                anchors.fill: parent
+                                                onClicked: {
+                                                    camera1.save()
+                                                }
+                                            }
+                                        }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+                                            Image {
+                                                id:screenSizeIcon2Id
+                                                sourceSize.width: 25
+                                                sourceSize.height: 25
+                                                anchors.centerIn: parent
+                                                source: "qrc:/UI/Assets/dashboard/expand.png"
+                                            }
+                                            MouseArea{
+                                                anchors.fill: parent
+                                                onClicked: {
+                                                    fullScreenRect.visible = true
+                                                    fullScreenView.enabled = true
+                                                    fullScreenView.sourceItem = camera1
+                                                }
+                                            }
+                                        }
 
 
-                   }
+                                        Item {
+                                            width:5
+                                        }
+                                    }
+
+                                }
 
 
-                   }
+
+                            }
+                            Tab{
+                                title: " A Scan "
+                                //                       Rectangle{
+                                //                           id:screen4
+                                //                           width: widthScreen * 0.42
+                                //                           height: (heightScreen *0.90)/2 - 5/2
+                                //                           border.color: "#6fda9c"
+                                //                           border.width: 2
+                                //                           color: "red"
+                                //                           radius: 15
+
+                                Item {
+
+                                    CustomPlotItem {
+
+                                        id: customPlot
+                                        anchors.fill: parent
+
+                                        Component.onCompleted: initCustomPlot()
+                                        MouseArea{
+                                            anchors.fill: parent
+                                            onClicked: {
+                                                customPlot.saveImgk(1)
+                                            }
+                                        }
+                                    }
+                                }
+
+                                //                   }
+
+
+                            }
+
+
+                        }
                         Rectangle{
                             id:screen3
                             width: widthScreen * 0.42
@@ -1638,31 +1929,39 @@ camera1.save()
                             border.width: 2
                             color: "#344955"
                             radius: 15
-//                            layer.enabled: true
-//                            layer.effect: OpacityMask {
-//                                maskSource: Item {
-//                                    width: screen3.width
-//                                    height: screen3.height
-//                                    Rectangle {
-//                                        anchors.centerIn: parent
-//                                        width:  screen3.width
-//                                        height: screen3.height
-//                                        border.width: 2
-//                                        color: "#344955"
-//                                        radius: 15
+                            //                            layer.enabled: true
+                            //                            layer.effect: OpacityMask {
+                            //                                maskSource: Item {
+                            //                                    width: screen3.width
+                            //                                    height: screen3.height
+                            //                                    Rectangle {
+                            //                                        anchors.centerIn: parent
+                            //                                        width:  screen3.width
+                            //                                        height: screen3.height
+                            //                                        border.width: 2
+                            //                                        color: "#344955"
+                            //                                        radius: 15
 
-//                                    }
-//                                }
-//                            }
+                            //                                    }
+                            //                                }
+                            //                            }
 
                             MediaPlayer {
                                 id: videoPlayer2
-//                                source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
+                                //                                source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
                                 source: "rtsp://10.223.240.0:8554/cam3"
 
                                 muted: true
                                 autoPlay: true
-
+                                onPlaybackStateChanged:
+                                {
+                                if(playbackState == 0)
+                                 {
+                                     source = ""
+                                     source = "rtsp://10.223.240.0:8554/cam3"
+                                     videoPlayer2.play();
+                                 }
+                                }
                             }
 
 
@@ -1673,15 +1972,15 @@ camera1.save()
                                 fillMode: VideoOutput.PreserveAspectCrop
 
                                 function save() {
-                                        console.log('Schedule Save')
+                                    //console.log('Schedule Save')
 
-                                        camera2.grabToImage(function(result) {
-                                              var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+                                    camera2.grabToImage(function(result) {
+                                        var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                                        console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
-                                            update()
-                                                    })
-                                    }
+                                        //console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
+                                        update()
+                                    })
+                                }
                             }
 
                             Rectangle{
@@ -1751,7 +2050,7 @@ camera1.save()
                                             fullScreenRect.visible = true
                                             fullScreenView.enabled = true
                                             fullScreenView.sourceItem = camera2
-                                            console.log("clicked")
+                                            //console.log("clicked")
                                         }
                                     }
                                 }
@@ -1777,12 +2076,12 @@ camera1.save()
                     anchors.fill: parent
 
                     function save() {
-                            console.log('Schedule Save')
-                            scheduleUpdate() // explicitly update. grabToImage() will force rendering afterwards.
-                            fullScreenView.grabToImage(function(result) {
-                                            console.log(result.saveToFile("fullscreenView.png"));
-                                        })
-                        }
+                        //console.log('Schedule Save')
+                        scheduleUpdate() // explicitly update. grabToImage() will force rendering afterwards.
+                        fullScreenView.grabToImage(function(result) {
+                            //console.log(result.saveToFile("fullscreenView.png"));
+                        })
+                    }
 
                 }
                 Rectangle{
@@ -1828,7 +2127,7 @@ camera1.save()
                         MouseArea{
                             anchors.fill: parent
                             onClicked: {
-                            fullScreenView.save()
+                                fullScreenView.save()
                             }
                         }
                     }
@@ -1848,7 +2147,7 @@ camera1.save()
                             onClicked: {
                                 fullScreenRect.visible = false
                                 fullScreenView.enabled = false
-                                console.log("clicked")
+                                //console.log("clicked")
                             }
                         }
                     }

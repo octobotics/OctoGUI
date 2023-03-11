@@ -3,7 +3,9 @@
 ConnectROS::ConnectROS(QObject *parent)
     : QObject(parent)
 {
+//    m_masterURI = "http://localhost:11311";
     m_masterURI = "http://10.223.240.1:11311";
+
     m_host = "octo";
 }
 QString ConnectROS::getMasterURI()
@@ -37,10 +39,10 @@ void ConnectROS::connectMasterURI(QString master, QString hostname)
         ros::start();
         std::cout << "master started!" << std::endl;
         QDir dirScanSpectra;
-            if (!dirScanSpectra.exists("SCREENSHOT"))
-            {
-                dirScanSpectra.mkdir("SCREENSHOT");
-            }
+        if (!dirScanSpectra.exists("SCREENSHOT"))
+        {
+            dirScanSpectra.mkdir("SCREENSHOT");
+        }
         emit connectSuccess();
     }
     else

@@ -24,19 +24,33 @@ struct graph_arr_
   typedef graph_arr_<ContainerAllocator> Type;
 
   graph_arr_()
-    : data()  {
+    : data()
+    , echo_arr()
+    , x_range(0)  {
       data.assign(0);
+
+      echo_arr.assign(0);
   }
   graph_arr_(const ContainerAllocator& _alloc)
-    : data()  {
+    : data()
+    , echo_arr()
+    , x_range(0)  {
   (void)_alloc;
       data.assign(0);
+
+      echo_arr.assign(0);
   }
 
 
 
    typedef boost::array<int64_t, 320>  _data_type;
   _data_type data;
+
+   typedef boost::array<int64_t, 3>  _echo_arr_type;
+  _echo_arr_type echo_arr;
+
+   typedef int64_t _x_range_type;
+  _x_range_type x_range;
 
 
 
@@ -67,7 +81,9 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::serialtoros::graph_arr_<ContainerAllocator1> & lhs, const ::serialtoros::graph_arr_<ContainerAllocator2> & rhs)
 {
-  return lhs.data == rhs.data;
+  return lhs.data == rhs.data &&
+    lhs.echo_arr == rhs.echo_arr &&
+    lhs.x_range == rhs.x_range;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -124,12 +140,12 @@ struct MD5Sum< ::serialtoros::graph_arr_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "6296f4fa134cef085ed104bdfb1130bd";
+    return "b2e06edd1c730d621391d0003d4caf82";
   }
 
   static const char* value(const ::serialtoros::graph_arr_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x6296f4fa134cef08ULL;
-  static const uint64_t static_value2 = 0x5ed104bdfb1130bdULL;
+  static const uint64_t static_value1 = 0xb2e06edd1c730d62ULL;
+  static const uint64_t static_value2 = 0x1391d0003d4caf82ULL;
 };
 
 template<class ContainerAllocator>
@@ -149,6 +165,8 @@ struct Definition< ::serialtoros::graph_arr_<ContainerAllocator> >
   static const char* value()
   {
     return "int64[320] data\n"
+"int64[3] echo_arr\n"
+"int64 x_range\n"
 ;
   }
 
@@ -168,6 +186,8 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.data);
+      stream.next(m.echo_arr);
+      stream.next(m.x_range);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -192,6 +212,14 @@ struct Printer< ::serialtoros::graph_arr_<ContainerAllocator> >
       s << indent << "  data[" << i << "]: ";
       Printer<int64_t>::stream(s, indent + "  ", v.data[i]);
     }
+    s << indent << "echo_arr[]" << std::endl;
+    for (size_t i = 0; i < v.echo_arr.size(); ++i)
+    {
+      s << indent << "  echo_arr[" << i << "]: ";
+      Printer<int64_t>::stream(s, indent + "  ", v.echo_arr[i]);
+    }
+    s << indent << "x_range: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.x_range);
   }
 };
 
