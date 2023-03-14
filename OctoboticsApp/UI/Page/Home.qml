@@ -5,6 +5,7 @@ import "../Assets/battery-status"
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
 import QtMultimedia 5.12
+
 import QtGraphicalEffects 1.0
 import QtLocation 5.12
 import QtQuick.Controls 1.4
@@ -1501,13 +1502,12 @@ Rectangle{
                             source: videoPlayer
                             fillMode:VideoOutput.PreserveAspectCrop
 
-
                             function save() {
-                                //console.log('Schedule Save1')
+                                console.log('Schedule Save1')
                                 camera.grabToImage(function(result) {
                                     var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                    //console.log(result.saveToFile("SCREENSHOT/cam1.png_"+date+".png"));
+                                    console.log(result.saveToFile("SCREENSHOT/cam1.png_"+date+".png"));
                                     update()
                                 })
                             }
@@ -1530,23 +1530,6 @@ Rectangle{
                                 Layout.fillHeight: true
                                 width: 30
 
-                                //                                Image {
-                                //                                    id:record1Id
-                                //                                    sourceSize.width: 25
-                                //                                    sourceSize.height: 25
-                                //                                    anchors.centerIn: parent
-                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
-
-                                //                                }
-                                //                                MouseArea{
-                                //                                    anchors.fill: parent
-                                //                                    onClicked: {
-                                ////                                        record.play()
-                                //                                        demo.gstRecord("Recording...");
-
-                                //                                    }
-
-                                //                                }
                                 Button {
                                     id: btnON1
                                     text : "Record"
@@ -1567,22 +1550,6 @@ Rectangle{
                                     }
                                 }
 
-                                //                                Image {
-                                //                                    id:stop
-                                //                                    sourceSize.width: 25
-                                //                                    sourceSize.height: 25
-                                //                                    anchors.centerIn: parent
-                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
-
-                                //                                }
-                                //                                MouseArea{
-                                //                                    anchors.fill: parent
-                                //                                    onClicked: {
-                                //                                        record.stop()
-                                //                                    }
-
-                                //                                }
-
                             }
 
                             Item {
@@ -1591,19 +1558,7 @@ Rectangle{
                             Item{
                                 Layout.fillHeight: true
                                 width: 30
-                                //                                Image {
-                                //                                    id:record4Id
-                                //                                    sourceSize.width: 25
-                                //                                    sourceSize.height: 25
-                                //                                    anchors.centerIn: parent
-                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
 
-                                //                                }
-                                //                                MouseArea{
-                                //                                    anchors.fill: parent
-                                //                                    onClicked: {
-                                //                                                    demo.gstStop("Stop");
-                                //                                    }
                                 Button {
                                     id: btnSTOP1
                                     text : "Stop"
@@ -1622,22 +1577,6 @@ Rectangle{
                                     }
                                 }
 
-
-                                //                                Image {
-                                //                                    id:stop
-                                //                                    sourceSize.width: 25
-                                //                                    sourceSize.height: 25
-                                //                                    anchors.centerIn: parent
-                                //                                    source: "qrc:/UI/Assets/dashboard/record.png"
-
-                                //                                }
-                                //                                MouseArea{
-                                //                                    anchors.fill: parent
-                                //                                    onClicked: {
-                                //                                        record.stop()
-                                //                                    }
-
-                                //                                }
 
                             }
                             Item {
@@ -1710,22 +1649,7 @@ Rectangle{
                                     border.width: 2
                                     color: "#344955"
                                     radius: 15
-                                    //                            layer.enabled: true
-                                    //                            layer.effect: OpacityMask {
-                                    //                                maskSource: Item {
-                                    //                                    width: screen2.width
-                                    //                                    height: screen2.height
-                                    //                                    Rectangle {
-                                    //                                        anchors.centerIn: parent
-                                    //                                        width:  screen2.width
-                                    //                                        height: screen2.height
-                                    //                                        border.width: 2
-                                    //                                        color: "#344955"
-                                    //                                        radius: 15
 
-                                    //                                    }
-                                    //                                }
-                                    //                            }
 
                                     MediaPlayer {
                                         id: videoPlayer1
@@ -1751,11 +1675,11 @@ Rectangle{
                                         source: videoPlayer1
                                         fillMode: VideoOutput.PreserveAspectCrop
                                         function save() {
-                                            //console.log('Schedule Save')
+                                            console.log('Schedule Save22')
                                             camera1.grabToImage(function(result) {
                                                 var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                                //console.log(result.saveToFile("SCREENSHOT/cam2.png_"+date+".png"));
+                                                console.log(result.saveToFile("SCREENSHOT/cam2.png_"+date+".png"));
                                                 update()
                                             })
                                         }
@@ -1776,20 +1700,6 @@ Rectangle{
                                         Item{
                                             Layout.fillHeight: true
                                             width: 30
-                                            //                                   Image {
-                                            //                                       id:record2Id
-                                            //                                       sourceSize.width: 25
-                                            //                                       sourceSize.height: 25
-                                            //                                       anchors.centerIn: parent
-                                            //                                       source: "qrc:/UI/Assets/dashboard/record.png"
-                                            //                                   }
-                                            //                                   MouseArea{
-                                            //                                       anchors.fill: parent
-                                            //                                       onClicked: {
-
-                                            //                                       }
-                                            //                                   }
-
                                             Button {
                                                 id: btnON2
                                                 text : "Record"
@@ -1888,14 +1798,6 @@ Rectangle{
                             }
                             Tab{
                                 title: " A Scan "
-                                //                       Rectangle{
-                                //                           id:screen4
-                                //                           width: widthScreen * 0.42
-                                //                           height: (heightScreen *0.90)/2 - 5/2
-                                //                           border.color: "#6fda9c"
-                                //                           border.width: 2
-                                //                           color: "red"
-                                //                           radius: 15
 
                                 Item {
 
@@ -1914,9 +1816,6 @@ Rectangle{
                                     }
                                 }
 
-                                //                   }
-
-
                             }
 
 
@@ -1929,30 +1828,16 @@ Rectangle{
                             border.width: 2
                             color: "#344955"
                             radius: 15
-                            //                            layer.enabled: true
-                            //                            layer.effect: OpacityMask {
-                            //                                maskSource: Item {
-                            //                                    width: screen3.width
-                            //                                    height: screen3.height
-                            //                                    Rectangle {
-                            //                                        anchors.centerIn: parent
-                            //                                        width:  screen3.width
-                            //                                        height: screen3.height
-                            //                                        border.width: 2
-                            //                                        color: "#344955"
-                            //                                        radius: 15
 
-                            //                                    }
-                            //                                }
-                            //                            }
 
                             MediaPlayer {
                                 id: videoPlayer2
-                                //                                source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
+//                                                                source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
                                 source: "rtsp://10.223.240.0:8554/cam3"
 
                                 muted: true
                                 autoPlay: true
+
                                 onPlaybackStateChanged:
                                 {
                                 if(playbackState == 0)
@@ -1964,6 +1849,25 @@ Rectangle{
                                 }
                             }
 
+                            VideoOutput {
+                                id: test
+                                width: 1920
+                                height: 1080
+                                implicitHeight: 1080
+                                implicitWidth: 1920
+                                source: videoPlayer2
+                                fillMode: VideoOutput.PreserveAspectCrop
+                                function save() {
+                                    //console.log('Schedule Save')
+
+                                    test.grabToImage(function(result) {
+                                        var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+
+                                        console.log(result.saveToFile("SCREENSHOT/cam333_"+date+".png"));
+                                        update()
+                                    })
+                                }
+                            }
 
                             VideoOutput {
                                 id: camera2
@@ -1977,11 +1881,12 @@ Rectangle{
                                     camera2.grabToImage(function(result) {
                                         var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                        //console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
+                                        console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
                                         update()
                                     })
                                 }
                             }
+
 
                             Rectangle{
                                 id:videoToolBar3
@@ -2025,10 +1930,37 @@ Rectangle{
                                         anchors.centerIn: parent
                                         source: "qrc:/UI/Assets/dashboard/capture.png"
                                     }
+
+//                                    MediaPlayer {
+//                                         id: cap
+////                                         source: "gst-pipeline: rtspsrc location= rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4 ! rtph264depay ! h264parse ! nvh264dec ! videoconvert ! jpegenc snapshot=TRUE ! filesink location=imgpng.jpeg"
+////                                         source: "gst-pipeline: rtspsrc location= rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4 ! rtph264depay ! h264parse ! nvh264dec  ! jpegenc ! filesink location=imgpng.jpeg"
+//                                         //                                         source: "gst-pipeline: rtspsrc location= rtsp://10.223.240.0:8554/cam1 ! rtph264depay ! h264parse ! nvh264dec  ! jpegenc ! filesink location=imgpng.jpeg"
+////                                         source: "gst-pipeline: rtspsrc location= rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4 ! rtph264depay ! h264parse ! nvh264dec ! videoconvert ! jpegenc ! multifilesink location=image_.jpg"
+//                                         source: "gst-pipeline: rtspsrc location= rtsp://10.223.240.0:8554/cam1 ! rtph264depay ! h264parse ! nvh264dec ! videoconvert ! jpegenc snapshot=TRUE! multifilesink location=image_.jpg"
+
+
+//                                    }
+
+
                                     MouseArea{
                                         anchors.fill: parent
                                         onClicked: {
                                             camera2.save()
+//                                            test.save()
+//                                            cap.play()
+//                                            cap.stop()
+//                                            cap.pause()
+//                                            console.log("after play---------------")
+//                                            clickimg.start()
+//                                            setTimeout(k(),5000)
+//                                            delay(10000, function()
+//                                                                   {
+//                                                                       cap.stop()
+//                                                                   })
+//
+//                                            console.log("after stop---------------")
+
                                         }
                                     }
                                 }
@@ -2181,6 +2113,50 @@ Rectangle{
             statusBar.color = "#00695C"
         }
     }
+//    Timer {
+//        id:clickimg
+//        interval: 10000; running: false; repeat: false
+//        onTriggered: {
+//            console.log(interval)
+//        }
+//    }
+//    Timer {
+//        id: timer
+//        running: false
+//        repeat: false
+
+//        property var callback
+
+//        onTriggered: callback()
+//    }
+    function k(){
+        cap.stop()
+    }
+    Timer
+     {
+         id: timer
+     }
+
+     function delay(delayTime,cb)
+     {
+         timer.interval = delayTime;
+         timer.repeat = false;
+         timer.triggered.connect(cb);
+         timer.start();
+     }
+//    function setTimeout(callback, delay)
+//    {
+//        if (timer.running) {
+//            console.error("nested calls to setTimeout are not supported!");
+//            return;
+//        }
+//        timer.callback = callback;
+//        // note: an interval of 0 is directly triggered, so add a little padding
+//        timer.interval = delay + 1;
+//        timer.running = true;
+//        console.error("in timer!");
+
+//    }
 }
 
 /*##^## Designer {

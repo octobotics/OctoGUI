@@ -322,6 +322,7 @@ void RosThread::sendToolData(QString value)
     else{
         stm_client::relay_control val;
         val.request.data = value.toInt();
+        qDebug()<<"relay_value:"<<value;
         send_tool_srv_.call(val);
 
     }
