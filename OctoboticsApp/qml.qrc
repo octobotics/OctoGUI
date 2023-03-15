@@ -8,11 +8,6 @@
         <file>UI/Assets/fontawesome-webfont.ttf</file>
         <file>UI/Page/ConnectMasterURI.qml</file>
         <file>UI/Assets/Font Awesome 6 Brands-Regular-400.otf</file>
-        <file>UI/Assets/battery-status/battery-empty-solid.svg</file>
-        <file>UI/Assets/battery-status/battery-quarter-solid.svg</file>
-        <file>UI/Assets/battery-status/battery-full-solid.svg</file>
-        <file>UI/Assets/battery-status/battery-three-quarters-solid.svg</file>
-        <file>UI/Assets/battery-status/battery-half-solid.svg</file>
         <file>UI/Assets/signal-status/wifi-signal.png</file>
         <file>UI/Assets/signal-status/no-wifi-signal.png</file>
         <file>UI/Assets/dashboard/settings.png</file>
@@ -27,5 +22,10 @@
         <file>UI/Page/ToggleButton.qml</file>
         <file>UI/Components/SButton.qml</file>
         <file>UI/Assets/dashboard/arrow.png</file>
+        <file>UI/Assets/battery-status/battery-empty-solid.png</file>
+        <file>UI/Assets/battery-status/battery-full-solid.png</file>
+        <file>UI/Assets/battery-status/battery-half-solid.png</file>
+        <file>UI/Assets/battery-status/battery-quarter-solid.png</file>
+        <file>UI/Assets/battery-status/battery-three-quarters-solid.png</file>
     </qresource>
 </RCC>

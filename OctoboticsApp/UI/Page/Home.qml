@@ -25,21 +25,21 @@ Rectangle{
 
     property variant battStatus: publisher.batteryValue
     onBattStatusChanged: {
+        console.log("in batttt",battStatus)
 
-        if (battStatus<45.0 && battStatus>44.0 && battCnt===0){
+        if (battStatus<=45 && battStatus>44 && battCnt<=3){
             battDialog.text = "\n\n         Battery LOW         \n\n"
             battDialog.icon = StandardIcon.Critical
-//            console.error("Batt Low")
+            console.log("lowwwwwwww",battStatus)
             battDialog.open()
             battCnt++
         }
-        else if((battStatus< 44 && battCnt==1))
+        else if((battStatus<= 44))
         {
             battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
             battDialog.icon = StandardIcon.Critical
-//            console.error("Batt Critical")
+            console.log("critical battery",battStatus)
             battDialog.open()
-            battCnt++
         }
 
 
@@ -291,18 +291,36 @@ Rectangle{
         var percentage = ((level - 44)*100) / (50 - 44);
 
         //console.log("percentage",percentage)
-        if (percentage < 20)
-            return "qrc:/UI/Assets/battery-status/battery-empty-solid.svg" // fa-battery-empty
+        if (percentage < 20){
+            batt.text = "BATTERY LOW"
+            alertTimer.start();
+            return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
+        }
         else if (percentage > 20 && percentage < 40)
-            return "qrc:/UI/Assets/battery-status/battery-quarter-solid.svg" // fa-battery-quarter
+       {     batt.text = " "
+
+            return "qrc:/UI/Assets/battery-status/battery-quarter-solid.png" // fa-battery-quarter
+        }
         else if (percentage > 40 && percentage < 60)
-            return "qrc:/UI/Assets/battery-status/battery-half-solid.svg" // fa-battery-half
+        {
+            batt.text = " "
+            return "qrc:/UI/Assets/battery-status/battery-half-solid.png" // fa-battery-half
+
+        }
         else if (percentage > 60 && percentage < 80)
-            return "qrc:/UI/Assets/battery-status/battery-three-quarters-solid.svg" // fa-battery-three-quarters
-        else if (percentage > 80)
-            return "qrc:/UI/Assets/battery-status/battery-full-solid.svg" // fa-battery-full
+        {
+            batt.text = " "
+            return "qrc:/UI/Assets/battery-status/battery-three-quarters-solid.png" // fa-battery-three-quarters
+
+        }
+        else if (percentage > 80){
+            batt.text = " "
+            return "qrc:/UI/Assets/battery-status/battery-full-solid.png" // fa-battery-full
+
+        }
+
         else
-            return "qrc:/UI/Assets/battery-status/battery-empty-solid.svg" // fa-battery-empty
+            return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
 
     }
     function displayConnectionStatus(status){
@@ -328,6 +346,7 @@ Rectangle{
             Layout.fillWidth: true
             height: parent.height*0.1
             color: "#00695C"
+
             PropertyAnimation { id: animationOne; target: statusBar;alwaysRunToEnd: true; property: "color"; to: "#fec1c1"; duration: 500
                 onStopped: animationTwo.start()}
             PropertyAnimation { id: animationTwo; target: statusBar;alwaysRunToEnd: true; property: "color"; to: "#9b0000"; duration: 300 }
@@ -372,11 +391,22 @@ Rectangle{
                 }
             }
             Item{
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter:  parent.horizontalCenter
+                Text {
+                    id: batt
+                    color: "black"
+                    anchors.centerIn: parent
+                    font.pixelSize: 50
+                    text: qsTr(" ")
+                }
+            }
+            Item{
                 //    anchors.right:  parent.right
                 //    anchors.rightMargin: 100
                 //    anchors.centerIn: parent.Center
                 //    anchors.verticalCenter: 100
-                x: 1600
+                x: 1500
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 Text {
@@ -386,7 +416,7 @@ Rectangle{
                     color: "black"
                     y:parent.height / 2+ height/2
                     //        anchors.
-                    leftPadding: -control.indicator.width - 5*control.spacing+ 5
+                    leftPadding: -control.indicator.width - 8*control.spacing+ 5
                 }
                 Switch {
                     id: control
@@ -433,7 +463,7 @@ Rectangle{
                 height: parent.height*0.95
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
-                anchors.rightMargin: 10
+                anchors.rightMargin: 40
 
                 Image {
                     id: batteryStatus
@@ -443,7 +473,6 @@ Rectangle{
                 }
                 Text {
                     id: batteryStatusValue
-                    //                    text: parseInt(((publisher.batteryValue - 44)*100) / (50 - 44)) + "%"
                     text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
 
                     verticalAlignment: Text.AlignVCenter
