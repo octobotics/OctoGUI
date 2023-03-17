@@ -389,10 +389,7 @@ Rectangle{
                 }
             }
             Item{
-                //    anchors.right:  parent.right
-                //    anchors.rightMargin: 100
-                //    anchors.centerIn: parent.Center
-                //    anchors.verticalCenter: 100
+
                 x: 1500
                 anchors.top: parent.top
                 anchors.topMargin: 5
@@ -519,12 +516,6 @@ Rectangle{
                                     ColumnLayout{
                                         anchors.centerIn: parent
                                         RowLayout{
-                                            //                                            anchors.fill: parent
-                                            //                                                   spacing: 30
-
-                                            // lets have some left and right margins
-                                            //                                                   anchors.leftMargin: 20
-                                            //                                                   anchors.rightMargin: 20
 
                                             Image {
                                                 id:magnetStatus
@@ -570,7 +561,6 @@ Rectangle{
                                                 text : "Pump"
                                                 implicitWidth : 70
                                                 implicitHeight : 30
-                                                //                                                anchors.centerIn: parent
 
                                                 background: Rectangle {
                                                     color:"#6fda9c"
@@ -845,13 +835,6 @@ Rectangle{
                                 }
 
 
-                                //                        }
-
-                                //                            RowLayout{
-
-
-
-
                                 SButton{
                                     Layout.topMargin: 10
                                     id: resetCrawler
@@ -893,8 +876,6 @@ Rectangle{
 
                             Item{
                                 Layout.fillHeight: true
-                                //                                Layout.alignment: parent.Center
-                                //                                Layout.vertica
                                 width: parent.width
 
                                 Rectangle{
@@ -954,20 +935,6 @@ Rectangle{
                                     }
 
                                 }
-                                //                                Item {
-                                //                                    width: 25
-                                //                                    height: 25
-                                //                                    x:rectId.x + rectId.width-26
-                                //                                    y:rectId.y + rectId.height-25
-                                //                                    Rectangle{
-                                //                                        id:armRectId
-
-                                //                                        width: 25
-                                //                                        height: 25
-                                //                                        color: "black"
-                                //                                    }
-
-                                //                                }
 
                                 Item {
                                     width: 25
@@ -1000,7 +967,6 @@ Rectangle{
                             anchors.fill: parent
                             RowLayout{
 
-
                                 Text {
                                     Layout.fillWidth: true
                                     text: qsTr("Arm")
@@ -1019,10 +985,7 @@ Rectangle{
                                 Item{
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
-                                    //                                    ColumnLayout{
-                                    //                                        Layout.fillHeight: true
 
-                                    //anchors.centerIn: parent
                                     ColumnLayout{
                                         Layout.fillHeight: true
                                         anchors.fill: parent
@@ -1049,12 +1012,7 @@ Rectangle{
                                                 }
 
                                             }
-                                            //                                                Item{
-                                            //                                                                                                width: 30
-                                            //                                                                                            }
 
-
-                                            //                                        }
                                             RowLayout{
                                                 Layout.leftMargin: 32
                                                 //                                                width:widthScreen * 0.20/2
@@ -1128,9 +1086,7 @@ Rectangle{
 
 
                                             SButton{
-                                                //                                                Layout.leftMargin: widthScreen * 0.16/4.5
 
-                                                //                                                Layout.topMargin: 15
                                                 id: resetArm
                                                 height: 20
                                                 implicitWidth: 120
@@ -1152,14 +1108,10 @@ Rectangle{
                                         }
 
                                         RowLayout{
-                                            //                                            Layout.leftMargin:(widthScreen * 0.20 -150)/2
-                                            //Layout.Center: parent.horizontalCenter
+
                                             Layout.leftMargin:(widthScreen * 0.20 -245)/2
 
                                             SButton{
-                                                //                                                Layout.topMargin: 15
-
-                                                //        Layout.Center:(widthScreen * 0.20 -150)/2
 
                                                 id: stpArm
                                                 height: 20
@@ -1195,7 +1147,7 @@ Rectangle{
                                         }
                                     }
 
-                                    //                                    }
+
                                 }
 
                             }
@@ -1226,8 +1178,6 @@ Rectangle{
 
                                     function calcThick()
                                     {
-                                        //                                                    var k = 0.0
-                                        //                                                     k = publisher.thickness.thickness.toFixed(2)
                                         var u= publisher.thickness.unit
                                         var un ="NAN"
                                         if(u===1)
@@ -1394,7 +1344,7 @@ Rectangle{
                                                 baseColor: mainAppColor
                                                 borderColor: mainAppColor
                                                 onClicked: {
-                                                    //
+
                                                     publisher.utData = sendDC.text
                                                 }
 
@@ -1474,26 +1424,11 @@ Rectangle{
                         border.width: 2
                         color: "#344955"
                         radius: 15
-                        //                        layer.enabled: true
-                        //                        layer.effect: OpacityMask {
-                        //                            maskSource: Item {
-                        //                                width: screen1.width
-                        //                                height: screen1.height
-                        //                                Rectangle {
-                        //                                    anchors.centerIn: parent
-                        //                                    width:  screen1.width
-                        //                                    height: screen1.height
-                        //                                    border.width: 2
-                        //                                    color: "#344955"
-                        //                                    radius: 15
 
-                        //                                }
-                        //                            }
-                        //                        }
                         MediaPlayer {
                             id: videoPlayer
                             //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                            source: "udp://10.223.240.0:8001"
+                            source: "rtsp://10.223.240.0:8554/cam2"
                             muted: true
                             autoPlay: true
                             onPlaybackStateChanged:
@@ -1518,13 +1453,20 @@ Rectangle{
                             fillMode:VideoOutput.PreserveAspectCrop
 
                             function save() {
-                                console.log('Schedule Save1')
-                                camera.grabToImage(function(result) {
-                                    var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+//                                console.log('Schedule Save1')
+//                                camera.grabToImage(function(result) {
+//                                    var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                    console.log(result.saveToFile("SCREENSHOT/cam1.png_"+date+".png"));
-                                    update()
-                                })
+//                                    console.log(result.saveToFile("SCREENSHOT/cam1.png_"+date+".png"));
+//                                    update()
+//                                })
+                                fullScreenRect.visible = true
+                                fullScreenView.enabled = true
+                                full_cam=1
+                                fullScreenView.sourceItem = camera
+                                fullScreenView.save()
+                                fullScreenRect.visible = false
+                                fullScreenView.enabled = false
                             }
                         }
 
@@ -1648,8 +1590,7 @@ Rectangle{
                         height: heightScreen * 0.90
 
                         TabView{
-                            //    width: widthScreen * 0.42
-                            //    height: ((heightScreen * 0.90)/2 ) - 5/2
+
                             implicitWidth: widthScreen * 0.42
                             implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
 
@@ -1691,13 +1632,20 @@ Rectangle{
                                         source: videoPlayer1
                                         fillMode: VideoOutput.PreserveAspectCrop
                                         function save() {
-                                            console.log('Schedule Save22')
-                                            camera1.grabToImage(function(result) {
-                                                var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+//                                            console.log('Schedule Save22')
+//                                            camera1.grabToImage(function(result) {
+//                                                var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                                console.log(result.saveToFile("SCREENSHOT/cam2.png_"+date+".png"));
-                                                update()
-                                            })
+//                                                console.log(result.saveToFile("SCREENSHOT/cam2.png_"+date+".png"));
+//                                                update()
+//                                            })
+                                            fullScreenRect.visible = true
+                                            fullScreenView.enabled = true
+                                            full_cam=2
+                                            fullScreenView.sourceItem = camera1
+                                            fullScreenView.save()
+                                            fullScreenRect.visible = false
+                                            fullScreenView.enabled = false
                                         }
                                     }
 
