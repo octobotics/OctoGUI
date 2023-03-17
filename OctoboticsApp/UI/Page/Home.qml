@@ -22,6 +22,7 @@ Rectangle{
     //    property var val: Qt.vector3d("NO Error [Radhe Radhe]","value2" )
     property int battCnt:0
     property bool armst: false
+    property int full_cam:0
 
     property variant battStatus: publisher.batteryValue
     onBattStatusChanged: {
@@ -110,20 +111,30 @@ Rectangle{
     }
     property int armTool: publisher.armToolStatus
     onArmToolChanged: {
-        if(armTool == 2){
+        if(armTool == 1){
             pumpStatus.source = "qrc:/UI/Assets/dashboard/remove.png"
-        }else if(armTool == 1){
+        }else if(armTool == 0){
             pumpStatus.source =  "qrc:/UI/Assets/dashboard/tick.png"
         }
-        if(armTool == 4){
+        if(armTool == 3){
             magnetStatus.source = "qrc:/UI/Assets/dashboard/remove.png"
-        }else if(armTool == 3){
+        }else if(armTool == 2){
             magnetStatus.source = "qrc:/UI/Assets/dashboard/tick.png"
         }
-        if(armTool == 6){
+        if(armTool == 5){
             grinderStatus.source = "qrc:/UI/Assets/dashboard/remove.png"
-        }else if(armTool == 5){
+        }else if(armTool == 4){
             grinderStatus.source = "qrc:/UI/Assets/dashboard/tick.png"
+        }
+        if(armTool == 7){
+            blightStatus.source = "qrc:/UI/Assets/dashboard/remove.png"
+        }else if(armTool == 6){
+            blightStatus.source = "qrc:/UI/Assets/dashboard/tick.png"
+        }
+        if(armTool == 9){
+            flightStatus.source = "qrc:/UI/Assets/dashboard/remove.png"
+        }else if(armTool == 8){
+            flightStatus.source = "qrc:/UI/Assets/dashboard/tick.png"
         }
     }
     property variant crawlerErr: publisher.errValue
@@ -260,31 +271,7 @@ Rectangle{
             battDialog.close()
         }
     }
-    Popup {
-        id: popup
 
-        width: 500
-        height: 300
-        x: -width/2
-        y: height
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape
-
-
-        //                                        color: "#344955"
-        Rectangle{
-            color: "green"
-            anchors.fill: parent
-
-        }
-        //                                          ColumnLayout{
-
-        //Rectangle
-
-        //                                          }
-
-    }
 
     function displaybatterStatus(level)
     {
@@ -622,7 +609,6 @@ Rectangle{
 
                                                 onClicked: {
                                                     publisher.toolToggle = "0"
-                                                    //                                                    popup.open()
 
                                                 }
                                             }
@@ -633,7 +619,7 @@ Rectangle{
                                         RowLayout{
 
                                             Image {
-                                                id:flightImg
+                                                id:flightStatus
                                                 sourceSize.width: 35
                                                 sourceSize.height: 35
                                                 source: "qrc:/UI/Assets/dashboard/remove.png"
@@ -663,7 +649,7 @@ Rectangle{
 
 
                                             Image {
-                                                id:blightImg
+                                                id:blightStatus
                                                 sourceSize.width: 35
                                                 sourceSize.height: 35
                                                 source: "qrc:/UI/Assets/dashboard/remove.png"
@@ -1507,7 +1493,7 @@ Rectangle{
                         MediaPlayer {
                             id: videoPlayer
                             //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                            source: "rtsp://10.223.240.0:8554/cam2"
+                            source: "udp://10.223.240.0:8001"
                             muted: true
                             autoPlay: true
                             onPlaybackStateChanged:
@@ -1644,6 +1630,7 @@ Rectangle{
                                         fullScreenRect.visible = true
                                         fullScreenView.enabled = true
                                         fullScreenView.sourceItem = camera
+                                        full_cam=1
                                     }
                                 }
                             }
@@ -1726,54 +1713,7 @@ Rectangle{
                                         Item {
                                             width: 50
                                         }
-                                        Item{
-                                            Layout.fillHeight: true
-                                            width: 30
-                                            Button {
-                                                id: btnON2
-                                                text : "Record"
-                                                width : 100
-                                                height : 25
-                                                anchors.centerIn: parent
 
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    //                                           border.color: "black"
-                                                    radius: 8
-                                                }
-
-                                                onClicked: {
-                                                    demo.gstRecord2("Recording...");
-
-                                                    btnON2.text = "recording...";
-
-                                                }
-                                            }
-                                        }
-                                        Item {
-                                            width: 100
-                                        }
-                                        Item{
-                                            Layout.fillHeight: true
-                                            width: 30
-                                            Button {
-                                                id: btnSTOP2
-                                                text : "Stop"
-                                                width : 100
-                                                height : 25
-                                                anchors.centerIn: parent
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 8
-                                                }
-
-                                                onClicked: {
-
-                                                    demo.gstStop2("Stop");
-                                                    btnON2.text = "Record";
-                                                }
-                                            }
-                                        }
                                         Item {
                                             Layout.fillWidth: true
                                         }
@@ -1810,6 +1750,7 @@ Rectangle{
                                                     fullScreenRect.visible = true
                                                     fullScreenView.enabled = true
                                                     fullScreenView.sourceItem = camera1
+                                                    full_cam=2
                                                 }
                                             }
                                         }
@@ -1861,7 +1802,7 @@ Rectangle{
 
                             MediaPlayer {
                                 id: videoPlayer2
-//                                                                source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
+//                                source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
                                 source: "rtsp://10.223.240.0:8554/cam3"
 
                                 muted: true
@@ -1879,26 +1820,6 @@ Rectangle{
                             }
 
                             VideoOutput {
-                                id: test
-                                width: 1920
-                                height: 1080
-                                implicitHeight: 1080
-                                implicitWidth: 1920
-                                source: videoPlayer2
-                                fillMode: VideoOutput.PreserveAspectCrop
-                                function save() {
-                                    //console.log('Schedule Save')
-
-                                    test.grabToImage(function(result) {
-                                        var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
-
-                                        console.log(result.saveToFile("SCREENSHOT/cam333_"+date+".png"));
-                                        update()
-                                    })
-                                }
-                            }
-
-                            VideoOutput {
                                 id: camera2
                                 anchors.fill: parent
                                 source: videoPlayer2
@@ -1907,12 +1828,20 @@ Rectangle{
                                 function save() {
                                     //console.log('Schedule Save')
 
-                                    camera2.grabToImage(function(result) {
-                                        var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+//                                    camera2.grabToImage(function(result) {
+//                                        var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                        console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
-                                        update()
-                                    })
+//                                        console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
+//                                        update()
+                                        fullScreenRect.visible = true
+                                        fullScreenView.enabled = true
+                                        full_cam=3
+                                        fullScreenView.sourceItem = camera2
+                                        fullScreenView.save()
+                                        fullScreenRect.visible = false
+                                        fullScreenView.enabled = false
+
+//                                    })
                                 }
                             }
 
@@ -1927,22 +1856,70 @@ Rectangle{
                             RowLayout{
                                 anchors.fill:videoToolBar3
                                 Item {
-                                    width: 5
+                                    width: 50
+                                }
+//                                Item{
+//                                    Layout.fillHeight: true
+//                                    width: 30
+//                                    Image {
+//                                        id:record3Id
+//                                        sourceSize.width: 25
+//                                        sourceSize.height: 25
+//                                        anchors.centerIn: parent
+//                                        source: "qrc:/UI/Assets/dashboard/record.png"
+//                                    }
+//                                    MouseArea{
+//                                        anchors.fill: parent
+//                                        onClicked: {
+
+//                                        }
+//                                    }
+//                                }
+                                Item{
+                                    Layout.fillHeight: true
+                                    width: 30
+                                    Button {
+                                        id: btnON2
+                                        text : "Record"
+                                        width : 100
+                                        height : 25
+                                        anchors.centerIn: parent
+
+                                        background: Rectangle {
+                                            color:"#6fda9c"
+                                            //                                           border.color: "black"
+                                            radius: 8
+                                        }
+
+                                        onClicked: {
+                                            demo.gstRecord2("Recording...");
+
+                                            btnON2.text = "recording...";
+
+                                        }
+                                    }
+                                }
+                                Item {
+                                    width: 100
                                 }
                                 Item{
                                     Layout.fillHeight: true
                                     width: 30
-                                    Image {
-                                        id:record3Id
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
+                                    Button {
+                                        id: btnSTOP2
+                                        text : "Stop"
+                                        width : 100
+                                        height : 25
                                         anchors.centerIn: parent
-                                        source: "qrc:/UI/Assets/dashboard/record.png"
-                                    }
-                                    MouseArea{
-                                        anchors.fill: parent
+                                        background: Rectangle {
+                                            color:"#6fda9c"
+                                            radius: 8
+                                        }
+
                                         onClicked: {
 
+                                            demo.gstStop2("Stop");
+                                            btnON2.text = "Record";
                                         }
                                     }
                                 }
@@ -1960,35 +1937,13 @@ Rectangle{
                                         source: "qrc:/UI/Assets/dashboard/capture.png"
                                     }
 
-//                                    MediaPlayer {
-//                                         id: cap
-////                                         source: "gst-pipeline: rtspsrc location= rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4 ! rtph264depay ! h264parse ! nvh264dec ! videoconvert ! jpegenc snapshot=TRUE ! filesink location=imgpng.jpeg"
-////                                         source: "gst-pipeline: rtspsrc location= rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4 ! rtph264depay ! h264parse ! nvh264dec  ! jpegenc ! filesink location=imgpng.jpeg"
-//                                         //                                         source: "gst-pipeline: rtspsrc location= rtsp://10.223.240.0:8554/cam1 ! rtph264depay ! h264parse ! nvh264dec  ! jpegenc ! filesink location=imgpng.jpeg"
-////                                         source: "gst-pipeline: rtspsrc location= rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4 ! rtph264depay ! h264parse ! nvh264dec ! videoconvert ! jpegenc ! multifilesink location=image_.jpg"
-//                                         source: "gst-pipeline: rtspsrc location= rtsp://10.223.240.0:8554/cam1 ! rtph264depay ! h264parse ! nvh264dec ! videoconvert ! jpegenc snapshot=TRUE! multifilesink location=image_.jpg"
-
-
-//                                    }
 
 
                                     MouseArea{
                                         anchors.fill: parent
                                         onClicked: {
                                             camera2.save()
-//                                            test.save()
-//                                            cap.play()
-//                                            cap.stop()
-//                                            cap.pause()
-//                                            console.log("after play---------------")
-//                                            clickimg.start()
-//                                            setTimeout(k(),5000)
-//                                            delay(10000, function()
-//                                                                   {
-//                                                                       cap.stop()
-//                                                                   })
-//
-//                                            console.log("after stop---------------")
+
 
                                         }
                                     }
@@ -2011,6 +1966,7 @@ Rectangle{
                                             fullScreenRect.visible = true
                                             fullScreenView.enabled = true
                                             fullScreenView.sourceItem = camera2
+                                            full_cam=3
                                             //console.log("clicked")
                                         }
                                     }
@@ -2037,10 +1993,13 @@ Rectangle{
                     anchors.fill: parent
 
                     function save() {
-                        //console.log('Schedule Save')
+                        console.log('Schedule Save full screen')
                         scheduleUpdate() // explicitly update. grabToImage() will force rendering afterwards.
                         fullScreenView.grabToImage(function(result) {
-                            //console.log(result.saveToFile("fullscreenView.png"));
+                            var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
+
+                            console.log(result.saveToFile("SCREENSHOT/cam"+full_cam+"_"+date+".png"));
+                            console.log("SCREENSHOT/cam"+full_cam+"_"+date+".png");
                         })
                     }
 
@@ -2142,50 +2101,7 @@ Rectangle{
             statusBar.color = "#00695C"
         }
     }
-//    Timer {
-//        id:clickimg
-//        interval: 10000; running: false; repeat: false
-//        onTriggered: {
-//            console.log(interval)
-//        }
-//    }
-//    Timer {
-//        id: timer
-//        running: false
-//        repeat: false
 
-//        property var callback
-
-//        onTriggered: callback()
-//    }
-    function k(){
-        cap.stop()
-    }
-    Timer
-     {
-         id: timer
-     }
-
-     function delay(delayTime,cb)
-     {
-         timer.interval = delayTime;
-         timer.repeat = false;
-         timer.triggered.connect(cb);
-         timer.start();
-     }
-//    function setTimeout(callback, delay)
-//    {
-//        if (timer.running) {
-//            console.error("nested calls to setTimeout are not supported!");
-//            return;
-//        }
-//        timer.callback = callback;
-//        // note: an interval of 0 is directly triggered, so add a little padding
-//        timer.interval = delay + 1;
-//        timer.running = true;
-//        console.error("in timer!");
-
-//    }
 }
 
 /*##^## Designer {

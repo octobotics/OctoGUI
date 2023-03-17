@@ -6,7 +6,7 @@ Publisher::Publisher(QObject *parent)
     : QObject(parent)
 {
     qDebug() << "MainWindow constructor";
-    m_batteryValue = 44;
+    m_batteryValue = 46;
     m_comStatus = 0;
     m_armToolStatus = 0;
     m_toggleValue = false;
