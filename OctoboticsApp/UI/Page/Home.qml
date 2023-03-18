@@ -305,7 +305,6 @@ Rectangle{
             return "qrc:/UI/Assets/battery-status/battery-full-solid.png" // fa-battery-full
 
         }
-
         else
             return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
 

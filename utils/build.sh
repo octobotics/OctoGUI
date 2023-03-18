@@ -9,7 +9,7 @@ Qmake=/home/$USER/Qt5.12.12/5.12.12/gcc_64/bin/qmake
 File=build/OctoboticsApp    
 if [[ ! -f $File ]] ; then
     echo -e "\e[1;31m File -> OctoboticsApp is not there, aborting.\e[0m"
-    echo -e "\e[1;31m Copy the OctoboticsApp file from your build-debug folder to utils \e[0m"
+    echo -e "\e[1;31m Copy the OctoboticsApp file from your build-debug folder to utils/build \e[0m"
     exit
 fi
 echo -e "\e[1;32m=============Starting Deployment=============\e[0m"
