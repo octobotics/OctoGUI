@@ -79,8 +79,8 @@ Window {
     function loginUser(uname, pword)
     {
         //if(uname === "octobotics" && pword === "octobotics@2022")
-//         if(uname === "octo" && pword === "y")
-        if(1)
+         if(uname === "octo" && pword === "y")
+//        if(1)
         {
 
             showConnect()
