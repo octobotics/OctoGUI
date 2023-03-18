@@ -31,6 +31,8 @@ void RosThread::run()
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
     ut_xrange_pub_ = m_nodeHandler->advertise<std_msgs::Int16 >("/send_ut_xrange", 1);
     ut_dc_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/send_ut_deepcoat", 1);
+    img_cap_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/img_cap", 1);
+
     //    img_pub_ =  m_nodeHandler->advertise<sensor_msgs::Image>("/send_image", 1);
     tool_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/arm_tool_status", 1, &RosThread::armToolCallback, this);
     comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/comm_status", 1, &RosThread::commCallback, this);
@@ -195,6 +197,14 @@ void RosThread::armInitSrv(int value)
     }
 
 }
+
+void RosThread::capImgPub(int value)
+{
+    std_msgs::Int8 k;
+    k.data= value;
+    img_cap_pub_.publish(k);
+
+}
 void RosThread::crawlerInitSrv(int value)
 {
     //
@@ -269,11 +279,6 @@ void RosThread::graphCallback(const serialtoros::graph_arr::ConstPtr &msg)
 
 
 }
-//void RosThread::graphCallback(QVector<int> v)
-//{
-//emit graphCallback(v);
-//}
-
 
 void RosThread::sendUtVel(QString value)
 {

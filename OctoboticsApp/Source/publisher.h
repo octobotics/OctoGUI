@@ -41,6 +41,7 @@ public slots:
     void call_crawlerinit(int val);
     void rst_arm(int val);
     void rst_crawler(int val);
+    void call_capImg(int val);
 
     void armToolCallback(int arg);
     void thicknessCallback(float thickness, float unit);
@@ -108,6 +109,7 @@ signals:
     void message1(QString msg);
     void value(int value);
     void value2(int value);
+    void capImg(int value);
     void rstArm(int value);
     void rstCrawler(int value);
     void trigArmStatusValueChanged();

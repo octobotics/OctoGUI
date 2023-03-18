@@ -96,6 +96,8 @@ void Publisher::initRosThread()
 
     connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
+    connect(this, SIGNAL(capImg(int)), this->rost, SLOT(capImgPub(int)));
+
     connect(this, SIGNAL(rstArm(int)), this->rost, SLOT(reset_arm(int)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
     connect(this->rost, SIGNAL(initArm(bool)), this, SLOT(initArm(bool)));
@@ -104,8 +106,6 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
     connect(this->rost, SIGNAL(initCrawler(bool)), this, SLOT(initCrawler(bool)));
     connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
-
-
 
     connect(this->rost, SIGNAL(armToolCallback(int)), this, SLOT(armToolCallback(int)));
     connect(this->rost, SIGNAL(commCallback(int)), this, SLOT(commCallback(int)));
@@ -254,6 +254,10 @@ void Publisher::call_arminit(int val)
 }
 void Publisher::call_crawlerinit(int val)
 {    emit value2(val);
+}
+void Publisher::call_capImg(int val)
+{
+    emit capImg(val);
 }
 void Publisher::rst_arm(int val)
 {

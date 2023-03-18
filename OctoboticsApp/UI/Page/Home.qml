@@ -69,7 +69,6 @@ Rectangle{
                                1 : "Front Right",
                                2 : "Rear Right",
                                3 : "Rear Left"
-
                            })
     property var armMotors: ({
                                  0 : "Base",
@@ -1466,6 +1465,7 @@ Rectangle{
                                 fullScreenView.save()
                                 fullScreenRect.visible = false
                                 fullScreenView.enabled = false
+                                publisher.call_capImg(1)
                             }
                         }
 
@@ -1645,6 +1645,8 @@ Rectangle{
                                             fullScreenView.save()
                                             fullScreenRect.visible = false
                                             fullScreenView.enabled = false
+                                            publisher.call_capImg(0)
+
                                         }
                                     }
 
@@ -1787,6 +1789,8 @@ Rectangle{
                                         fullScreenView.save()
                                         fullScreenRect.visible = false
                                         fullScreenView.enabled = false
+                                        publisher.call_capImg(2)
+
 
 //                                    })
                                 }

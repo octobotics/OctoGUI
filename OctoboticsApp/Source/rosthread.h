@@ -31,6 +31,7 @@ public slots:
     void checkArmStatus();
     void armInitSrv(int value);
     void crawlerInitSrv(int value);
+    void capImgPub(int value);
     void reset_arm(int val);
     void reset_crawler(int val);
     void addLine(QString newLine);
@@ -96,7 +97,7 @@ private:
     ros::Publisher ut_xrange_pub_;
     ros::Publisher ut_dc_pub_;
     ros::Publisher img_pub_;
-
+    ros::Publisher img_cap_pub_;
     //    ros::ServiceServer service;
     ros::ServiceServer toggle_srv_;
     ros::ServiceServer send_img_srv_;
