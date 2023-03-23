@@ -28,5 +28,6 @@
         <file>UI/Assets/battery-status/battery-quarter-solid.png</file>
         <file>UI/Assets/battery-status/battery-three-quarters-solid.png</file>
         <file>UI/Assets/dashboard/swap.png</file>
+        <file>UI/Assets/dashboard/reset.png</file>
     </qresource>
 </RCC>

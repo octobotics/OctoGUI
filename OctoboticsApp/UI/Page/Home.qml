@@ -304,7 +304,7 @@ Rectangle{
             break
 
         case 3:
-            var tab3 = g3.getTab(0).item
+            var tab3 = g2.getTab(1).item
             tab3.videoPlayer3.playlist.currentIndex = arrange_cam[0]
             tab3.videoPlayer3.play()
             console.log ("swapped with cam: ",id+1)
@@ -329,14 +329,19 @@ Rectangle{
     }
     function resetCam()
     {
-        videoPlayer.playlist.currentIndex = arrange_cam[0]
+        videoPlayer.playlist.currentIndex = 0
         videoPlayer.play()
 
-        g1.t1.videoPlayer1.playlist.currentIndex = arrange_cam[1]
-        g1.t1.videoPlayer1.play()
+        var tab1 = g1.getTab(0).item
+        tab1.videoPlayer1.playlist.currentIndex = 1
+        tab1.videoPlayer1.play()
 
-        videoPlayer2.playlist.currentIndex = arrange_cam[2]
-        videoPlayer2.play()
+        var tab2 = g2.getTab(0).item
+        tab2.videoPlayer2.playlist.currentIndex = 2
+        tab2.videoPlayer2.play()
+        var tab3 = g2.getTab(1).item
+        tab3.videoPlayer3.playlist.currentIndex = 3
+        tab3.videoPlayer3.play()
 
     }
     MessageDialog {
@@ -1642,7 +1647,26 @@ Rectangle{
                             Item {
                                 Layout.fillWidth: true
                             }
-
+                            Item{
+                                Layout.fillHeight: true
+                                width: 30
+                                Image {
+                                    id:resetCams
+                                    sourceSize.width: 25
+                                    sourceSize.height: 25
+                                    anchors.centerIn: parent
+                                    source: "qrc:/UI/Assets/dashboard/reset.png"
+                                }
+                                MouseArea{
+                                    anchors.fill: parent
+                                    onClicked: {
+                                    resetCam()
+                                    }
+                                }
+                            }
+                            Item {
+                                width:5
+                            }
                             Item{
                                 Layout.fillHeight: true
                                 width: 30
@@ -1659,6 +1683,9 @@ Rectangle{
                                         camera.save()
                                     }
                                 }
+                            }
+                            Item {
+                                width:5
                             }
                             Item{
                                 Layout.fillHeight: true
