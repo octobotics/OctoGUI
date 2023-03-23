@@ -18,6 +18,8 @@ class Publisher : public QObject
     Q_PROPERTY(int comStatus READ getComStatus WRITE setComStatus NOTIFY comStatusChanged)
     Q_PROPERTY(int armToolStatus READ getArmToolStatus WRITE setArmToolStatus NOTIFY armToolStatusChanged)
     Q_PROPERTY(float batteryValue READ getBatteryValue WRITE setBatteryValue NOTIFY batteryValueChanged)
+    Q_PROPERTY(float pressureValue READ getPressureValue WRITE setPressureValue NOTIFY pressureValueChanged)
+
     Q_PROPERTY(QString utVel READ getUtVel WRITE setUtVel NOTIFY utVelChanged)
     Q_PROPERTY(QString utData READ getUtData WRITE setUtData NOTIFY utDataChanged)
     Q_PROPERTY(QString toolToggle READ getToolToggle WRITE setToolToggle NOTIFY toolToggleChanged)
@@ -47,6 +49,8 @@ public slots:
     void thicknessCallback(float thickness, float unit);
     void commCallback(int value);
     void battCallback(float value);
+    void pressureCallback(float value);
+
     void tempCallback(QVector<int> value);
     void errorCallback(QVector<int> value);
     void velCallback(float current_vel_linear, float current_vel_angular, float max_linear, float max_angular);
@@ -71,6 +75,8 @@ public slots:
     void setComStatus(int value);
     void setArmToolStatus(int value);
     void setBatteryValue(float value);
+    void setPressureValue(float value);
+
     void setUtVel(QString value);
     void setUtData(QString value);
     void setToolToggle(QString value);
@@ -92,6 +98,7 @@ public slots:
     int getArmToolStatus();
     int getComStatus();
     float getBatteryValue();
+    float getPressureValue();
     QString getUtData();
     QString getUtVel();
     QString getToolToggle();
@@ -125,6 +132,8 @@ signals:
     void comStatusChanged(int value);
     void armToolStatusChanged(int value);
     void batteryValueChanged(float value);
+    void pressureValueChanged(float value);
+
     void velocityValueChanged(QVariantMap value);
     void armStatusChanged(QVector<int> status);
     void crawlStatusChanged(QVariantMap status);
@@ -149,6 +158,7 @@ private:
     int m_comStatus;
     int m_armToolStatus;
     float m_batteryValue;
+    float m_pressureValue;
 
     QString m_utVel;
     QString m_toolToggle;

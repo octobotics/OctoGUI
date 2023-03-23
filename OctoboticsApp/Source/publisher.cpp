@@ -52,6 +52,11 @@ void Publisher::battCallback(float value)
 //    qDebug() << Q_FUNC_INFO << value;
     setBatteryValue(value);
 }
+void Publisher::pressureCallback(float value)
+{
+//    qDebug() << Q_FUNC_INFO << value;
+    setPressureValue(value);
+}
 void Publisher::errorCallback(QVector<int> value)
 {
 //    qDebug() << Q_FUNC_INFO << value;
@@ -92,7 +97,7 @@ void Publisher::initRosThread()
     connect(this, SIGNAL(utVelChanged(QString)), this->rost, SLOT(sendUtVel(QString)));
     connect(this, SIGNAL(utDataChanged(QString)), this->rost, SLOT(sendUtData(QString)));
     connect(this, SIGNAL(toolToggleChanged(QString)), this->rost, SLOT(sendToolData(QString)));
-    connect(this, SIGNAL(trigArmStatusValueChanged ()), this->rost, SLOT(checkArmStatus()));
+    connect(this, SIGNAL(trigArmStatusValueChanged()), this->rost, SLOT(checkArmStatus()));
 
     connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
@@ -110,12 +115,14 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(armToolCallback(int)), this, SLOT(armToolCallback(int)));
     connect(this->rost, SIGNAL(commCallback(int)), this, SLOT(commCallback(int)));
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
-    connect(this->rost, SIGNAL(velCallback(float, float, float, float)), this, SLOT(velCallback(float, float, float, float)));
-    connect(this->rost, SIGNAL(utCallback(int, int, int)), this, SLOT(utCallback(int, int, int)));
+    connect(this->rost, SIGNAL(pressureCallback(float)), this, SLOT(pressureCallback(float)));
+
+    connect(this->rost, SIGNAL(velCallback(float,float,float,float)), this, SLOT(velCallback(float,float,float,float)));
+    connect(this->rost, SIGNAL(utCallback(int,int,int)), this, SLOT(utCallback(int,int,int)));
     connect(this->rost, SIGNAL(toggleCallback(bool)), this, SLOT(toggleCallback(bool)));
     connect(this->rost, SIGNAL(armCallback(QVector<int>)), this, SLOT(armCallback(QVector<int>)));
-    connect(this->rost, SIGNAL(crawlerCallback(bool, bool,bool,bool)), this, SLOT(crawlerCallback(bool, bool,bool,bool)));
-    connect(this->rost,SIGNAL(thicknessCallback(float, float)), this , SLOT(thicknessCallback(float, float)));
+    connect(this->rost, SIGNAL(crawlerCallback(bool,bool,bool,bool)), this, SLOT(crawlerCallback(bool,bool,bool,bool)));
+    connect(this->rost,SIGNAL(thicknessCallback(float,float)), this , SLOT(thicknessCallback(float,float)));
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
 
@@ -126,11 +133,21 @@ float Publisher::getBatteryValue()
     return m_batteryValue;
 }
 
+float Publisher::getPressureValue()
+{
+    return m_pressureValue;
+}
 void Publisher::setBatteryValue(float value)
 {
     m_batteryValue = value;
 //    qDebug() << "battery value" << value;
     emit batteryValueChanged(value);
+}
+void Publisher::setPressureValue(float value)
+{
+    m_pressureValue = value;
+//    qDebug() << "battery value" << value;
+    emit pressureValueChanged(value);
 }
 
 QVector<int> Publisher::getTempValue()

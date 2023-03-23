@@ -11,8 +11,12 @@ Window {
     y: (Screen.height - windowId.height) / 2
     property color popupBackGroundColor: "#b44"
     property color popupTextCOlor: "#ffffff"
-    property color backGroundColor : "#356859"
+//    property color backGroundColor : "#356859"
+    property color backGroundColor : "black"
+
     property color mainAppColor: "#6fda9c"
+//    property color mainAppColor: "black"
+
     property color mainTextCOlor: "#f0f0f0"
     property real widthScreen : Screen.width - Screen.width*0.25
     property real heightScreen : Screen.height - Screen.height*0.25
@@ -78,9 +82,9 @@ Window {
     // Login users
     function loginUser(uname, pword)
     {
-        //if(uname === "octobotics" && pword === "octobotics@2022")
-         if(uname === "octo" && pword === "y")
-//        if(1)
+//        if(uname === "octobotics" && pword === "octobotics@2022")
+//         if(uname === "octo" && pword === "y")
+        if(1)
         {
 
             showConnect()

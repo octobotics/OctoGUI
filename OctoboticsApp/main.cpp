@@ -5,6 +5,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "Source/hellocpp.h"
+
 #include "Source/customplotitem.h"
 //#include "gststream.h"
 
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
     ConnectROS m_connectROS;
 //    CustomPlotItem m_cst;
     qmlRegisterType<HelloCpp>("HelloCpp", 1, 0, "HelloCpp");
+
     qmlRegisterType<CustomPlotItem>("CustomPlot", 1, 0, "CustomPlotItem");
 
     ctx->setContextProperty("publisher", &m_pub);

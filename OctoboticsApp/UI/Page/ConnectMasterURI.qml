@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.1
 import "../../UI/Components"
 Page {
     id: connectROSPage
-    property color backGroundColor : "#356859"
+    property color backGroundColor : "black"
     property color mainAppColor: "#6fda9c"
     property color mainTextCOlor: "#f0f0f0"
 

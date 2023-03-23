@@ -3,8 +3,8 @@
 ConnectROS::ConnectROS(QObject *parent)
     : QObject(parent)
 {
-//    m_masterURI = "http://octo:11311";
-    m_masterURI = "http://10.223.240.1:11311";
+    m_masterURI = "http://octo:11311";
+//    m_masterURI = "http://10.223.240.1:11311";
 
     m_host = "octo";
 }
@@ -34,6 +34,9 @@ void ConnectROS::connectMasterURI(QString master, QString hostname)
     std::cout << "master started!"
               << "master :: " << master.toStdString() << " host :: " << hostname.toStdString() << std::endl;
     ros::init(remappings, "octo_gui");
+
+//    ros::AsyncSpinner spinner(0);
+//    spinner.start();
     if (ros::master::check())
     {
         ros::start();

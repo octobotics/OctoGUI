@@ -27,6 +27,8 @@ void RosThread::run()
     c_motors_[3] = "Rear Left";
 
     m_nodeHandler.reset(new ros::NodeHandle("~")); // check this
+
+
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
     ut_xrange_pub_ = m_nodeHandler->advertise<std_msgs::Int16 >("/send_ut_xrange", 1);
@@ -50,6 +52,8 @@ void RosThread::run()
     //    utf_sub_ = m_nodeHandler->subscribe<octo_qt::float_array>("/ut_force_status", 1, &RosThread::utfCallback, this);
     ut_sub_ = m_nodeHandler->subscribe<serialtoros::VDE_arr>("/ut_VDE_values", 1, &RosThread::utCallback, this);
     f_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/force_status", 1, &RosThread::fCallback, this);
+    pressure_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/pressure", 1, &RosThread::pressureCallback, this);
+
     arm_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/init_teleop");
     arm_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/stop_teleop");
     arm_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/reset_motors");
@@ -64,6 +68,8 @@ void RosThread::run()
     toggle_srv_ = m_nodeHandler->advertiseService("toggle_robot", &RosThread::toggleCallback, this);
     send_img_srv_ = m_nodeHandler->advertiseService("img_send", &RosThread::imgCallback, this);
     ros::spin();
+//    ros::waitForShutdown();
+
 }
 
 
@@ -398,5 +404,16 @@ bool RosThread::imgCallback(serialtoros::graph_path::Request &req, serialtoros::
         res.path = graph_path_.toStdString();
         graph_path_ = "";
     }
+    return 0;
+
+}
+void RosThread::pressureCallback(const std_msgs::Float32::ConstPtr &msg){
+
+    auto pressure = msg->data;
+    qDebug()<< pressure;
+
+    emit pressureCallback(pressure);
+
+
 
 }

@@ -39,7 +39,7 @@ public slots:
     void sendUtData(QString value);
     void sendToolData(QString value);
     void saveImg(QString img);
-
+    void pressureCallback(const std_msgs::Float32::ConstPtr &msg);
     // ros subscribers
     void armToolCallback(const std_msgs::Int8ConstPtr &msg);
     void commCallback(const std_msgs::Int8::ConstPtr &msg);
@@ -65,6 +65,8 @@ signals:
     void velCallback(float current_vel_linear, float current_vel_angular, float max_linear, float max_angular);
     void utCallback(int vel, int deepcoat, int echo);
     void fCallback(float force);
+    void pressureCallback(float force);
+
     void armCallback(QVector<int> arm_status);
     void toggleCallback(bool flag);
     void crawlerCallback(bool m1, bool m2, bool m3, bool m4);
@@ -86,7 +88,7 @@ private:
     ros::Subscriber comm_sub_;
     ros::Subscriber crawler_status_sub_;
     ros::Subscriber arm_status_sub_;
-
+    ros::Subscriber pressure_sub_;
     ros::Subscriber batt_sub_;
     ros::Subscriber vel_sub_;
     ros::Subscriber ut_sub_;
