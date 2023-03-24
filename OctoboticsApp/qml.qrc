@@ -27,5 +27,9 @@
         <file>UI/Assets/battery-status/battery-half-solid.png</file>
         <file>UI/Assets/battery-status/battery-quarter-solid.png</file>
         <file>UI/Assets/battery-status/battery-three-quarters-solid.png</file>
+        <file>UI/Assets/dashboard/reset.png</file>
+        <file>UI/Assets/dashboard/swap.png</file>
+        <file>Source/recordcams.cpp</file>
+        <file>Source/recordcams.h</file>
     </qresource>
 </RCC>

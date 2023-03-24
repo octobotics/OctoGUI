@@ -8,23 +8,7 @@ QString graph_path_ = "";
 void RosThread::run()
 {   CustomPlotItem *m_cst = new CustomPlotItem();
     qDebug() << "RosThread run called";
-    error_[0] = "NO Error [Radhe Radhe]";
-    error_[2] = "Motor Stalled [Critical]";
-    error_[4] = "Low Pressure [Donno Dude]";
-    error_[8] = " Over Voltage [Moderate]";
-    error_[16] = "Over Current [Critical]";
-    error_[64] = "Power Overrun [Moderate]";
-    error_[256] = "Speeding [Moderate]";
-    error_[512] = "Empty Error 1";
-    error_[1024] = "Empty Error 2";
-    error_[2048] = "Empty Error 3";
-    error_[4096] = "Very High Temperature [Moderate]";
-    error_[8192] = "Encoder Calibration Error [Moderate]";
 
-    c_motors_[0] = "Front Left";
-    c_motors_[1] = "Front Right";
-    c_motors_[2] = "Rear Right";
-    c_motors_[3] = "Rear Left";
 
     m_nodeHandler.reset(new ros::NodeHandle("~")); // check this
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
@@ -63,7 +47,9 @@ void RosThread::run()
 
     toggle_srv_ = m_nodeHandler->advertiseService("toggle_robot", &RosThread::toggleCallback, this);
     send_img_srv_ = m_nodeHandler->advertiseService("img_send", &RosThread::imgCallback, this);
-    ros::spin();
+//    ros::spin();
+    ros::waitForShutdown();
+
 }
 
 

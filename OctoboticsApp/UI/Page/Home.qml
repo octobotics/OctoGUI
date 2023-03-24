@@ -14,16 +14,18 @@ import HelloCpp 1.0
 import "../../UI/Components"
 import CustomPlot 1.0
 import QtQuick.Dialogs 1.1
-
+import RecordCams 1.0
 Rectangle{
 
-    color: "white"
+    color: "black"
     property int iconSize: 32
     //    property var val: Qt.vector3d("NO Error [Radhe Radhe]","value2" )
     property int battCnt:0
     property bool armst: false
     property int full_cam:0
-
+    property color  fg: "#27322f"
+    property color  bg: "black"
+    property variant arrange_cam: [0,1,2,3]
     property variant battStatus: publisher.batteryValue
     onBattStatusChanged: {
         console.log("in batttt",battStatus)
@@ -77,6 +79,13 @@ Rectangle{
                                  3 : "Tool"
 
                              })
+    property var cameras: ({
+                               0 : "FORWARD CAM",
+                               1 : "ARM CAM",
+                               2 : "OVERVIEW CAM",
+                               3 : "BACK CAM"
+
+                           })
     property variant armStatus: publisher.armStatus
     onArmStatusChanged: {
         if(!armst)
@@ -244,6 +253,59 @@ Rectangle{
         }
         armDialog.open()
     }
+
+
+    function swapCam(id){
+        var k = 0
+        videoPlayer.playlist.currentIndex = arrange_cam[id]
+        videoPlayer.play()
+        //        console.log("---------------------------------------------------",id,arrange_cam)
+        switch (id) {
+        case 1:
+            var tab1 = g1.getTab(0).item
+            tab1.videoPlayer1.playlist.currentIndex = arrange_cam[0]
+            tab1.videoPlayer1.play()
+            console.log ("swapped with cam: ",id+1)
+            break
+        case 2:
+           videoPlayer2.playlist.currentIndex = arrange_cam[0]
+           videoPlayer2.play()
+            console.log ("swapped with cam: ",id+1)
+
+            break
+
+        default:
+            console.log ("1: count is non zero")
+            break
+        }
+        k = arrange_cam[id]
+        arrange_cam[id] = arrange_cam[0]
+        arrange_cam[0] = k
+        //        w1.text= cameras[arrange_cam[0]]
+        //        w2.text= cameras[arrange_cam[1]]
+
+        //        w3.text= cameras[arrange_cam[2]]
+
+        //        w4.text= cameras[arrange_cam[3]]
+
+
+
+    }
+    function resetCam()
+    {
+        videoPlayer.playlist.currentIndex = 0
+        videoPlayer.play()
+
+        var tab1 = g1.getTab(0).item
+        tab1.videoPlayer1.playlist.currentIndex = 1
+        tab1.videoPlayer1.play()
+
+        videoPlayer2.playlist.currentIndex = 2
+        videoPlayer2.play()
+
+
+    }
+
 
     MessageDialog {
         id: armDialog
@@ -1425,22 +1487,27 @@ Rectangle{
 
                         MediaPlayer {
                             id: videoPlayer
-                            //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                            source: "rtsp://10.223.240.0:8554/cam2"
+
                             muted: true
                             autoPlay: true
-                            onPlaybackStateChanged:
-                            {
-                            if(playbackState == 0)
-                             {
-                                 source = ""
-                                 source = "rtsp://10.223.240.0:8554/cam2"
-                                 videoPlayer.play();
-                             }
+                            playlist: Playlist {
+                                PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                                PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
                             }
+                            //                            playlist: Playlist {
+                            //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+                            //                                       PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+                            //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                            //                                 }
+
                         }
                         HelloCpp {
                             id: demo
+                        }
+                        RecordCams
+                        {
+                            id: recCams
                         }
 
 
@@ -1451,25 +1518,21 @@ Rectangle{
                             fillMode:VideoOutput.PreserveAspectCrop
 
                             function save() {
-//                                console.log('Schedule Save1')
-//                                camera.grabToImage(function(result) {
-//                                    var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
-
-//                                    console.log(result.saveToFile("SCREENSHOT/cam1.png_"+date+".png"));
-//                                    update()
-//                                })
                                 fullScreenRect.visible = true
                                 fullScreenView.enabled = true
-                                full_cam=1
+                                full_cam= arrange_cam[0]
                                 fullScreenView.sourceItem = camera
                                 fullScreenView.save()
                                 fullScreenRect.visible = false
                                 fullScreenView.enabled = false
-                                publisher.call_capImg(1)
+                                publisher.call_capImg(arrange_cam[0])
                             }
                         }
 
-
+                        Component.onCompleted: {
+                            videoPlayer.playlist.currentIndex = 0;
+                            videoPlayer.play();
+                        }
                         Rectangle{
                             id:videoToolBar
                             anchors.bottom: parent.bottom
@@ -1542,6 +1605,26 @@ Rectangle{
                                 Layout.fillHeight: true
                                 width: 30
                                 Image {
+                                    id:resetCams
+                                    sourceSize.width: 25
+                                    sourceSize.height: 25
+                                    anchors.centerIn: parent
+                                    source: "qrc:/UI/Assets/dashboard/reset.png"
+                                }
+                                MouseArea{
+                                    anchors.fill: parent
+                                    onClicked: {
+                                    resetCam()
+                                    }
+                                }
+                            }
+                            Item {
+                                width:5
+                            }
+                            Item{
+                                Layout.fillHeight: true
+                                width: 30
+                                Image {
                                     id:captureIcon1Id
                                     sourceSize.width: 25
                                     sourceSize.height: 25
@@ -1554,6 +1637,9 @@ Rectangle{
                                         camera.save()
                                     }
                                 }
+                            }
+                            Item {
+                                width:5
                             }
                             Item{
                                 Layout.fillHeight: true
@@ -1589,13 +1675,15 @@ Rectangle{
                         height: heightScreen * 0.90
 
                         TabView{
-
+                            id: g1
                             implicitWidth: widthScreen * 0.42
                             implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
 
 
                             Tab{
                                 title: " Cam 2  "
+                                id: t1
+                                active:true
 
                                 Rectangle{
                                     id:screen2
@@ -1605,23 +1693,23 @@ Rectangle{
                                     border.width: 2
                                     color: "#344955"
                                     radius: 15
+                                    property alias videoPlayer1: videoPlayer1
 
 
                                     MediaPlayer {
                                         id: videoPlayer1
-                                        //source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                                        source: "rtsp://10.223.240.0:8554/cam1"
+
                                         muted: true
                                         autoPlay: true
-                                        onPlaybackStateChanged:
-                                        {
-                                        if(playbackState == 0)
-                                         {
-                                             source = ""
-                                             source = "rtsp://10.223.240.0:8554/cam1"
-                                             videoPlayer1.play();
-                                            console.log("cam1 reset")
-                                         }
+//                                        playlist: Playlist {
+//                                                 PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+//                                                   PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+//                                                 PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+//                                             }
+                                        playlist: Playlist {
+                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
                                         }
                                     }
 
@@ -1640,16 +1728,19 @@ Rectangle{
 //                                            })
                                             fullScreenRect.visible = true
                                             fullScreenView.enabled = true
-                                            full_cam=2
+                                            full_cam=arrange_cam[1]
                                             fullScreenView.sourceItem = camera1
                                             fullScreenView.save()
                                             fullScreenRect.visible = false
                                             fullScreenView.enabled = false
-                                            publisher.call_capImg(0)
+                                            publisher.call_capImg(arrange_cam[1])
 
                                         }
                                     }
-
+                                    Component.onCompleted: {
+                                        videoPlayer1.playlist.currentIndex = 1;
+                                        videoPlayer1.play();
+                                    }
                                     Rectangle{
                                         id:videoToolBar2
                                         anchors.bottom: parent.bottom
@@ -1662,10 +1753,85 @@ Rectangle{
                                         Item {
                                             width: 50
                                         }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
 
+                                            Button {
+                                                id: btnON3
+                                                text : "Record"
+                                                width : 100
+                                                height : 25
+                                                anchors.centerIn: parent
+
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 8
+                                                }
+
+                                                onClicked: {
+                                                    recCams.gstRecord3("Recording...");
+
+                                                    btnON3.text = "recording...";
+
+                                                }
+                                            }
+
+                                        }
+
+                                        Item {
+                                            width: 100
+                                        }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+
+                                            Button {
+                                                id: btnSTOP3
+                                                text : "Stop"
+                                                width : 100
+                                                height : 25
+                                                anchors.centerIn: parent
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 8
+                                                }
+
+                                                onClicked: {
+
+                                                    recCams.gstStop3("Stop");
+                                                    btnON3.text = "Record";
+                                                }
+                                            }
+
+
+                                        }
                                         Item {
                                             Layout.fillWidth: true
                                         }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+                                            Image {
+                                                id:swap1
+                                                sourceSize.width: 25
+                                                sourceSize.height: 25
+                                                anchors.centerIn: parent
+                                                source: "qrc:/UI/Assets/dashboard/swap.png"
+                                            }
+                                            MouseArea{
+                                                anchors.fill: parent
+                                                onClicked: {
+                                                    swapCam(1)
+
+
+                                                }
+                                            }
+                                        }
+                                        Item{
+                                            width:5
+                                        }
+
                                         Item{
                                             Layout.fillHeight: true
                                             width: 30
@@ -1682,6 +1848,9 @@ Rectangle{
                                                     camera1.save()
                                                 }
                                             }
+                                        }
+                                        Item {
+                                            width:5
                                         }
                                         Item{
                                             Layout.fillHeight: true
@@ -1716,7 +1885,9 @@ Rectangle{
 
                             }
                             Tab{
+                                id: t2
                                 title: " A Scan "
+                                active: true
 
                                 Item {
 
@@ -1736,7 +1907,25 @@ Rectangle{
                                 }
 
                             }
-
+                            style: TabViewStyle {
+                                frameOverlap: 1
+                                tabOverlap:1
+                                tabsAlignment:Qt.AlignLeft
+                                tab: Rectangle {
+                                    color: styleData.selected ? "green" :"white"
+                                    border.color:  "green"
+                                    implicitWidth: Math.max(text.width + 4, 80)
+                                    implicitHeight: 20
+                                    radius: 2
+                                    Text {
+                                        id: text
+                                        anchors.centerIn: parent
+                                        text: styleData.title
+                                        color: styleData.selected ? "white" : "black"
+                                    }
+                                }
+                                frame: Rectangle { color: "black" }
+                            }
 
                         }
                         Rectangle{
@@ -1751,21 +1940,19 @@ Rectangle{
 
                             MediaPlayer {
                                 id: videoPlayer2
-//                                source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-                                source: "rtsp://10.223.240.0:8554/cam3"
-
                                 muted: true
                                 autoPlay: true
 
-                                onPlaybackStateChanged:
-                                {
-                                if(playbackState == 0)
-                                 {
-                                     source = ""
-                                     source = "rtsp://10.223.240.0:8554/cam3"
-                                     videoPlayer2.play();
-                                 }
-                                }
+//                                playlist: Playlist {
+//                                         PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+//                                           PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+//                                         PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+//                                     }
+                                        playlist: Playlist {
+                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                        }
                             }
 
                             VideoOutput {
@@ -1782,21 +1969,24 @@ Rectangle{
 
 //                                        console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
 //                                        update()
-                                        fullScreenRect.visible = true
-                                        fullScreenView.enabled = true
-                                        full_cam=3
-                                        fullScreenView.sourceItem = camera2
-                                        fullScreenView.save()
-                                        fullScreenRect.visible = false
-                                        fullScreenView.enabled = false
-                                        publisher.call_capImg(2)
+                                    fullScreenRect.visible = true
+                                    fullScreenView.enabled = true
+                                    full_cam=arrange_cam[2]
+                                    fullScreenView.sourceItem = camera2
+                                    fullScreenView.save()
+                                    fullScreenRect.visible = false
+                                    fullScreenView.enabled = false
+                                    publisher.call_capImg(arrange_cam[2])
 
 
 //                                    })
                                 }
                             }
 
-
+                            Component.onCompleted: {
+                                videoPlayer2.playlist.currentIndex = 2;
+                                videoPlayer2.play();
+                            }
                             Rectangle{
                                 id:videoToolBar3
                                 anchors.bottom: parent.bottom
@@ -1809,23 +1999,7 @@ Rectangle{
                                 Item {
                                     width: 50
                                 }
-//                                Item{
-//                                    Layout.fillHeight: true
-//                                    width: 30
-//                                    Image {
-//                                        id:record3Id
-//                                        sourceSize.width: 25
-//                                        sourceSize.height: 25
-//                                        anchors.centerIn: parent
-//                                        source: "qrc:/UI/Assets/dashboard/record.png"
-//                                    }
-//                                    MouseArea{
-//                                        anchors.fill: parent
-//                                        onClicked: {
 
-//                                        }
-//                                    }
-//                                }
                                 Item{
                                     Layout.fillHeight: true
                                     width: 30
@@ -1881,6 +2055,29 @@ Rectangle{
                                     Layout.fillHeight: true
                                     width: 30
                                     Image {
+                                        id:swap2
+                                        sourceSize.width: 25
+                                        sourceSize.height: 25
+                                        anchors.centerIn: parent
+                                        source: "qrc:/UI/Assets/dashboard/swap.png"
+                                    }
+                                    MouseArea{
+                                        anchors.fill: parent
+                                        onClicked: {
+                                            //swap main and third cam
+                                            swapCam(2)
+
+
+                                        }
+                                    }
+                                }
+                                Item{
+                                    width:5
+                                }
+                                Item{
+                                    Layout.fillHeight: true
+                                    width: 30
+                                    Image {
                                         id:captureIcon3Id
                                         sourceSize.width: 25
                                         sourceSize.height: 25
@@ -1898,6 +2095,9 @@ Rectangle{
 
                                         }
                                     }
+                                }
+                                Item{
+                                    width:5
                                 }
                                 Item{
                                     Layout.fillHeight: true
@@ -1967,22 +2167,22 @@ Rectangle{
                     Item {
                         width: 5
                     }
-                    Item{
-                        Layout.fillHeight: true
-                        width: 30
-                        Image {
-                            sourceSize.width: 25
-                            sourceSize.height: 25
-                            anchors.centerIn: parent
-                            source: "qrc:/UI/Assets/dashboard/record.png"
-                        }
-                        MouseArea{
-                            anchors.fill: parent
-                            onClicked: {
+//                    Item{
+//                        Layout.fillHeight: true
+//                        width: 30
+//                        Image {
+//                            sourceSize.width: 25
+//                            sourceSize.height: 25
+//                            anchors.centerIn: parent
+//                            source: "qrc:/UI/Assets/dashboard/record.png"
+//                        }
+//                        MouseArea{
+//                            anchors.fill: parent
+//                            onClicked: {
 
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                     Item {
                         Layout.fillWidth: true
                     }
