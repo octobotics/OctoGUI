@@ -6,7 +6,6 @@
 #include <QQmlContext>
 #include "Source/hellocpp.h"
 #include "Source/customplotitem.h"
-//#include "gststream.h"
 #include "Source/recordcams.h"
 
 int main(int argc, char *argv[])
@@ -17,7 +16,6 @@ int main(int argc, char *argv[])
     QQmlContext *ctx = engine.rootContext();
     Publisher m_pub;
     ConnectROS m_connectROS;
-//    CustomPlotItem m_cst;
     qmlRegisterType<HelloCpp>("HelloCpp", 1, 0, "HelloCpp");
     qmlRegisterType<recordCams>("RecordCams", 1, 0, "RecordCams");
 

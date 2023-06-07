@@ -1,8 +1,27 @@
+/*!
+ *  \file      recordcams.cpp
+ *  \brief     record camera class.
+ *  \details   This class is used to record rtsp pipelines from the cameras.
+ *  \author    Charith Reddy
+ *  \copyright Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved.
+                Do not remove this copyright notice.
+                Do not use, reuse, copy, merge, publish, sub-license, sell, distribute or modify this code - except without explicit,
+                written permission from Octobotics Tech Pvt. Ltd.
+                Contact connect@octobotics.tech for full license information.
+
+ *  \todo      remove duplicating the code and condense into a single pipeline
+ *  \warning   Improper use can crash the application
+ */
+
 #include <QDebug>
 #include "include2.h"
 #include "QDateTime"
 #include "recordcams.h"
 
+
+/*!
+ * \brief cb_new_pad callback pad for the third pipeline
+ */
 static void cb_new_pad3(GstElement *element, GstPad *pad, gpointer data)
 {
     gchar *name;
@@ -18,6 +37,9 @@ static void cb_new_pad3(GstElement *element, GstPad *pad, gpointer data)
 
     g_free(name);
 }
+/*!
+ * \brief cb_new_pad2 callback pad for fourth pipeline
+ */
 static void cb_new_pad4 (GstElement *element, GstPad *pad, gpointer data)
 {
     gchar *name;
@@ -33,6 +55,10 @@ static void cb_new_pad4 (GstElement *element, GstPad *pad, gpointer data)
 
     g_free(name);
 }
+/*!
+ * \brief recordCams::recordCams constructor and pipeline declaration
+ * \param parent
+ */
 recordCams::recordCams(QObject *parent) :
 QObject(parent)
 {
@@ -49,9 +75,9 @@ QObject(parent)
 
 
     qDebug() << " start step 1";
-//    g_object_set(source3, "location", "rtsp://10.223.240.0:8554/cam1", NULL);
-    g_object_set(source4, "location", "rtsp://10.223.240.0:8554/cam2", NULL);
-    g_object_set(source3, "location", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4", NULL);
+//    g_object_set(source3, "location", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4", NULL);
+    g_object_set(source4, "location", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4", NULL);
+    g_object_set(source3, "location", "rtsp://10.223.240.0:8554/cam3", NULL);
     qDebug() << " start step 2";
     queue3 = gst_element_factory_make("queue", "queue3");
     dpay3 = gst_element_factory_make( "rtph264depay", "depayl1");
@@ -130,7 +156,9 @@ QObject(parent)
     gst_element_set_state (pipeline4, GST_STATE_PLAYING);
 
 }
-
+/*!
+ * \brief HelloCpp::gstRecord records the video from the third pipeline
+ */
 void recordCams::gstRecord3()
 {
     if(recording3)
@@ -146,7 +174,7 @@ void recordCams::gstRecord3()
 
     const char *s = QDateTime::currentDateTime().toString("yyyy-MM-dd-hh:mm:ss-").toLocal8Bit();
     std::string qdate = s;
-    std::string filename = qdate + fileId2 + ".mp4";
+    std::string filename = "cam3_" + qdate + fileId2 + ".mp4";
     std::cout << "start recording:: " << filename << std::endl;
 
     // reinitialize the recording3branch
@@ -186,7 +214,9 @@ void recordCams::gstRecord3()
 }
 
 
-
+/*!
+ * \brief HelloCpp::gstRecord records the video from the fourth pipeline
+ */
 void recordCams::gstRecord4()
 {
     if(recording4)
@@ -202,7 +232,7 @@ void recordCams::gstRecord4()
 
     const char *s2 = QDateTime::currentDateTime().toString("yyyy-MM-dd-hh:mm:ss-").toLocal8Bit();
     std::string qdate = s2;
-    std::string filename = "cam2_"+ qdate + fileId2 + ".mp4";
+    std::string filename = "cam4_"+ qdate + fileId2 + ".mp4";
     std::cout << "start recording:: " << filename << std::endl;
 
     // reinitialize the recording3branch
@@ -241,6 +271,9 @@ void recordCams::gstRecord4()
     recording4 = true;
 }
 
+/*!
+ * \brief HelloCpp::gstStop stops the recording from third pipeline
+ */
 void recordCams::gstStop3()
 {
     if(!recording3)
@@ -269,6 +302,9 @@ void recordCams::gstStop3()
     gst_object_unref (teepad3);
     recording3= false;
 }
+/*!
+ * \brief HelloCpp::gstStop stops the recording from fourth pipeline
+ */
 void recordCams::gstStop4()
 {
     if(!recording4)

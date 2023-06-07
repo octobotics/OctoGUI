@@ -1,11 +1,32 @@
+/*!
+ *  \file      connectros.cpp
+ *  \brief     Connect ros class.
+ *  \details   This class is used to connect the UI to the ros master. You can edit the default rosmaster and hostname here
+ *  \author    Venkat, Charith Reddy
+ *  \copyright Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved.
+                Do not remove this copyright notice.
+                Do not use, reuse, copy, merge, publish, sub-license, sell, distribute or modify this code - except without explicit,
+                written permission from Octobotics Tech Pvt. Ltd.
+                Contact connect@octobotics.tech for full license information.
+
+ *  \todo      None
+ *  \warning   Improper use can crash the application
+ */
+
+
+
 #include "connectros.h"
 
+/*!
+ * \brief ConnectROS::ConnectROS: constructor: set hostname and URI according the machine and robot that is being used
+ * \param m_masterURI: ROS Master URI of the robot
+ * \param m_host: ROS Hostname of the ground station machine being used
+ */
 ConnectROS::ConnectROS(QObject *parent)
     : QObject(parent)
 {
-    m_masterURI = "http://octo:11311";
-//    m_masterURI = "http://10.223.240.1:11311";
-
+//    m_masterURI = "http://octo:11311";
+    m_masterURI = "http://dry:11311";
     m_host = "octo";
 }
 QString ConnectROS::getMasterURI()
@@ -35,9 +56,10 @@ void ConnectROS::connectMasterURI(QString master, QString hostname)
               << "master :: " << master.toStdString() << " host :: " << hostname.toStdString() << std::endl;
     ros::init(remappings, "octo_gui");
 
-    ros::AsyncSpinner spinner(0);
-    spinner.start();
+//    ros::AsyncSpinner spinner(0);
+//    spinner.start();
 
+    // creates a folder called Screenshot to save images from the UI
     if (ros::master::check())
     {
         ros::start();

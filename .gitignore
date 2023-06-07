@@ -2,3 +2,6 @@ utils/build
 utils/Application-x86_64.AppImage 
 utils/Octo_Pilot-x86_64.AppImage
 utils/SCREENSHOT
+docs/
+html/
+latex/

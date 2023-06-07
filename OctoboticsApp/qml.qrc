@@ -31,5 +31,7 @@
         <file>UI/Assets/dashboard/swap.png</file>
         <file>Source/recordcams.cpp</file>
         <file>Source/recordcams.h</file>
+        <file>UI/Assets/alarm.wav</file>
+        <file>UI/Assets/dashboard/info.png</file>
     </qresource>
 </RCC>

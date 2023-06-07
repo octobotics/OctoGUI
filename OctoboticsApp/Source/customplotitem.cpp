@@ -1,30 +1,58 @@
+/*!
+ *  \file      customplotitem.cpp
+ *  \brief     Custom plotting class.
+ *  \details   This class is used to plot the A-Scan graph from UT gauge.
+ *  \author    Charith Reddy
+ *  \copyright Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved.
+                Do not remove this copyright notice.
+                Do not use, reuse, copy, merge, publish, sub-license, sell, distribute or modify this code - except without explicit,
+                written permission from Octobotics Tech Pvt. Ltd.
+                Contact connect@octobotics.tech for full license information.
+
+ *  \todo      None
+ *  \warning   Improper use can crash the application
+ */
+
+
 #include "customplotitem.h"
 #include "qcustomplot.h"
 #include <QDebug>
 #include <math.h>
+
+//global variables
 QVector<double> x_data(320), y_data(320), tuple(3),tup_y(3);
 int trig = 0;
 int x_range;
 
+/*!
+ * \brief CustomPlotItem::CustomPlotItem: constructor
+ */
 CustomPlotItem::CustomPlotItem( QQuickItem* parent ) : QQuickPaintedItem( parent )
   , m_CustomPlot( nullptr )
 {
+    //new ros object
     RosThread *m_ros = new RosThread();
     setFlag( QQuickItem::ItemHasContents, true );
     setAcceptedMouseButtons( Qt::AllButtons );
     connect( this, &QQuickPaintedItem::widthChanged, this, &CustomPlotItem::updateCustomPlotSize );
     connect( this, &QQuickPaintedItem::heightChanged, this, &CustomPlotItem::updateCustomPlotSize );
+    //replot loop
     connect( m_CustomPlot, &QCustomPlot::afterReplot, this, &CustomPlotItem::onCustomReplot );
     connect(this,SIGNAL(saveImg(QString)), m_ros,SLOT(saveImg(QString)) );
 
 }
+/*!
+ * \brief CustomPlotItem::~CustomPlotItem: destructor
+ */
 CustomPlotItem::~CustomPlotItem()
 {
     delete m_CustomPlot;
     m_CustomPlot = nullptr;
 }
 
-
+/*!
+ * \brief CustomPlotItem::initCustomPlot initializes the plot
+ */
 void CustomPlotItem::initCustomPlot()
 {
 
@@ -36,7 +64,10 @@ void CustomPlotItem::initCustomPlot()
     m_CustomPlot->replot();
 }
 
-
+/*!
+ * \brief CustomPlotItem::paint draws pixmap of the plot
+ * \param painter
+ */
 void CustomPlotItem::paint( QPainter* painter )
 {
     if (m_CustomPlot)
@@ -49,7 +80,10 @@ void CustomPlotItem::paint( QPainter* painter )
     }
 }
 
-
+/*!
+ * \brief CustomPlotItem::setupPlot sets axes, color and other details of the plot
+ * \param customPlot
+ */
 void CustomPlotItem::setupPlot(QCustomPlot* customPlot)
 {
     customPlot->addGraph();
@@ -109,6 +143,49 @@ void CustomPlotItem::setupPlot(QCustomPlot* customPlot)
     graphTimer->start(100);
 
 }
+
+/*!
+ * \brief CustomPlotItem::printRandoms returns random values between two numbers
+ * \param lower: lower value
+ * \param upper: higher value
+ * \return random values
+ */
+int CustomPlotItem::printRandoms(int lower,int upper)
+{
+    return (rand()%(upper-lower+1))+lower;
+}
+
+/*!
+ * \brief CustomPlotItem::graph_rpt not being used currently
+ */
+void CustomPlotItem::graph_rpt()
+{
+//unused
+
+}
+
+/*!
+ * \brief CustomPlotItem::updateCustomPlotSize sets geometry of the custom plot
+ */
+void CustomPlotItem::updateCustomPlotSize()
+{
+    if (m_CustomPlot)
+    {
+        m_CustomPlot->setGeometry( 0, 0, width(), height() );
+    }
+}
+
+/*!
+ * \brief CustomPlotItem::onCustomReplot: calls replot after plotting
+ */
+void CustomPlotItem::onCustomReplot()
+{
+    update();
+}
+
+/*!
+ * \brief CustomPlotItem::realtimeDataSlot updates the graph from ros data in real time
+ */
 void CustomPlotItem::realtimeDataSlot()
 {
 
@@ -121,27 +198,37 @@ void CustomPlotItem::realtimeDataSlot()
     m_CustomPlot->graph(1)->addData( tuple, tup_y );
     //      qDebug()<<"tuple"<<trig;
     if (trig == 1)
-    {   // qDebug()<<trig<<"-----------------------------";
-
+    {
         saveImgFun(100);
 
     }
-
-
-
     m_CustomPlot->replot();
 }
-void CustomPlotItem::graph_rpt()
-{
-//unused
 
-}
+/*!
+ * \brief CustomPlotItem::trigImg triggers the variable to get a snapshot of the graph
+ * \param k
+ */
 void CustomPlotItem::trigImg(int k)
 {
 
     trig = 1;
 }
+/*!
+ * \brief CustomPlotItem::saveImgk
+ * \param m
+ */
+void CustomPlotItem::saveImgk(int m)
+{
 
+    m_CustomPlot->savePng("SCREENSHOT/graph_.png");
+
+}
+
+/*!
+ * \brief CustomPlotItem::saveImgFun saves the image in the Screenshot folder with current date and time
+ * \param m unused
+ */
 void CustomPlotItem::saveImgFun(int m)
 {
     m_CustomPlot->savePng("SCREENSHOT/g1.png");
@@ -155,40 +242,18 @@ void CustomPlotItem::saveImgFun(int m)
     auto str = oss.str();
     QString k = QString::fromUtf8(str.c_str());
     m_CustomPlot->savePng("SCREENSHOT/graph_"+k+".png");
-    //    qDebug()<<myImage;
     emit saveImg("SCREENSHOT/graph_"+k+".png");
     trig = 0;
 
 }
-void CustomPlotItem::saveImgk(int m)
-{
 
-    m_CustomPlot->savePng("SCREENSHOT/graph_.png");
-
-
-}
-void CustomPlotItem::updateCustomPlotSize()
-{
-    if (m_CustomPlot)
-    {
-        m_CustomPlot->setGeometry( 0, 0, width(), height() );
-    }
-}
-
-void CustomPlotItem::onCustomReplot()
-{
-    //    qDebug() << Q_FUNC_INFO;
-    update();
-}
-
-
-
-int CustomPlotItem::printRandoms(int lower,int upper)
-{
-    return (rand()%(upper-lower+1))+lower;
-}
-
-
+/*!
+ * \brief CustomPlotItem::graphCall gets data from ros thread and assigns them to global variables
+ * \param v: 320 values coming from the UT graph node
+ * \param tup: tuple of echoes
+ * \param x_range1 current range of X axis to fit all the 320 values
+ *
+ */
 void CustomPlotItem::graphCall(QVector<double> v, QVector<double> tup, int64_t x_range1)
 {
 
@@ -196,10 +261,9 @@ void CustomPlotItem::graphCall(QVector<double> v, QVector<double> tup, int64_t x
     for (int i=0; i<320; ++i)
     {
         y[i] = (x_range/320.0)*i;
-        qDebug() <<"y:"<< y[i]<< "and i is "<< i;
+//        qDebug() <<"y:"<< y[i]<< "and i is "<< i;
 
     }
-
 
     tuple  = tup;
     x_data = v;
@@ -219,45 +283,5 @@ void CustomPlotItem::graphCall(QVector<double> v, QVector<double> tup, int64_t x
     }
     tup_y = ty;
 
-
-}
-
-
-void CustomPlotItem::mousePressEvent( QMouseEvent* event )
-{
-    //qDebug() << Q_FUNC_INFO;
-    routeMouseEvents( event );
-}
-
-void CustomPlotItem::mouseReleaseEvent( QMouseEvent* event )
-{
-    // qDebug() << Q_FUNC_INFO;
-    routeMouseEvents( event );
-}
-
-void CustomPlotItem::mouseMoveEvent( QMouseEvent* event )
-{
-    routeMouseEvents( event );
-}
-
-void CustomPlotItem::mouseDoubleClickEvent( QMouseEvent* event )
-{
-    //qDebug() << Q_FUNC_INFO;
-    routeMouseEvents( event );
-}
-
-void CustomPlotItem::graphClicked( QCPAbstractPlottable* plottable )
-{
-    //qDebug() << Q_FUNC_INFO << QString( "Clicked on graph '%1 " ).arg( plottable->name() );
-}
-
-void CustomPlotItem::routeMouseEvents( QMouseEvent* event )
-{
-    if (m_CustomPlot)
-    {
-        QMouseEvent* newEvent = new QMouseEvent( event->type(), event->localPos(), event->button(), event->buttons(), event->modifiers() );
-        //QCoreApplication::sendEvent( m_CustomPlot, newEvent );
-        QCoreApplication::postEvent( m_CustomPlot, newEvent );
-    }
 }
 

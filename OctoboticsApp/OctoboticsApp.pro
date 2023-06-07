@@ -1,4 +1,4 @@
-QT += quick multimedia opengl printsupport svg
+QT += quick multimedia opengl printsupport svg quickcontrols2
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -58,14 +58,11 @@ LIBS += -L$$PWD/ros_lib/lib -lcpp_common -lroscpp -lroslib -lrosconsole -lroscpp
 
 LIBS += -L/usr/lib/x86_64-linux-gnu/gstreamer-1.0  -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 #-lglib-2.0
 #INCLUDEPATH += /opt/ros/noetic/include
-#INCLUDEPATH += /home/zeutec/vijay-octobotics/ui_ws-main/devel/include
 #LIBS += -L/opt/ros/noetic/lib -lroscpp -lroslib -lrosconsole -lroscpp_serialization -lrostime
 
 HEADERS += \
     Source/connectros.h \
     Source/include.h \
     Source/publisher.h \
-    Source/rosthread.h \
- \#    Source/test.h
-#    gststream.h
+    Source/rosthread.h
 

@@ -13,7 +13,7 @@ if [[ ! -f $File ]] ; then
     exit
 fi
 echo -e "\e[1;32m=============Starting Deployment=============\e[0m"
-./linuxdeployqt-5-x86_64.AppImage build/OctoboticsApp  -qmake=$Qmake -qmldir=../OctoboticsApp/UI -always-overwrite -appimage  -bundle-non-qt-libs
+./linuxdeployqt-5-x86_64.AppImage build/OctoboticsApp  -qmake=$Qmake -qmldir=../OctoboticsApp/UI -always-overwrite -appimage  -bundle-non-qt-libs -appimage
 echo -e "\e[1;32m=============First Deployment Completed=============\e[0m"
 
 echo -e "\e[1;32m=============Removing Gstreamer=============\e[0m"

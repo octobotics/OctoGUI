@@ -29,25 +29,31 @@ struct vitals_
     , voltage(0.0)
     , temp()
     , error()
-    , mode()  {
+    , mode()
+    , current()  {
       temp.assign(0.0);
 
       error.assign(0.0);
 
       mode.assign(0.0);
+
+      current.assign(0.0);
   }
   vitals_(const ContainerAllocator& _alloc)
     : header(_alloc)
     , voltage(0.0)
     , temp()
     , error()
-    , mode()  {
+    , mode()
+    , current()  {
   (void)_alloc;
       temp.assign(0.0);
 
       error.assign(0.0);
 
       mode.assign(0.0);
+
+      current.assign(0.0);
   }
 
 
@@ -66,6 +72,9 @@ struct vitals_
 
    typedef boost::array<float, 4>  _mode_type;
   _mode_type mode;
+
+   typedef boost::array<float, 4>  _current_type;
+  _current_type current;
 
 
 
@@ -100,7 +109,8 @@ bool operator==(const ::my_actuator::vitals_<ContainerAllocator1> & lhs, const :
     lhs.voltage == rhs.voltage &&
     lhs.temp == rhs.temp &&
     lhs.error == rhs.error &&
-    lhs.mode == rhs.mode;
+    lhs.mode == rhs.mode &&
+    lhs.current == rhs.current;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -157,12 +167,12 @@ struct MD5Sum< ::my_actuator::vitals_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "af80d2fd4e2af8a9d4f0680366f6617c";
+    return "e35796378a4ca2d5461b875910fd9a1a";
   }
 
   static const char* value(const ::my_actuator::vitals_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xaf80d2fd4e2af8a9ULL;
-  static const uint64_t static_value2 = 0xd4f0680366f6617cULL;
+  static const uint64_t static_value1 = 0xe35796378a4ca2d5ULL;
+  static const uint64_t static_value2 = 0x461b875910fd9a1aULL;
 };
 
 template<class ContainerAllocator>
@@ -186,7 +196,7 @@ struct Definition< ::my_actuator::vitals_<ContainerAllocator> >
 "float32[4] temp\n"
 "float32[4] error\n"
 "float32[4] mode\n"
-"\n"
+"float32[4] current\n"
 "\n"
 "================================================================================\n"
 "MSG: std_msgs/Header\n"
@@ -226,6 +236,7 @@ namespace serialization
       stream.next(m.temp);
       stream.next(m.error);
       stream.next(m.mode);
+      stream.next(m.current);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -266,6 +277,12 @@ struct Printer< ::my_actuator::vitals_<ContainerAllocator> >
     {
       s << indent << "  mode[" << i << "]: ";
       Printer<float>::stream(s, indent + "  ", v.mode[i]);
+    }
+    s << indent << "current[]" << std::endl;
+    for (size_t i = 0; i < v.current.size(); ++i)
+    {
+      s << indent << "  current[" << i << "]: ";
+      Printer<float>::stream(s, indent + "  ", v.current[i]);
     }
   }
 };
