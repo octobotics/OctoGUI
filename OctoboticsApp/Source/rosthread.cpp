@@ -17,7 +17,7 @@
 #include <QDebug>
 #include <bits/stdc++.h>
 
-QString graph_path_ = "";
+QString GraphPath_ = "";
 
 /*!
  * \brief a QThread initializing ROS publishers, subscribers and services
@@ -29,6 +29,14 @@ void RosThread::run()
 
     //ros node handler
     m_nodeHandler.reset(new ros::NodeHandle("~"));
+
+
+    //graph object
+    CustomPlotItem *m_cst = new CustomPlotItem();
+    //graph signal to send data received from ros topic to customplotitem
+    connect(this, SIGNAL(graphCall(QVector<double>, QVector<double>, int64_t)), m_cst, SLOT(graphCall(QVector<double>,QVector<double>,int64_t)));
+    //graph signal to trigger graph image capture from ros service call
+    connect(this, SIGNAL(trigImg(int)), m_cst, SLOT(trigImg(int)));
 
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
@@ -67,12 +75,6 @@ void RosThread::run()
     //ros spin
     ros::spin();
 
-    //graph object
-    CustomPlotItem *m_cst = new CustomPlotItem();
-    //graph signal to send data received from ros topic to customplotitem
-    connect(this, SIGNAL(graphCall(QVector<double>, QVector<double>, int64_t)), m_cst, SLOT(graphCall(QVector<double>,QVector<double>,int64_t)));
-    //graph signal to trigger graph image capture from ros service call
-    connect(this, SIGNAL(trigImg(int)), m_cst, SLOT(trigImg(int)));
 }
 
 /*!
@@ -315,17 +317,18 @@ bool RosThread::toggleCallback(stm_client::tool_status::Request &req, stm_client
  * \param res
  * \return
  */
-bool RosThread::imgCallback(serialtoros::graph_path::Request &req, serialtoros::graph_path::Response &res )
+bool RosThread::imgCallback(serialtoros::GraphPath::Request &req, serialtoros::GraphPath::Response &res )
 {
 
+    qDebug()<< "imgcallback" << req.req;
     if (req.req ==1 )
     {   int i = 1;
-        emit trigImg(i);
-//        qDebug()<<graph_path_;
+        emit trigImg(1);
+        qDebug()<<GraphPath_;
         ros::Duration(0.2).sleep();
 
-        res.path = graph_path_.toStdString();
-        graph_path_ = "";
+        res.path = GraphPath_.toStdString();
+        GraphPath_ = "";
     }
     return true;
 }
@@ -527,7 +530,8 @@ void RosThread::checkArmStatus()
 void RosThread::saveImg(QString img)
 {
 
-    graph_path_ = img;
+    GraphPath_ = img;
+    qDebug() << img;
 
 }
 

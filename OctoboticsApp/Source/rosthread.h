@@ -29,7 +29,7 @@
 #include "std_msgs/Int16.h"
 #include "std_msgs/Int64.h"
 #include "stm_client/relay_control.h"
-#include "serialtoros/graph_path.h"
+#include "serialtoros/GraphPath.h"
 #include "my_actuator/vitals.h"
 #include "std_msgs/String.h"
 #include "std_srvs/Trigger.h"
@@ -71,7 +71,7 @@ public slots:
 
     //ros service servers
     bool toggleCallback(stm_client::tool_status::Request &req, stm_client::tool_status::Response &res);
-    bool imgCallback(serialtoros::graph_path::Request &req, serialtoros::graph_path::Response &res );
+    bool imgCallback(serialtoros::GraphPath::Request &req, serialtoros::GraphPath::Response &res );
 
     //ros service clients
     void sendToolData(QString value);

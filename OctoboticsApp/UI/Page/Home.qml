@@ -2062,7 +2062,7 @@ Rectangle{
                                         MouseArea{
                                             anchors.fill: parent
                                             onClicked: {
-                                                customPlot.saveImgk(1)
+//                                                customPlot.saveImgk(1)
                                             }
                                         }
                                     }

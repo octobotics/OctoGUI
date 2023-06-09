@@ -196,7 +196,7 @@ void CustomPlotItem::realtimeDataSlot()
 
     m_CustomPlot->graph(0)->addData(y_data,x_data);
     m_CustomPlot->graph(1)->addData( tuple, tup_y );
-    //      qDebug()<<"tuple"<<trig;
+//          qDebug()<<"tuple"<<trig;
     if (trig == 1)
     {
         saveImgFun(100);
@@ -211,7 +211,7 @@ void CustomPlotItem::realtimeDataSlot()
  */
 void CustomPlotItem::trigImg(int k)
 {
-
+    qDebug() << "hi";
     trig = 1;
 }
 /*!
@@ -222,6 +222,7 @@ void CustomPlotItem::saveImgk(int m)
 {
 
     m_CustomPlot->savePng("SCREENSHOT/graph_.png");
+    qDebug()<<"allaaaa";
 
 }
 
@@ -241,6 +242,7 @@ void CustomPlotItem::saveImgFun(int m)
     oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
     auto str = oss.str();
     QString k = QString::fromUtf8(str.c_str());
+    qDebug()<< k << "heyyy";
     m_CustomPlot->savePng("SCREENSHOT/graph_"+k+".png");
     emit saveImg("SCREENSHOT/graph_"+k+".png");
     trig = 0;

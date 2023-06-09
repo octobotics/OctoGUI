@@ -31,7 +31,6 @@ Page {
         width: parent.width
         height: parent.height / 3
         color: backGroundColor
-
     }
 
     ColumnLayout {
@@ -94,9 +93,7 @@ Page {
             Keys.onPressed: (event)=> {
                     if (event.key === Qt.Key_Return) {
                         loginUser(loginUsername.text, loginPassword.text)
-
                     }
-
         }
             background: Rectangle {
                 implicitWidth: 200
@@ -142,7 +139,6 @@ Page {
             Keys.onPressed: (event)=> {
                     if (event.key === Qt.Key_Return) {
                         loginUser(loginUsername.text, loginPassword.text)
-
                     }
 
         }
