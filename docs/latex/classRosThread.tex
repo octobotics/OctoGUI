@@ -1,0 +1,500 @@
+\doxysection{Ros\+Thread Class Reference}
+\hypertarget{classRosThread}{}\label{classRosThread}\index{RosThread@{RosThread}}
+
+
+The \doxylink{classRosThread}{Ros\+Thread} class is a QThread to run a ros node.  
+
+
+
+
+{\ttfamily \#include $<$rosthread.\+h$>$}
+
+Inheritance diagram for Ros\+Thread\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRosThread}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classRosThread_a9891db3198c452118356ed6f07cdaa2d}{add\+Line}} (QString new\+Line)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a9891db3198c452118356ed6f07cdaa2d}{Ros\+Thread\+::add\+Line} Test function to validate ros communcation with QT. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a6f8ecceae217362e6a8bcdff035914e5}{send\+Ut\+Vel}} (QString value)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a6f8ecceae217362e6a8bcdff035914e5}{Ros\+Thread\+::send\+Ut\+Vel} Publishes UT Velocity from UI to serialtoros node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a8c706481aa63f1969e07a6e0cf5380aa}{send\+Ut\+Data}} (QString value)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a8c706481aa63f1969e07a6e0cf5380aa}{Ros\+Thread\+::send\+Ut\+Data} Publishes Deepcoat and Xrange values to serialtoros node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a387050fc0570d7d09031ac009bd1d8a3}{cap\+Img\+Pub}} (int value)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a387050fc0570d7d09031ac009bd1d8a3}{Ros\+Thread\+::cap\+Img\+Pub} publisher to trigger local image capture from cameras in xavier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a3b30930ed8c8477f2cd3173123941594}{comm\+Callback}} (const std\+\_\+msgs\+::\+Int8\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a3b30930ed8c8477f2cd3173123941594}{Ros\+Thread\+::comm\+Callback} Subscriber Callback for communication status. \end{DoxyCompactList}\item 
+\Hypertarget{classRosThread_a91385de1093d5d0a914de72324e25c1e}\label{classRosThread_a91385de1093d5d0a914de72324e25c1e} 
+void {\bfseries arm\+Tool\+Callback} (const std\+\_\+msgs\+::\+Int8\+Const\+Ptr \&msg)
+\item 
+void \mbox{\hyperlink{classRosThread_aaf27f63820129a30f400493548f8a09c}{vel\+Callback}} (const octo\+\_\+qt\+::ang\+\_\+lin\+\_\+arr\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_aaf27f63820129a30f400493548f8a09c}{Ros\+Thread\+::vel\+Callback} Receives current and max velocities from crawler node and displays on circular gauge. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_aa7e6336474685afff2290cc1d86de49a}{crawler\+Callback}} (const my\+\_\+actuator\+::vitals\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_aa7e6336474685afff2290cc1d86de49a}{Ros\+Thread\+::crawler\+Callback} gets vitals like voltage, error msgs and current motor temperature from crawler node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_ae0a9b443b45ea9f6268539edbc952acd}{thickness\+Callback}} (const serialtoros\+::thick\+\_\+arr\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_ae0a9b443b45ea9f6268539edbc952acd}{Ros\+Thread\+::thickness\+Callback} gets thickness from ut serial node and displays on UI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a3c25226ead370f3b24137482a3e34cf2}{graph\+Callback}} (const serialtoros\+::graph\+\_\+arr\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a3c25226ead370f3b24137482a3e34cf2}{Ros\+Thread\+::graph\+Callback} gets graph values from UT serial node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_adbcc51b8167ba0e8c0ce31f0c68f7d01}{ut\+Callback}} (const serialtoros\+::\+VDE\+\_\+arr\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_adbcc51b8167ba0e8c0ce31f0c68f7d01}{Ros\+Thread\+::ut\+Callback} gets current velocity, deepcoat and echo values from UT serial node and displays in the UI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a89c7c0f226f6544ab35420ad1d77d88d}{f\+Callback}} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a89c7c0f226f6544ab35420ad1d77d88d}{Ros\+Thread\+::f\+Callback} gets force value from sensor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_ad8baabba15f2ff76f88ab74284ecf109}{current\+Callback}} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_ad8baabba15f2ff76f88ab74284ecf109}{Ros\+Thread\+::current\+Callback} gets current value from stm32 and displays on UI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a1c07bd414e0eee60a827cd5e5bb778c3}{uid\+Callback}} (const launch\+\_\+crawler\+::\+Serial\+Numbers\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a1c07bd414e0eee60a827cd5e5bb778c3}{Ros\+Thread\+::uid\+Callback} gets serial numbers of cralwer from xavier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a2f56183f175d67756df96cf26fe13510}{pressure\+Callback}} (const stm\+\_\+client\+::atm\+\_\+arr\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a2f56183f175d67756df96cf26fe13510}{Ros\+Thread\+::pressure\+Callback} gets values from pressure sensors and sends to UI. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classRosThread_a2e34a3faf3af2400883f8f812aef987f}{toggle\+Callback}} (\mbox{\hyperlink{structstm__client_1_1tool__statusRequest__}{stm\+\_\+client\+::tool\+\_\+status\+::\+Request}} \&req, \mbox{\hyperlink{structstm__client_1_1tool__statusResponse__}{stm\+\_\+client\+::tool\+\_\+status\+::\+Response}} \&res)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a2e34a3faf3af2400883f8f812aef987f}{Ros\+Thread\+::toggle\+Callback} ros service server that gets the toggle input from route joy node that shows if joy is in arm mode or crawler mode. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classRosThread_a769a508d26e014c6545e0db00cb45af3}{img\+Callback}} (\mbox{\hyperlink{structserialtoros_1_1GraphPathRequest__}{serialtoros\+::\+Graph\+Path\+::\+Request}} \&req, \mbox{\hyperlink{structserialtoros_1_1GraphPathResponse__}{serialtoros\+::\+Graph\+Path\+::\+Response}} \&res)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a769a508d26e014c6545e0db00cb45af3}{Ros\+Thread\+::img\+Callback} ros service server callback to send graph image path to (gets a call from unity service client) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a4d8f22d22d29ad311252198db44fcaa5}{send\+Tool\+Data}} (QString value)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a4d8f22d22d29ad311252198db44fcaa5}{Ros\+Thread\+::send\+Tool\+Data} toggles relay and grinder depending on the button clicks in UI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_aaf64d7cc2c3440f59907cc2cad64475e}{crawler\+Init\+Srv}} (int value)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_aaf64d7cc2c3440f59907cc2cad64475e}{Ros\+Thread\+::crawler\+Init\+Srv} calls the service to initialialize and stop the crawler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_abd76b5234ccca8620d50bf4833e78a36}{reset\+\_\+crawler}} (int val)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_abd76b5234ccca8620d50bf4833e78a36}{Ros\+Thread\+::reset\+\_\+crawler} calls a service to reset crawler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a2df472cb2c6ad526720eed784ea8d4db}{arm\+Init\+Srv}} (int value)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a2df472cb2c6ad526720eed784ea8d4db}{Ros\+Thread\+::arm\+Init\+Srv} calls the service to initialialize and stop the arm. \end{DoxyCompactList}\item 
+\Hypertarget{classRosThread_aa9194c814841448df411ca6f48ffcc8a}\label{classRosThread_aa9194c814841448df411ca6f48ffcc8a} 
+void {\bfseries check\+Arm\+Status} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_aa9194c814841448df411ca6f48ffcc8a}{Ros\+Thread\+::check\+Arm\+Status} calls a service to get current status of arm (error code and temperature) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a7eb8a4e0d5107da450bd772b27cecbd0}{reset\+\_\+arm}} (int val)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a7eb8a4e0d5107da450bd772b27cecbd0}{Ros\+Thread\+::reset\+\_\+arm}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRosThread_a5ed365bb9e138c6e0ab66eaf973f93f3}{save\+Img}} (QString img)
+\begin{DoxyCompactList}\small\item\em \doxylink{classRosThread_a5ed365bb9e138c6e0ab66eaf973f93f3}{Ros\+Thread\+::save\+Img} gets graphimage path from customplotitem and stores it in a global variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classRosThread_a9baf14017aa994eb5053a20fb6f018da}\label{classRosThread_a9baf14017aa994eb5053a20fb6f018da} 
+void {\bfseries comm\+Callback} (int value)
+\item 
+\Hypertarget{classRosThread_aff84fff23ac829d028e80ecbcd8dfeb1}\label{classRosThread_aff84fff23ac829d028e80ecbcd8dfeb1} 
+void {\bfseries arm\+Tool\+Callback} (int value)
+\item 
+\Hypertarget{classRosThread_a78e9c85f4ef08f8a9805f9b0ab5074b9}\label{classRosThread_a78e9c85f4ef08f8a9805f9b0ab5074b9} 
+void {\bfseries batt\+Callback} (float value)
+\item 
+\Hypertarget{classRosThread_a4a89e8da9e4e33438953fcd4390b0fe1}\label{classRosThread_a4a89e8da9e4e33438953fcd4390b0fe1} 
+void {\bfseries temp\+Callback} (QVector$<$ int $>$ temp)
+\item 
+\Hypertarget{classRosThread_a62297718192142e00b590a1f604680e2}\label{classRosThread_a62297718192142e00b590a1f604680e2} 
+void {\bfseries error\+Callback} (QVector$<$ int $>$ err)
+\item 
+\Hypertarget{classRosThread_a54ef3f5965a77011db6884dd40699a67}\label{classRosThread_a54ef3f5965a77011db6884dd40699a67} 
+void {\bfseries vel\+Callback} (float current\+\_\+vel\+\_\+linear, float current\+\_\+vel\+\_\+angular, float max\+\_\+linear, float max\+\_\+angular)
+\item 
+\Hypertarget{classRosThread_afa4b334b454a031917d160d913cc4ffb}\label{classRosThread_afa4b334b454a031917d160d913cc4ffb} 
+void {\bfseries crawler\+Callback} (bool m1, bool m2, bool m3, bool m4)
+\item 
+\Hypertarget{classRosThread_a180301c1bceef44b6373d6880be9f870}\label{classRosThread_a180301c1bceef44b6373d6880be9f870} 
+void {\bfseries arm\+Callback} (QVector$<$ int $>$ arm\+\_\+status)
+\item 
+\Hypertarget{classRosThread_a4d4426666d9960dc7bb6e3d3736eb350}\label{classRosThread_a4d4426666d9960dc7bb6e3d3736eb350} 
+void {\bfseries ut\+Callback} (int vel, int deepcoat, int echo)
+\item 
+\Hypertarget{classRosThread_a1454c1fe8d1d828b97ec5b7dbb6b827b}\label{classRosThread_a1454c1fe8d1d828b97ec5b7dbb6b827b} 
+void {\bfseries f\+Callback} (float force)
+\item 
+\Hypertarget{classRosThread_a970d9c182fa639d33a7b2d7886d60a0d}\label{classRosThread_a970d9c182fa639d33a7b2d7886d60a0d} 
+void {\bfseries uid\+Callback} (QVector$<$ QString $>$ uid)
+\item 
+\Hypertarget{classRosThread_ab2becb047e9cb7816decf5fb496c804d}\label{classRosThread_ab2becb047e9cb7816decf5fb496c804d} 
+void {\bfseries current\+Callback} (float current)
+\item 
+\Hypertarget{classRosThread_a716ee25126f9a49667cb044454988a42}\label{classRosThread_a716ee25126f9a49667cb044454988a42} 
+void {\bfseries pressure\+Callback} (QVector$<$ int $>$ data)
+\item 
+\Hypertarget{classRosThread_a7e05f0fb363a5ad94e0515eff4c39376}\label{classRosThread_a7e05f0fb363a5ad94e0515eff4c39376} 
+void {\bfseries graph\+Call} (QVector$<$ double $>$ data, QVector$<$ double $>$ tuple, int64\+\_\+t x\+\_\+range)
+\item 
+\Hypertarget{classRosThread_af69a1fa5bc2254f9805807203d6f5609}\label{classRosThread_af69a1fa5bc2254f9805807203d6f5609} 
+void {\bfseries toggle\+Callback} (bool flag)
+\item 
+\Hypertarget{classRosThread_abfd58316d177009a0c11d0ed818aef66}\label{classRosThread_abfd58316d177009a0c11d0ed818aef66} 
+void {\bfseries trig\+Img} (int k)
+\item 
+\Hypertarget{classRosThread_a4a010f5cae3d2c47d0bebef8f4650f20}\label{classRosThread_a4a010f5cae3d2c47d0bebef8f4650f20} 
+void {\bfseries thickness\+Callback} (float thickness, float unit)
+\item 
+\Hypertarget{classRosThread_ac1a9bdd64ddeb1849ff652bfff4c5ba5}\label{classRosThread_ac1a9bdd64ddeb1849ff652bfff4c5ba5} 
+void {\bfseries init\+Arm} (bool k)
+\item 
+\Hypertarget{classRosThread_a407272c31545bde2e823b7ced33687b5}\label{classRosThread_a407272c31545bde2e823b7ced33687b5} 
+void {\bfseries stop\+Arm} (bool k)
+\item 
+\Hypertarget{classRosThread_adbad696594323ef7788fa45d1cd5c38d}\label{classRosThread_adbad696594323ef7788fa45d1cd5c38d} 
+void {\bfseries rst\+Arm} (bool k)
+\item 
+\Hypertarget{classRosThread_aff319449b441591579b65a61acb073a8}\label{classRosThread_aff319449b441591579b65a61acb073a8} 
+void {\bfseries init\+Crawler} (bool k)
+\item 
+\Hypertarget{classRosThread_a889f9c1f0674525ff70c939a73f640e4}\label{classRosThread_a889f9c1f0674525ff70c939a73f640e4} 
+void {\bfseries stop\+Crawler} (bool k)
+\item 
+\Hypertarget{classRosThread_ad5e5136533651f25a2a9c7e39739033a}\label{classRosThread_ad5e5136533651f25a2a9c7e39739033a} 
+void {\bfseries rst\+Crawler} (bool k)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classRosThread_a3860023ff438951bbdcfb876a344505f}\label{classRosThread_a3860023ff438951bbdcfb876a344505f} 
+void {\bfseries run} ()
+\begin{DoxyCompactList}\small\item\em a QThread initializing ROS publishers, subscribers and services \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{classRosThread}{Ros\+Thread} class is a QThread to run a ros node. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRosThread_a9891db3198c452118356ed6f07cdaa2d}\label{classRosThread_a9891db3198c452118356ed6f07cdaa2d} 
+\index{RosThread@{RosThread}!addLine@{addLine}}
+\index{addLine@{addLine}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{addLine}{addLine}}
+{\footnotesize\ttfamily void Ros\+Thread\+::add\+Line (\begin{DoxyParamCaption}\item[{QString}]{new\+Line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a9891db3198c452118356ed6f07cdaa2d}{Ros\+Thread\+::add\+Line} Test function to validate ros communcation with QT. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Line} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a2df472cb2c6ad526720eed784ea8d4db}\label{classRosThread_a2df472cb2c6ad526720eed784ea8d4db} 
+\index{RosThread@{RosThread}!armInitSrv@{armInitSrv}}
+\index{armInitSrv@{armInitSrv}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{armInitSrv}{armInitSrv}}
+{\footnotesize\ttfamily void Ros\+Thread\+::arm\+Init\+Srv (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a2df472cb2c6ad526720eed784ea8d4db}{Ros\+Thread\+::arm\+Init\+Srv} calls the service to initialialize and stop the arm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & 0\+: stop arm 1\+: init arm \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a387050fc0570d7d09031ac009bd1d8a3}\label{classRosThread_a387050fc0570d7d09031ac009bd1d8a3} 
+\index{RosThread@{RosThread}!capImgPub@{capImgPub}}
+\index{capImgPub@{capImgPub}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{capImgPub}{capImgPub}}
+{\footnotesize\ttfamily void Ros\+Thread\+::cap\+Img\+Pub (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a387050fc0570d7d09031ac009bd1d8a3}{Ros\+Thread\+::cap\+Img\+Pub} publisher to trigger local image capture from cameras in xavier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a3b30930ed8c8477f2cd3173123941594}\label{classRosThread_a3b30930ed8c8477f2cd3173123941594} 
+\index{RosThread@{RosThread}!commCallback@{commCallback}}
+\index{commCallback@{commCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{commCallback}{commCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::comm\+Callback (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+Int8\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a3b30930ed8c8477f2cd3173123941594}{Ros\+Thread\+::comm\+Callback} Subscriber Callback for communication status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & gets 0 if connection lost and 1 if established \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_aa7e6336474685afff2290cc1d86de49a}\label{classRosThread_aa7e6336474685afff2290cc1d86de49a} 
+\index{RosThread@{RosThread}!crawlerCallback@{crawlerCallback}}
+\index{crawlerCallback@{crawlerCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{crawlerCallback}{crawlerCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::crawler\+Callback (\begin{DoxyParamCaption}\item[{const my\+\_\+actuator\+::vitals\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_aa7e6336474685afff2290cc1d86de49a}{Ros\+Thread\+::crawler\+Callback} gets vitals like voltage, error msgs and current motor temperature from crawler node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_aaf64d7cc2c3440f59907cc2cad64475e}\label{classRosThread_aaf64d7cc2c3440f59907cc2cad64475e} 
+\index{RosThread@{RosThread}!crawlerInitSrv@{crawlerInitSrv}}
+\index{crawlerInitSrv@{crawlerInitSrv}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{crawlerInitSrv}{crawlerInitSrv}}
+{\footnotesize\ttfamily void Ros\+Thread\+::crawler\+Init\+Srv (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_aaf64d7cc2c3440f59907cc2cad64475e}{Ros\+Thread\+::crawler\+Init\+Srv} calls the service to initialialize and stop the crawler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & 1\+: init 0\+: stop \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_ad8baabba15f2ff76f88ab74284ecf109}\label{classRosThread_ad8baabba15f2ff76f88ab74284ecf109} 
+\index{RosThread@{RosThread}!currentCallback@{currentCallback}}
+\index{currentCallback@{currentCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{currentCallback}{currentCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::current\+Callback (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_ad8baabba15f2ff76f88ab74284ecf109}{Ros\+Thread\+::current\+Callback} gets current value from stm32 and displays on UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a89c7c0f226f6544ab35420ad1d77d88d}\label{classRosThread_a89c7c0f226f6544ab35420ad1d77d88d} 
+\index{RosThread@{RosThread}!fCallback@{fCallback}}
+\index{fCallback@{fCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{fCallback}{fCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::f\+Callback (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a89c7c0f226f6544ab35420ad1d77d88d}{Ros\+Thread\+::f\+Callback} gets force value from sensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a3c25226ead370f3b24137482a3e34cf2}\label{classRosThread_a3c25226ead370f3b24137482a3e34cf2} 
+\index{RosThread@{RosThread}!graphCallback@{graphCallback}}
+\index{graphCallback@{graphCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{graphCallback}{graphCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::graph\+Callback (\begin{DoxyParamCaption}\item[{const serialtoros\+::graph\+\_\+arr\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a3c25226ead370f3b24137482a3e34cf2}{Ros\+Thread\+::graph\+Callback} gets graph values from UT serial node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a769a508d26e014c6545e0db00cb45af3}\label{classRosThread_a769a508d26e014c6545e0db00cb45af3} 
+\index{RosThread@{RosThread}!imgCallback@{imgCallback}}
+\index{imgCallback@{imgCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{imgCallback}{imgCallback}}
+{\footnotesize\ttfamily bool Ros\+Thread\+::img\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structserialtoros_1_1GraphPathRequest__}{serialtoros\+::\+Graph\+Path\+::\+Request}} \&}]{req,  }\item[{\mbox{\hyperlink{structserialtoros_1_1GraphPathResponse__}{serialtoros\+::\+Graph\+Path\+::\+Response}} \&}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a769a508d26e014c6545e0db00cb45af3}{Ros\+Thread\+::img\+Callback} ros service server callback to send graph image path to (gets a call from unity service client) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+{\em res} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{classRosThread_a2f56183f175d67756df96cf26fe13510}\label{classRosThread_a2f56183f175d67756df96cf26fe13510} 
+\index{RosThread@{RosThread}!pressureCallback@{pressureCallback}}
+\index{pressureCallback@{pressureCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{pressureCallback}{pressureCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::pressure\+Callback (\begin{DoxyParamCaption}\item[{const stm\+\_\+client\+::atm\+\_\+arr\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a2f56183f175d67756df96cf26fe13510}{Ros\+Thread\+::pressure\+Callback} gets values from pressure sensors and sends to UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a7eb8a4e0d5107da450bd772b27cecbd0}\label{classRosThread_a7eb8a4e0d5107da450bd772b27cecbd0} 
+\index{RosThread@{RosThread}!reset\_arm@{reset\_arm}}
+\index{reset\_arm@{reset\_arm}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{reset\_arm}{reset\_arm}}
+{\footnotesize\ttfamily void Ros\+Thread\+::reset\+\_\+arm (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a7eb8a4e0d5107da450bd772b27cecbd0}{Ros\+Thread\+::reset\+\_\+arm}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_abd76b5234ccca8620d50bf4833e78a36}\label{classRosThread_abd76b5234ccca8620d50bf4833e78a36} 
+\index{RosThread@{RosThread}!reset\_crawler@{reset\_crawler}}
+\index{reset\_crawler@{reset\_crawler}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{reset\_crawler}{reset\_crawler}}
+{\footnotesize\ttfamily void Ros\+Thread\+::reset\+\_\+crawler (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_abd76b5234ccca8620d50bf4833e78a36}{Ros\+Thread\+::reset\+\_\+crawler} calls a service to reset crawler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & trigger value \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a5ed365bb9e138c6e0ab66eaf973f93f3}\label{classRosThread_a5ed365bb9e138c6e0ab66eaf973f93f3} 
+\index{RosThread@{RosThread}!saveImg@{saveImg}}
+\index{saveImg@{saveImg}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{saveImg}{saveImg}}
+{\footnotesize\ttfamily void Ros\+Thread\+::save\+Img (\begin{DoxyParamCaption}\item[{QString}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a5ed365bb9e138c6e0ab66eaf973f93f3}{Ros\+Thread\+::save\+Img} gets graphimage path from customplotitem and stores it in a global variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a4d8f22d22d29ad311252198db44fcaa5}\label{classRosThread_a4d8f22d22d29ad311252198db44fcaa5} 
+\index{RosThread@{RosThread}!sendToolData@{sendToolData}}
+\index{sendToolData@{sendToolData}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{sendToolData}{sendToolData}}
+{\footnotesize\ttfamily void Ros\+Thread\+::send\+Tool\+Data (\begin{DoxyParamCaption}\item[{QString}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a4d8f22d22d29ad311252198db44fcaa5}{Ros\+Thread\+::send\+Tool\+Data} toggles relay and grinder depending on the button clicks in UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & 0\+: grinder all others\+: relay control \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a8c706481aa63f1969e07a6e0cf5380aa}\label{classRosThread_a8c706481aa63f1969e07a6e0cf5380aa} 
+\index{RosThread@{RosThread}!sendUtData@{sendUtData}}
+\index{sendUtData@{sendUtData}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{sendUtData}{sendUtData}}
+{\footnotesize\ttfamily void Ros\+Thread\+::send\+Ut\+Data (\begin{DoxyParamCaption}\item[{QString}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a8c706481aa63f1969e07a6e0cf5380aa}{Ros\+Thread\+::send\+Ut\+Data} Publishes Deepcoat and Xrange values to serialtoros node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & 0\+: sends 0 to deepcoat 1\+: sends 1 to deepcoat 128\+: sends 128 to xrange( to start receiving graph data from UT node) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a6f8ecceae217362e6a8bcdff035914e5}\label{classRosThread_a6f8ecceae217362e6a8bcdff035914e5} 
+\index{RosThread@{RosThread}!sendUtVel@{sendUtVel}}
+\index{sendUtVel@{sendUtVel}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{sendUtVel}{sendUtVel}}
+{\footnotesize\ttfamily void Ros\+Thread\+::send\+Ut\+Vel (\begin{DoxyParamCaption}\item[{QString}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a6f8ecceae217362e6a8bcdff035914e5}{Ros\+Thread\+::send\+Ut\+Vel} Publishes UT Velocity from UI to serialtoros node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & gets value from user input in UI \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_ae0a9b443b45ea9f6268539edbc952acd}\label{classRosThread_ae0a9b443b45ea9f6268539edbc952acd} 
+\index{RosThread@{RosThread}!thicknessCallback@{thicknessCallback}}
+\index{thicknessCallback@{thicknessCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{thicknessCallback}{thicknessCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::thickness\+Callback (\begin{DoxyParamCaption}\item[{const serialtoros\+::thick\+\_\+arr\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_ae0a9b443b45ea9f6268539edbc952acd}{Ros\+Thread\+::thickness\+Callback} gets thickness from ut serial node and displays on UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_a2e34a3faf3af2400883f8f812aef987f}\label{classRosThread_a2e34a3faf3af2400883f8f812aef987f} 
+\index{RosThread@{RosThread}!toggleCallback@{toggleCallback}}
+\index{toggleCallback@{toggleCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{toggleCallback}{toggleCallback}}
+{\footnotesize\ttfamily bool Ros\+Thread\+::toggle\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstm__client_1_1tool__statusRequest__}{stm\+\_\+client\+::tool\+\_\+status\+::\+Request}} \&}]{req,  }\item[{\mbox{\hyperlink{structstm__client_1_1tool__statusResponse__}{stm\+\_\+client\+::tool\+\_\+status\+::\+Response}} \&}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a2e34a3faf3af2400883f8f812aef987f}{Ros\+Thread\+::toggle\+Callback} ros service server that gets the toggle input from route joy node that shows if joy is in arm mode or crawler mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & \\
+\hline
+{\em res} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{classRosThread_a1c07bd414e0eee60a827cd5e5bb778c3}\label{classRosThread_a1c07bd414e0eee60a827cd5e5bb778c3} 
+\index{RosThread@{RosThread}!uidCallback@{uidCallback}}
+\index{uidCallback@{uidCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{uidCallback}{uidCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::uid\+Callback (\begin{DoxyParamCaption}\item[{const launch\+\_\+crawler\+::\+Serial\+Numbers\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_a1c07bd414e0eee60a827cd5e5bb778c3}{Ros\+Thread\+::uid\+Callback} gets serial numbers of cralwer from xavier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_adbcc51b8167ba0e8c0ce31f0c68f7d01}\label{classRosThread_adbcc51b8167ba0e8c0ce31f0c68f7d01} 
+\index{RosThread@{RosThread}!utCallback@{utCallback}}
+\index{utCallback@{utCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{utCallback}{utCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::ut\+Callback (\begin{DoxyParamCaption}\item[{const serialtoros\+::\+VDE\+\_\+arr\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_adbcc51b8167ba0e8c0ce31f0c68f7d01}{Ros\+Thread\+::ut\+Callback} gets current velocity, deepcoat and echo values from UT serial node and displays in the UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classRosThread_aaf27f63820129a30f400493548f8a09c}\label{classRosThread_aaf27f63820129a30f400493548f8a09c} 
+\index{RosThread@{RosThread}!velCallback@{velCallback}}
+\index{velCallback@{velCallback}!RosThread@{RosThread}}
+\doxysubsubsection{\texorpdfstring{velCallback}{velCallback}}
+{\footnotesize\ttfamily void Ros\+Thread\+::vel\+Callback (\begin{DoxyParamCaption}\item[{const octo\+\_\+qt\+::ang\+\_\+lin\+\_\+arr\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classRosThread_aaf27f63820129a30f400493548f8a09c}{Ros\+Thread\+::vel\+Callback} Receives current and max velocities from crawler node and displays on circular gauge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{rosthread_8h}{rosthread.\+h}}\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{rosthread_8cpp}{rosthread.\+cpp}}\end{DoxyCompactItemize}

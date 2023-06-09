@@ -1,0 +1,190 @@
+\doxysection{Custom\+Plot\+Item Class Reference}
+\hypertarget{classCustomPlotItem}{}\label{classCustomPlotItem}\index{CustomPlotItem@{CustomPlotItem}}
+
+
+The \doxylink{classCustomPlotItem}{Custom\+Plot\+Item} class starts and updates the UT graph in real time.  
+
+
+
+
+{\ttfamily \#include $<$customplotitem.\+h$>$}
+
+Inheritance diagram for Custom\+Plot\+Item\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classCustomPlotItem}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classCustomPlotItem_a7be6208ba532d9c72ff2325180e50571}{print\+Randoms}} (int lower, int upper)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a7be6208ba532d9c72ff2325180e50571}{Custom\+Plot\+Item\+::print\+Randoms} returns random values between two numbers. \end{DoxyCompactList}\item 
+\Hypertarget{classCustomPlotItem_a41e606a2be486f039dac4ec3a625d7da}\label{classCustomPlotItem_a41e606a2be486f039dac4ec3a625d7da} 
+void {\bfseries graph\+\_\+rpt} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a41e606a2be486f039dac4ec3a625d7da}{Custom\+Plot\+Item\+::graph\+\_\+rpt} not being used currently. \end{DoxyCompactList}\item 
+\Hypertarget{classCustomPlotItem_af18d28fe83756a9d8d32eef5d718b888}\label{classCustomPlotItem_af18d28fe83756a9d8d32eef5d718b888} 
+void {\bfseries update\+Custom\+Plot\+Size} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_af18d28fe83756a9d8d32eef5d718b888}{Custom\+Plot\+Item\+::update\+Custom\+Plot\+Size} sets geometry of the custom plot. \end{DoxyCompactList}\item 
+\Hypertarget{classCustomPlotItem_a1859600dd204375bc45a266d30848283}\label{classCustomPlotItem_a1859600dd204375bc45a266d30848283} 
+void {\bfseries on\+Custom\+Replot} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a1859600dd204375bc45a266d30848283}{Custom\+Plot\+Item\+::on\+Custom\+Replot}\+: calls replot after plotting. \end{DoxyCompactList}\item 
+\Hypertarget{classCustomPlotItem_a919efbc7d84b1a499a4f675e2cb44724}\label{classCustomPlotItem_a919efbc7d84b1a499a4f675e2cb44724} 
+void {\bfseries realtime\+Data\+Slot} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a919efbc7d84b1a499a4f675e2cb44724}{Custom\+Plot\+Item\+::realtime\+Data\+Slot} updates the graph from ros data in real time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCustomPlotItem_a1020c576a78748e8952dc6058b87bcf2}{trig\+Img}} (int k)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a1020c576a78748e8952dc6058b87bcf2}{Custom\+Plot\+Item\+::trig\+Img} triggers the variable to get a snapshot of the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCustomPlotItem_a5e51998b4f1ac215974d806fc2964f29}{save\+Imgk}} (int m)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a5e51998b4f1ac215974d806fc2964f29}{Custom\+Plot\+Item\+::save\+Imgk}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCustomPlotItem_a0e06229c292158f39e1149d8f7728967}{graph\+Call}} (QVector$<$ double $>$ v, QVector$<$ double $>$ graph\+\_\+arr, int64\+\_\+t x\+\_\+range)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a0e06229c292158f39e1149d8f7728967}{Custom\+Plot\+Item\+::graph\+Call} gets data from ros thread and assigns them to global variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classCustomPlotItem_a723e6fb1e99ca2f25a9008ac9dbd27b5}\label{classCustomPlotItem_a723e6fb1e99ca2f25a9008ac9dbd27b5} 
+void {\bfseries save\+Img} (QString my\+Image)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classCustomPlotItem_a17d5b999f9f6c3499488e88be529904f}\label{classCustomPlotItem_a17d5b999f9f6c3499488e88be529904f} 
+{\bfseries Custom\+Plot\+Item} (QQuick\+Item \texorpdfstring{$\ast$}{*}parent=0)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a17d5b999f9f6c3499488e88be529904f}{Custom\+Plot\+Item\+::\+Custom\+Plot\+Item}\+: constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classCustomPlotItem_a00364bb1a5b96eaff3ca52d643654324}\label{classCustomPlotItem_a00364bb1a5b96eaff3ca52d643654324} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Custom\+Plot\+Item} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a00364bb1a5b96eaff3ca52d643654324}{Custom\+Plot\+Item\+::\texorpdfstring{$\sim$}{\string~}\+Custom\+Plot\+Item}\+: destructor. \end{DoxyCompactList}\item 
+\Hypertarget{classCustomPlotItem_abfcfacfa347ea45acc1d4483785d9926}\label{classCustomPlotItem_abfcfacfa347ea45acc1d4483785d9926} 
+Q\+\_\+\+INVOKABLE void {\bfseries init\+Custom\+Plot} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_abfcfacfa347ea45acc1d4483785d9926}{Custom\+Plot\+Item\+::init\+Custom\+Plot} initializes the plot. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCustomPlotItem_adeb274b4ceb53ffba0fdd99d813547de}{paint}} (QPainter \texorpdfstring{$\ast$}{*}painter)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_adeb274b4ceb53ffba0fdd99d813547de}{Custom\+Plot\+Item\+::paint} draws pixmap of the plot. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCustomPlotItem_aff344e9b4851038ade7fb1af337035cc}{setup\+Plot}} (\mbox{\hyperlink{classQCustomPlot}{QCustom\+Plot}} \texorpdfstring{$\ast$}{*}custom\+Plot)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_aff344e9b4851038ade7fb1af337035cc}{Custom\+Plot\+Item\+::setup\+Plot} sets axes, color and other details of the plot. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCustomPlotItem_a58280605559f198ae836273fe189f4b7}{save\+Img\+Fun}} (int m)
+\begin{DoxyCompactList}\small\item\em \doxylink{classCustomPlotItem_a58280605559f198ae836273fe189f4b7}{Custom\+Plot\+Item\+::save\+Img\+Fun} saves the image in the Screenshot folder with current date and time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{classCustomPlotItem}{Custom\+Plot\+Item} class starts and updates the UT graph in real time. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCustomPlotItem_a0e06229c292158f39e1149d8f7728967}\label{classCustomPlotItem_a0e06229c292158f39e1149d8f7728967} 
+\index{CustomPlotItem@{CustomPlotItem}!graphCall@{graphCall}}
+\index{graphCall@{graphCall}!CustomPlotItem@{CustomPlotItem}}
+\doxysubsubsection{\texorpdfstring{graphCall}{graphCall}}
+{\footnotesize\ttfamily void Custom\+Plot\+Item\+::graph\+Call (\begin{DoxyParamCaption}\item[{QVector$<$ double $>$}]{v,  }\item[{QVector$<$ double $>$}]{tup,  }\item[{int64\+\_\+t}]{x\+\_\+range1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classCustomPlotItem_a0e06229c292158f39e1149d8f7728967}{Custom\+Plot\+Item\+::graph\+Call} gets data from ros thread and assigns them to global variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & 320 values coming from the UT graph node \\
+\hline
+{\em tup} & tuple of echoes \\
+\hline
+{\em x\+\_\+range1} & current range of X axis to fit all the 320 values \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCustomPlotItem_adeb274b4ceb53ffba0fdd99d813547de}\label{classCustomPlotItem_adeb274b4ceb53ffba0fdd99d813547de} 
+\index{CustomPlotItem@{CustomPlotItem}!paint@{paint}}
+\index{paint@{paint}!CustomPlotItem@{CustomPlotItem}}
+\doxysubsubsection{\texorpdfstring{paint()}{paint()}}
+{\footnotesize\ttfamily void Custom\+Plot\+Item\+::paint (\begin{DoxyParamCaption}\item[{QPainter \texorpdfstring{$\ast$}{*}}]{painter }\end{DoxyParamCaption})}
+
+
+
+\doxylink{classCustomPlotItem_adeb274b4ceb53ffba0fdd99d813547de}{Custom\+Plot\+Item\+::paint} draws pixmap of the plot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em painter} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCustomPlotItem_a7be6208ba532d9c72ff2325180e50571}\label{classCustomPlotItem_a7be6208ba532d9c72ff2325180e50571} 
+\index{CustomPlotItem@{CustomPlotItem}!printRandoms@{printRandoms}}
+\index{printRandoms@{printRandoms}!CustomPlotItem@{CustomPlotItem}}
+\doxysubsubsection{\texorpdfstring{printRandoms}{printRandoms}}
+{\footnotesize\ttfamily int Custom\+Plot\+Item\+::print\+Randoms (\begin{DoxyParamCaption}\item[{int}]{lower,  }\item[{int}]{upper }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classCustomPlotItem_a7be6208ba532d9c72ff2325180e50571}{Custom\+Plot\+Item\+::print\+Randoms} returns random values between two numbers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lower} & lower value \\
+\hline
+{\em upper} & higher value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+random values 
+\end{DoxyReturn}
+\Hypertarget{classCustomPlotItem_a58280605559f198ae836273fe189f4b7}\label{classCustomPlotItem_a58280605559f198ae836273fe189f4b7} 
+\index{CustomPlotItem@{CustomPlotItem}!saveImgFun@{saveImgFun}}
+\index{saveImgFun@{saveImgFun}!CustomPlotItem@{CustomPlotItem}}
+\doxysubsubsection{\texorpdfstring{saveImgFun()}{saveImgFun()}}
+{\footnotesize\ttfamily void Custom\+Plot\+Item\+::save\+Img\+Fun (\begin{DoxyParamCaption}\item[{int}]{m }\end{DoxyParamCaption})}
+
+
+
+\doxylink{classCustomPlotItem_a58280605559f198ae836273fe189f4b7}{Custom\+Plot\+Item\+::save\+Img\+Fun} saves the image in the Screenshot folder with current date and time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & unused \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCustomPlotItem_a5e51998b4f1ac215974d806fc2964f29}\label{classCustomPlotItem_a5e51998b4f1ac215974d806fc2964f29} 
+\index{CustomPlotItem@{CustomPlotItem}!saveImgk@{saveImgk}}
+\index{saveImgk@{saveImgk}!CustomPlotItem@{CustomPlotItem}}
+\doxysubsubsection{\texorpdfstring{saveImgk}{saveImgk}}
+{\footnotesize\ttfamily void Custom\+Plot\+Item\+::save\+Imgk (\begin{DoxyParamCaption}\item[{int}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classCustomPlotItem_a5e51998b4f1ac215974d806fc2964f29}{Custom\+Plot\+Item\+::save\+Imgk}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCustomPlotItem_aff344e9b4851038ade7fb1af337035cc}\label{classCustomPlotItem_aff344e9b4851038ade7fb1af337035cc} 
+\index{CustomPlotItem@{CustomPlotItem}!setupPlot@{setupPlot}}
+\index{setupPlot@{setupPlot}!CustomPlotItem@{CustomPlotItem}}
+\doxysubsubsection{\texorpdfstring{setupPlot()}{setupPlot()}}
+{\footnotesize\ttfamily void Custom\+Plot\+Item\+::setup\+Plot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classQCustomPlot}{QCustom\+Plot}} \texorpdfstring{$\ast$}{*}}]{custom\+Plot }\end{DoxyParamCaption})}
+
+
+
+\doxylink{classCustomPlotItem_aff344e9b4851038ade7fb1af337035cc}{Custom\+Plot\+Item\+::setup\+Plot} sets axes, color and other details of the plot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em custom\+Plot} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCustomPlotItem_a1020c576a78748e8952dc6058b87bcf2}\label{classCustomPlotItem_a1020c576a78748e8952dc6058b87bcf2} 
+\index{CustomPlotItem@{CustomPlotItem}!trigImg@{trigImg}}
+\index{trigImg@{trigImg}!CustomPlotItem@{CustomPlotItem}}
+\doxysubsubsection{\texorpdfstring{trigImg}{trigImg}}
+{\footnotesize\ttfamily void Custom\+Plot\+Item\+::trig\+Img (\begin{DoxyParamCaption}\item[{int}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\doxylink{classCustomPlotItem_a1020c576a78748e8952dc6058b87bcf2}{Custom\+Plot\+Item\+::trig\+Img} triggers the variable to get a snapshot of the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{customplotitem_8h}{customplotitem.\+h}}\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{customplotitem_8cpp}{customplotitem.\+cpp}}\end{DoxyCompactItemize}

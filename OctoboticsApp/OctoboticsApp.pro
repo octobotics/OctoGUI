@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Source/connectros.cpp \
         Source/publisher.cpp \
+    Source/recordcams.cpp \
         Source/rosthread.cpp \
         Source/hellocpp.cpp \
         Source/qcustomplot.cpp \
@@ -24,8 +25,10 @@ SOURCES += \
 
 HEADERS += \
        Source/hellocpp.h \
+       Source/include2.h \
        Source/qcustomplot.h \
-       Source/customplotitem.h
+       Source/customplotitem.h \
+       Source/recordcams.h
 
 
 

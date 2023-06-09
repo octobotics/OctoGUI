@@ -1,0 +1,448 @@
+\doxysection{Publisher Class Reference}
+\hypertarget{classPublisher}{}\label{classPublisher}\index{Publisher@{Publisher}}
+
+
+The \doxylink{classPublisher}{Publisher} class acts as a mediator between ros node and our qml page.  
+
+
+
+
+{\ttfamily \#include $<$publisher.\+h$>$}
+
+Inheritance diagram for Publisher\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPublisher}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPublisher_a558908a5b099f53271f8982ea1bc73a0}\label{classPublisher_a558908a5b099f53271f8982ea1bc73a0} 
+void {\bfseries init\+Ros\+Thread} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classPublisher_a558908a5b099f53271f8982ea1bc73a0}{Publisher\+::init\+Ros\+Thread}\+: initlalizes ros thread and makes connections between ros thread and UI. \end{DoxyCompactList}\item 
+\Hypertarget{classPublisher_adc4dcf30a69b11d5c7ac0065861142f6}\label{classPublisher_adc4dcf30a69b11d5c7ac0065861142f6} 
+void {\bfseries on\+\_\+push\+Button\+\_\+pressed} ()
+\item 
+\Hypertarget{classPublisher_afff42c8de727c85ca66132c11815b581}\label{classPublisher_afff42c8de727c85ca66132c11815b581} 
+void {\bfseries on\+\_\+push\+Button\+\_\+2\+\_\+pressed} ()
+\item 
+\Hypertarget{classPublisher_a53c17bbe0667e1ed3f8e22d8685afbcd}\label{classPublisher_a53c17bbe0667e1ed3f8e22d8685afbcd} 
+int {\bfseries get\+Com\+Status} ()
+\item 
+\Hypertarget{classPublisher_adf2893cbd36fc3eea33fdf49e070deff}\label{classPublisher_adf2893cbd36fc3eea33fdf49e070deff} 
+void {\bfseries set\+Com\+Status} (int value)
+\item 
+\Hypertarget{classPublisher_a6e515d52e1bcc6a0d6a33aa57576ced5}\label{classPublisher_a6e515d52e1bcc6a0d6a33aa57576ced5} 
+void {\bfseries comm\+Callback} (int value)
+\item 
+\Hypertarget{classPublisher_af2ce556fa53dba544800eb9dada1e7de}\label{classPublisher_af2ce556fa53dba544800eb9dada1e7de} 
+bool {\bfseries get\+Toggle\+Value} ()
+\item 
+\Hypertarget{classPublisher_ab20578f9833d3d9475a0c6b7b0a0fe4b}\label{classPublisher_ab20578f9833d3d9475a0c6b7b0a0fe4b} 
+void {\bfseries set\+Toggle\+Value} (bool flag)
+\item 
+\Hypertarget{classPublisher_ae024ca242aa063ee604acaa967a63d93}\label{classPublisher_ae024ca242aa063ee604acaa967a63d93} 
+void {\bfseries toggle\+Callback} (bool flag)
+\item 
+\Hypertarget{classPublisher_a718e5300fd8ced79428d9922597e2f34}\label{classPublisher_a718e5300fd8ced79428d9922597e2f34} 
+QString {\bfseries get\+Tool\+Toggle} ()
+\item 
+\Hypertarget{classPublisher_af009fd20a8397170edda23f795ae341e}\label{classPublisher_af009fd20a8397170edda23f795ae341e} 
+void {\bfseries set\+Tool\+Toggle} (QString value)
+\item 
+\Hypertarget{classPublisher_adcc9981839977ce5129d3efa8af5ac36}\label{classPublisher_adcc9981839977ce5129d3efa8af5ac36} 
+int {\bfseries get\+Arm\+Tool\+Status} ()
+\item 
+\Hypertarget{classPublisher_a679994ed12537cbcba8d1829108d25c1}\label{classPublisher_a679994ed12537cbcba8d1829108d25c1} 
+void {\bfseries set\+Arm\+Tool\+Status} (int value)
+\item 
+\Hypertarget{classPublisher_a80d04a40c8fff766e28c6eb22086f571}\label{classPublisher_a80d04a40c8fff766e28c6eb22086f571} 
+void {\bfseries arm\+Tool\+Callback} (int arg)
+\item 
+\Hypertarget{classPublisher_a884742868cea1f6a71259f793d9eeaff}\label{classPublisher_a884742868cea1f6a71259f793d9eeaff} 
+bool {\bfseries get\+Init\+Arm\+Value} ()
+\item 
+\Hypertarget{classPublisher_a27e876c0d693d4d1845db8da10afa387}\label{classPublisher_a27e876c0d693d4d1845db8da10afa387} 
+void {\bfseries set\+Init\+Arm\+Value} (bool k)
+\item 
+\Hypertarget{classPublisher_a51ff4b9d3428d74173eb5b2ed986d764}\label{classPublisher_a51ff4b9d3428d74173eb5b2ed986d764} 
+bool {\bfseries get\+Stop\+Arm\+Value} ()
+\item 
+\Hypertarget{classPublisher_a575a8ffb437c4abb82f3d35ac14728bb}\label{classPublisher_a575a8ffb437c4abb82f3d35ac14728bb} 
+void {\bfseries set\+Stop\+Arm\+Value} (bool k)
+\item 
+\Hypertarget{classPublisher_a181bbb7af512da4f56242e982d697025}\label{classPublisher_a181bbb7af512da4f56242e982d697025} 
+void {\bfseries set\+Rst\+Arm\+Value} (bool k)
+\item 
+\Hypertarget{classPublisher_a123d6b95bd0825e461d828f8ee1870e1}\label{classPublisher_a123d6b95bd0825e461d828f8ee1870e1} 
+bool {\bfseries get\+Rst\+Arm\+Value} ()
+\item 
+\Hypertarget{classPublisher_a906c542f878cc7ea5720fec6dae55e17}\label{classPublisher_a906c542f878cc7ea5720fec6dae55e17} 
+QVector$<$ int $>$ {\bfseries get\+Arm\+Status} ()
+\item 
+\Hypertarget{classPublisher_a72ca7ecf48bcda27a62b78a3938c4235}\label{classPublisher_a72ca7ecf48bcda27a62b78a3938c4235} 
+void {\bfseries set\+Arm\+Status} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_abe271eafcacc6337607cde14f0138e2e}\label{classPublisher_abe271eafcacc6337607cde14f0138e2e} 
+void {\bfseries call\+\_\+arminit} (int val)
+\item 
+\Hypertarget{classPublisher_ad48f0c02bf5ee1896ddb69408a620371}\label{classPublisher_ad48f0c02bf5ee1896ddb69408a620371} 
+void {\bfseries trig\+\_\+arm\+Status} ()
+\item 
+\Hypertarget{classPublisher_a83895cc43af546056acb3268ca7b915b}\label{classPublisher_a83895cc43af546056acb3268ca7b915b} 
+void {\bfseries rst\+\_\+arm} (int val)
+\item 
+\Hypertarget{classPublisher_a6f37198f5cc028f21b2aeaf6180da0b9}\label{classPublisher_a6f37198f5cc028f21b2aeaf6180da0b9} 
+void {\bfseries arm\+Callback} (QVector$<$ int $>$ status)
+\item 
+\Hypertarget{classPublisher_abc877c8f11f3d0a0d5d3ce16536b3d60}\label{classPublisher_abc877c8f11f3d0a0d5d3ce16536b3d60} 
+void {\bfseries init\+Arm} (bool k)
+\item 
+\Hypertarget{classPublisher_a3ddb2022a4068872fd7a477042308a99}\label{classPublisher_a3ddb2022a4068872fd7a477042308a99} 
+void {\bfseries stop\+Arm} (bool k)
+\item 
+\Hypertarget{classPublisher_a28d50b0482a4caebdbe74a82d18f5050}\label{classPublisher_a28d50b0482a4caebdbe74a82d18f5050} 
+void {\bfseries rst\+Arm} (bool k)
+\item 
+\Hypertarget{classPublisher_a02358abbb5443de064c6a3ed87014064}\label{classPublisher_a02358abbb5443de064c6a3ed87014064} 
+bool {\bfseries get\+Init\+Crawler\+Value} ()
+\item 
+\Hypertarget{classPublisher_a3bb0413e6e552a1fdd7bbc44f72cffac}\label{classPublisher_a3bb0413e6e552a1fdd7bbc44f72cffac} 
+void {\bfseries set\+Init\+Crawler\+Value} (bool k)
+\item 
+\Hypertarget{classPublisher_a330af347638089c19ff2962de858a28c}\label{classPublisher_a330af347638089c19ff2962de858a28c} 
+bool {\bfseries get\+Stop\+Crawler\+Value} ()
+\item 
+\Hypertarget{classPublisher_a80bbc407b260812f4c309fb27ebfb563}\label{classPublisher_a80bbc407b260812f4c309fb27ebfb563} 
+void {\bfseries set\+Stop\+Crawler\+Value} (bool k)
+\item 
+\Hypertarget{classPublisher_a07c50d2075a8f10962b100ec73770dc4}\label{classPublisher_a07c50d2075a8f10962b100ec73770dc4} 
+bool {\bfseries get\+Rst\+Crawler\+Value} ()
+\item 
+\Hypertarget{classPublisher_ab5369a7498d67f12d587b5c51ef84055}\label{classPublisher_ab5369a7498d67f12d587b5c51ef84055} 
+void {\bfseries set\+Rst\+Crawler\+Value} (bool k)
+\item 
+\Hypertarget{classPublisher_a13ab1b6503d5470206522017bef3dbbd}\label{classPublisher_a13ab1b6503d5470206522017bef3dbbd} 
+QVector$<$ int $>$ {\bfseries get\+Temp\+Value} ()
+\item 
+\Hypertarget{classPublisher_a6f4c1e4f05924ee531b4dbfb5172c712}\label{classPublisher_a6f4c1e4f05924ee531b4dbfb5172c712} 
+void {\bfseries set\+Temp\+Value} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_a237229d377aa4c4a4c9c061646c1fcb1}\label{classPublisher_a237229d377aa4c4a4c9c061646c1fcb1} 
+QVector$<$ int $>$ {\bfseries get\+Err\+Value} ()
+\item 
+\Hypertarget{classPublisher_a1fecc35ed561345aa73be94b9e8e7139}\label{classPublisher_a1fecc35ed561345aa73be94b9e8e7139} 
+void {\bfseries set\+Err\+Value} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_a9117667e5963d91b7ba0876e43fc27dc}\label{classPublisher_a9117667e5963d91b7ba0876e43fc27dc} 
+QVariant\+Map {\bfseries get\+Velocity\+Value} ()
+\item 
+\Hypertarget{classPublisher_a88e0a1592143a5c959f367f6a458a40a}\label{classPublisher_a88e0a1592143a5c959f367f6a458a40a} 
+void {\bfseries set\+Velocity\+Value} (QVariant\+Map value)
+\item 
+\Hypertarget{classPublisher_ae9cd8620cc96aa6f03343780295fe24d}\label{classPublisher_ae9cd8620cc96aa6f03343780295fe24d} 
+QVariant\+Map {\bfseries get\+Crawl\+Status} ()
+\item 
+\Hypertarget{classPublisher_ac15d2b99a6a7cc639f91b02b6ebb5692}\label{classPublisher_ac15d2b99a6a7cc639f91b02b6ebb5692} 
+void {\bfseries set\+Crawl\+Status} (QVariant\+Map value)
+\item 
+\Hypertarget{classPublisher_a638cd15741363c1c512aa78814bacb99}\label{classPublisher_a638cd15741363c1c512aa78814bacb99} 
+void {\bfseries rst\+\_\+crawler} (int val)
+\item 
+\Hypertarget{classPublisher_a62daea157890247ceb008941a8c84f42}\label{classPublisher_a62daea157890247ceb008941a8c84f42} 
+void {\bfseries call\+\_\+crawlerinit} (int val)
+\item 
+\Hypertarget{classPublisher_a1c6eae83cfb452afc8a98d68c7649e89}\label{classPublisher_a1c6eae83cfb452afc8a98d68c7649e89} 
+void {\bfseries error\+Callback} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_af09ed4f86a41d3e5edc71819459f7987}\label{classPublisher_af09ed4f86a41d3e5edc71819459f7987} 
+void {\bfseries temp\+Callback} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_a6bc79084c7522fb3288088306c8f90cc}\label{classPublisher_a6bc79084c7522fb3288088306c8f90cc} 
+void {\bfseries vel\+Callback} (float current\+\_\+vel\+\_\+linear, float current\+\_\+vel\+\_\+angular, float max\+\_\+linear, float max\+\_\+angular)
+\item 
+\Hypertarget{classPublisher_a4a4eddd92be6a9ca27ad3356752ea97b}\label{classPublisher_a4a4eddd92be6a9ca27ad3356752ea97b} 
+void {\bfseries crawler\+Callback} (bool front\+Left, bool front\+Right, bool backr\+Right, bool back\+Left)
+\item 
+\Hypertarget{classPublisher_a68f2e491f81977c9cd1162e2d31b81d6}\label{classPublisher_a68f2e491f81977c9cd1162e2d31b81d6} 
+void {\bfseries init\+Crawler} (bool k)
+\item 
+\Hypertarget{classPublisher_ad16f8bd06973322676bf88d8b27c89ef}\label{classPublisher_ad16f8bd06973322676bf88d8b27c89ef} 
+void {\bfseries stop\+Crawler} (bool k)
+\item 
+\Hypertarget{classPublisher_a423650dad4bd5ee5b30f0c754d859954}\label{classPublisher_a423650dad4bd5ee5b30f0c754d859954} 
+void {\bfseries rst\+Crawler} (bool k)
+\item 
+\Hypertarget{classPublisher_a49e323115596cf34df586ffa336d11e3}\label{classPublisher_a49e323115596cf34df586ffa336d11e3} 
+float {\bfseries get\+Battery\+Value} ()
+\item 
+\Hypertarget{classPublisher_a16e08280cd182c03ba1672d5e2a8e520}\label{classPublisher_a16e08280cd182c03ba1672d5e2a8e520} 
+void {\bfseries set\+Battery\+Value} (float value)
+\item 
+\Hypertarget{classPublisher_aa105509d1551427cb95cdb3d70907b7b}\label{classPublisher_aa105509d1551427cb95cdb3d70907b7b} 
+void {\bfseries batt\+Callback} (float value)
+\item 
+\Hypertarget{classPublisher_a2978dc0a829c1cfc4263c8c7edf4c363}\label{classPublisher_a2978dc0a829c1cfc4263c8c7edf4c363} 
+float {\bfseries get\+Current\+Value} ()
+\item 
+\Hypertarget{classPublisher_ad0dc20aa080e1130ae3bb32f3332cec1}\label{classPublisher_ad0dc20aa080e1130ae3bb32f3332cec1} 
+void {\bfseries set\+Current\+Value} (float value)
+\item 
+\Hypertarget{classPublisher_a4f9e628ae68ffdb0ed9e60505fe0bd52}\label{classPublisher_a4f9e628ae68ffdb0ed9e60505fe0bd52} 
+void {\bfseries current\+Callback} (float value)
+\item 
+\Hypertarget{classPublisher_a7e50627061e30b72868250848e028dd8}\label{classPublisher_a7e50627061e30b72868250848e028dd8} 
+QString {\bfseries get\+Ut\+Data} ()
+\item 
+\Hypertarget{classPublisher_abe974eab9a9048d7592c9350aca7fee3}\label{classPublisher_abe974eab9a9048d7592c9350aca7fee3} 
+void {\bfseries set\+Ut\+Data} (QString value)
+\item 
+\Hypertarget{classPublisher_a9697e11529586c42151ef05e25a86198}\label{classPublisher_a9697e11529586c42151ef05e25a86198} 
+QString {\bfseries get\+Ut\+Vel} ()
+\item 
+\Hypertarget{classPublisher_a22692851294ce3cd1f8bf77c7ace4ea3}\label{classPublisher_a22692851294ce3cd1f8bf77c7ace4ea3} 
+void {\bfseries set\+Ut\+Vel} (QString value)
+\item 
+\Hypertarget{classPublisher_a65b8c51fcd8a6fc1a644cc94f0bbd631}\label{classPublisher_a65b8c51fcd8a6fc1a644cc94f0bbd631} 
+QVariant\+Map {\bfseries get\+Utstatus} ()
+\item 
+\Hypertarget{classPublisher_aae48311c5e65bf7fa673c81d3f75621d}\label{classPublisher_aae48311c5e65bf7fa673c81d3f75621d} 
+void {\bfseries set\+Utstatus} (QVariant\+Map value)
+\item 
+\Hypertarget{classPublisher_a35643b64c388a317456f0b5744fdc3f8}\label{classPublisher_a35643b64c388a317456f0b5744fdc3f8} 
+QVariant\+Map {\bfseries get\+Thickness} ()
+\item 
+\Hypertarget{classPublisher_aefc7ef2534067fa01b7c2d619bb92c76}\label{classPublisher_aefc7ef2534067fa01b7c2d619bb92c76} 
+void {\bfseries set\+Thickness} (QVariant\+Map value)
+\item 
+\Hypertarget{classPublisher_aac7176815a8521a43b2adb28dcd3c901}\label{classPublisher_aac7176815a8521a43b2adb28dcd3c901} 
+void {\bfseries ut\+Callback} (int vel, int deepcoat, int echo)
+\item 
+\Hypertarget{classPublisher_ae020fec12dd1c9db12ce3a3bfe4513bd}\label{classPublisher_ae020fec12dd1c9db12ce3a3bfe4513bd} 
+void {\bfseries thickness\+Callback} (float thickness, float unit)
+\item 
+\Hypertarget{classPublisher_a9a18dec359ea0facea66b4d970545930}\label{classPublisher_a9a18dec359ea0facea66b4d970545930} 
+QVector$<$ QString $>$ {\bfseries get\+Uid} ()
+\item 
+\Hypertarget{classPublisher_a9e3ca1967abba3cb5b4a2c9544628129}\label{classPublisher_a9e3ca1967abba3cb5b4a2c9544628129} 
+void {\bfseries set\+Uid} (QVector$<$ QString $>$ value)
+\item 
+\Hypertarget{classPublisher_a6d14dd2fbbd38b062971cac97134bd99}\label{classPublisher_a6d14dd2fbbd38b062971cac97134bd99} 
+void {\bfseries uid\+Callback} (QVector$<$ QString $>$ value)
+\item 
+\Hypertarget{classPublisher_af8d8174237a347ba209ba5a45e77ab57}\label{classPublisher_af8d8174237a347ba209ba5a45e77ab57} 
+void {\bfseries call\+\_\+cap\+Img} (int val)
+\item 
+\Hypertarget{classPublisher_a9797c9efae95bfbeeddf5934ee0d581b}\label{classPublisher_a9797c9efae95bfbeeddf5934ee0d581b} 
+QVector$<$ int $>$ {\bfseries get\+Pressure\+Value} ()
+\item 
+\Hypertarget{classPublisher_a0e9bb85ceabf1e38e2da16fea0e8bbcc}\label{classPublisher_a0e9bb85ceabf1e38e2da16fea0e8bbcc} 
+void {\bfseries set\+Pressure\+Value} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_ad57fc4cde894b41286e35fedd0a7d2c4}\label{classPublisher_ad57fc4cde894b41286e35fedd0a7d2c4} 
+void {\bfseries pressure\+Callback} (QVector$<$ int $>$ value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPublisher_ad3ba7ff02e21ed02e57a7ebf1bdd6e0b}\label{classPublisher_ad3ba7ff02e21ed02e57a7ebf1bdd6e0b} 
+void {\bfseries message} (QString msg)
+\item 
+\Hypertarget{classPublisher_a249f20a468eccccf2721c2f895056999}\label{classPublisher_a249f20a468eccccf2721c2f895056999} 
+void {\bfseries message1} (QString msg)
+\item 
+\Hypertarget{classPublisher_ab6c03e7d29f69baa211d3e392c65b7c6}\label{classPublisher_ab6c03e7d29f69baa211d3e392c65b7c6} 
+void {\bfseries value} (int value)
+\item 
+\Hypertarget{classPublisher_a2add6c804b85ae554230afbabf51d31b}\label{classPublisher_a2add6c804b85ae554230afbabf51d31b} 
+void {\bfseries value2} (int value)
+\item 
+\Hypertarget{classPublisher_aa68becadc4f48c37aecff7b7f74018e3}\label{classPublisher_aa68becadc4f48c37aecff7b7f74018e3} 
+void {\bfseries com\+Status\+Changed} (int value)
+\item 
+\Hypertarget{classPublisher_ac2fb14d33d0e41982c87bf1071c8a8f9}\label{classPublisher_ac2fb14d33d0e41982c87bf1071c8a8f9} 
+void {\bfseries toggle\+Value\+Changed} (bool value)
+\item 
+\Hypertarget{classPublisher_a285b18f119f2cb015f576e1c4a521165}\label{classPublisher_a285b18f119f2cb015f576e1c4a521165} 
+void {\bfseries arm\+Tool\+Status\+Changed} (int value)
+\item 
+\Hypertarget{classPublisher_a263b7e5a9e2111c46cd9328d656ad883}\label{classPublisher_a263b7e5a9e2111c46cd9328d656ad883} 
+void {\bfseries tool\+Toggle\+Changed} (QString value)
+\item 
+\Hypertarget{classPublisher_aafeccbee42210b2f08a104cb27e207d9}\label{classPublisher_aafeccbee42210b2f08a104cb27e207d9} 
+void {\bfseries init\+Arm\+Value\+Changed} (bool value)
+\item 
+\Hypertarget{classPublisher_ac49ed7276204e277ff5b1ecdca6e0be1}\label{classPublisher_ac49ed7276204e277ff5b1ecdca6e0be1} 
+void {\bfseries rst\+Arm\+Value\+Changed} (bool value)
+\item 
+\Hypertarget{classPublisher_aba31fcfad95c75a5da18c53e0c55d63a}\label{classPublisher_aba31fcfad95c75a5da18c53e0c55d63a} 
+void {\bfseries stop\+Arm\+Value\+Changed} (bool value)
+\item 
+\Hypertarget{classPublisher_aee0d68a873322ae95a8a7c197ccaf376}\label{classPublisher_aee0d68a873322ae95a8a7c197ccaf376} 
+void {\bfseries rst\+Arm} (int value)
+\item 
+\Hypertarget{classPublisher_a9144bc5f92b0f097daef92eb7825ac65}\label{classPublisher_a9144bc5f92b0f097daef92eb7825ac65} 
+void {\bfseries trig\+Arm\+Status\+Value\+Changed} ()
+\item 
+\Hypertarget{classPublisher_a654469209cd722b8119eee7ae9837f21}\label{classPublisher_a654469209cd722b8119eee7ae9837f21} 
+void {\bfseries arm\+Status\+Changed} (QVector$<$ int $>$ status)
+\item 
+\Hypertarget{classPublisher_a2db098b234ff990bd95919d831578c36}\label{classPublisher_a2db098b234ff990bd95919d831578c36} 
+void {\bfseries init\+Crawler\+Value\+Changed} (bool value)
+\item 
+\Hypertarget{classPublisher_a461ba3a31195685a51c01c51bdd1e0cb}\label{classPublisher_a461ba3a31195685a51c01c51bdd1e0cb} 
+void {\bfseries stop\+Crawler\+Value\+Changed} (bool value)
+\item 
+\Hypertarget{classPublisher_aaa8c23336cc1af9ef60c434cb81f11cf}\label{classPublisher_aaa8c23336cc1af9ef60c434cb81f11cf} 
+void {\bfseries rst\+Crawler\+Value\+Changed} (bool value)
+\item 
+\Hypertarget{classPublisher_a416a7d778c79831e598cbca6c767a445}\label{classPublisher_a416a7d778c79831e598cbca6c767a445} 
+void {\bfseries err\+Value\+Changed} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_ad3610c124b7b6d7e26a133e83e26d6c8}\label{classPublisher_ad3610c124b7b6d7e26a133e83e26d6c8} 
+void {\bfseries temp\+Value\+Changed} (QVector$<$ int $>$ value)
+\item 
+\Hypertarget{classPublisher_ac19b4a789f33e798d8a41a37a2dbb227}\label{classPublisher_ac19b4a789f33e798d8a41a37a2dbb227} 
+void {\bfseries rst\+Crawler} (int value)
+\item 
+\Hypertarget{classPublisher_a278015e18aa6782bca5c03f2ac5c8b33}\label{classPublisher_a278015e18aa6782bca5c03f2ac5c8b33} 
+void {\bfseries crawl\+Status\+Changed} (QVariant\+Map status)
+\item 
+\Hypertarget{classPublisher_adaf919eeef23757c0f3574353fe2273f}\label{classPublisher_adaf919eeef23757c0f3574353fe2273f} 
+void {\bfseries velocity\+Value\+Changed} (QVariant\+Map value)
+\item 
+\Hypertarget{classPublisher_a2f749296eaef794558d2a7377ebfeddd}\label{classPublisher_a2f749296eaef794558d2a7377ebfeddd} 
+void {\bfseries battery\+Value\+Changed} (float value)
+\item 
+\Hypertarget{classPublisher_a9e8659af89b3d948bf9cd9e8036ee22c}\label{classPublisher_a9e8659af89b3d948bf9cd9e8036ee22c} 
+void {\bfseries current\+Value\+Changed} (float value)
+\item 
+\Hypertarget{classPublisher_af8255934d8ba8a6653b3d61a6405cef9}\label{classPublisher_af8255934d8ba8a6653b3d61a6405cef9} 
+void {\bfseries utstatus\+Changed} (QVariant\+Map status)
+\item 
+\Hypertarget{classPublisher_a135b291532a78662044a4fd683d86db4}\label{classPublisher_a135b291532a78662044a4fd683d86db4} 
+void {\bfseries thickness\+Changed} (QVariant\+Map status)
+\item 
+\Hypertarget{classPublisher_ad0913b841fa8e20fae6173647f4ca56b}\label{classPublisher_ad0913b841fa8e20fae6173647f4ca56b} 
+void {\bfseries ut\+Vel\+Changed} (QString value)
+\item 
+\Hypertarget{classPublisher_aa8526cf03afbe6bfd114063f44b793e0}\label{classPublisher_aa8526cf03afbe6bfd114063f44b793e0} 
+void {\bfseries ut\+Data\+Changed} (QString value)
+\item 
+\Hypertarget{classPublisher_a370c0e95c021eb10001553102f67f6f5}\label{classPublisher_a370c0e95c021eb10001553102f67f6f5} 
+void {\bfseries uid\+Changed} (QVector$<$ QString $>$ value)
+\item 
+\Hypertarget{classPublisher_ad25e3f78c93b5d392e096e0a30e33058}\label{classPublisher_ad25e3f78c93b5d392e096e0a30e33058} 
+void {\bfseries cap\+Img} (int value)
+\item 
+\Hypertarget{classPublisher_a1003a166c76ac1a97e441a37cf1de58b}\label{classPublisher_a1003a166c76ac1a97e441a37cf1de58b} 
+void {\bfseries pressure\+Value\+Changed} (QVector$<$ int $>$ value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPublisher_ab859978f25809e12622e2efcec750ad8}{Publisher}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \doxylink{classPublisher_ab859978f25809e12622e2efcec750ad8}{Publisher\+::\+Publisher}\+: constructor\+: initalizes variables. \end{DoxyCompactList}\item 
+\Hypertarget{classPublisher_ac69af7131a48792510b533573c2373f7}\label{classPublisher_ac69af7131a48792510b533573c2373f7} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Publisher} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classPublisher_ac69af7131a48792510b533573c2373f7}{Publisher\+::\texorpdfstring{$\sim$}{\string~}\+Publisher} destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPublisher_acbcb376550940a9eb708b2518dd63e2c}\label{classPublisher_acbcb376550940a9eb708b2518dd63e2c} 
+int {\bfseries com\+Status}
+\item 
+\Hypertarget{classPublisher_a4225f8ca25ad4508a315f51532a9af92}\label{classPublisher_a4225f8ca25ad4508a315f51532a9af92} 
+bool {\bfseries toggle\+Value}
+\item 
+\Hypertarget{classPublisher_ad1745df92fe39d495e532c52d727fea1}\label{classPublisher_ad1745df92fe39d495e532c52d727fea1} 
+int {\bfseries arm\+Tool\+Status}
+\item 
+\Hypertarget{classPublisher_afa473d902bd330b469ae8b6a844253d7}\label{classPublisher_afa473d902bd330b469ae8b6a844253d7} 
+QString {\bfseries tool\+Toggle}
+\item 
+\Hypertarget{classPublisher_ab8f826a9889b2302d4da60523965565c}\label{classPublisher_ab8f826a9889b2302d4da60523965565c} 
+bool {\bfseries init\+Arm\+Value}
+\item 
+\Hypertarget{classPublisher_a697528fdd0bba6e67eca9d888c33275b}\label{classPublisher_a697528fdd0bba6e67eca9d888c33275b} 
+bool {\bfseries stop\+Arm\+Value}
+\item 
+\Hypertarget{classPublisher_a68c4c740800bbfef0a41e331320db844}\label{classPublisher_a68c4c740800bbfef0a41e331320db844} 
+bool {\bfseries rst\+Arm\+Value}
+\item 
+\Hypertarget{classPublisher_a409536d2ff09f85a3082151ff2bc8e7d}\label{classPublisher_a409536d2ff09f85a3082151ff2bc8e7d} 
+QVector$<$ int $>$ {\bfseries arm\+Status}
+\item 
+\Hypertarget{classPublisher_ac26510f71ead6a826e9d256f0e3d7a13}\label{classPublisher_ac26510f71ead6a826e9d256f0e3d7a13} 
+bool {\bfseries init\+Crawler\+Value}
+\item 
+\Hypertarget{classPublisher_ad204ec09724b5329d38b82114f544941}\label{classPublisher_ad204ec09724b5329d38b82114f544941} 
+bool {\bfseries stop\+Crawler\+Value}
+\item 
+\Hypertarget{classPublisher_a271c0d020c6979a04fc546074dd33bde}\label{classPublisher_a271c0d020c6979a04fc546074dd33bde} 
+bool {\bfseries rst\+Crawler\+Value}
+\item 
+\Hypertarget{classPublisher_a47b858ae04c3668d7546947655825b41}\label{classPublisher_a47b858ae04c3668d7546947655825b41} 
+QVector$<$ int $>$ {\bfseries err\+Value}
+\item 
+\Hypertarget{classPublisher_a240656f5ff1863ef257d8d077c7743a6}\label{classPublisher_a240656f5ff1863ef257d8d077c7743a6} 
+QVector$<$ int $>$ {\bfseries temp\+Value}
+\item 
+\Hypertarget{classPublisher_a28d1758d25347b97db5c156ee39b7e73}\label{classPublisher_a28d1758d25347b97db5c156ee39b7e73} 
+QVariant\+Map {\bfseries crawl\+Status}
+\item 
+\Hypertarget{classPublisher_a3a1fec8e7ed8808f0e4f21824094f4d9}\label{classPublisher_a3a1fec8e7ed8808f0e4f21824094f4d9} 
+QVariant\+Map {\bfseries velocity\+Value}
+\item 
+\Hypertarget{classPublisher_adf59f704d539ccb759dc3a709b57df88}\label{classPublisher_adf59f704d539ccb759dc3a709b57df88} 
+float {\bfseries battery\+Value}
+\item 
+\Hypertarget{classPublisher_af4396ac55c3ae72b76da2573973fa1eb}\label{classPublisher_af4396ac55c3ae72b76da2573973fa1eb} 
+float {\bfseries current\+Value}
+\item 
+\Hypertarget{classPublisher_a8fc12822d6868590302564f683cdcca0}\label{classPublisher_a8fc12822d6868590302564f683cdcca0} 
+QString {\bfseries ut\+Data}
+\item 
+\Hypertarget{classPublisher_ad0c5864bdef3a07d9634b2b34fcefe36}\label{classPublisher_ad0c5864bdef3a07d9634b2b34fcefe36} 
+QString {\bfseries ut\+Vel}
+\item 
+\Hypertarget{classPublisher_a86077cacb7e5d613bf1a67102f60cbf0}\label{classPublisher_a86077cacb7e5d613bf1a67102f60cbf0} 
+QVariant\+Map {\bfseries utstatus}
+\item 
+\Hypertarget{classPublisher_a7f71845c603457f146e24174b7016615}\label{classPublisher_a7f71845c603457f146e24174b7016615} 
+QVariant\+Map {\bfseries thickness}
+\item 
+\Hypertarget{classPublisher_ad2d93d202e3b1be4c672942df85d9676}\label{classPublisher_ad2d93d202e3b1be4c672942df85d9676} 
+QVector$<$ QString $>$ {\bfseries uid}
+\item 
+\Hypertarget{classPublisher_ad6f2121bfeb60e67d0a7fcd3a3b39e4a}\label{classPublisher_ad6f2121bfeb60e67d0a7fcd3a3b39e4a} 
+QVector$<$ int $>$ {\bfseries pressure\+Value}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{classPublisher}{Publisher} class acts as a mediator between ros node and our qml page. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPublisher_ab859978f25809e12622e2efcec750ad8}\label{classPublisher_ab859978f25809e12622e2efcec750ad8} 
+\index{Publisher@{Publisher}!Publisher@{Publisher}}
+\index{Publisher@{Publisher}!Publisher@{Publisher}}
+\doxysubsubsection{\texorpdfstring{Publisher()}{Publisher()}}
+{\footnotesize\ttfamily Publisher\+::\+Publisher (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\doxylink{classPublisher_ab859978f25809e12622e2efcec750ad8}{Publisher\+::\+Publisher}\+: constructor\+: initalizes variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{publisher_8h}{publisher.\+h}}\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{publisher_8cpp}{publisher.\+cpp}}\end{DoxyCompactItemize}

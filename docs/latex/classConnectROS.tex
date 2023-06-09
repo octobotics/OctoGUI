@@ -1,0 +1,93 @@
+\doxysection{Connect\+ROS Class Reference}
+\hypertarget{classConnectROS}{}\label{classConnectROS}\index{ConnectROS@{ConnectROS}}
+
+
+The \doxylink{classConnectROS}{Connect\+ROS} class takes hostname and URI from UI and connects to the ros master.  
+
+
+
+
+{\ttfamily \#include $<$connectros.\+h$>$}
+
+Inheritance diagram for Connect\+ROS\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classConnectROS}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classConnectROS_aaa7ba69c72e8d333f3c1d181e20a58f4}\label{classConnectROS_aaa7ba69c72e8d333f3c1d181e20a58f4} 
+QString {\bfseries get\+Master\+URI} ()
+\item 
+\Hypertarget{classConnectROS_a6011f8bb1eeadf9f6e3c7fb3f0ac52d1}\label{classConnectROS_a6011f8bb1eeadf9f6e3c7fb3f0ac52d1} 
+void {\bfseries set\+Master\+URI} (const QString \&arg)
+\item 
+\Hypertarget{classConnectROS_a6245bc415f55068af355c8a9cbcc1c20}\label{classConnectROS_a6245bc415f55068af355c8a9cbcc1c20} 
+QString {\bfseries get\+Host} ()
+\item 
+\Hypertarget{classConnectROS_add32b86bfd755faeee6ca25b1bff7f19}\label{classConnectROS_add32b86bfd755faeee6ca25b1bff7f19} 
+void {\bfseries set\+Host} (const QString \&arg)
+\item 
+\Hypertarget{classConnectROS_af94f95518140a1b74fa09f0085f5eee0}\label{classConnectROS_af94f95518140a1b74fa09f0085f5eee0} 
+void {\bfseries connect\+Master\+URI} (QString master, QString hostname)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classConnectROS_a24916ed64d749f491906d310b88c1c0a}\label{classConnectROS_a24916ed64d749f491906d310b88c1c0a} 
+void {\bfseries master\+URIChanged} (const QString \&arg)
+\item 
+\Hypertarget{classConnectROS_a50683c685eb61dbd38667bde7a69362c}\label{classConnectROS_a50683c685eb61dbd38667bde7a69362c} 
+void {\bfseries host\+Changed} (const QString \&arg)
+\item 
+\Hypertarget{classConnectROS_ac287bd0f9fa886e222391bc951ac4f0d}\label{classConnectROS_ac287bd0f9fa886e222391bc951ac4f0d} 
+void {\bfseries retry} ()
+\item 
+\Hypertarget{classConnectROS_a85efcda661932403dee552ac3d0c3d4a}\label{classConnectROS_a85efcda661932403dee552ac3d0c3d4a} 
+void {\bfseries connect\+Success} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classConnectROS_a8a2760862007de649c7affdfe6986421}{Connect\+ROS}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \doxylink{classConnectROS_a8a2760862007de649c7affdfe6986421}{Connect\+ROS\+::\+Connect\+ROS}\+: constructor\+: set hostname and URI according the machine and robot that is being used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classConnectROS_a8d4a8c55e03ab4fb9778a1d291fa6578}\label{classConnectROS_a8d4a8c55e03ab4fb9778a1d291fa6578} 
+QString {\bfseries master\+URI}
+\item 
+\Hypertarget{classConnectROS_a8f878ddc2b34373c253314c0660b9e73}\label{classConnectROS_a8f878ddc2b34373c253314c0660b9e73} 
+QString {\bfseries host}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{classConnectROS}{Connect\+ROS} class takes hostname and URI from UI and connects to the ros master. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classConnectROS_a8a2760862007de649c7affdfe6986421}\label{classConnectROS_a8a2760862007de649c7affdfe6986421} 
+\index{ConnectROS@{ConnectROS}!ConnectROS@{ConnectROS}}
+\index{ConnectROS@{ConnectROS}!ConnectROS@{ConnectROS}}
+\doxysubsubsection{\texorpdfstring{ConnectROS()}{ConnectROS()}}
+{\footnotesize\ttfamily Connect\+ROS\+::\+Connect\+ROS (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\doxylink{classConnectROS_a8a2760862007de649c7affdfe6986421}{Connect\+ROS\+::\+Connect\+ROS}\+: constructor\+: set hostname and URI according the machine and robot that is being used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m\+\_\+master\+URI} & ROS Master URI of the robot \\
+\hline
+{\em m\+\_\+host} & ROS Hostname of the ground station machine being used \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{connectros_8h}{connectros.\+h}}\item 
+Octobotics\+App/\+Source/\mbox{\hyperlink{connectros_8cpp}{connectros.\+cpp}}\end{DoxyCompactItemize}

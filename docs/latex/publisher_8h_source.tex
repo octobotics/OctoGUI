@@ -1,0 +1,273 @@
+\doxysection{publisher.\+h}
+\hypertarget{publisher_8h_source}{}\label{publisher_8h_source}\index{OctoboticsApp/Source/publisher.h@{OctoboticsApp/Source/publisher.h}}
+\mbox{\hyperlink{publisher_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifndef\ PUBLISHER\_H}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ PUBLISHER\_H}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{rosthread_8h}{rosthread.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QDebug>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QThread>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPublisher}{Publisher}}\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ QProperty\ is\ like\ a\ C++\ lambda\ and\ can\ be\ used\ to\ express\ relationships\ between\ different\ properties}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ communication}}
+\DoxyCodeLine{00034\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{int}\ comStatus\ READ\ getComStatus\ WRITE\ setComStatus\ NOTIFY\ comStatusChanged)}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ crawler\ arm\ toggle\ status}}
+\DoxyCodeLine{00037\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{bool}\ toggleValue\ READ\ getToggleValue\ WRITE\ setToggleValue\ NOTIFY\ toggleValueChanged)}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ arm\ tool}}
+\DoxyCodeLine{00040\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{int}\ armToolStatus\ READ\ getArmToolStatus\ WRITE\ setArmToolStatus\ NOTIFY\ armToolStatusChanged)}
+\DoxyCodeLine{00041\ \ \ \ \ Q\_PROPERTY(QString\ toolToggle\ READ\ getToolToggle\ WRITE\ setToolToggle\ NOTIFY\ toolToggleChanged)}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ arm}}
+\DoxyCodeLine{00044\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{bool}\ initArmValue\ READ\ getInitArmValue\ WRITE\ setInitArmValue\ NOTIFY\ initArmValueChanged)}
+\DoxyCodeLine{00045\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{bool}\ stopArmValue\ READ\ getStopArmValue\ WRITE\ setStopArmValue\ NOTIFY\ stopArmValueChanged)}
+\DoxyCodeLine{00046\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{bool}\ rstArmValue\ READ\ getRstArmValue\ WRITE\ setRstArmValue\ NOTIFY\ rstArmValueChanged)}
+\DoxyCodeLine{00047\ \ \ \ \ Q\_PROPERTY(QVector<int>\ armStatus\ READ\ getArmStatus\ WRITE\ setArmStatus\ NOTIFY\ armStatusChanged)}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{//\ crawler}}
+\DoxyCodeLine{00050\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{bool}\ initCrawlerValue\ READ\ getInitCrawlerValue\ WRITE\ setInitCrawlerValue\ NOTIFY\ initCrawlerValueChanged)}
+\DoxyCodeLine{00051\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{bool}\ stopCrawlerValue\ READ\ getStopCrawlerValue\ WRITE\ setStopCrawlerValue\ NOTIFY\ stopCrawlerValueChanged)}
+\DoxyCodeLine{00052\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{bool}\ rstCrawlerValue\ READ\ getRstCrawlerValue\ WRITE\ setRstCrawlerValue\ NOTIFY\ rstCrawlerValueChanged)}
+\DoxyCodeLine{00053\ \ \ \ \ Q\_PROPERTY(QVector<int>\ errValue\ READ\ getErrValue\ WRITE\ setErrValue\ NOTIFY\ errValueChanged)}
+\DoxyCodeLine{00054\ \ \ \ \ Q\_PROPERTY(QVector<int>\ tempValue\ READ\ getTempValue\ WRITE\ setTempValue\ NOTIFY\ tempValueChanged)}
+\DoxyCodeLine{00055\ \ \ \ \ Q\_PROPERTY(QVariantMap\ crawlStatus\ READ\ getCrawlStatus\ WRITE\ setCrawlStatus\ NOTIFY\ crawlStatusChanged)}
+\DoxyCodeLine{00056\ \ \ \ \ Q\_PROPERTY(QVariantMap\ velocityValue\ READ\ getVelocityValue\ WRITE\ setVelocityValue\ NOTIFY\ velocityValueChanged)}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ battery}}
+\DoxyCodeLine{00059\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{float}\ batteryValue\ READ\ getBatteryValue\ WRITE\ setBatteryValue\ NOTIFY\ batteryValueChanged)}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ current}}
+\DoxyCodeLine{00062\ \ \ \ \ Q\_PROPERTY(\textcolor{keywordtype}{float}\ currentValue\ READ\ getCurrentValue\ WRITE\ setCurrentValue\ NOTIFY\ currentValueChanged)}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ ut\ gauge}}
+\DoxyCodeLine{00065\ \ \ \ \ Q\_PROPERTY(QString\ utData\ READ\ getUtData\ WRITE\ setUtData\ NOTIFY\ utDataChanged)}
+\DoxyCodeLine{00066\ \ \ \ \ Q\_PROPERTY(QString\ utVel\ READ\ getUtVel\ WRITE\ setUtVel\ NOTIFY\ utVelChanged)}
+\DoxyCodeLine{00067\ \ \ \ \ Q\_PROPERTY(QVariantMap\ utstatus\ READ\ getUtstatus\ WRITE\ setUtstatus\ NOTIFY\ utstatusChanged)}
+\DoxyCodeLine{00068\ \ \ \ \ Q\_PROPERTY(QVariantMap\ thickness\ READ\ getThickness\ WRITE\ setThickness\ NOTIFY\ thicknessChanged)}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//\ unique\ id}}
+\DoxyCodeLine{00071\ \ \ \ \ Q\_PROPERTY(QVector<QString>\ uid\ READ\ getUid\ WRITE\ setUid\ NOTIFY\ uidChanged)}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ pressure\ sensor\ values}}
+\DoxyCodeLine{00074\ \ \ \ \ Q\_PROPERTY(QVector<int>\ pressureValue\ READ\ getPressureValue\ WRITE\ setPressureValue\ NOTIFY\ pressureValueChanged)}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classPublisher}{Publisher}}(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classPublisher_ac69af7131a48792510b533573c2373f7}{\string~Publisher}}();}
+\DoxyCodeLine{00080\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPublisher_a558908a5b099f53271f8982ea1bc73a0}{initRosThread}}();}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButton\_pressed();}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButton\_2\_pressed();}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{//communication}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{int}\ getComStatus();}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ setComStatus(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ commCallback(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//toggle\ robot}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{bool}\ getToggleValue();}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ setToggleValue(\textcolor{keywordtype}{bool}\ flag);}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ toggleCallback(\textcolor{keywordtype}{bool}\ flag);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//arm\ tool}}
+\DoxyCodeLine{00097\ \ \ \ \ QString\ getToolToggle();}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ setToolToggle(QString\ value);}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{int}\ getArmToolStatus();}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ setArmToolStatus(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ armToolCallback(\textcolor{keywordtype}{int}\ arg);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//arm}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ getInitArmValue();}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ setInitArmValue(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ getStopArmValue();}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ setStopArmValue(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ setRstArmValue(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ getRstArmValue();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ QVector<int>\ getArmStatus();}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ setArmStatus(QVector<int>\ value);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ call\_arminit(\textcolor{keywordtype}{int}\ val);}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ trig\_armStatus();}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ rst\_arm(\textcolor{keywordtype}{int}\ val);}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ armCallback(QVector<int>\ status);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ initArm(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ stopArm(\textcolor{keywordtype}{bool}\ k\ );}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ rstArm(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//crawler}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{bool}\ getInitCrawlerValue();}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ setInitCrawlerValue(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{bool}\ getStopCrawlerValue();}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ setStopCrawlerValue(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{bool}\ getRstCrawlerValue();}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ setRstCrawlerValue(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ QVector<int>\ getTempValue();}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ setTempValue(QVector<int>\ value);}
+\DoxyCodeLine{00136\ \ \ \ \ QVector<int>\ getErrValue();}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{void}\ setErrValue(QVector<int>\ value);}
+\DoxyCodeLine{00138\ \ \ \ \ QVariantMap\ getVelocityValue();}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ setVelocityValue(QVariantMap\ value);}
+\DoxyCodeLine{00140\ \ \ \ \ QVariantMap\ getCrawlStatus();}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ setCrawlStatus(QVariantMap\ value);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ rst\_crawler(\textcolor{keywordtype}{int}\ val);}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ call\_crawlerinit(\textcolor{keywordtype}{int}\ val);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ errorCallback(QVector<int>\ value);}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ tempCallback(QVector<int>\ value);}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{void}\ velCallback(\textcolor{keywordtype}{float}\ current\_vel\_linear,\ \textcolor{keywordtype}{float}\ current\_vel\_angular,\ \textcolor{keywordtype}{float}\ max\_linear,\ \textcolor{keywordtype}{float}\ max\_angular);}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ crawlerCallback(\textcolor{keywordtype}{bool}\ frontLeft,\ \textcolor{keywordtype}{bool}\ frontRight,\ \textcolor{keywordtype}{bool}\ backrRight,\ \textcolor{keywordtype}{bool}\ backLeft);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{void}\ initCrawler(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ stopCrawler(\textcolor{keywordtype}{bool}\ k\ );}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ rstCrawler(\textcolor{keywordtype}{bool}\ k);}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{comment}{//battery}}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{float}\ getBatteryValue();}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ setBatteryValue(\textcolor{keywordtype}{float}\ value);}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ battCallback(\textcolor{keywordtype}{float}\ value);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//current}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{float}\ getCurrentValue();}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentValue(\textcolor{keywordtype}{float}\ value);}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{void}\ currentCallback(\textcolor{keywordtype}{float}\ value);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{comment}{//ut\ gauge}}
+\DoxyCodeLine{00167\ \ \ \ \ QString\ getUtData();}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{void}\ setUtData(QString\ value);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ QString\ getUtVel();}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{void}\ setUtVel(QString\ value);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ QVariantMap\ getUtstatus();}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{void}\ setUtstatus(QVariantMap\ value);}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ QVariantMap\ getThickness();}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{void}\ setThickness(QVariantMap\ value);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordtype}{void}\ utCallback(\textcolor{keywordtype}{int}\ vel,\ \textcolor{keywordtype}{int}\ deepcoat,\ \textcolor{keywordtype}{int}\ echo);}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{void}\ thicknessCallback(\textcolor{keywordtype}{float}\ thickness,\ \textcolor{keywordtype}{float}\ unit);}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{comment}{//unique\ id}}
+\DoxyCodeLine{00183\ \ \ \ \ QVector<QString>\ getUid();}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{void}\ setUid(QVector<QString>\ value);}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordtype}{void}\ uidCallback(QVector<QString>\ value);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//image}}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ call\_capImg(\textcolor{keywordtype}{int}\ val);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{comment}{//pressure}}
+\DoxyCodeLine{00191\ \ \ \ \ QVector<int>\ getPressureValue();}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{void}\ setPressureValue(QVector<int>\ value);}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ pressureCallback(QVector<int>\ value);}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ signals:}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{void}\ message(QString\ msg);}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordtype}{void}\ message1(QString\ msg);}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{void}\ value(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{void}\ value2(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{comment}{//communcation}}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{void}\ comStatusChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{comment}{//toggle\ robot}}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{void}\ toggleValueChanged(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{comment}{//arm\ tool}}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{void}\ armToolStatusChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordtype}{void}\ toolToggleChanged(QString\ value);}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{comment}{//arm}}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{void}\ initArmValueChanged(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{void}\ rstArmValueChanged(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{void}\ stopArmValueChanged(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{void}\ rstArm(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{void}\ trigArmStatusValueChanged();}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordtype}{void}\ armStatusChanged(QVector<int>\ status);}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{//crawler}}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{void}\ initCrawlerValueChanged(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordtype}{void}\ stopCrawlerValueChanged(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{void}\ rstCrawlerValueChanged(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{void}\ errValueChanged(QVector<int>\ value);}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordtype}{void}\ tempValueChanged(QVector<int>\ value);}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordtype}{void}\ rstCrawler(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordtype}{void}\ crawlStatusChanged(QVariantMap\ status);}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordtype}{void}\ velocityValueChanged(QVariantMap\ value);}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{comment}{//battery}}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordtype}{void}\ batteryValueChanged(\textcolor{keywordtype}{float}\ value);}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{comment}{//current}}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{void}\ currentValueChanged(\textcolor{keywordtype}{float}\ value);}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{//ut\ gauge}}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{void}\ utstatusChanged(QVariantMap\ status);}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordtype}{void}\ thicknessChanged(QVariantMap\ status);}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{void}\ utVelChanged(QString\ value);}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{void}\ utDataChanged(QString\ value);}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{comment}{//unique\ id}}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{void}\ uidChanged(QVector<QString>\ value);}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{comment}{//image\ capture}}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordtype}{void}\ capImg(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{comment}{//pressure}}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordtype}{void}\ pressureValueChanged(QVector<int>\ value);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00253\ \ \ \ \ \mbox{\hyperlink{classRosThread}{RosThread}}\ *rost;}
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classQCustomPlot}{QCustomPlot}}*\ \ m\_CustomPlot;}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_toggleValue;}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_initArmValue;}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_rstArmValue;}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_stopArmValue;}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_initCrawlerValue;}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_stopCrawlerValue;}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_rstCrawlerValue;}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_comStatus;}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_armToolStatus;}
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{float}\ m\_batteryValue;}
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordtype}{float}\ m\_currentValue;}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ QString\ m\_utVel;}
+\DoxyCodeLine{00268\ \ \ \ \ QString\ m\_toolToggle;}
+\DoxyCodeLine{00269\ \ \ \ \ QString\ m\_utData;}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ QVariantMap\ m\_crawlStatus;}
+\DoxyCodeLine{00272\ \ \ \ \ QVariantMap\ m\_velocityValue;}
+\DoxyCodeLine{00273\ \ \ \ \ QVariantMap\ m\_utStatus;}
+\DoxyCodeLine{00274\ \ \ \ \ QVariantMap\ m\_thickness;}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ QVector<int>\ m\_armStatus;}
+\DoxyCodeLine{00277\ \ \ \ \ QVector<int>\ m\_errValue;}
+\DoxyCodeLine{00278\ \ \ \ \ QVector<int>\ m\_tempValue;}
+\DoxyCodeLine{00279\ \ \ \ \ QVector<QString>\ m\_uidValue;}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ QVector<int>\ m\_pressureValue;}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \};}
+\DoxyCodeLine{00284\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PUBLISHER\_H}}
+
+\end{DoxyCode}

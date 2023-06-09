@@ -1,3 +1,18 @@
+/*!
+ *  \file      home.qml
+ *  \brief     This is the code for main page of UI
+ *  \details   This is the code for main page of UI. You should be doing most of the new changes here.
+ *  \author    Charith Reddy, Venkat
+ *  \copyright Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved.
+                Do not remove this copyright notice.
+                Do not use, reuse, copy, merge, publish, sub-license, sell, distribute or modify this code - except without explicit,
+                written permission from Octobotics Tech Pvt. Ltd.
+                Contact connect@octobotics.tech for full license information.
+
+ *  \todo      1. limit the popups if we get any error. Now it pops up after every value change in error
+ *  \warning   Improper use can crash the application
+ */
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
@@ -11,6 +26,7 @@ import QtLocation 5.12
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.5
 import HelloCpp 1.0
+import RecordCams 1.0
 import "../../UI/Components"
 import CustomPlot 1.0
 import QtQuick.Dialogs 1.1
@@ -21,39 +37,19 @@ Rectangle{
     property int iconSize: 32
     property int battCnt:0
     property bool armst: false
+    property variant atmAlarm: [0,0,0]
     property int full_cam:0
     property color  fg: "#27322f"
     property color  bg: "black"
     property variant arrange_cam: [0,1,2,3]
-    //    property string cam1: "rtsp://10.223.240.0:8554/cam3"
-    //    property string cam2: "rtsp://10.223.240.0:8554/cam1"
-    //    property string cam3: "rtsp://10.223.240.0:8554/cam2"
-    //    property string cam1: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4"
-    //    property string cam2: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"
-    //    property string cam3: "http://195.196.36.242/mjpg/video.mjpg"
+    property int minPressure: 17000 //minimum pressure value: multiply the actual float value with 10
 
-
-    property real battStatus: publisher.batteryValue
-    onBattStatusChanged: {
-        console.log("in batttt",battStatus)
-
-        if (battStatus<=45 && battStatus>44 && battCnt<=3){
-            battDialog.text = "\n\n         Battery LOW         \n\n"
-            battDialog.icon = StandardIcon.Critical
-            console.log("lowwwwwwww",battStatus)
-            battDialog.open()
-            battCnt++
-        }
-        else if((battStatus<= 44))
-        {
-            battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
-            battDialog.icon = StandardIcon.Critical
-            console.log("critical battery",battStatus)
-            battDialog.open()
-        }
-
-
+    SoundEffect {
+        id: alarmTone
+        source: "qrc:/UI/Assets/alarm.wav"
     }
+
+
     property var armErr: ({   0 : "NO Error [Radhe Radhe]",
                               6 : "Storage data error",
                               13 : "Multi-turn calibrate error",
@@ -94,6 +90,9 @@ Rectangle{
                                3 : "BACK CAM"
 
                            })
+    /*!
+     * \brief  armStatus: gets arm error and temperature from ros and gives a popup if any issue
+     */
     property variant armStatus: publisher.armStatus
     onArmStatusChanged: {
         if(!armst)
@@ -108,6 +107,9 @@ Rectangle{
             armDialog.open()}
     }
 
+    /*!
+     * \brief  crawlStatus: gets crawler status  from ros - not using now
+     */
     property variant crawlStatus: publisher.crawlStatus
     onCrawlStatusChanged: {
         //        //console.log("crawlStatus")
@@ -117,6 +119,11 @@ Rectangle{
         //        //console.log("backLeft",crawlStatus.backLeft)
     }
 
+
+
+    /*!
+     * \brief  velocityValue: gets crawler velocity  from ros - not using now
+     */
     property variant velocityValue: publisher.velocityValue
     onVelocityValueChanged:  {
         //console.log("velocity status")
@@ -125,6 +132,10 @@ Rectangle{
         //console.log("max_linear",velocityValue.max_linear)
         //console.log("max_angular",velocityValue.max_angular)
     }
+
+    /*!
+     * \brief  armTool: gets arm tool status from ros and updates the checker in tool tab
+     */
     property int armTool: publisher.armToolStatus
     onArmToolChanged: {
         if(armTool == 1){
@@ -153,6 +164,9 @@ Rectangle{
             flightStatus.source = "qrc:/UI/Assets/dashboard/tick.png"
         }
     }
+    /*!
+     * \brief  crawlerErr: gets crawler motors error value from ros and gives a popup on error
+     */
     property variant crawlerErr: publisher.errValue
     onCrawlerErrChanged: {
         //        //console.log("err status",crawlerErr[1])
@@ -160,52 +174,142 @@ Rectangle{
             crawlerDialog.text =  cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n"
             //            crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : Temperature greater than "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : Temperature greater than "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : Temperature greater than "+crawlerTemp[3]+" deg"+"\n"
 
-            crawlerDialog.title = "Crawler Error"
-            crawlerDialog.icon = StandardIcon.Critical
-            crawlerDialog.open()
+            //            crawlerDialog.title = "Crawler Error"
+            //            crawlerDialog.icon = StandardIcon.Critical
+            //            crawlerDialog.open()
         }
-        //        //console.log("val status",16===crawlerErr[1])
-        //        //console.log("val status",val[28])
 
     }
 
-    property real botPressure: publisher.pressureValue
+    property variant botPressure: publisher.pressureValue
     onBotPressureChanged: {
-        pressureGauge.value = botPressure
-        console.log(botPressure)
-        if (botPressure<=1.7){
-            batt.text = "          LOW PRESSURE            "
-           pressureGauge.color = "red"
-            alertTimer.start();
+        atm1.text =  "" + botPressure[0]/10000.0
+        atm2.text =  "" +botPressure[1]/10000.0
+        atm3.text =  "" +botPressure[2]/10000.0
 
-            generalDialog.text = "          LOW PRESSURE            "
-            generalDialog.icon = StandardIcon.Critical
-//            generalDialog.open()
+        if(botPressure[0]<0.0){
+            atm1.color = "red"
+            atm1.text =  "No Data"
+            //            generalDialog.text = "          NO PRESSURE DATA FROM ELECTRONICS BOX         "
+            //            generalDialog.icon = StandardIcon.Critical
+            //            generalDialog.open()
+        }
+        else if (minPressure >= botPressure[0]){
+            batt.text = "          LOW PRESSURE            "
+            atm1.color = "red"
+            alertTimer.start();
+            if(!atmAlarm[0]){
+                alarmTone.play()
+                atmAlarm[0]= 1
+            }
+            //            generalDialog.text = "          LOW PRESSURE            "
+            //            generalDialog.icon = StandardIcon.Critical
+            //            generalDialog.open()
+        }
+
+        else{
+            atm1.color  = "green"
+            atmAlarm[0]= 0
+
+        }
+        if(botPressure[1]<0.0){
+            atm2.color = "red"
+            atm2.text =  "No Data"
+            //            generalDialog.text = "          NO PRESSURE DATA FROM BATTERY BOX         "
+            //            generalDialog.icon = StandardIcon.Critical
+            //            generalDialog.open()
+        }
+        else if (minPressure >= botPressure[1]){
+            batt.text = "    LOW PRESSURE            "
+            atm2.color = "red"
+            alertTimer.start();
+            if(!atmAlarm[1]){
+                alarmTone.play()
+                atmAlarm[1]= 1
+            }
+            //            generalDialog.text = "    LOW PRESSURE            "
+            //            generalDialog.icon = StandardIcon.Critical
+            //            generalDialog.open()
+        }
+
+        else{
+            atm2.color = "green"
+            atmAlarm[1]= 0
+
+        }
+        if(botPressure[2]<0.0){
+            atm3.color = "red"
+            atm3.text =  "No Data"
+            //            generalDialog.text = "          NO PRESSURE DATA FROM MEDIA BOX         "
+            //            generalDialog.icon = StandardIcon.Critical
+            //            generalDialog.open()
+        }
+        else if (minPressure >= botPressure[2]){
+            batt.text = "    LOW PRESSURE            "
+            atm3.color = "red"
+            alertTimer.start();
+            if(!atmAlarm[2]){
+                alarmTone.play()
+                atmAlarm[2]= 1
+            }
+            //            generalDialog.text = "          LOW PRESSURE            "
+            //            generalDialog.icon = StandardIcon.Critical
+            //            generalDialog.open()
+        }
+
+        else{
+            atm3.color = "green"
+            atmAlarm[2]= 0
+
+        }
+
+
+    }
+    property real battStatus: publisher.batteryValue
+    onBattStatusChanged: {
+        console.log("in batttt",battStatus)
+
+        if (battStatus<=45 && battStatus>44 && battCnt<=3){
+            battDialog.text = "\n\n         Battery LOW         \n\n"
+            battDialog.icon = StandardIcon.Critical
+            console.log("lowwwwwwww",battStatus)
+            battDialog.open()
+            battCnt++
+        }
+        else if((battStatus<= 44))
+        {
+            battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
+            battDialog.icon = StandardIcon.Critical
+            console.log("critical battery",battStatus)
+            battDialog.open()
         }
         else{
-            pressureGauge.color = "green"
+
         }
 
 
     }
-
+    /*!
+     * \brief  crawlerTemp: gets crawler motors temp value from ros and gives a popup on temp error
+     * \todo   make a variable for temperature value
+     */
     property variant crawlerTemp: publisher.tempValue
     onCrawlerTempChanged:  {
-        //console.log("temp status",crawlerTemp[1])
 
         if(crawlerTemp[0]>85 || crawlerTemp[1]>85 || crawlerTemp[2]>85 || crawlerTemp[3]>85){
             crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : Temperature greater than "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : Temperature greater than "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : Temperature greater than "+crawlerTemp[3]+" deg"+"\n"
             crawlerDialog.title = "Crawler Temperature Error"
-            crawlerDialog.icon = StandardIcon.Critical
-            crawlerDialog.open()
+            //            crawlerDialog.icon = StandardIcon.Critical
+            //            crawlerDialog.open()
         }
-        //        //console.log("val status",16===crawlerErr[1])
-        //        //console.log("val status",val[28])
+
 
     }
-    //    property variant statusArm: publisher.armCallback()
 
 
+    /*!
+     * \brief  initCrawler: gets crawler init value from ros and gives a popup on success or failure
+     */
     function initCrawler() {
         if ( publisher.initCrawlerValue){
             crawlerDialog.text = "\n\n         Crawler Initialized         \n\n"
@@ -220,6 +324,9 @@ Rectangle{
         crawlerDialog.open()
 
     }
+    /*!
+     * \brief  rstCrawler: gets crawler reset value from ros and gives a popup on success or failure
+     */
     function rstCrawler()  {
         if (publisher.rstCrawlerValue){
             crawlerDialog.text = "\n\n         Crawler Restarted         \n\n"
@@ -232,7 +339,9 @@ Rectangle{
         crawlerDialog.open()
 
     }
-
+    /*!
+     * \brief stopCrawler: gets crawler stop value from ros and gives a popup on success or failure
+     */
     function stopCrawler()  {
         if (publisher.stopCrawlerValue){
             crawlerDialog.text = "\n\n         Crawler Stopped         \n\n"
@@ -245,7 +354,9 @@ Rectangle{
         crawlerDialog.open()
 
     }
-
+    /*!
+     * \brief  initArm: gets arm init value from ros and gives a popup on success or failure
+     */
     function initArm()  {
         if (publisher.initArmValue){
             armDialog.text = "\n\n         Arm Initialized         \n\n"
@@ -258,6 +369,9 @@ Rectangle{
         armDialog.open()
 
     }
+    /*!
+     * \brief  rstArm: gets arm reset value from ros and gives a popup on success or failure
+     */
     function rstArm()  {
         if (publisher.rstArmValue){
             armDialog.text = "\n\n         Arm Restarted         \n\n"
@@ -270,7 +384,9 @@ Rectangle{
         armDialog.open()
 
     }
-
+    /*!
+     * \brief  stopArm: gets arm stop value from ros and gives a popup on success or failure
+     */
     function stopArm()  {
         if (publisher.stopArmValue){
             armDialog.text = "\n\n         Arm Stopped         \n\n"
@@ -282,12 +398,14 @@ Rectangle{
         }
         armDialog.open()
     }
-
+    /*!
+     * \brief  swapCam: swaps the video feeds with the main frame
+     */
     function swapCam(id){
         var k = 0
         videoPlayer.playlist.currentIndex = arrange_cam[id]
         videoPlayer.play()
-        //        console.log("---------------------------------------------------",id,arrange_cam)
+        console.log("---------------------------------------------------",id,arrange_cam)
         switch (id) {
         case 1:
             var tab1 = g1.getTab(0).item
@@ -310,6 +428,7 @@ Rectangle{
             console.log ("swapped with cam: ",id+1)
 
             break
+
         default:
             console.log ("1: count is non zero")
             break
@@ -317,16 +436,11 @@ Rectangle{
         k = arrange_cam[id]
         arrange_cam[id] = arrange_cam[0]
         arrange_cam[0] = k
-        //        w1.text= cameras[arrange_cam[0]]
-        //        w2.text= cameras[arrange_cam[1]]
-
-        //        w3.text= cameras[arrange_cam[2]]
-
-        //        w4.text= cameras[arrange_cam[3]]
-
-
 
     }
+    /*!
+     * \brief  resetCam: resets the video feeds to their original frames
+     */
     function resetCam()
     {
         videoPlayer.playlist.currentIndex = 0
@@ -342,6 +456,70 @@ Rectangle{
         var tab3 = g2.getTab(1).item
         tab3.videoPlayer3.playlist.currentIndex = 3
         tab3.videoPlayer3.play()
+        arrange_cam[0] = 0
+        arrange_cam[1] = 1
+        arrange_cam[2] = 2
+        arrange_cam[3] = 3
+
+    }
+    /*!
+     * \brief  displaybatterStatus: displays current battery status animation
+     */
+    function displaybatterStatus(level)
+    {
+        var percentage = ((level - 44)*100) / (50 - 44);
+
+        //console.log("percentage",percentage)
+        if (percentage < 20){
+            batt.text = "    BATTERY LOW"
+            alertTimer.start();
+            return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
+        }
+        else if (percentage > 20 && percentage < 40)
+        {     batt.text = " "
+
+            return "qrc:/UI/Assets/battery-status/battery-quarter-solid.png" // fa-battery-quarter
+        }
+        else if (percentage > 40 && percentage < 60)
+        {
+            batt.text = " "
+            return "qrc:/UI/Assets/battery-status/battery-half-solid.png" // fa-battery-half
+
+        }
+        else if (percentage > 60 && percentage < 80)
+        {
+            batt.text = " "
+            return "qrc:/UI/Assets/battery-status/battery-three-quarters-solid.png" // fa-battery-three-quarters
+
+        }
+        else if (percentage > 80){
+            batt.text = " "
+            return "qrc:/UI/Assets/battery-status/battery-full-solid.png" // fa-battery-full
+
+        }
+        else
+            return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
+
+    }
+
+    /*!
+     * \brief  displayConnectionStatus: displays current connection status
+     */
+    function displayConnectionStatus(status){
+        if(status === 0){
+            return "qrc:/UI/Assets/signal-status/no-wifi-signal.png" // fa-battery-full
+        }else
+        {
+            return "qrc:/UI/Assets/signal-status/wifi-signal.png" // fa-battery-full
+
+        }
+    }
+    /*!
+     * \brief  init_crawler: calls the crawler to initialize
+     */
+    function init_crawler(ccw){
+
+        publisher.call_crawlerinit(ccw)
 
     }
     MessageDialog {
@@ -379,57 +557,6 @@ Rectangle{
     }
 
 
-    function displaybatterStatus(level)
-    {
-        var percentage = ((level - 44)*100) / (50 - 44);
-
-        //console.log("percentage",percentage)
-        if (percentage < 20){
-            batt.text = "BATTERY LOW"
-            alertTimer.start();
-            return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
-        }
-        else if (percentage > 20 && percentage < 40)
-        {     batt.text = " "
-
-            return "qrc:/UI/Assets/battery-status/battery-quarter-solid.png" // fa-battery-quarter
-        }
-        else if (percentage > 40 && percentage < 60)
-        {
-            batt.text = " "
-            return "qrc:/UI/Assets/battery-status/battery-half-solid.png" // fa-battery-half
-
-        }
-        else if (percentage > 60 && percentage < 80)
-        {
-            batt.text = " "
-            return "qrc:/UI/Assets/battery-status/battery-three-quarters-solid.png" // fa-battery-three-quarters
-
-        }
-        else if (percentage > 80){
-            batt.text = " "
-            return "qrc:/UI/Assets/battery-status/battery-full-solid.png" // fa-battery-full
-
-        }
-        else
-            return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
-
-    }
-    function displayConnectionStatus(status){
-        if(status === 0){
-            return "qrc:/UI/Assets/signal-status/no-wifi-signal.png" // fa-battery-full
-        }else
-        {
-            return "qrc:/UI/Assets/signal-status/wifi-signal.png" // fa-battery-full
-
-        }
-    }
-    function init_crawler(ccw){
-
-        publisher.call_crawlerinit(ccw)
-
-    }
-
     ColumnLayout{
         anchors.fill: parent
         spacing: 0
@@ -442,109 +569,190 @@ Rectangle{
             PropertyAnimation { id: animationOne; target: statusBar;alwaysRunToEnd: true; property: "color"; to: "#fec1c1"; duration: 500
                 onStopped: animationTwo.start()}
             PropertyAnimation { id: animationTwo; target: statusBar;alwaysRunToEnd: true; property: "color"; to: "#9b0000"; duration: 300 }
-            Item {
-                id: logo
-                width: 80
-                height: 80
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
+            RowLayout{
+                Rectangle{
+                    width: widthScreen * 0.06
+                    height: parent.height*0.1
 
-                Image {
-                    sourceSize.width: 80
-                    sourceSize.height: 80
-                    anchors.centerIn: parent
-                    source: "qrc:/UI/Assets/octobotics_logo.png"
+
+                    Item {
+                        id: logo
+                        width: 80
+                        height: 80
+                        //                anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+
+                        Image {
+                            sourceSize.width: 80
+                            sourceSize.height: 80
+                            source: "qrc:/UI/Assets/octobotics_logo.png"
+                        }
+
+                    }
                 }
-            }
-            Item {
-                id: connectionStatus
-                width: 40
-                height: 40
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: logo.right
-                anchors.leftMargin: 20
+                Rectangle{
+                    width: widthScreen * 0.1
+                    height: parent.height*0.2
 
-                Image {
-                    id: connectionStatusImg
-                    anchors.fill: connectionStatus
-                    source:displayConnectionStatus(publisher.comStatus)
-                    onSourceChanged: {
-                        if(publisher.comStatus){
-                            alertTimer.stop();
-                            alertTimer.running = false
+                    Item {
+                        id: connectionStatus
+                        width: 50
+                        height: 60
+                        //                anchors.left: logo.right
 
-                        }else{
 
-                            alertTimer.start();
+                        Image {
+                            id: connectionStatusImg
+                            anchors.fill: connectionStatus
+                            anchors.topMargin: 6
+                            source:displayConnectionStatus(publisher.comStatus)
+                            onSourceChanged: {
+                                if(publisher.comStatus){
+                                    alertTimer.stop();
+                                    alarmTone.stop()
+                                    alertTimer.running = false
+
+                                }else{
+
+                                    alertTimer.start();
+                                    alarmTone.play()
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+
+                Rectangle{
+                    width: widthScreen * 0.68
+                    height: parent.height
+                    Item{
+                        anchors.horizontalCenter:  parent.horizontalCenter
+                        Text {
+                            id: batt
+                            color: "black"
+                            //                    anchors.centerIn: parent
+                            font.pixelSize: 50
+                            text: qsTr("HI")
+                        }
+                    }
+                }
+                Rectangle{
+                    width: widthScreen * 0.03
+                    height: parent.height
+                }
+                Rectangle{
+                    width: widthScreen * 0.1
+                    height: parent.height
+
+
+                    RowLayout{
+                        width: parent.width
+
+                        Item{
+
+                            Text {
+                                id:currTxt
+                                font.family: "Tahoma"
+                                font.bold: true
+                                font.pixelSize: 20
+                                color: "black"
+                                topPadding: 18
+                                text:   "Current:"
+
+                            }
+                            Text {
+
+                                font.family: "Tahoma"
+                                font.bold: true
+                                font.pixelSize: 20
+                                anchors.left: currTxt.right
+                                color: "black"
+                                topPadding: 18
+                                text:   publisher.currentValue === -1 ? "-----" : publisher.currentValue.toFixed(2)
+
+                            }
+
+                        }
+
+                    }
+                }
+                Rectangle{
+                    width: widthScreen * 0.03
+                    height: parent.height
+                }
+                Rectangle{
+                    width: widthScreen * 0.3
+                    height: parent.height
+
+                    RowLayout{
+                        width: parent.width
+                        Item{
+                            id: togglCw
+                            Text {
+                                id: textId
+                                font.family: "Tahoma"
+
+                                text: "Crawler"
+                                font.bold: true
+                                font.pixelSize: 20
+                                color: "black"
+                                topPadding: 18
+                            }
+                        }
+
+                        Item{
+                            Layout.leftMargin: 85
+                            //                                            Layout.topMargin:
+                            Switch {
+                                id: control
+                                text: qsTr("Arm")
+                                checked:publisher.toggleValue
+                                enabled: false
+                                width: 60
+                                height: 58
+                                indicator: Rectangle {
+                                    implicitWidth: 58
+                                    implicitHeight: 28
+                                    x: control.leftPadding
+                                    y: parent.height / 2 - height / 2
+                                    radius: 13
+                                    color: control.checked ? "#17a81a" : "red"
+                                    border.color: "#17a81a"//control.checked ? "#17a81a" : "#cccccc"
+
+                                    Rectangle {
+                                        x: control.checked ? parent.width - width : 0
+                                        width: 28
+                                        height: 28
+                                        radius: 13
+                                        color: control.down ? "#cccccc" : "#ffffff"
+                                        border.color: "#232F34"//control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
+                                    }
+                                }
+
+                                contentItem: Text {
+                                    text: control.text
+                                    font.bold: true
+                                    font.pixelSize: 20
+                                    verticalAlignment: Text.AlignVCenter
+                                    //                                                    topPadding: 20
+
+                                    color: "black"
+                                    leftPadding: control.indicator.width + control.spacing
+                                }
+                            }
                         }
 
 
-                    }
-                }
-            }
-            Item{
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter:  parent.horizontalCenter
-                Text {
-                    id: batt
-                    color: "black"
-                    anchors.centerIn: parent
-                    font.pixelSize: 50
-                    text: qsTr(" ")
-                }
-            }
-            Item{
 
-                x: 1500
-                anchors.top: parent.top
-                anchors.topMargin: 5
-                Text {
-                    id: textId
-                    text: "Crawler"
-                    font.pixelSize: 24
-                    color: "black"
-                    y:parent.height / 2+ height/2
-                    //        anchors.
-                    leftPadding: -control.indicator.width - 8*control.spacing+ 5
-                }
-                Switch {
-                    id: control
-                    text: qsTr("Arm")
-                    checked:publisher.toggleValue
-                    enabled: false
-                    width: 60
-                    height: 58
-                    indicator: Rectangle {
-                        implicitWidth: 58
-                        implicitHeight: 28
-                        x: control.leftPadding
-                        y: parent.height / 2 - height / 2
-                        radius: 13
-                        color: control.checked ? "#17a81a" : "red"
-                        border.color: "#17a81a"//control.checked ? "#17a81a" : "#cccccc"
 
-                        Rectangle {
-                            x: control.checked ? parent.width - width : 0
-                            width: 28
-                            height: 28
-                            radius: 13
-                            color: control.down ? "#cccccc" : "#ffffff"
-                            border.color: "#232F34"//control.checked ? (control.down ? "#17a81a" : "#21be2b") : "#999999"
-                        }
-                    }
 
-                    contentItem: Text {
-                        text: control.text
-                        font.pixelSize: 24
-                        verticalAlignment: Text.AlignVCenter
-                        color: "black"
-                        leftPadding: control.indicator.width + control.spacing
                     }
                 }
 
-
-
             }
+
 
             Item {
                 id: batteryStatusId
@@ -552,7 +760,7 @@ Rectangle{
                 height: parent.height*0.95
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
-                anchors.rightMargin: 40
+                anchors.rightMargin: 90
 
                 Image {
                     id: batteryStatus
@@ -571,8 +779,36 @@ Rectangle{
                     color: "white"
                 }
             }
+            Item {
+                id: uidInfo
+                width: 40
+                height: 40
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+
+                Image {
+                    id: uidInfoImage
+                    anchors.fill: uidInfo
+                    anchors.topMargin: 3
+                    source: "qrc:/UI/Assets/dashboard/info.png"
+
+                }
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        generalDialog.text =   "\n\nRobot Information\n\n"+"Robot ID"+" : "+publisher.uid[0]+"\n\n\n"+"Xavier ID"+"\t\t:\t"+publisher.uid[1]+"\n"+"CSI ID"+"\t\t:\t"+publisher.uid[2]+"\n"+"ZED ID"+"\t\t:\t"+publisher.uid[3]+"\n"+"UT Gauge ID"+"\t:\t"+publisher.uid[4]+"\n"+"Lidar ID"+"\t\t:\t"+publisher.uid[5]+
+                                "\n"+"Drive Motors ID"+"\t:\t"+publisher.uid[6]+"\n"+"Arm Motors ID"+"\t:\t"+publisher.uid[7]+"\n"+"STM32 ID"+"\t\t:\t"+publisher.uid[8]+"\n"+"Crawler RS485 ID"+"\t:\t"+publisher.uid[9]+ "\n"+"ARM RS485 ID"+"\t:\t"+publisher.uid[10]+"\n"+"Servo ID"+"\t\t:\t"+publisher.uid[11]+"\n"+"Pump ID"+"\t\t:\t"+publisher.uid[12]+"\n"+"Magnets ID"+"\t\t:\t"+publisher.uid[13]+"\n"+"BLDC ID"+"\t\t:\t"+publisher.uid[14]+"\n"+"ESC ID"+"\t\t:\t"+publisher.uid[15]+"\n"+"STM Shield ID"+"\t:\t"+publisher.uid[16]+"\n"+"PDB ID"+"\t\t:\t"+publisher.uid[17]+
+                                "\n"+"Emergency Unit ID"+"\t:\t"+publisher.uid[18]+"\n"+"EU Transmitter ID"+"\t:\t"+publisher.uid[19]+"\n"+"EU Receiver ID"+"\t:\t"+publisher.uid[20]+"\n"+"Lipo Battery ID"+"\t:\t"+publisher.uid[21]+"\n"+"Lion Battery ID"+"\t:\t"+publisher.uid[22]+ "\n"+"Coin Cell ID"+"\t\t:\t"+publisher.uid[22]+"\n\n"
+
+                        generalDialog.icon = StandardIcon.Information
+                        generalDialog.open()}
+                }
+            }
+
 
         }
+
 
         Rectangle {
             id:dashboardId
@@ -707,7 +943,7 @@ Rectangle{
                                                 }
 
                                                 onClicked: {
-                                                    publisher.toolToggle = "5"
+                                                    publisher.toolToggle = "6"
 
                                                 }
                                             }
@@ -1471,39 +1707,79 @@ Rectangle{
                         ColumnLayout{
                             anchors.fill: parent
                             spacing: 5
+                            ColumnLayout{
 
-                            Text {
-                                Layout.fillWidth: true
-                                text: qsTr("Pressure")
-                                font.family: "Tahoma"
-                                font.bold: true
-                                font.pixelSize: 24
-                                color: "#ffffff"
-                                verticalAlignment: Text.AlignVCenter
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-
-
-                            Gauge {
-                                id:pressureGauge
-                                minimumValue: 0
-                                value: 1.7
-                                implicitHeight: 150
-                                tickmarkStepSize: 0.5
-                                property string color: "red"
-                                maximumValue: 2.0
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                style: GaugeStyle {
-                                    foreground: null
-                                    valueBar: Rectangle {
-                                        implicitWidth: 40
-                                        color: pressureGauge.color
-                                    }
+                                Text {
+                                    id: atm1
+                                    Layout.fillWidth: true
+                                    text: qsTr("1.5")
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 25
+                                    color: "#6fda9c"
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
                                 }
-                                formatValue: function(value) {
-                                    return value.toFixed(2);
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: qsTr("Electronics Box")
+                                    font.family: "Tahoma"
+                                    font.pixelSize: 15
+                                    font.bold: true
+                                    color: "#ffffff"
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
                                 }
                             }
+                            ColumnLayout{
+                                Text {
+                                    id: atm2
+                                    Layout.fillWidth: true
+                                    text: qsTr("1.7")
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 25
+                                    color: "#6fda9c"
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: qsTr("Battery Box")
+                                    font.family: "Tahoma"
+                                    font.pixelSize: 15
+                                    font.bold: true
+                                    color: "#ffffff"
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+                            }
+                            ColumnLayout{
+
+                                Text {
+                                    id: atm3
+                                    Layout.fillWidth: true
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 25
+                                    color: "#6fda9c"
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                    text: "1.7"
+
+                                }
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: qsTr("Media Box")
+                                    font.family: "Tahoma"
+                                    font.pixelSize: 15
+                                    font.bold: true
+                                    color: "#ffffff"
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+                            }
+
 
                         }
                     }
@@ -1524,25 +1800,27 @@ Rectangle{
                         MediaPlayer {
                             id: videoPlayer
 
-                            //                            playlist: Playlist {
-                            //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                            //                                       PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                            //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
-                            //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
-                            //                                 }
                             playlist: Playlist {
-                                PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                                PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+                                PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1/" }
+                                PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                                PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
                             }
+                            //                            playlist: Playlist {
+                            //                                PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                            //                                PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                            //                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                            //                                PlaylistItem { sourc0e: "http://195.196.36.242/mjpg/video.mjpg" }
+                            //                            }
                             muted: true
                             autoPlay: true
                         }
                         HelloCpp {
                             id: demo
                         }
-
+                        RecordCams {
+                            id: record
+                        }
 
                         VideoOutput {
                             id: camera
@@ -1631,19 +1909,7 @@ Rectangle{
 
 
                             }
-                            //                            Item {
-                            //                                width: 300
-                            //                            }
-                            //                            Item{
-                            //                                Layout.fillHeight: true
-                            //                                width: 30
-                            //                            Text {
-                            //                                id:w1
-                            //                                text: cameras[arrange_cam[0]]
-                            ////                                font.family: "Helvetica"
-                            //                                font.pointSize: 20
-                            //                                color: "black"
-                            //                            }}
+
                             Item {
                                 Layout.fillWidth: true
                             }
@@ -1660,7 +1926,7 @@ Rectangle{
                                 MouseArea{
                                     anchors.fill: parent
                                     onClicked: {
-                                    resetCam()
+                                        resetCam()
                                     }
                                 }
                             }
@@ -1744,18 +2010,18 @@ Rectangle{
 
                                     MediaPlayer {
                                         id: videoPlayer1
-                                        //                            playlist: Playlist {
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                                        //                                       PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
-                                        //                                 }
                                         playlist: Playlist {
-                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
                                         }
+                                        //                                        playlist: Playlist {
+                                        //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                                        //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                        //                                        }
                                         muted: true
                                         autoPlay: true
 
@@ -1767,13 +2033,7 @@ Rectangle{
                                         source: videoPlayer1
                                         fillMode: VideoOutput.PreserveAspectCrop
                                         function save() {
-                                            //                                            console.log('Schedule Save22')
-                                            //                                            camera1.grabToImage(function(result) {
-                                            //                                                var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
 
-                                            //                                                console.log(result.saveToFile("SCREENSHOT/cam2.png_"+date+".png"));
-                                            //                                                update()
-                                            //                                            })
                                             fullScreenRect.visible = true
                                             fullScreenView.enabled = true
                                             full_cam=arrange_cam[1]
@@ -1802,19 +2062,59 @@ Rectangle{
                                         Item {
                                             width: 50
                                         }
-                                        Item {
-                                            width: 50
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+
+                                            Button {
+                                                id: btnON4
+                                                text : "Record"
+                                                width : 100
+                                                height : 25
+                                                anchors.centerIn: parent
+
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 8
+                                                }
+
+                                                onClicked: {
+                                                    demo.gstRecord2("Recording...");
+
+                                                    btnON4.text = "recording...";
+
+                                                }
+                                            }
+
                                         }
-                                        //                                        Item{
-                                        //                                            Layout.fillHeight: true
-                                        //                                            width: 30
-                                        //                                        Text {
-                                        //                                            id:w2
-                                        //                                            text: cameras[arrange_cam[1]]
-                                        //            //                                font.family: "Helvetica"
-                                        //                                            font.pointSize: 20
-                                        //                                            color: "black"
-                                        //                                        }}
+
+                                        Item {
+                                            width: 100
+                                        }
+                                        Item{
+                                            Layout.fillHeight: true
+                                            width: 30
+
+                                            Button {
+                                                id: btnSTOP4
+                                                text : "Stop"
+                                                width : 100
+                                                height : 25
+                                                anchors.centerIn: parent
+                                                background: Rectangle {
+                                                    color:"#6fda9c"
+                                                    radius: 8
+                                                }
+
+                                                onClicked: {
+
+                                                    demo.gstStop2("Stop");
+                                                    btnON4.text = "Record";
+                                                }
+                                            }
+
+
+                                        }
                                         Item {
                                             Layout.fillWidth: true
                                         }
@@ -1962,18 +2262,18 @@ Rectangle{
 
                                     MediaPlayer {
                                         id: videoPlayer2
-                                        //                            playlist: Playlist {
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                                        //                                       PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
-                                        //                                 }
                                         playlist: Playlist {
-                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
                                         }
+                                        //                                        playlist: Playlist {
+                                        //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                                        //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                        //                                        }
                                         muted: true
                                         autoPlay: true
 
@@ -1986,13 +2286,7 @@ Rectangle{
                                         fillMode: VideoOutput.PreserveAspectCrop
 
                                         function save() {
-                                            //console.log('Schedule Save')
 
-                                            //                                    camera2.grabToImage(function(result) {
-                                            //                                        var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
-
-                                            //                                        console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
-                                            //                                        update()
                                             fullScreenRect.visible = true
                                             fullScreenView.enabled = true
                                             full_cam=arrange_cam[2]
@@ -2041,7 +2335,7 @@ Rectangle{
                                                 }
 
                                                 onClicked: {
-                                                    demo.gstRecord2("Recording...");
+                                                    record.gstRecord3("Recording...");
 
                                                     btnON2.text = "recording...";
 
@@ -2067,24 +2361,12 @@ Rectangle{
 
                                                 onClicked: {
 
-                                                    demo.gstStop2("Stop");
+                                                    record.gstStop3("Stop");
                                                     btnON2.text = "Record";
                                                 }
                                             }
                                         }
-                                        //                                Item {
-                                        //                                    width: 50
-                                        //                                }
-                                        //                                Item{
-                                        //                                    Layout.fillHeight: true
-                                        //                                    width: 30
-                                        //                                Text {
-                                        //                                    id:w3
-                                        //                                    text: cameras[arrange_cam[2]]
-                                        //    //                                font.family: "Helvetica"
-                                        //                                    font.pointSize: 20
-                                        //                                    color: "black"
-                                        //                                }}
+
                                         Item {
                                             Layout.fillWidth: true
                                         }
@@ -2184,18 +2466,18 @@ Rectangle{
 
                                     MediaPlayer {
                                         id: videoPlayer3
-                                        //                            playlist: Playlist {
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                                        //                                       PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
-                                        //                                     PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
-                                        //                                 }
                                         playlist: Playlist {
-                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam4" }
                                         }
+                                        //                                        playlist: Playlist {
+                                        //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                                        //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                                        //                                        }
                                         muted: true
                                         autoPlay: true
 
@@ -2208,13 +2490,7 @@ Rectangle{
                                         fillMode: VideoOutput.PreserveAspectCrop
 
                                         function save() {
-                                            //console.log('Schedule Save')
 
-                                            //                                    camera2.grabToImage(function(result) {
-                                            //                                        var date = new Date().toLocaleString(Qt.locale(), "dddd"+"."+"MMMMM"+"."+"yyyy"+"_"+"hh"+"_"+"mm"+"_"+"ss"+"_"+"zzz")
-
-                                            //                                        console.log(result.saveToFile("SCREENSHOT/cam3_"+date+".png"));
-                                            //                                        update()
                                             fullScreenRect.visible = true
                                             fullScreenView.enabled = true
                                             full_cam=arrange_cam[3]
@@ -2263,7 +2539,7 @@ Rectangle{
                                                 }
 
                                                 onClicked: {
-                                                    demo.gstRecord2("Recording...");
+                                                    record.gstRecord4("Recording...");
 
                                                     btnON3.text = "recording...";
 
@@ -2289,24 +2565,12 @@ Rectangle{
 
                                                 onClicked: {
 
-                                                    demo.gstStop2("Stop");
+                                                    record.gstStop4("Stop");
                                                     btnON3.text = "Record";
                                                 }
                                             }
                                         }
-                                        //                                Item {
-                                        //                                    width: 50
-                                        //                                }
-                                        //                                Item{
-                                        //                                    Layout.fillHeight: true
-                                        //                                    width: 30
-                                        //                                Text {
-                                        //                                    id:w3
-                                        //                                    text: cameras[arrange_cam[2]]
-                                        //    //                                font.family: "Helvetica"
-                                        //                                    font.pointSize: 20
-                                        //                                    color: "black"
-                                        //                                }}
+
                                         Item {
                                             Layout.fillWidth: true
                                         }

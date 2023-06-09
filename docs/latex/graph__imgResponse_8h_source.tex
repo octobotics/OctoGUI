@@ -1,0 +1,250 @@
+\doxysection{graph\+\_\+img\+Response.\+h}
+\hypertarget{graph__imgResponse_8h_source}{}\label{graph__imgResponse_8h_source}\index{OctoboticsApp/ros\_custom\_service/include/serialtoros/graph\_imgResponse.h@{OctoboticsApp/ros\_custom\_service/include/serialtoros/graph\_imgResponse.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Generated\ by\ gencpp\ from\ file\ serialtoros/graph\_imgResponse.msg}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ DO\ NOT\ EDIT!}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ SERIALTOROS\_MESSAGE\_GRAPH\_IMGRESPONSE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ SERIALTOROS\_MESSAGE\_GRAPH\_IMGRESPONSE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <ros/types.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <ros/serialization.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <ros/builtin\_message\_traits.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <ros/message\_operations.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <sensor\_msgs/Image.h>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }serialtoros}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{graph\_imgResponse\_}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{graph\_imgResponse\_<ContainerAllocator>}}\ \mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{Type}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{graph\_imgResponse\_}}()}
+\DoxyCodeLine{00028\ \ \ \ \ :\ img()\ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{graph\_imgResponse\_}}(\textcolor{keyword}{const}\ ContainerAllocator\&\ \_alloc)}
+\DoxyCodeLine{00031\ \ \ \ \ :\ img(\_alloc)\ \ \{}
+\DoxyCodeLine{00032\ \ \ (void)\_alloc;}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ typedef\ \ ::sensor\_msgs::Image\_<ContainerAllocator>\ \ \_img\_type;}
+\DoxyCodeLine{00038\ \ \ \_img\_type\ img;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{typedef}\ boost::shared\_ptr<\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\ >\ Ptr;}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{typedef}\ boost::shared\_ptr<\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\ \textcolor{keyword}{const}>\ ConstPtr;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \};\ \textcolor{comment}{//\ struct\ graph\_imgResponse\_}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ typedef\ ::serialtoros::graph\_imgResponse\_<std::allocator<void>\ >\ \mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{graph\_imgResponse}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{typedef}\ boost::shared\_ptr<\ ::serialtoros::graph\_imgResponse\ >\ graph\_imgResponsePtr;}
+\DoxyCodeLine{00052\ \textcolor{keyword}{typedef}\ boost::shared\_ptr<\ ::serialtoros::graph\_imgResponse\ const>\ graph\_imgResponseConstPtr;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ constants\ requiring\ out\ of\ line\ definition}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ ContainerAllocator>}
+\DoxyCodeLine{00059\ std::ostream\&\ operator<<(std::ostream\&\ s,\ const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\ \&\ v)}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ ros::message\_operations::Printer<\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\ >::stream(s,\ \textcolor{stringliteral}{"{}"{}},\ v);}
+\DoxyCodeLine{00062\ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00063\ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ ContainerAllocator1,\ \textcolor{keyword}{typename}\ ContainerAllocator2>}
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{bool}\ operator==(const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator1>\ \&\ lhs,\ const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator2>\ \&\ rhs)}
+\DoxyCodeLine{00068\ \{}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{return}\ lhs.img\ ==\ rhs.img;}
+\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ ContainerAllocator1,\ \textcolor{keyword}{typename}\ ContainerAllocator2>}
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{bool}\ operator!=(const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator1>\ \&\ lhs,\ const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator2>\ \&\ rhs)}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{return}\ !(lhs\ ==\ rhs);}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \}\ \textcolor{comment}{//\ namespace\ serialtoros}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{namespace\ }ros}
+\DoxyCodeLine{00082\ \{}
+\DoxyCodeLine{00083\ \textcolor{keyword}{namespace\ }message\_traits}
+\DoxyCodeLine{00084\ \{}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00091\ \textcolor{keyword}{struct\ }IsMessage<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00092\ \ \ :\ TrueType}
+\DoxyCodeLine{00093\ \ \ \{\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00096\ \textcolor{keyword}{struct\ }IsMessage<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ const>}
+\DoxyCodeLine{00097\ \ \ :\ TrueType}
+\DoxyCodeLine{00098\ \ \ \{\ \};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00101\ \textcolor{keyword}{struct\ }IsFixedSize<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00102\ \ \ :\ FalseType}
+\DoxyCodeLine{00103\ \ \ \{\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00106\ \textcolor{keyword}{struct\ }IsFixedSize<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ const>}
+\DoxyCodeLine{00107\ \ \ :\ FalseType}
+\DoxyCodeLine{00108\ \ \ \{\ \};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00111\ \textcolor{keyword}{struct\ }HasHeader<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00112\ \ \ :\ FalseType}
+\DoxyCodeLine{00113\ \ \ \{\ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00116\ \textcolor{keyword}{struct\ }HasHeader<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ const>}
+\DoxyCodeLine{00117\ \ \ :\ FalseType}
+\DoxyCodeLine{00118\ \ \ \{\ \};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00122\ \textcolor{keyword}{struct\ }MD5Sum<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00123\ \{}
+\DoxyCodeLine{00124\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value()}
+\DoxyCodeLine{00125\ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}b4274f524cc812fc54ca8ebeeda2deb2"{}};}
+\DoxyCodeLine{00127\ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value(const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\&)\ \{\ \textcolor{keywordflow}{return}\ value();\ \}}
+\DoxyCodeLine{00130\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint64\_t\ static\_value1\ =\ 0xb4274f524cc812fcULL;}
+\DoxyCodeLine{00131\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint64\_t\ static\_value2\ =\ 0x54ca8ebeeda2deb2ULL;}
+\DoxyCodeLine{00132\ \};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00135\ \textcolor{keyword}{struct\ }DataType<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00136\ \{}
+\DoxyCodeLine{00137\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value()}
+\DoxyCodeLine{00138\ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}serialtoros/graph\_imgResponse"{}};}
+\DoxyCodeLine{00140\ \ \ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value(const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\&)\ \{\ \textcolor{keywordflow}{return}\ value();\ \}}
+\DoxyCodeLine{00143\ \};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00146\ \textcolor{keyword}{struct\ }Definition<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00147\ \{}
+\DoxyCodeLine{00148\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value()}
+\DoxyCodeLine{00149\ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}sensor\_msgs/Image\ img\(\backslash\)n"{}}}
+\DoxyCodeLine{00151\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00152\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00153\ \textcolor{stringliteral}{"{}================================================================================\(\backslash\)n"{}}}
+\DoxyCodeLine{00154\ \textcolor{stringliteral}{"{}MSG:\ sensor\_msgs/Image\(\backslash\)n"{}}}
+\DoxyCodeLine{00155\ \textcolor{stringliteral}{"{}\#\ This\ message\ contains\ an\ uncompressed\ image\(\backslash\)n"{}}}
+\DoxyCodeLine{00156\ \textcolor{stringliteral}{"{}\#\ (0,\ 0)\ is\ at\ top-\/left\ corner\ of\ image\(\backslash\)n"{}}}
+\DoxyCodeLine{00157\ \textcolor{stringliteral}{"{}\#\(\backslash\)n"{}}}
+\DoxyCodeLine{00158\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00159\ \textcolor{stringliteral}{"{}Header\ header\ \ \ \ \ \ \ \ \#\ Header\ timestamp\ should\ be\ acquisition\ time\ of\ image\(\backslash\)n"{}}}
+\DoxyCodeLine{00160\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Header\ frame\_id\ should\ be\ optical\ frame\ of\ camera\(\backslash\)n"{}}}
+\DoxyCodeLine{00161\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ origin\ of\ frame\ should\ be\ optical\ center\ of\ camera\(\backslash\)n"{}}}
+\DoxyCodeLine{00162\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ +x\ should\ point\ to\ the\ right\ in\ the\ image\(\backslash\)n"{}}}
+\DoxyCodeLine{00163\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ +y\ should\ point\ down\ in\ the\ image\(\backslash\)n"{}}}
+\DoxyCodeLine{00164\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ +z\ should\ point\ into\ to\ plane\ of\ the\ image\(\backslash\)n"{}}}
+\DoxyCodeLine{00165\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ If\ the\ frame\_id\ here\ and\ the\ frame\_id\ of\ the\ CameraInfo\(\backslash\)n"{}}}
+\DoxyCodeLine{00166\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ message\ associated\ with\ the\ image\ conflict\(\backslash\)n"{}}}
+\DoxyCodeLine{00167\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ the\ behavior\ is\ undefined\(\backslash\)n"{}}}
+\DoxyCodeLine{00168\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00169\ \textcolor{stringliteral}{"{}uint32\ height\ \ \ \ \ \ \ \ \ \#\ image\ height,\ that\ is,\ number\ of\ rows\(\backslash\)n"{}}}
+\DoxyCodeLine{00170\ \textcolor{stringliteral}{"{}uint32\ width\ \ \ \ \ \ \ \ \ \ \#\ image\ width,\ that\ is,\ number\ of\ columns\(\backslash\)n"{}}}
+\DoxyCodeLine{00171\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00172\ \textcolor{stringliteral}{"{}\#\ The\ legal\ values\ for\ encoding\ are\ in\ file\ src/image\_encodings.cpp\(\backslash\)n"{}}}
+\DoxyCodeLine{00173\ \textcolor{stringliteral}{"{}\#\ If\ you\ want\ to\ standardize\ a\ new\ string\ format,\ join\(\backslash\)n"{}}}
+\DoxyCodeLine{00174\ \textcolor{stringliteral}{"{}\#\ ros-\/users@lists.sourceforge.net\ and\ send\ an\ email\ proposing\ a\ new\ encoding.\(\backslash\)n"{}}}
+\DoxyCodeLine{00175\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00176\ \textcolor{stringliteral}{"{}string\ encoding\ \ \ \ \ \ \ \#\ Encoding\ of\ pixels\ -\/-\/\ channel\ meaning,\ ordering,\ size\(\backslash\)n"{}}}
+\DoxyCodeLine{00177\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ taken\ from\ the\ list\ of\ strings\ in\ include/sensor\_msgs/image\_encodings.h\(\backslash\)n"{}}}
+\DoxyCodeLine{00178\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00179\ \textcolor{stringliteral}{"{}uint8\ is\_bigendian\ \ \ \ \#\ is\ this\ data\ bigendian?\(\backslash\)n"{}}}
+\DoxyCodeLine{00180\ \textcolor{stringliteral}{"{}uint32\ step\ \ \ \ \ \ \ \ \ \ \ \#\ Full\ row\ length\ in\ bytes\(\backslash\)n"{}}}
+\DoxyCodeLine{00181\ \textcolor{stringliteral}{"{}uint8[]\ data\ \ \ \ \ \ \ \ \ \ \#\ actual\ matrix\ data,\ size\ is\ (step\ *\ rows)\(\backslash\)n"{}}}
+\DoxyCodeLine{00182\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{00183\ \textcolor{stringliteral}{"{}================================================================================\(\backslash\)n"{}}}
+\DoxyCodeLine{00184\ \textcolor{stringliteral}{"{}MSG:\ std\_msgs/Header\(\backslash\)n"{}}}
+\DoxyCodeLine{00185\ \textcolor{stringliteral}{"{}\#\ Standard\ metadata\ for\ higher-\/level\ stamped\ data\ types.\(\backslash\)n"{}}}
+\DoxyCodeLine{00186\ \textcolor{stringliteral}{"{}\#\ This\ is\ generally\ used\ to\ communicate\ timestamped\ data\ \(\backslash\)n"{}}}
+\DoxyCodeLine{00187\ \textcolor{stringliteral}{"{}\#\ in\ a\ particular\ coordinate\ frame.\(\backslash\)n"{}}}
+\DoxyCodeLine{00188\ \textcolor{stringliteral}{"{}\#\ \(\backslash\)n"{}}}
+\DoxyCodeLine{00189\ \textcolor{stringliteral}{"{}\#\ sequence\ ID:\ consecutively\ increasing\ ID\ \(\backslash\)n"{}}}
+\DoxyCodeLine{00190\ \textcolor{stringliteral}{"{}uint32\ seq\(\backslash\)n"{}}}
+\DoxyCodeLine{00191\ \textcolor{stringliteral}{"{}\#Two-\/integer\ timestamp\ that\ is\ expressed\ as:\(\backslash\)n"{}}}
+\DoxyCodeLine{00192\ \textcolor{stringliteral}{"{}\#\ *\ stamp.sec:\ seconds\ (stamp\_secs)\ since\ epoch\ (in\ Python\ the\ variable\ is\ called\ 'secs')\(\backslash\)n"{}}}
+\DoxyCodeLine{00193\ \textcolor{stringliteral}{"{}\#\ *\ stamp.nsec:\ nanoseconds\ since\ stamp\_secs\ (in\ Python\ the\ variable\ is\ called\ 'nsecs')\(\backslash\)n"{}}}
+\DoxyCodeLine{00194\ \textcolor{stringliteral}{"{}\#\ time-\/handling\ sugar\ is\ provided\ by\ the\ client\ library\(\backslash\)n"{}}}
+\DoxyCodeLine{00195\ \textcolor{stringliteral}{"{}time\ stamp\(\backslash\)n"{}}}
+\DoxyCodeLine{00196\ \textcolor{stringliteral}{"{}\#Frame\ this\ data\ is\ associated\ with\(\backslash\)n"{}}}
+\DoxyCodeLine{00197\ \textcolor{stringliteral}{"{}string\ frame\_id\(\backslash\)n"{}}}
+\DoxyCodeLine{00198\ ;}
+\DoxyCodeLine{00199\ \ \ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value(const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\&)\ \{\ \textcolor{keywordflow}{return}\ value();\ \}}
+\DoxyCodeLine{00202\ \};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \}\ \textcolor{comment}{//\ namespace\ message\_traits}}
+\DoxyCodeLine{00205\ \}\ \textcolor{comment}{//\ namespace\ ros}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{keyword}{namespace\ }ros}
+\DoxyCodeLine{00208\ \{}
+\DoxyCodeLine{00209\ \textcolor{keyword}{namespace\ }serialization}
+\DoxyCodeLine{00210\ \{}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ContainerAllocator>\ \textcolor{keyword}{struct\ }Serializer<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00213\ \ \ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Stream,\ \textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{inline}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ allInOne(Stream\&\ stream,\ T\ m)}
+\DoxyCodeLine{00215\ \ \ \ \ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ stream.next(m.img);}
+\DoxyCodeLine{00217\ \ \ \ \ \}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ ROS\_DECLARE\_ALLINONE\_SERIALIZER}
+\DoxyCodeLine{00220\ \ \ \};\ \textcolor{comment}{//\ struct\ graph\_imgResponse\_}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \}\ \textcolor{comment}{//\ namespace\ serialization}}
+\DoxyCodeLine{00223\ \}\ \textcolor{comment}{//\ namespace\ ros}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{namespace\ }ros}
+\DoxyCodeLine{00226\ \{}
+\DoxyCodeLine{00227\ \textcolor{keyword}{namespace\ }message\_operations}
+\DoxyCodeLine{00228\ \{}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ ContainerAllocator>}
+\DoxyCodeLine{00231\ \textcolor{keyword}{struct\ }Printer<\ ::\mbox{\hyperlink{structserialtoros_1_1graph__imgResponse__}{serialtoros::graph\_imgResponse\_}}<ContainerAllocator>\ >}
+\DoxyCodeLine{00232\ \{}
+\DoxyCodeLine{00233\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Stream>\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ stream(Stream\&\ s,\ \textcolor{keyword}{const}\ std::string\&\ indent,\ const\ ::serialtoros::graph\_imgResponse\_<ContainerAllocator>\&\ v)}
+\DoxyCodeLine{00234\ \ \ \{}
+\DoxyCodeLine{00235\ \ \ \ \ s\ <<\ indent\ <<\ \textcolor{stringliteral}{"{}img:\ "{}};}
+\DoxyCodeLine{00236\ \ \ \ \ s\ <<\ std::endl;}
+\DoxyCodeLine{00237\ \ \ \ \ Printer<\ ::sensor\_msgs::Image\_<ContainerAllocator>\ >::stream(s,\ indent\ +\ \textcolor{stringliteral}{"{}\ \ "{}},\ v.img);}
+\DoxyCodeLine{00238\ \ \ \}}
+\DoxyCodeLine{00239\ \};}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \}\ \textcolor{comment}{//\ namespace\ message\_operations}}
+\DoxyCodeLine{00242\ \}\ \textcolor{comment}{//\ namespace\ ros}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SERIALTOROS\_MESSAGE\_GRAPH\_IMGRESPONSE\_H}}
+
+\end{DoxyCode}

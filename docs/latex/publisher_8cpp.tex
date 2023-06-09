@@ -1,0 +1,27 @@
+\doxysection{Octobotics\+App/\+Source/publisher.cpp File Reference}
+\hypertarget{publisher_8cpp}{}\label{publisher_8cpp}\index{OctoboticsApp/Source/publisher.cpp@{OctoboticsApp/Source/publisher.cpp}}
+
+
+Connects ros data with qt.  
+
+
+{\ttfamily \#include \"{}qquickitem.\+h\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \"{}publisher.\+h\"{}}\newline
+
+
+\doxysubsection{Detailed Description}
+Connects ros data with qt. 
+
+This class acts as a mediator between ros node and our qml page. It coverts data, notifies any changes in data from both UI and ros node. \begin{DoxyAuthor}{Authors}
+Venkat, Charith Reddy 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved. Do not remove this copyright notice. Do not use, reuse, copy, merge, publish, sub-\/license, sell, distribute or modify this code -\/ except without explicit, written permission from Octobotics Tech Pvt. Ltd. Contact \href{mailto:connect@octobotics.tech}{\texttt{ connect@octobotics.\+tech}} for full license information.
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000009}{Todo}}]Remove extra connections used for arm and crawler. Make it more efficient (eg\+: using separate connections for crawler error and temp) \end{DoxyRefDesc}
+\begin{DoxyWarning}{Warning}
+Improper use can crash the application 
+\end{DoxyWarning}

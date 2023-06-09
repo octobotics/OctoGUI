@@ -1,3 +1,17 @@
+/*!
+ *  \file      main.qml
+ *  \brief     This is the code for the main screen page of UI
+ *  \details   This is the code for the main screen page of the UI. You can edit the username and password here.
+ *  \author    Venkat
+ *  \copyright Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved.
+                Do not remove this copyright notice.
+                Do not use, reuse, copy, merge, publish, sub-license, sell, distribute or modify this code - except without explicit,
+                written permission from Octobotics Tech Pvt. Ltd.
+                Contact connect@octobotics.tech for full license information.
+
+ *  \todo      None
+ *  \warning   Improper use can crash the application
+ */
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
@@ -80,9 +94,9 @@ Window {
     }
 
     // Login users
+    // use this if you want to start the app with credentials
     function loginUser(uname, pword)
     {
-//        if(uname === "octobotics" && pword === "octobotics@2022")
 //         if(uname === "octo" && pword === "y")
         if(1)
         {
@@ -98,8 +112,6 @@ Window {
     // Show UserInfo page
     function showUserInfo()
     {
-//        windowId.width = Screen.width - Screen.width*0.15
-//        windowId.height = Screen.height - Screen.height*0.15
         windowId.visibility = Qt.WindowFullScreen
         stackView.replace("qrc:/UI/Page/Home.qml")
     }
