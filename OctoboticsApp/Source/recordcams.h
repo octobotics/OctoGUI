@@ -1,5 +1,5 @@
 /*!
- *  \file      hellocpp.h
+ *  \file      recordcams.h
  *  \brief     record camera class.
  *  \details   This class is used to record rtsp pipelines from the cameras.
  *  \author    Charith Reddy
@@ -13,25 +13,27 @@
  *  \warning   Improper use can crash the application
  */
 
-#ifndef HELLOCPP_H
-#define HELLOCPP_H
+#ifndef RECORDCAMS_H
+#define RECORDCAMS_H
+
+
 
 #include <QObject>
 
 /*!
- * \brief The HelloCpp class is used to record the rtsp pipeline from cameras
+ * \brief The recordCams class is used to record the rtsp pipeline from cameras
  */
-class HelloCpp : public QObject
+class recordCams : public QObject
 {
     Q_OBJECT
 
 public:
 
-    explicit HelloCpp(QObject *parent = 0);
-    Q_INVOKABLE void gstRecord();
-    Q_INVOKABLE void gstStop();
-    Q_INVOKABLE void gstRecord2();
-    Q_INVOKABLE void gstStop2();
+    explicit recordCams(QObject *parent = 0);
+    Q_INVOKABLE void gstRecord3();
+    Q_INVOKABLE void gstStop3();
+    Q_INVOKABLE void gstRecord4();
+    Q_INVOKABLE void gstStop4();
 signals:
 
 public slots:
