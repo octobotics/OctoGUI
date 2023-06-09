@@ -29,11 +29,5 @@
         <file>UI/Assets/battery-status/battery-three-quarters-solid.png</file>
         <file>UI/Assets/dashboard/swap.png</file>
         <file>UI/Assets/dashboard/reset.png</file>
-        <file>Source/test.h</file>
-        <file>Source/recordcams.h</file>
-        <file>Source/recordcams.cpp</file>
-        <file>UI/Assets/alarm.wav</file>
-        <file>UI/Assets/dashboard/current.png</file>
-        <file>UI/Assets/dashboard/info.png</file>
     </qresource>
 </RCC>

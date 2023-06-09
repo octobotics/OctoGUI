@@ -1,17 +1,3 @@
-/*!
- *  \file      SplashScreen.qml
- *  \brief     This is the code for the splash screen animation page of UI
- *  \details   This is the code for the splash screen animation page of UI
- *  \author    Venkat
- *  \copyright Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved.
-                Do not remove this copyright notice.
-                Do not use, reuse, copy, merge, publish, sub-license, sell, distribute or modify this code - except without explicit,
-                written permission from Octobotics Tech Pvt. Ltd.
-                Contact connect@octobotics.tech for full license information.
-
- *  \todo      None
- *  \warning   Improper use can crash the application
- */
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12

@@ -1,27 +1,7 @@
-/*!
- *  \file      hellocpp.cpp
- *  \brief     record camera class.
- *  \details   This class is used to record rtsp pipelines from the cameras.
- *  \author    Charith Reddy
- *  \copyright Copyright (C) 2022 Octobotics Tech Pvt. Ltd. All Rights Reserved.
-                Do not remove this copyright notice.
-                Do not use, reuse, copy, merge, publish, sub-license, sell, distribute or modify this code - except without explicit,
-                written permission from Octobotics Tech Pvt. Ltd.
-                Contact connect@octobotics.tech for full license information.
-
- *  \todo      remove duplicating the code and condense into a single pipeline
- *  \warning   Improper use can crash the application
- */
-
-
 #include "hellocpp.h"
 #include <QDebug>
 #include "include.h"
 #include "QDateTime"
-
-/*!
- * \brief cb_new_pad callback pad for the first pipeline
- */
 
 static void cb_new_pad (GstElement *element, GstPad *pad, gpointer data)
 {
@@ -38,9 +18,6 @@ static void cb_new_pad (GstElement *element, GstPad *pad, gpointer data)
 
     g_free(name);
 }
-/*!
- * \brief cb_new_pad2 callback pad for second pipeline
- */
 static void cb_new_pad2 (GstElement *element, GstPad *pad, gpointer data)
 {
     gchar *name;
@@ -56,10 +33,6 @@ static void cb_new_pad2 (GstElement *element, GstPad *pad, gpointer data)
 
     g_free(name);
 }
-/*!
- * \brief HelloCpp::HelloCpp constructor and pipeline declaration
- * \param parent
- */
 HelloCpp::HelloCpp(QObject *parent) :
 QObject(parent)
 {
@@ -76,8 +49,8 @@ QObject(parent)
 
 
     qDebug() << " start step 1";
-    g_object_set(source1, "location", "rtsp://10.223.240.0:8554/cam2", NULL);
-    g_object_set(source2, "location", "rtsp://10.223.240.0:8554/cam1", NULL);
+    g_object_set(source1, "location", "rtsp://10.223.240.0:8554/cam1", NULL);
+    g_object_set(source2, "location", "rtsp://10.223.240.0:8554/cam2", NULL);
 //    g_object_set(source2, "location", "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4", NULL);
     qDebug() << " start step 2";
     queue1 = gst_element_factory_make("queue", "queue1");
@@ -158,9 +131,6 @@ QObject(parent)
 
 }
 
-/*!
- * \brief HelloCpp::gstRecord records the video from the first pipeline
- */
 void HelloCpp::gstRecord()
 {
     if(recording)
@@ -216,9 +186,7 @@ void HelloCpp::gstRecord()
 }
 
 
-/*!
- * \brief HelloCpp::gstRecord2 records the video from second pipeline
- */
+
 void HelloCpp::gstRecord2()
 {
     if(recording2)
@@ -273,9 +241,6 @@ void HelloCpp::gstRecord2()
     recording2 = true;
 }
 
-/*!
- * \brief HelloCpp::gstStop stops the recording from first pipeline
- */
 void HelloCpp::gstStop()
 {
     if(!recording)
@@ -304,9 +269,6 @@ void HelloCpp::gstStop()
     gst_object_unref (teepad1);
     recording = false;
 }
-/*!
- * \brief HelloCpp::gstStop2 stops the recording from second pipeline
- */
 void HelloCpp::gstStop2()
 {
     if(!recording2)

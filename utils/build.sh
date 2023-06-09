@@ -31,41 +31,41 @@ cd build
 echo ${PWD}
 rm default.desktop
 rm default.png
-touch UWPilot.desktop
-cp /dev/null UWPilot.desktop
+touch OctoPilot.desktop
+cp /dev/null OctoPilot.desktop
 echo "[Desktop Entry]
 Type=Application
-Name=Octo Pilot - UnderWater
+Name=Octo Pilot
 Comment=Co-Pilot for OctoBots
 Exec=./AppRun %F
 Icon=octo
-Categories=Science;">$'UWPilot.desktop' 
+Categories=Science;">$'OctoPilot.desktop' 
 cd ..
 echo ${PWD}
 echo "=============Creating App Image============="
 ./appimagetool-x86_64.AppImage build
 echo -e "\e[1;32m=============Copying New Gstreamer File=============\e[0m"
 echo "=============Creating Desktop Folder============="
-mkdir ~/Desktop/OctoPilotUW
-cp Octo_Pilot-x86_64.AppImage ~/Desktop/OctoPilotUW
+mkdir ~/Desktop/OctoPilot
+cp Octo_Pilot-x86_64.AppImage ~/Desktop/OctoPilot
 echo -e "\e[1;32m=============Copying New Gstreamer File=============\e[0m"
 echo -e "\e[1;32m=============Moving logo to pixmap=============\e[0m"
 sudo cp octo.png /usr/share/pixmaps
 cd ~/Desktop
-dtp=UWPilot.desktop
+dtp=OctoPilot.desktop
 if [ -f $dtp ]; then
    rm  $dtp
    echo -e "\e[1;31m $dtp is removed \e[0m"
    echo "$dtp is removed"
 fi
 echo -e "\e[1;32m=============Making a Desktop file=============\e[0m"
-touch UWPilot.desktop
+touch OctoPilot.desktop
 echo "[Desktop Entry]
 Type=Application
-Name=Octo Pilot - UnderWater
+Name=Octo Pilot
 Comment=Co-Pilot for OctoBots
-Exec=/home/$USER/Desktop/OctoPilotUW/Octo_Pilot-x86_64.AppImage %F
+Exec=/home/$USER/Desktop/OctoPilot/Octo_Pilot-x86_64.AppImage %F
 Icon=octo
-Categories=Science;">>$'UWPilot.desktop' 
+Categories=Science;">>$'OctoPilot.desktop' 
 
 echo -e "\e[1;32m=======================================Deployment Completed=======================================\e[0m"
