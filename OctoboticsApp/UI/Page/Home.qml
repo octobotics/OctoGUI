@@ -29,10 +29,11 @@ import "../../UI/Components"
 import CustomPlot 1.0
 import QtQuick.Dialogs 1.1
 import RecordCams 1.0
+import QtQuick.Extras 1.4
 
 Rectangle{
 
-    color: "black"
+    color: "#292D3E"
     property int iconSize: 32
     property int battCnt:0
     property bool armst: false
@@ -40,6 +41,10 @@ Rectangle{
     property color  fg: "#27322f"
     property color  bg: "black"
     property variant arrange_cam: [0,1,2,3]
+    property color  secondBg: "#34324a"
+    property color borderSecondBg: "#ab47bc"
+    property color buttonBg: "#c792ea"
+    property color textColor: "#c792ea"
 
     property var armErr: ({   0 : "NO Error [Radhe Radhe]",
                               6 : "Storage data error",
@@ -464,6 +469,7 @@ Rectangle{
             id:statusBar
             Layout.fillWidth: true
             height: parent.height*0.1
+            visible: false
             color: "#00695C"
 
             PropertyAnimation { id: animationOne; target: statusBar;alwaysRunToEnd: true; property: "color"; to: "#fec1c1"; duration: 500
@@ -489,38 +495,38 @@ Rectangle{
 
                     }
                 }
-                Rectangle{
-                    width: widthScreen * 0.1
-                    height: parent.height*0.2
+                //                Rectangle{
+                //                    width: widthScreen * 0.1
+                //                    height: parent.height*0.2
 
-                    Item {
-                        id: connectionStatus
-                        width: 50
-                        height: 60
-
-
-                        Image {
-                            id: connectionStatusImg
-                            anchors.fill: connectionStatus
-                            anchors.topMargin: 6
-                            source:displayConnectionStatus(publisher.comStatus)
-                            onSourceChanged: {
-                                if(publisher.comStatus){
-                                    alertTimer.stop();
-                                    alarmTone.stop()
-                                    alertTimer.running = false
-
-                                }else{
-
-                                    alertTimer.start();
-                                    alarmTone.play()
-                                }
+                //                    Item {
+                //                        id: connectionStatus
+                //                        width: 50
+                //                        height: 60
 
 
-                            }
-                        }
-                    }
-                }
+                //                        Image {
+                //                            id: connectionStatusImg
+                //                            anchors.fill: connectionStatus
+                //                            anchors.topMargin: 6
+                //                            source:displayConnectionStatus(publisher.comStatus)
+                //                            onSourceChanged: {
+                //                                if(publisher.comStatus){
+                //                                    alertTimer.stop();
+                //                                    alarmTone.stop()
+                //                                    alertTimer.running = false
+
+                //                                }else{
+
+                //                                    alertTimer.start();
+                //                                    alarmTone.play()
+                //                                }
+
+
+                //                            }
+                //                        }
+                //                    }
+                //                }
 
                 Rectangle{
                     width: widthScreen * 0.68
@@ -646,31 +652,31 @@ Rectangle{
 
             }
 
-            Item {
-                id: batteryStatusId
-                width: 60
-                height: parent.height*0.95
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                anchors.rightMargin: 90
+            //            Item {
+            //                id: batteryStatusId
+            //                width: 60
+            //                height: parent.height*0.95
+            //                anchors.verticalCenter: parent.verticalCenter
+            //                anchors.right: parent.right
+            //                anchors.rightMargin: 90
 
-                Image {
-                    id: batteryStatus
-                    anchors.fill: parent
-                    source:displaybatterStatus(publisher.batteryValue)
+            //                Image {
+            //                    id: batteryStatus
+            //                    anchors.fill: parent
+            //                    source:displaybatterStatus(publisher.batteryValue)
 
-                }
-                Text {
-                    id: batteryStatusValue
-                    text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
+            //                }
+            //                Text {
+            //                    id: batteryStatusValue
+            //                    text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
 
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    anchors.fill: parent
-                    font.pointSize: 8
-                    color: "white"
-                }
-            }
+            //                    verticalAlignment: Text.AlignVCenter
+            //                    horizontalAlignment: Text.AlignHCenter
+            //                    anchors.fill: parent
+            //                    font.pointSize: 8
+            //                    color: "white"
+            //                }
+            //            }
             Item {
                 id: uidInfo
                 width: 40
@@ -705,7 +711,7 @@ Rectangle{
             id:dashboardId
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color:"#232F34"
+            color:"#292D3E"
             RowLayout{
                 anchors.right:  parent.right
                 anchors.top: parent.top
@@ -715,930 +721,1319 @@ Rectangle{
             ColumnLayout{
                 anchors.centerIn: parent
                 RowLayout {
-
                     Rectangle{
                         width: widthScreen * 0.28
                         height: heightScreen * 0.25
-                        border.color: "#6fda9c"
-                        color: "#344955"
+                        border.color:borderSecondBg
+                        color: secondBg
                         radius: 15
 
-                        ColumnLayout{
-                            anchors.fill: parent
-                            spacing: 0
-                            RowLayout{
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: qsTr("Tool")
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 24
-                                    color: "#FFFFFF"
-                                    horizontalAlignment: Text.AlignHCenter
-                                    verticalAlignment: Text.AlignVCenter
-                                }
-                            }
-                            RowLayout{
-                                Layout.fillHeight: true
-                                width: parent.width
+                        Row{
+                            anchors.centerIn: parent
+                            spacing: parent.width * 0.1
+                            Column{
+                                spacing: parent.height * 0.2
+                                RowLayout{
+                                    spacing: parent.width * 0.2
+                                    Item {
+                                        id: connectionStatus
+                                        width: 70
+                                        height: 60
+                                        Image {
+                                            id: connectionStatusImg
+                                            width: 40
+                                            height: 40
+                                            anchors.centerIn: parent
+                                            source:displayConnectionStatus(publisher.comStatus)
+                                            onSourceChanged: {
+                                                if(publisher.comStatus){
+                                                    alertTimer.stop();
+                                                    alarmTone.stop()
+                                                    alertTimer.running = false
 
-                                Item{
-                                    Layout.fillHeight: true
-                                    Layout.fillWidth: true
-                                    ColumnLayout{
-                                        anchors.centerIn: parent
-                                        RowLayout{
+                                                }else{
 
-                                            Image {
-                                                id:magnetStatus
-                                                sourceSize.width: 35
-                                                sourceSize.height: 35
-                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-
-                                            Button {
-                                                id: magnet
-                                                text : "Magnet"
-                                                implicitWidth : 70
-                                                implicitHeight : 30
-
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 5
-                                                    opacity: magnet.down ? 0.5 : 1
-
+                                                    alertTimer.start();
+                                                    alarmTone.play()
                                                 }
 
-                                                onClicked: {
-                                                    publisher.toolToggle = "7"
 
-                                                }
-                                            }
-
-                                            Item{
-                                                width: 8
-                                            }
-
-
-                                            Image {
-                                                id:pumpStatus
-                                                sourceSize.width: 35
-                                                sourceSize.height: 35
-                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-
-                                            Button {
-                                                id: pump
-                                                text : "Pump"
-                                                implicitWidth : 70
-                                                implicitHeight : 30
-
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 5
-                                                    opacity: pump.down ? 0.5 : 1
-
-                                                }
-
-                                                onClicked: {
-                                                    publisher.toolToggle = "4"
-
-                                                }
-                                            }
-                                            Item{
-                                                width: 8
-                                            }
-                                            Image {
-                                                id:grinderStatus
-                                                sourceSize.width: 35
-                                                sourceSize.height: 35
-                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-
-                                            Button {
-                                                id: grinder
-                                                text : "Grinder"
-                                                implicitWidth : 70
-                                                implicitHeight : 30
-
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 5
-                                                    opacity: grinder.down ? 0.5 : 1
-
-                                                }
-
-                                                onClicked: {
-                                                    publisher.toolToggle = "0"
-
-                                                }
                                             }
                                         }
-                                        Item {
-                                            height:20
-                                        }
-                                        RowLayout{
-
-                                            Image {
-                                                id:flightStatus
-                                                sourceSize.width: 35
-                                                sourceSize.height: 35
-                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Button {
-                                                id: flight
-                                                text : "Upper Light"
-                                                implicitWidth : 120
-                                                implicitHeight : 30
-
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 5
-                                                    opacity: flight.down ? 0.5 : 1
-
-                                                }
-
-                                                onClicked: {
-                                                    publisher.toolToggle = "6"
-
-                                                }
-                                            }
-                                            Item {
-                                                width:30
-                                            }
-
-
-
-                                            Image {
-                                                id:blightStatus
-                                                sourceSize.width: 35
-                                                sourceSize.height: 35
-                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                                            }
-                                            Button {
-                                                id: blight
-                                                text : "Bottom Light"
-                                                implicitWidth : 120
-                                                implicitHeight : 30
-
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 5
-                                                    opacity: blight.down ? 0.5 : 1
-
-                                                }
-
-                                                onClicked: {
-                                                    publisher.toolToggle = "5"
-
-                                                }
-                                            }
-
-
-                                        }
-
                                     }
+                                    SButton{
+                                        height: 20
+                                        name:  "TD"
+                                        baseColor:  buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: 70
+                                        onClicked: {
 
+                                            init_crawler(1)
+                                            initCrawler()
+
+                                        }
+                                    }
+                                    Item {
+                                        id: batteryStatusId
+                                        width: 70
+                                        height: 60
+                                        Image {
+                                            id: batteryStatus
+                                            anchors.fill: parent
+                                            source:displaybatterStatus(publisher.batteryValue)
+                                        }
+
+                                        Text {
+                                            id: batteryStatusValue
+                                            text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
+
+                                            verticalAlignment: Text.AlignVCenter
+                                            horizontalAlignment: Text.AlignHCenter
+                                            anchors.fill: parent
+                                            font.pointSize: 8
+                                            color: textColor
+                                        }
+                                    }
                                 }
-                            }
+                                RowLayout{
+                                    spacing: parent.width * 0.2
+                                    SButton{
+                                        height: 20
+                                        name:  "P/P"
+                                        baseColor:  buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: 70
+                                        onClicked: {
 
-                        }
+                                        }
+                                    }
+                                    SButton{
+                                        height: 20
+                                        name:  "Led"
+                                        baseColor:  buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: 70
+                                        onClicked: {
 
-                    }
-                    Rectangle{
-                        width: widthScreen * 0.16
-                        height: heightScreen * 0.25
-                        border.color: "#6fda9c"
-                        color: "#344955"
-                        radius: 15
+                                        }
+                                    }
+                                    SButton{
+                                        height: 20
+                                        name:  "Log"
+                                        baseColor:  buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: 70
+                                        onClicked: {
 
-                        ColumnLayout{
-                            anchors.fill: parent
-                            RowLayout{
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: qsTr("Linear")
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 24
-                                    color: "#ffffff"
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
+                                        }
+                                    }
                                 }
                             }
                             Item{
-                                Layout.fillHeight: true
-                                width: parent.width
-
-                                CircularGauge {
-                                    id:circularGaugeBar
+                                height: heightScreen * 0.18
+                                width: 60
+                                Gauge {
                                     anchors.fill: parent
-                                    antialiasing: true
-                                    style: CircularGaugeStyle {
-                                        tickmarkStepSize: 2
-                                    }
-
-                                    value: publisher.velocityValue.current_vel_linear === undefined ? 0 :publisher.velocityValue.current_vel_linear
-                                    maximumValue: publisher.velocityValue.max_linear === undefined ? 10 :publisher.velocityValue.max_linear
+                                    minimumValue: 0
+                                    value: 50
+                                    maximumValue: 100
                                     anchors.centerIn: parent
-                                    Component.onCompleted: forceActiveFocus()
-                                    property bool accelerating: false
-                                    Behavior on value {
-                                        NumberAnimation {
-                                            duration: 1000
-                                        }
-                                    }
                                 }
-                            }
 
+                            }
                         }
+
+
+
+                        //                        ColumnLayout{
+                        //                            anchors.fill: parent
+                        //                            spacing: 0
+                        //                            RowLayout{
+                        //                                Text {
+                        //                                    Layout.fillWidth: true
+                        //                                    text: qsTr("Tool")
+                        //                                    font.family: "Tahoma"
+                        //                                    font.bold: true
+                        //                                    font.pixelSize: 24
+                        //                                    color: "#FFFFFF"
+                        //                                    horizontalAlignment: Text.AlignHCenter
+                        //                                    verticalAlignment: Text.AlignVCenter
+                        //                                }
+                        //                            }
+                        //                            RowLayout{
+                        //                                Layout.fillHeight: true
+                        //                                width: parent.width
+
+                        //                                Item{
+                        //                                    Layout.fillHeight: true
+                        //                                    Layout.fillWidth: true
+                        //                                    ColumnLayout{
+                        //                                        anchors.centerIn: parent
+                        //                                        RowLayout{
+
+                        //                                            Image {
+                        //                                                id:magnetStatus
+                        //                                                sourceSize.width: 35
+                        //                                                sourceSize.height: 35
+                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                        //                                            }
+
+                        //                                            Button {
+                        //                                                id: magnet
+                        //                                                text : "Magnet"
+                        //                                                implicitWidth : 70
+                        //                                                implicitHeight : 30
+
+                        //                                                background: Rectangle {
+                        //                                                    color:"#6fda9c"
+                        //                                                    radius: 5
+                        //                                                    opacity: magnet.down ? 0.5 : 1
+
+                        //                                                }
+
+                        //                                                onClicked: {
+                        //                                                    publisher.toolToggle = "7"
+
+                        //                                                }
+                        //                                            }
+
+                        //                                            Item{
+                        //                                                width: 8
+                        //                                            }
+
+
+                        //                                            Image {
+                        //                                                id:pumpStatus
+                        //                                                sourceSize.width: 35
+                        //                                                sourceSize.height: 35
+                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                        //                                            }
+
+                        //                                            Button {
+                        //                                                id: pump
+                        //                                                text : "Pump"
+                        //                                                implicitWidth : 70
+                        //                                                implicitHeight : 30
+
+                        //                                                background: Rectangle {
+                        //                                                    color:"#6fda9c"
+                        //                                                    radius: 5
+                        //                                                    opacity: pump.down ? 0.5 : 1
+
+                        //                                                }
+
+                        //                                                onClicked: {
+                        //                                                    publisher.toolToggle = "4"
+
+                        //                                                }
+                        //                                            }
+                        //                                            Item{
+                        //                                                width: 8
+                        //                                            }
+                        //                                            Image {
+                        //                                                id:grinderStatus
+                        //                                                sourceSize.width: 35
+                        //                                                sourceSize.height: 35
+                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                        //                                            }
+
+                        //                                            Button {
+                        //                                                id: grinder
+                        //                                                text : "Grinder"
+                        //                                                implicitWidth : 70
+                        //                                                implicitHeight : 30
+
+                        //                                                background: Rectangle {
+                        //                                                    color:"#6fda9c"
+                        //                                                    radius: 5
+                        //                                                    opacity: grinder.down ? 0.5 : 1
+
+                        //                                                }
+
+                        //                                                onClicked: {
+                        //                                                    publisher.toolToggle = "0"
+
+                        //                                                }
+                        //                                            }
+                        //                                        }
+                        //                                        Item {
+                        //                                            height:20
+                        //                                        }
+                        //                                        RowLayout{
+
+                        //                                            Image {
+                        //                                                id:flightStatus
+                        //                                                sourceSize.width: 35
+                        //                                                sourceSize.height: 35
+                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                        //                                            }
+                        //                                            Button {
+                        //                                                id: flight
+                        //                                                text : "Upper Light"
+                        //                                                implicitWidth : 120
+                        //                                                implicitHeight : 30
+
+                        //                                                background: Rectangle {
+                        //                                                    color:"#6fda9c"
+                        //                                                    radius: 5
+                        //                                                    opacity: flight.down ? 0.5 : 1
+
+                        //                                                }
+
+                        //                                                onClicked: {
+                        //                                                    publisher.toolToggle = "6"
+
+                        //                                                }
+                        //                                            }
+                        //                                            Item {
+                        //                                                width:30
+                        //                                            }
+
+
+
+                        //                                            Image {
+                        //                                                id:blightStatus
+                        //                                                sourceSize.width: 35
+                        //                                                sourceSize.height: 35
+                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+                        //                                            }
+                        //                                            Button {
+                        //                                                id: blight
+                        //                                                text : "Bottom Light"
+                        //                                                implicitWidth : 120
+                        //                                                implicitHeight : 30
+
+                        //                                                background: Rectangle {
+                        //                                                    color:"#6fda9c"
+                        //                                                    radius: 5
+                        //                                                    opacity: blight.down ? 0.5 : 1
+
+                        //                                                }
+
+                        //                                                onClicked: {
+                        //                                                    publisher.toolToggle = "5"
+
+                        //                                                }
+                        //                                            }
+
+
+                        //                                        }
+
+                        //                                    }
+
+                        //                                }
+                        //                            }
+
+                        //                        }
 
                     }
                     Rectangle{
-                        width: widthScreen * 0.16
+                        width: widthScreen * 0.18
                         height: heightScreen * 0.25
-                        border.color: "#6fda9c"
-                        color: "#344955"
+                        border.color: borderSecondBg
+                        color: secondBg
                         radius: 15
-
                         ColumnLayout{
                             anchors.fill: parent
-                            RowLayout{
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: qsTr("Angular")
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 24
-                                    color: "#ffffff"
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
-                            }
-                            Item{
-                                Layout.fillHeight: true
-                                width: parent.width
-
-                                CircularGauge {
-                                    id:circularGauge2Bar
-                                    anchors.fill: parent
-                                    antialiasing: true
-                                    style: CircularGaugeStyle {
-                                        tickmarkStepSize: 2
-                                    }
-                                    value: publisher.velocityValue.current_vel_angular === undefined ? 0 :publisher.velocityValue.current_vel_angular
-                                    maximumValue: publisher.velocityValue.max_angular === undefined ? 10 :publisher.velocityValue.max_angular
-                                    anchors.centerIn: parent
-                                    Component.onCompleted: forceActiveFocus()
-                                    property bool accelerating: false
-                                    Behavior on value {
-                                        NumberAnimation {
-                                            duration: 1000
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-
-                    }
-                    Rectangle{
-                        id: crawlerr
-                        width: widthScreen * 0.24
-                        height: heightScreen * 0.25
-                        border.color: "#6fda9c"
-                        color: "#344955"
-                        radius: 15
-
-                        ColumnLayout{
-                            anchors.fill: parent
-                            id:cr
-
-
+                            anchors.topMargin: 10
                             Text {
                                 Layout.fillWidth: true
-                                text: qsTr("Crawler")
+                                text: qsTr("Speed")
                                 font.family: "Tahoma"
                                 font.bold: true
                                 font.pixelSize: 24
-                                color: "#ffffff"
+                                color: textColor
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
-
-
-                            RowLayout{
-
-                                SButton{
-                                    Layout.leftMargin: widthScreen * 0.16/10
-                                    Layout.topMargin: 10
-
-                                    id: intCrawler
-                                    height: 20
-                                    name:  "Initialize"
-                                    baseColor:  mainAppColor
-                                    borderColor: mainAppColor
-                                    implicitWidth: 70
-
-                                    onClicked: {
-
-                                        init_crawler(1)
-                                        initCrawler()
-
-                                    }
-
-
-                                }
-                                SButton{
-                                    Layout.topMargin: 10
-                                    id: stpCrawler
-                                    height: 20
-                                    name:"Stop"
-                                    baseColor:  "#FF2E2E"
-                                    borderColor: "#FF2E2E"
-                                    implicitWidth: 70
-
-                                    onClicked: {
-                                        init_crawler(0)
-                                        stopCrawler()
-
-
-                                    }
-                                }
-
-
-                                SButton{
-                                    Layout.topMargin: 10
-                                    id: resetCrawler
-                                    height: 20
-                                    implicitWidth: 70
-
-                                    name: "Reset"
-                                    baseColor: mainAppColor
-                                    borderColor: mainAppColor
-                                    onClicked: {
-                                        publisher.rst_crawler(1)
-                                        rstCrawler()
-                                    }
-
-                                }
-                                SButton{
-                                    Layout.topMargin: 10
-
-
-                                    id: crawlerStatus
-                                    height: 20
-                                    name:  "Status"
-                                    baseColor:  mainAppColor
-                                    borderColor: mainAppColor
-                                    implicitWidth: 70
-
-                                    onClicked: {
-
-                                        crawlerDialog.text =  "\n\nErrors:\n\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n\n\n"+
-                                                "\n\nTemperature:\n\n" +cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : "+crawlerTemp[3]+" deg"+"\n"
-                                        crawlerDialog.icon = StandardIcon.Information
-                                        crawlerDialog.open()
-
-                                    }
-                                }
-
-                            }
-
-                            Item{
+                            Row{
                                 Layout.fillHeight: true
                                 width: parent.width
-
-                                Rectangle{
-                                    id:rectId
-                                    anchors.centerIn: parent
-                                    anchors.verticalCenterOffset: 5
-                                    width: widthScreen * 0.08
-                                    height: heightScreen * 0.10
-                                    color: "#232F34"
-                                    Image {
-                                        anchors.centerIn: parent
-
-                                        sourceSize.width: 40
-                                        sourceSize.height: 40
-                                        source:"qrc:/UI/Assets/dashboard/arrow.png"
-                                    }
-                                }
-
-                                Item {
-                                    width: 25
-                                    height: 25
-                                    x:rectId.x - width
-                                    y:rectId.y - height+25
-                                    Image {
-                                        id:fl
-                                        anchors.centerIn: parent
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
-                                        source: publisher.crawlStatus.frontLeft ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                    }
-
-                                }
-
-                                Item {
-                                    width: 25
-                                    height: 25
-                                    x:rectId.x + rectId.width
-                                    y:rectId.y - height+25
-                                    Image {
-                                        id:fr
-                                        anchors.centerIn: parent
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
-                                        source:  publisher.crawlStatus.frontRight? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                    }
-
-                                }
-
-                                Item {
-                                    width: 25
-                                    height: 25
-                                    x:rectId.x + rectId.width
-                                    y:rectId.y + rectId.height-25
-                                    Image {
-                                        id:bl
-                                        anchors.centerIn: parent
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
-                                        source: publisher.crawlStatus.backLeft  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                    }
-
-                                }
-
-                                Item {
-                                    width: 25
-                                    height: 25
-                                    x:rectId.x - width
-                                    y:rectId.y + rectId.height-25
-                                    Image {
-                                        id:br
-                                        anchors.centerIn: parent
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
-                                        source: publisher.crawlStatus.backrRight ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-                                    }
-
-                                }
-
-                            }
-
-
-
-                        }
-                    }
-                    Rectangle{
-                        width: widthScreen * 0.20
-                        height: heightScreen * 0.25
-                        border.color: "#6fda9c"
-                        color: "#344955"
-                        radius: 15
-
-                        ColumnLayout{
-                            anchors.fill: parent
-                            RowLayout{
-
                                 Text {
-                                    Layout.fillWidth: true
-                                    text: qsTr("Arm")
+                                    width: parent.width * 0.8
+                                    height: parent.height
+                                    textFormat: Text.RichText
+                                    text: "30" + "<b style='font-size: 20px;'> mm/s<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
-                                    font.pixelSize: 24
-                                    color: "#FFFFFF"
-                                    horizontalAlignment: Text.AlignHCenter
-                                    verticalAlignment: Text.AlignVCenter
-                                }
-
-                            }
-
-                            RowLayout{
-                                Layout.fillHeight: true
-                                Item{
-                                    Layout.fillHeight: true
-                                    Layout.fillWidth: true
-
-                                    ColumnLayout{
-                                        Layout.fillHeight: true
-                                        anchors.fill: parent
-
-
-                                        RowLayout{
-                                            Layout.fillWidth: true
-
-                                            RowLayout{
-                                                Layout.leftMargin: 40
-
-
-                                                Image {
-                                                    sourceSize.width: 20
-                                                    sourceSize.height: 20
-                                                    source: publisher.armStatus[0] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-                                                }
-                                                Text {
-                                                    color: "#6fda9c"
-                                                    font.pixelSize: 20
-                                                    text: qsTr("Base")
-                                                }
-
-                                            }
-
-                                            RowLayout{
-                                                Layout.leftMargin: 32
-
-                                                Image {
-                                                    sourceSize.width: 20
-                                                    sourceSize.height: 20
-                                                    source:  publisher.armStatus[1]? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-                                                }
-                                                Text {
-                                                    color: "#6fda9c"
-                                                    font.pixelSize: 20
-                                                    text: qsTr("Shoulder")
-                                                }
-
-
-                                            }
-                                        }
-                                        RowLayout{
-                                            RowLayout{
-
-                                                Layout.leftMargin: 40
-
-                                                Image {
-                                                    sourceSize.width: 20
-                                                    sourceSize.height: 20
-                                                    source: publisher.armStatus[2] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-                                                }
-                                                Text {
-                                                    color: "#6fda9c"
-                                                    font.pixelSize: 20
-                                                    text: qsTr("Elbow")
-                                                }
-                                            }
-                                            RowLayout{
-                                                Layout.leftMargin: 20
-
-                                                Image {
-                                                    sourceSize.width: 20
-                                                    sourceSize.height: 20
-                                                    source: publisher.armStatus[3]  ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-                                                }
-                                                Text {
-                                                    color: "#6fda9c"
-                                                    font.pixelSize: 20
-                                                    text: qsTr("Tool")
-                                                }
-                                            }}
-
-                                        RowLayout{
-
-                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
-
-                                            SButton{
-
-                                                id: intArm
-                                                height: 20
-                                                name: "Initilize"
-                                                baseColor: mainAppColor
-                                                borderColor: mainAppColor
-                                                implicitWidth: 120
-                                                onClicked: {
-                                                    publisher.call_arminit(1)
-                                                    initArm()
-                                                }
-                                            }
-
-
-                                            SButton{
-
-                                                id: resetArm
-                                                height: 20
-                                                implicitWidth: 120
-
-                                                name: "Reset"
-                                                baseColor: mainAppColor
-                                                borderColor: mainAppColor
-                                                onClicked: {
-                                                    publisher.rst_arm(1)
-
-                                                    rstArm()
-
-                                                }
-
-                                            }
-
-
-
-                                        }
-
-                                        RowLayout{
-
-                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
-
-                                            SButton{
-
-                                                id: stpArm
-                                                height: 20
-                                                name: "Stop"
-                                                baseColor: "red"
-                                                borderColor: "red"
-                                                implicitWidth: 120
-                                                onClicked: {
-                                                    publisher.call_arminit(0)
-
-                                                    stopArm()
-                                                }
-                                            }
-
-
-                                            SButton{
-
-                                                id: armmStatus
-                                                height: 20
-                                                name:  "Status"
-                                                baseColor:  mainAppColor
-                                                borderColor: mainAppColor
-                                                implicitWidth: 120
-
-                                                onClicked: {
-                                                    publisher.trig_armStatus()
-                                                    console.log("called in button")
-
-                                                }
-                                            }
-
-
-                                        }
-                                    }
-
-
-                                }
-
-                            }
-
-                        }
-                    }
-                    Rectangle{
-                        width: widthScreen * 0.22
-                        height: heightScreen * 0.25
-                        border.color: "#6fda9c"
-                        border.width: 2
-                        color: "#344955"
-                        radius: 15
-
-                        ColumnLayout{
-                            anchors.fill: parent
-                            spacing: 0
-                            RowLayout{
-                                Text {
-                                    Layout.fillWidth: true
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 50
-                                    color: "#6fda9c"
+                                    font.pixelSize: 60
+                                     color: textColor
                                     verticalAlignment: Text.AlignVCenter
                                     horizontalAlignment: Text.AlignHCenter
-                                    topPadding: 5
-
-                                    function calcThick()
-                                    {
-                                        var u= publisher.thickness.unit
-                                        var un ="NAN"
-                                        if(u===1)
-                                            un= "mm"
-                                        else if(u===0)
-                                            un= "in"
-                                        else
-                                            un ="NAN"
-                                        return(" "+ un)
-
-                                    }
-                                    text:   publisher.thickness.unit === -1 ? "-----" : publisher.thickness.thickness.toFixed(2) + calcThick()
                                 }
-
-
-
-                            }
-                            RowLayout{
-                                Layout.fillHeight: true
-                                width: parent.width
-                                Item{
-                                    Layout.fillHeight: true
-                                    Layout.fillWidth: true
+                                Item {
+                                    width: parent.width * 0.2
+                                    height: parent.height
                                     ColumnLayout{
-                                        anchors.left : parent
-                                        RowLayout{
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 12
-                                                text: qsTr("Velocity :")
-                                                leftPadding: 10
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-
-                                                font.pixelSize: 12
-                                                text: publisher.utstatus.vel === undefined ? "NAN" : publisher.utstatus.vel + " " + "m/s"
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 12
-                                                leftPadding: 10
-
-                                                text: qsTr("DeepCoat :")
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-
-                                                font.pixelSize: 12
-                                                text: publisher.utstatus.deepcoat === undefined ? "NAN" : publisher.utstatus.deepcoat
-                                            }
-
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 12
-                                                leftPadding: 10
-                                                text: qsTr("Echoes :")
-                                            }
-                                            Text {
-                                                color: "#6fda9c"
-
-                                                font.pixelSize: 12
-                                                text: publisher.utstatus.echo === undefined ? "NAN" : publisher.utstatus.echo
-                                            }
-
-
-                                        }
-                                        RowLayout{
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 20
-                                                text: qsTr("Velocity   :")
-                                                leftPadding: 10
-                                            }
-
-                                            TextField {
-                                                id: sendVel
-                                                Layout.preferredWidth: 80
-                                                Layout.alignment: Qt.AlignHCenter
-                                                color: mainTextColor
-                                                font.pointSize: 14
-                                                font.family: "fontawesome"
-                                                leftPadding: 5
-                                                activeFocusOnPress: true
-                                                Keys.onPressed: (event)=> {
-                                                                    if (event.key === Qt.Key_Return) {
-                                                                        publisher.utVel = text
-
-                                                                    }}
-                                                background: Rectangle {
-                                                    implicitWidth:  30
-                                                    implicitHeight: 30
-                                                    radius: implicitHeight / 2
-                                                    color: "transparent"
-
-                                                    Rectangle {
-                                                        width: 80
-                                                        height: 1
-                                                        anchors.horizontalCenter: parent.horizontalCenter
-                                                        anchors.bottom: parent.bottom
-                                                        color: mainAppColor
-                                                    }
-                                                }
-                                            }
-                                            SButton{
-                                                height: 15
-                                                name: "Send"
-                                                baseColor: mainAppColor
-                                                borderColor: mainAppColor
-                                                onClicked: {
-                                                    publisher.utVel = sendVel.text
-                                                }
-
-
-                                            }
-                                        }
-                                        RowLayout{
-
-                                            Layout.fillHeight: true
-                                            width: parent.width/2
-                                            Text {
-                                                Layout.alignment: Qt.AlignCenter
-
-                                                color: "#6fda9c"
-                                                font.pixelSize: 20
-                                                leftPadding: 10
-
-                                                text: qsTr("DeepCoat :")
-                                            }
-
-                                            TextField {
-                                                id: sendDC
-                                                Layout.preferredWidth: 80
-                                                Layout.alignment: Qt.AlignHCenter
-                                                color: mainTextColor
-                                                font.pointSize: 14
-                                                font.family: "fontawesome"
-                                                leftPadding: 5
-                                                activeFocusOnPress: true
-                                                Keys.onPressed: (event)=> {
-                                                                    if (event.key === Qt.Key_Return) {
-                                                                        publisher.utData = sendDC.text
-
-                                                                    }}
-                                                background: Rectangle {
-                                                    implicitWidth:  30
-                                                    implicitHeight: 30
-                                                    radius: implicitHeight / 2
-                                                    color: "transparent"
-
-                                                    Rectangle {
-                                                        width: 80
-                                                        height: 1
-                                                        anchors.horizontalCenter: parent.horizontalCenter
-                                                        anchors.bottom: parent.bottom
-                                                        color: mainAppColor
-                                                    }
-                                                }
-                                            }
-                                            SButton{
-                                                height: 15
-                                                name: "Send"
-                                                baseColor: mainAppColor
-                                                borderColor: mainAppColor
-                                                onClicked: {
-
-                                                    publisher.utData = sendDC.text
-                                                }
-
-
-                                            }
-                                        }
-                                        RowLayout{
-                                            Text {
-                                                color: "#6fda9c"
-                                                font.pixelSize: 20
-                                                leftPadding: 10
-                                                text: qsTr("XRange :")
-                                            }
-
-                                            TextField {
-                                                id: sendXR
-                                                Layout.preferredWidth: 80
-                                                Layout.alignment: Qt.AlignHCenter
-                                                color: mainTextColor
-                                                font.pointSize: 14
-                                                font.family: "fontawesome"
-                                                leftPadding: 5
-                                                activeFocusOnPress: true
-                                                Keys.onPressed: (event)=> {
-                                                                    if (event.key === Qt.Key_Return) {
-                                                                        publisher.utData = sendXR.text
-
-                                                                    }}
-                                                background: Rectangle {
-                                                    implicitWidth:  30
-                                                    implicitHeight: 30
-                                                    radius: implicitHeight / 2
-                                                    color: "transparent"
-
-                                                    Rectangle {
-                                                        width: 80
-                                                        height: 1
-                                                        anchors.horizontalCenter: parent.horizontalCenter
-                                                        anchors.bottom: parent.bottom
-                                                        color: mainAppColor
-                                                    }
-                                                }
-                                            }
-                                            SButton{
-                                                height: 15
-                                                name: "Send"
-                                                baseColor: mainAppColor
-                                                borderColor: mainAppColor
-                                                onClicked: {
-                                                    //
-                                                    publisher.utData = sendXR.text
-                                                }
-
-
-                                            }
+                                        height: parent.height
+                                        width: parent.width
+                                        Image {
+                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                         }
                                         Item {
-                                            height: 2
+                                            Layout.fillHeight: true
+                                        }
+                                        Image {
+                                            rotation: 180
+                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                         }
                                     }
-
                                 }
                             }
-
+                            Item {
+                                height: parent.height * 0.1
+                            }
                         }
-
                     }
+                    Rectangle{
+                        width: widthScreen * 0.18
+                        height: heightScreen * 0.25
+                        border.color: borderSecondBg
+                        color: secondBg
+                        radius: 15
+                        ColumnLayout{
+                            anchors.fill: parent
+                            anchors.topMargin: 10
+                            Text {
+                                Layout.fillWidth: true
+                                text: qsTr("Linear Sensor Position")
+                                font.family: "Tahoma"
+                                font.bold: true
+                                font.pixelSize: 24
+                              color: textColor
+                                verticalAlignment: Text.AlignVCenter
+                                horizontalAlignment: Text.AlignHCenter
+                            }
+                            Row{
+                                Layout.fillHeight: true
+                                width: parent.width
+                                Text {
+                                    width: parent.width * 0.8
+                                    height: parent.height
+                                    textFormat: Text.RichText
+                                    text: "30" + "<b style='font-size: 20px;'> mm<b>"
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 60
+                                     color: textColor
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+                                Item {
+                                    width: parent.width * 0.2
+                                    height: parent.height
+                                    ColumnLayout{
+                                        height: parent.height
+                                        width: parent.width
+                                        Image {
+                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                        }
+                                        Item {
+                                            Layout.fillHeight: true
+                                        }
+                                        Image {
+                                            rotation: 180
+                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                        }
+                                    }
+                                }
+                            }
+                            Item {
+                                height: parent.height * 0.1
+                            }
+                        }
+                    }
+                    Rectangle{
+                        width: widthScreen * 0.18
+                        height: heightScreen * 0.25
+                        border.color: borderSecondBg
+                        color: secondBg
+                        radius: 15
+                        ColumnLayout{
+                            anchors.fill: parent
+                            anchors.topMargin: 10
+                            Text {
+                                Layout.fillWidth: true
+                                text: qsTr("Angle Indicator")
+                                font.family: "Tahoma"
+                                font.bold: true
+                                font.pixelSize: 24
+                                 color: textColor
+                                verticalAlignment: Text.AlignVCenter
+                                horizontalAlignment: Text.AlignHCenter
+                            }
+                            Row{
+                                Layout.fillHeight: true
+                                width: parent.width
+                                Text {
+                                    width: parent.width * 0.8
+                                    height: parent.height
+                                    text: "30" + "\xB0"
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 60
+                                     color: textColor
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+                                Item {
+                                    width: parent.width * 0.2
+                                    height: parent.height
+                                    ColumnLayout{
+                                        height: parent.height
+                                        width: parent.width
+                                        Image {
+                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                        }
+                                        Item {
+                                            Layout.fillHeight: true
+                                        }
+                                        Image {
+                                            rotation: 180
+                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                        }
+                                    }
+                                }
+                            }
+                            Item {
+                                height: parent.height * 0.1
+                            }
+                        }
+                    }
+
+                    // visble false
+//                    Rectangle{
+//                        id: crawlerr
+//                        width: widthScreen * 0.24
+//                        height: heightScreen * 0.25
+//                        border.color: "#6fda9c"
+//                        color: "#344955"
+//                        radius: 15
+//                        visible: false
+
+//                        ColumnLayout{
+//                            anchors.fill: parent
+//                            id:cr
+
+
+//                            Text {
+//                                Layout.fillWidth: true
+//                                text: qsTr("Crawler")
+//                                font.family: "Tahoma"
+//                                font.bold: true
+//                                font.pixelSize: 24
+//                                color: "#ffffff"
+//                                verticalAlignment: Text.AlignVCenter
+//                                horizontalAlignment: Text.AlignHCenter
+//                            }
+
+
+//                            RowLayout{
+
+//                                SButton{
+//                                    Layout.leftMargin: widthScreen * 0.16/10
+//                                    Layout.topMargin: 10
+
+//                                    id: intCrawler
+//                                    height: 20
+//                                    name:  "Initialize"
+//                                    baseColor:  mainAppColor
+//                                    borderColor: mainAppColor
+//                                    implicitWidth: 70
+
+//                                    onClicked: {
+
+//                                        init_crawler(1)
+//                                        initCrawler()
+
+//                                    }
+
+
+//                                }
+//                                SButton{
+//                                    Layout.topMargin: 10
+//                                    id: stpCrawler
+//                                    height: 20
+//                                    name:"Stop"
+//                                    baseColor:  "#FF2E2E"
+//                                    borderColor: "#FF2E2E"
+//                                    implicitWidth: 70
+
+//                                    onClicked: {
+//                                        init_crawler(0)
+//                                        stopCrawler()
+
+
+//                                    }
+//                                }
+
+
+//                                SButton{
+//                                    Layout.topMargin: 10
+//                                    id: resetCrawler
+//                                    height: 20
+//                                    implicitWidth: 70
+
+//                                    name: "Reset"
+//                                    baseColor: mainAppColor
+//                                    borderColor: mainAppColor
+//                                    onClicked: {
+//                                        publisher.rst_crawler(1)
+//                                        rstCrawler()
+//                                    }
+
+//                                }
+//                                SButton{
+//                                    Layout.topMargin: 10
+
+
+//                                    id: crawlerStatus
+//                                    height: 20
+//                                    name:  "Status"
+//                                    baseColor:  mainAppColor
+//                                    borderColor: mainAppColor
+//                                    implicitWidth: 70
+
+//                                    onClicked: {
+
+//                                        crawlerDialog.text =  "\n\nErrors:\n\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n\n\n"+
+//                                                "\n\nTemperature:\n\n" +cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : "+crawlerTemp[3]+" deg"+"\n"
+//                                        crawlerDialog.icon = StandardIcon.Information
+//                                        crawlerDialog.open()
+
+//                                    }
+//                                }
+
+//                            }
+
+//                            Item{
+//                                Layout.fillHeight: true
+//                                width: parent.width
+
+//                                Rectangle{
+//                                    id:rectId
+//                                    anchors.centerIn: parent
+//                                    anchors.verticalCenterOffset: 5
+//                                    width: widthScreen * 0.08
+//                                    height: heightScreen * 0.10
+//                                    color: "#232F34"
+//                                    Image {
+//                                        anchors.centerIn: parent
+
+//                                        sourceSize.width: 40
+//                                        sourceSize.height: 40
+//                                        source:"qrc:/UI/Assets/dashboard/arrow.png"
+//                                    }
+//                                }
+
+//                                Item {
+//                                    width: 25
+//                                    height: 25
+//                                    x:rectId.x - width
+//                                    y:rectId.y - height+25
+//                                    Image {
+//                                        id:fl
+//                                        anchors.centerIn: parent
+//                                        sourceSize.width: 25
+//                                        sourceSize.height: 25
+//                                        source: publisher.crawlStatus.frontLeft ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+//                                    }
+
+//                                }
+
+//                                Item {
+//                                    width: 25
+//                                    height: 25
+//                                    x:rectId.x + rectId.width
+//                                    y:rectId.y - height+25
+//                                    Image {
+//                                        id:fr
+//                                        anchors.centerIn: parent
+//                                        sourceSize.width: 25
+//                                        sourceSize.height: 25
+//                                        source:  publisher.crawlStatus.frontRight? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+//                                    }
+
+//                                }
+
+//                                Item {
+//                                    width: 25
+//                                    height: 25
+//                                    x:rectId.x + rectId.width
+//                                    y:rectId.y + rectId.height-25
+//                                    Image {
+//                                        id:bl
+//                                        anchors.centerIn: parent
+//                                        sourceSize.width: 25
+//                                        sourceSize.height: 25
+//                                        source: publisher.crawlStatus.backLeft  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+//                                    }
+
+//                                }
+
+//                                Item {
+//                                    width: 25
+//                                    height: 25
+//                                    x:rectId.x - width
+//                                    y:rectId.y + rectId.height-25
+//                                    Image {
+//                                        id:br
+//                                        anchors.centerIn: parent
+//                                        sourceSize.width: 25
+//                                        sourceSize.height: 25
+//                                        source: publisher.crawlStatus.backrRight ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+//                                    }
+
+//                                }
+
+//                            }
+
+
+
+//                        }
+//                    }
+//                    Rectangle{
+//                        width: widthScreen * 0.28
+//                        height: heightScreen * 0.25
+//                        border.color: "#6fda9c"
+//                        color: "#344955"
+//                        radius: 15
+//                        visible: false
+
+//                        ColumnLayout{
+//                            anchors.fill: parent
+//                            spacing: 0
+//                            RowLayout{
+//                                Text {
+//                                    Layout.fillWidth: true
+//                                    text: qsTr("Tool")
+//                                    font.family: "Tahoma"
+//                                    font.bold: true
+//                                    font.pixelSize: 24
+//                                    color: "#FFFFFF"
+//                                    horizontalAlignment: Text.AlignHCenter
+//                                    verticalAlignment: Text.AlignVCenter
+//                                }
+//                            }
+//                            RowLayout{
+//                                Layout.fillHeight: true
+//                                width: parent.width
+
+//                                Item{
+//                                    Layout.fillHeight: true
+//                                    Layout.fillWidth: true
+//                                    ColumnLayout{
+//                                        anchors.centerIn: parent
+//                                        RowLayout{
+
+//                                            Image {
+//                                                id:magnetStatus
+//                                                sourceSize.width: 35
+//                                                sourceSize.height: 35
+//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+//                                            }
+
+//                                            Button {
+//                                                id: magnet
+//                                                text : "Magnet"
+//                                                implicitWidth : 70
+//                                                implicitHeight : 30
+
+//                                                background: Rectangle {
+//                                                    color:"#6fda9c"
+//                                                    radius: 5
+//                                                    opacity: magnet.down ? 0.5 : 1
+
+//                                                }
+
+//                                                onClicked: {
+//                                                    publisher.toolToggle = "7"
+
+//                                                }
+//                                            }
+
+//                                            Item{
+//                                                width: 8
+//                                            }
+
+
+//                                            Image {
+//                                                id:pumpStatus
+//                                                sourceSize.width: 35
+//                                                sourceSize.height: 35
+//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+//                                            }
+
+//                                            Button {
+//                                                id: pump
+//                                                text : "Pump"
+//                                                implicitWidth : 70
+//                                                implicitHeight : 30
+
+//                                                background: Rectangle {
+//                                                    color:"#6fda9c"
+//                                                    radius: 5
+//                                                    opacity: pump.down ? 0.5 : 1
+
+//                                                }
+
+//                                                onClicked: {
+//                                                    publisher.toolToggle = "4"
+
+//                                                }
+//                                            }
+//                                            Item{
+//                                                width: 8
+//                                            }
+//                                            Image {
+//                                                id:grinderStatus
+//                                                sourceSize.width: 35
+//                                                sourceSize.height: 35
+//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+//                                            }
+
+//                                            Button {
+//                                                id: grinder
+//                                                text : "Grinder"
+//                                                implicitWidth : 70
+//                                                implicitHeight : 30
+
+//                                                background: Rectangle {
+//                                                    color:"#6fda9c"
+//                                                    radius: 5
+//                                                    opacity: grinder.down ? 0.5 : 1
+
+//                                                }
+
+//                                                onClicked: {
+//                                                    publisher.toolToggle = "0"
+
+//                                                }
+//                                            }
+//                                        }
+//                                        Item {
+//                                            height:20
+//                                        }
+//                                        RowLayout{
+
+//                                            Image {
+//                                                id:flightStatus
+//                                                sourceSize.width: 35
+//                                                sourceSize.height: 35
+//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+//                                            }
+//                                            Button {
+//                                                id: flight
+//                                                text : "Upper Light"
+//                                                implicitWidth : 120
+//                                                implicitHeight : 30
+
+//                                                background: Rectangle {
+//                                                    color:"#6fda9c"
+//                                                    radius: 5
+//                                                    opacity: flight.down ? 0.5 : 1
+
+//                                                }
+
+//                                                onClicked: {
+//                                                    publisher.toolToggle = "6"
+
+//                                                }
+//                                            }
+//                                            Item {
+//                                                width:30
+//                                            }
+
+
+
+//                                            Image {
+//                                                id:blightStatus
+//                                                sourceSize.width: 35
+//                                                sourceSize.height: 35
+//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
+//                                            }
+//                                            Button {
+//                                                id: blight
+//                                                text : "Bottom Light"
+//                                                implicitWidth : 120
+//                                                implicitHeight : 30
+
+//                                                background: Rectangle {
+//                                                    color:"#6fda9c"
+//                                                    radius: 5
+//                                                    opacity: blight.down ? 0.5 : 1
+
+//                                                }
+
+//                                                onClicked: {
+//                                                    publisher.toolToggle = "5"
+
+//                                                }
+//                                            }
+
+
+//                                        }
+
+//                                    }
+
+//                                }
+//                            }
+
+//                        }
+
+//                    }
+//                    Rectangle{
+//                        width: widthScreen * 0.20
+//                        height: heightScreen * 0.25
+//                        border.color: "#6fda9c"
+//                        color: "#344955"
+//                        radius: 15
+//                        visible: false
+
+//                        ColumnLayout{
+//                            anchors.fill: parent
+//                            RowLayout{
+
+//                                Text {
+//                                    Layout.fillWidth: true
+//                                    text: qsTr("Arm")
+//                                    font.family: "Tahoma"
+//                                    font.bold: true
+//                                    font.pixelSize: 24
+//                                    color: "#FFFFFF"
+//                                    horizontalAlignment: Text.AlignHCenter
+//                                    verticalAlignment: Text.AlignVCenter
+//                                }
+
+//                            }
+
+//                            RowLayout{
+//                                Layout.fillHeight: true
+//                                Item{
+//                                    Layout.fillHeight: true
+//                                    Layout.fillWidth: true
+
+//                                    ColumnLayout{
+//                                        Layout.fillHeight: true
+//                                        anchors.fill: parent
+
+
+//                                        RowLayout{
+//                                            Layout.fillWidth: true
+
+//                                            RowLayout{
+//                                                Layout.leftMargin: 40
+
+
+//                                                Image {
+//                                                    sourceSize.width: 20
+//                                                    sourceSize.height: 20
+//                                                    source: publisher.armStatus[0] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+//                                                }
+//                                                Text {
+//                                                    color: "#6fda9c"
+//                                                    font.pixelSize: 20
+//                                                    text: qsTr("Base")
+//                                                }
+
+//                                            }
+
+//                                            RowLayout{
+//                                                Layout.leftMargin: 32
+
+//                                                Image {
+//                                                    sourceSize.width: 20
+//                                                    sourceSize.height: 20
+//                                                    source:  publisher.armStatus[1]? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+//                                                }
+//                                                Text {
+//                                                    color: "#6fda9c"
+//                                                    font.pixelSize: 20
+//                                                    text: qsTr("Shoulder")
+//                                                }
+
+
+//                                            }
+//                                        }
+//                                        RowLayout{
+//                                            RowLayout{
+
+//                                                Layout.leftMargin: 40
+
+//                                                Image {
+//                                                    sourceSize.width: 20
+//                                                    sourceSize.height: 20
+//                                                    source: publisher.armStatus[2] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+//                                                }
+//                                                Text {
+//                                                    color: "#6fda9c"
+//                                                    font.pixelSize: 20
+//                                                    text: qsTr("Elbow")
+//                                                }
+//                                            }
+//                                            RowLayout{
+//                                                Layout.leftMargin: 20
+
+//                                                Image {
+//                                                    sourceSize.width: 20
+//                                                    sourceSize.height: 20
+//                                                    source: publisher.armStatus[3]  ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
+//                                                }
+//                                                Text {
+//                                                    color: "#6fda9c"
+//                                                    font.pixelSize: 20
+//                                                    text: qsTr("Tool")
+//                                                }
+//                                            }}
+
+//                                        RowLayout{
+
+//                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
+
+//                                            SButton{
+
+//                                                id: intArm
+//                                                height: 20
+//                                                name: "Initilize"
+//                                                baseColor: mainAppColor
+//                                                borderColor: mainAppColor
+//                                                implicitWidth: 120
+//                                                onClicked: {
+//                                                    publisher.call_arminit(1)
+//                                                    initArm()
+//                                                }
+//                                            }
+
+
+//                                            SButton{
+
+//                                                id: resetArm
+//                                                height: 20
+//                                                implicitWidth: 120
+
+//                                                name: "Reset"
+//                                                baseColor: mainAppColor
+//                                                borderColor: mainAppColor
+//                                                onClicked: {
+//                                                    publisher.rst_arm(1)
+
+//                                                    rstArm()
+
+//                                                }
+
+//                                            }
+
+
+
+//                                        }
+
+//                                        RowLayout{
+
+//                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
+
+//                                            SButton{
+
+//                                                id: stpArm
+//                                                height: 20
+//                                                name: "Stop"
+//                                                baseColor: "red"
+//                                                borderColor: "red"
+//                                                implicitWidth: 120
+//                                                onClicked: {
+//                                                    publisher.call_arminit(0)
+
+//                                                    stopArm()
+//                                                }
+//                                            }
+
+
+//                                            SButton{
+
+//                                                id: armmStatus
+//                                                height: 20
+//                                                name:  "Status"
+//                                                baseColor:  mainAppColor
+//                                                borderColor: mainAppColor
+//                                                implicitWidth: 120
+
+//                                                onClicked: {
+//                                                    publisher.trig_armStatus()
+//                                                    console.log("called in button")
+
+//                                                }
+//                                            }
+
+
+//                                        }
+//                                    }
+
+
+//                                }
+
+//                            }
+
+//                        }
+//                    }
+//                    Rectangle{
+//                        width: widthScreen * 0.22
+//                        height: heightScreen * 0.25
+//                        border.color: "#6fda9c"
+//                        border.width: 2
+//                        color: "#344955"
+//                        radius: 15
+//                        visible: false
+
+//                        ColumnLayout{
+//                            anchors.fill: parent
+//                            spacing: 0
+//                            RowLayout{
+//                                Text {
+//                                    Layout.fillWidth: true
+//                                    font.family: "Tahoma"
+//                                    font.bold: true
+//                                    font.pixelSize: 50
+//                                    color: "#6fda9c"
+//                                    verticalAlignment: Text.AlignVCenter
+//                                    horizontalAlignment: Text.AlignHCenter
+//                                    topPadding: 5
+
+//                                    function calcThick()
+//                                    {
+//                                        var u= publisher.thickness.unit
+//                                        var un ="NAN"
+//                                        if(u===1)
+//                                            un= "mm"
+//                                        else if(u===0)
+//                                            un= "in"
+//                                        else
+//                                            un ="NAN"
+//                                        return(" "+ un)
+
+//                                    }
+//                                    text:   publisher.thickness.unit === -1 ? "-----" : publisher.thickness.thickness.toFixed(2) + calcThick()
+//                                }
+
+
+
+//                            }
+//                            RowLayout{
+//                                Layout.fillHeight: true
+//                                width: parent.width
+//                                Item{
+//                                    Layout.fillHeight: true
+//                                    Layout.fillWidth: true
+//                                    ColumnLayout{
+//                                        anchors.left : parent
+//                                        RowLayout{
+//                                            Text {
+//                                                color: "#6fda9c"
+//                                                font.pixelSize: 12
+//                                                text: qsTr("Velocity :")
+//                                                leftPadding: 10
+//                                            }
+//                                            Text {
+//                                                color: "#6fda9c"
+
+//                                                font.pixelSize: 12
+//                                                text: publisher.utstatus.vel === undefined ? "NAN" : publisher.utstatus.vel + " " + "m/s"
+//                                            }
+//                                            Text {
+//                                                color: "#6fda9c"
+//                                                font.pixelSize: 12
+//                                                leftPadding: 10
+
+//                                                text: qsTr("DeepCoat :")
+//                                            }
+//                                            Text {
+//                                                color: "#6fda9c"
+
+//                                                font.pixelSize: 12
+//                                                text: publisher.utstatus.deepcoat === undefined ? "NAN" : publisher.utstatus.deepcoat
+//                                            }
+
+//                                            Text {
+//                                                color: "#6fda9c"
+//                                                font.pixelSize: 12
+//                                                leftPadding: 10
+//                                                text: qsTr("Echoes :")
+//                                            }
+//                                            Text {
+//                                                color: "#6fda9c"
+
+//                                                font.pixelSize: 12
+//                                                text: publisher.utstatus.echo === undefined ? "NAN" : publisher.utstatus.echo
+//                                            }
+
+
+//                                        }
+//                                        RowLayout{
+//                                            Text {
+//                                                color: "#6fda9c"
+//                                                font.pixelSize: 20
+//                                                text: qsTr("Velocity   :")
+//                                                leftPadding: 10
+//                                            }
+
+//                                            TextField {
+//                                                id: sendVel
+//                                                Layout.preferredWidth: 80
+//                                                Layout.alignment: Qt.AlignHCenter
+//                                                color: mainTextColor
+//                                                font.pointSize: 14
+//                                                font.family: "fontawesome"
+//                                                leftPadding: 5
+//                                                activeFocusOnPress: true
+//                                                Keys.onPressed: (event)=> {
+//                                                                    if (event.key === Qt.Key_Return) {
+//                                                                        publisher.utVel = text
+
+//                                                                    }}
+//                                                background: Rectangle {
+//                                                    implicitWidth:  30
+//                                                    implicitHeight: 30
+//                                                    radius: implicitHeight / 2
+//                                                    color: "transparent"
+
+//                                                    Rectangle {
+//                                                        width: 80
+//                                                        height: 1
+//                                                        anchors.horizontalCenter: parent.horizontalCenter
+//                                                        anchors.bottom: parent.bottom
+//                                                        color: mainAppColor
+//                                                    }
+//                                                }
+//                                            }
+//                                            SButton{
+//                                                height: 15
+//                                                name: "Send"
+//                                                baseColor: mainAppColor
+//                                                borderColor: mainAppColor
+//                                                onClicked: {
+//                                                    publisher.utVel = sendVel.text
+//                                                }
+
+
+//                                            }
+//                                        }
+//                                        RowLayout{
+
+//                                            Layout.fillHeight: true
+//                                            width: parent.width/2
+//                                            Text {
+//                                                Layout.alignment: Qt.AlignCenter
+
+//                                                color: "#6fda9c"
+//                                                font.pixelSize: 20
+//                                                leftPadding: 10
+
+//                                                text: qsTr("DeepCoat :")
+//                                            }
+
+//                                            TextField {
+//                                                id: sendDC
+//                                                Layout.preferredWidth: 80
+//                                                Layout.alignment: Qt.AlignHCenter
+//                                                color: mainTextColor
+//                                                font.pointSize: 14
+//                                                font.family: "fontawesome"
+//                                                leftPadding: 5
+//                                                activeFocusOnPress: true
+//                                                Keys.onPressed: (event)=> {
+//                                                                    if (event.key === Qt.Key_Return) {
+//                                                                        publisher.utData = sendDC.text
+
+//                                                                    }}
+//                                                background: Rectangle {
+//                                                    implicitWidth:  30
+//                                                    implicitHeight: 30
+//                                                    radius: implicitHeight / 2
+//                                                    color: "transparent"
+
+//                                                    Rectangle {
+//                                                        width: 80
+//                                                        height: 1
+//                                                        anchors.horizontalCenter: parent.horizontalCenter
+//                                                        anchors.bottom: parent.bottom
+//                                                        color: mainAppColor
+//                                                    }
+//                                                }
+//                                            }
+//                                            SButton{
+//                                                height: 15
+//                                                name: "Send"
+//                                                baseColor: mainAppColor
+//                                                borderColor: mainAppColor
+//                                                onClicked: {
+
+//                                                    publisher.utData = sendDC.text
+//                                                }
+
+
+//                                            }
+//                                        }
+//                                        RowLayout{
+//                                            Text {
+//                                                color: "#6fda9c"
+//                                                font.pixelSize: 20
+//                                                leftPadding: 10
+//                                                text: qsTr("XRange :")
+//                                            }
+
+//                                            TextField {
+//                                                id: sendXR
+//                                                Layout.preferredWidth: 80
+//                                                Layout.alignment: Qt.AlignHCenter
+//                                                color: mainTextColor
+//                                                font.pointSize: 14
+//                                                font.family: "fontawesome"
+//                                                leftPadding: 5
+//                                                activeFocusOnPress: true
+//                                                Keys.onPressed: (event)=> {
+//                                                                    if (event.key === Qt.Key_Return) {
+//                                                                        publisher.utData = sendXR.text
+
+//                                                                    }}
+//                                                background: Rectangle {
+//                                                    implicitWidth:  30
+//                                                    implicitHeight: 30
+//                                                    radius: implicitHeight / 2
+//                                                    color: "transparent"
+
+//                                                    Rectangle {
+//                                                        width: 80
+//                                                        height: 1
+//                                                        anchors.horizontalCenter: parent.horizontalCenter
+//                                                        anchors.bottom: parent.bottom
+//                                                        color: mainAppColor
+//                                                    }
+//                                                }
+//                                            }
+//                                            SButton{
+//                                                height: 15
+//                                                name: "Send"
+//                                                baseColor: mainAppColor
+//                                                borderColor: mainAppColor
+//                                                onClicked: {
+//                                                    //
+//                                                    publisher.utData = sendXR.text
+//                                                }
+
+
+//                                            }
+//                                        }
+//                                        Item {
+//                                            height: 2
+//                                        }
+//                                    }
+
+//                                }
+//                            }
+
+//                        }
+
+//                    }
+
                 }
 
                 RowLayout{
@@ -1647,9 +2042,9 @@ Rectangle{
                         id:screen1
                         width: (widthScreen * 0.42) * 2
                         height: (heightScreen * 0.90)
-                        border.color: "#6fda9c"
+                        border.color: borderSecondBg
+                        color: secondBg
                         border.width: 2
-                        color: "#344955"
                         radius: 15
 
                         MediaPlayer {
@@ -1727,7 +2122,7 @@ Rectangle{
                                     anchors.centerIn: parent
 
                                     background: Rectangle {
-                                        color:"#6fda9c"
+                                        color:buttonBg
                                         radius: 8
                                     }
 
@@ -1755,7 +2150,7 @@ Rectangle{
                                     height : 25
                                     anchors.centerIn: parent
                                     background: Rectangle {
-                                        color:"#6fda9c"
+                                        color:buttonBg
                                         radius: 8
                                     }
 
@@ -1842,445 +2237,641 @@ Rectangle{
                     ColumnLayout{
                         width: widthScreen * 0.42
                         height: heightScreen * 0.90
-
-                        TabView{
-                            id: g1
-                            implicitWidth: widthScreen * 0.42
-                            implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
-
-
-                            Tab{
-                                title: " Cam 2  "
-                                id: t1
-                                active:true
-
-                                Rectangle{
-                                    id:screen2
-                                    width: widthScreen * 0.42
-                                    height: ((heightScreen * 0.90)/2 ) - 5/2
-                                    border.color: "#6fda9c"
-                                    border.width: 2
-                                    color: "#344955"
-                                    radius: 15
-                                    property alias videoPlayer1: videoPlayer1
-
-
-                                    MediaPlayer {
-                                        id: videoPlayer1
-
-                                        muted: true
-                                        autoPlay: true
-                                        playlist: Playlist {
-                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
-                                        }
-                                        //                                        playlist: Playlist {
-                                        //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                                        //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                                        //                                        }
-                                    }
-
-                                    VideoOutput {
-                                        id: camera1
-                                        anchors.fill: parent
-                                        source: videoPlayer1
-                                        fillMode: VideoOutput.PreserveAspectCrop
-                                        function save() {
-                                            fullScreenRect.visible = true
-                                            fullScreenView.enabled = true
-                                            full_cam=arrange_cam[1]
-                                            fullScreenView.sourceItem = camera1
-                                            fullScreenView.save()
-                                            fullScreenRect.visible = false
-                                            fullScreenView.enabled = false
-                                            publisher.call_capImg(arrange_cam[1])
-
-                                        }
-                                    }
-                                    Component.onCompleted: {
-                                        videoPlayer1.playlist.currentIndex = 1;
-                                        videoPlayer1.play();
-                                    }
-                                    Rectangle{
-                                        id:videoToolBar2
-                                        anchors.bottom: parent.bottom
-                                        width: parent.width
-                                        height: parent.height*0.1
-                                        opacity: 0.5
-                                    }
-                                    RowLayout{
-                                        anchors.fill:videoToolBar2
-                                        Item {
-                                            width: 50
-                                        }
-                                        Item{
-                                            Layout.fillHeight: true
-                                            width: 30
-
-                                            Button {
-                                                id: btnON3
-                                                text : "Record"
-                                                width : 100
-                                                height : 25
-                                                anchors.centerIn: parent
-
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 8
-                                                }
-
-                                                onClicked: {
-                                                    recCams.gstRecord3("Recording...");
-
-                                                    btnON3.text = "recording...";
-
-                                                }
-                                            }
-
-                                        }
-
-                                        Item {
-                                            width: 100
-                                        }
-                                        Item{
-                                            Layout.fillHeight: true
-                                            width: 30
-
-                                            Button {
-                                                id: btnSTOP3
-                                                text : "Stop"
-                                                width : 100
-                                                height : 25
-                                                anchors.centerIn: parent
-                                                background: Rectangle {
-                                                    color:"#6fda9c"
-                                                    radius: 8
-                                                }
-
-                                                onClicked: {
-
-                                                    recCams.gstStop3("Stop");
-                                                    btnON3.text = "Record";
-                                                }
-                                            }
-
-
-                                        }
-                                        Item {
-                                            Layout.fillWidth: true
-                                        }
-                                        Item{
-                                            Layout.fillHeight: true
-                                            width: 30
-                                            Image {
-                                                id:swap1
-                                                sourceSize.width: 25
-                                                sourceSize.height: 25
-                                                anchors.centerIn: parent
-                                                source: "qrc:/UI/Assets/dashboard/swap.png"
-                                            }
-                                            MouseArea{
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    swapCam(1)
-
-
-                                                }
-                                            }
-                                        }
-                                        Item{
-                                            width:5
-                                        }
-
-                                        Item{
-                                            Layout.fillHeight: true
-                                            width: 30
-                                            Image {
-                                                id:captureIcon2Id
-                                                sourceSize.width: 25
-                                                sourceSize.height: 25
-                                                anchors.centerIn: parent
-                                                source: "qrc:/UI/Assets/dashboard/capture.png"
-                                            }
-                                            MouseArea{
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    camera1.save()
-                                                }
-                                            }
-                                        }
-                                        Item {
-                                            width:5
-                                        }
-                                        Item{
-                                            Layout.fillHeight: true
-                                            width: 30
-                                            Image {
-                                                id:screenSizeIcon2Id
-                                                sourceSize.width: 25
-                                                sourceSize.height: 25
-                                                anchors.centerIn: parent
-                                                source: "qrc:/UI/Assets/dashboard/expand.png"
-                                            }
-                                            MouseArea{
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    fullScreenRect.visible = true
-                                                    fullScreenView.enabled = true
-                                                    fullScreenView.sourceItem = camera1
-                                                    full_cam=2
-                                                }
-                                            }
-                                        }
-
-
-                                        Item {
-                                            width:5
-                                        }
-                                    }
-
-                                }
-
-
-
-                            }
-                            Tab{
-                                id: t2
-                                title: " A Scan "
-                                active: true
-
-                                Item {
-
-                                    CustomPlotItem {
-
-                                        id: customPlot
-                                        anchors.fill: parent
-
-                                        Component.onCompleted: initCustomPlot()
-                                        MouseArea{
-                                            anchors.fill: parent
-                                            onClicked: {
-//                                                customPlot.saveImgk(1)
-                                            }
-                                        }
-                                    }
-                                }
-
-                            }
-                            style: TabViewStyle {
-                                frameOverlap: 1
-                                tabOverlap:1
-                                tabsAlignment:Qt.AlignLeft
-                                tab: Rectangle {
-                                    color: styleData.selected ? "green" :"white"
-                                    border.color:  "green"
-                                    implicitWidth: Math.max(text.width + 4, 80)
-                                    implicitHeight: 20
-                                    radius: 2
-                                    Text {
-                                        id: text
-                                        anchors.centerIn: parent
-                                        text: styleData.title
-                                        color: styleData.selected ? "white" : "black"
-                                    }
-                                }
-                                frame: Rectangle { color: "black" }
-                            }
-
-                        }
                         Rectangle{
-                            id:screen3
-                            width: widthScreen * 0.42
-                            height: (heightScreen *0.90)/2 - 5/2
-                            border.color: "#6fda9c"
-                            border.width: 2
-                            color: "#344955"
+                            implicitWidth: widthScreen * 0.42
+                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
+                            border.color: borderSecondBg
+                            color: secondBg
                             radius: 15
+                            ColumnLayout{
+                                anchors.centerIn: parent
 
-
-                            MediaPlayer {
-                                id: videoPlayer2
-                                muted: true
-                                autoPlay: true
-
-                                playlist: Playlist {
-                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                                SButton{
+                                    height: 20
+                                    name:  "AUTO MODE"
+                                    baseColor:  buttonBg
+                                    borderColor: buttonBg
+                                    implicitWidth:(widthScreen * 0.42)/2
+                                    onClicked: {
+                                    }
                                 }
-                                //                                        playlist: Playlist {
-                                //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                                //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                                //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                                //                                        }
-                            }
-
-                            VideoOutput {
-                                id: camera2
-                                anchors.fill: parent
-                                source: videoPlayer2
-                                fillMode: VideoOutput.PreserveAspectCrop
-
-                                function save() {
-
-                                    fullScreenRect.visible = true
-                                    fullScreenView.enabled = true
-                                    full_cam=arrange_cam[2]
-                                    fullScreenView.sourceItem = camera2
-                                    fullScreenView.save()
-                                    fullScreenRect.visible = false
-                                    fullScreenView.enabled = false
-                                    publisher.call_capImg(arrange_cam[2])
-
+                                SButton{
+                                    height: 20
+                                    name:  "MANUAL MODE"
+                                    baseColor:  buttonBg
+                                    borderColor: buttonBg
+                                    implicitWidth:(widthScreen * 0.42)/2
+                                    onClicked: {
+                                    }
+                                }
+                                SButton{
+                                    height: 20
+                                    name:  "RESET"
+                                    baseColor:  buttonBg
+                                    borderColor: buttonBg
+                                     implicitWidth:(widthScreen * 0.42)/2
+                                    onClicked: {
+                                    }
                                 }
                             }
-
-                            Component.onCompleted: {
-                                videoPlayer2.playlist.currentIndex = 2;
-                                videoPlayer2.play();
+                        }
+                        RowLayout{
+                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
+                            implicitWidth: widthScreen * 0.42
+                            Rectangle{
+                                implicitHeight: ((heightScreen * 0.90)/3 )-5/2
+                                implicitWidth: ((widthScreen * 0.42)/3)-5/3
+                                border.color: borderSecondBg
+                                color: secondBg
+                                radius: 15
+                                ColumnLayout{
+                                    anchors.fill: parent
+                                    anchors.topMargin: 10
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: qsTr("Tripmeter")
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 24
+                                         color: textColor
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
+                                    Text {
+                                            Layout.fillWidth: true
+                                            Layout.fillHeight: true
+                                            textFormat: Text.RichText
+                                            text: "30" + "<b style='font-size: 20px;'> mtr<b>"
+                                            font.family: "Tahoma"
+                                            font.bold: true
+                                            font.pixelSize: 60
+                                             color: textColor
+                                            verticalAlignment: Text.AlignVCenter
+                                            horizontalAlignment: Text.AlignHCenter
+                                        }
+                                    Item {
+                                        height: parent.height * 0.1
+                                    }
+                                }
                             }
                             Rectangle{
-                                id:videoToolBar3
-                                anchors.bottom: parent.bottom
-                                width: parent.width
-                                height: parent.height*0.1
-                                opacity: 0.5
+                                implicitHeight: ((heightScreen * 0.90)/3 )-5/2
+                                implicitWidth: ((widthScreen * 0.42)/3)-5/3
+                                border.color: borderSecondBg
+                                color: secondBg
+                                radius: 15
+                                ColumnLayout{
+                                    anchors.fill: parent
+                                    anchors.topMargin: 10
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: qsTr("Encoder")
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 24
+                                         color: textColor
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
+                                    Text {
+                                            Layout.fillWidth: true
+                                            Layout.fillHeight: true
+                                            textFormat: Text.RichText
+                                            text: "30" + "<b style='font-size: 20px;'> mm<b>"
+                                            font.family: "Tahoma"
+                                            font.bold: true
+                                            font.pixelSize: 60
+                                             color: textColor
+                                            verticalAlignment: Text.AlignVCenter
+                                            horizontalAlignment: Text.AlignHCenter
+                                        }
+                                    Item {
+                                        height: parent.height * 0.1
+                                    }
+                                }
+
                             }
-                            RowLayout{
-                                anchors.fill:videoToolBar3
-                                Item {
-                                    width: 50
-                                }
-
-                                Item{
-                                    Layout.fillHeight: true
-                                    width: 30
-                                    Button {
-                                        id: btnON2
-                                        text : "Record"
-                                        width : 100
-                                        height : 25
-                                        anchors.centerIn: parent
-
-                                        background: Rectangle {
-                                            color:"#6fda9c"
-                                            radius: 8
+                            Rectangle{
+                                implicitHeight: ((heightScreen * 0.90)/3 )-5/2
+                                implicitWidth: ((widthScreen * 0.42)/3)-5/3
+                                border.color: borderSecondBg
+                                color: secondBg
+                                radius: 15
+                                ColumnLayout{
+                                    anchors.fill: parent
+                                    anchors.topMargin: 10
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: qsTr("Odometer")
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 24
+                                         color: textColor
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
+                                    Text {
+                                            Layout.fillWidth: true
+                                            Layout.fillHeight: true
+                                            textFormat: Text.RichText
+                                            text: "30" + "<b style='font-size: 20px;'> mtr<b>"
+                                            font.family: "Tahoma"
+                                            font.bold: true
+                                            font.pixelSize: 60
+                                             color: textColor
+                                            verticalAlignment: Text.AlignVCenter
+                                            horizontalAlignment: Text.AlignHCenter
                                         }
-
-                                        onClicked: {
-                                            demo.gstRecord2("Recording...");
-
-                                            btnON2.text = "recording...";
-
-                                        }
+                                    Item {
+                                        height: parent.height * 0.1
                                     }
                                 }
-                                Item {
-                                    width: 100
-                                }
-                                Item{
-                                    Layout.fillHeight: true
-                                    width: 30
-                                    Button {
-                                        id: btnSTOP2
-                                        text : "Stop"
-                                        width : 100
-                                        height : 25
-                                        anchors.centerIn: parent
-                                        background: Rectangle {
-                                            color:"#6fda9c"
-                                            radius: 8
-                                        }
 
-                                        onClicked: {
-
-                                            demo.gstStop2("Stop");
-                                            btnON2.text = "Record";
-                                        }
-                                    }
-                                }
-                                Item {
+                            }
+                        }
+                        Rectangle{
+                            implicitWidth: widthScreen * 0.42
+                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
+                            border.color: borderSecondBg
+                            color: secondBg
+                            radius: 15
+                            ColumnLayout{
+                                anchors.fill: parent
+                                anchors.topMargin: 10
+                                Text {
                                     Layout.fillWidth: true
+                                    text: qsTr("Emergency STOP")
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 24
+                                     color: textColor
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
                                 }
-                                Item{
-                                    Layout.fillHeight: true
-                                    width: 30
-                                    Image {
-                                        id:swap2
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
+
+                                Item {
+                                    height: 20
+                                    Layout.fillWidth: true
+                                    SButton{
                                         anchors.centerIn: parent
-                                        source: "qrc:/UI/Assets/dashboard/swap.png"
-                                    }
-                                    MouseArea{
-                                        anchors.fill: parent
+                                        height: parent.height
+                                        width: parent.width * 0.5
+                                        name:  "STOP"
+                                        baseColor:  "#911911"
+                                        borderColor: "#911911"
                                         onClicked: {
-                                            //swap main and third cam
-                                            swapCam(2)
-
-
-                                        }
-                                    }
-                                }
-                                Item{
-                                    width:5
-                                }
-                                Item{
-                                    Layout.fillHeight: true
-                                    width: 30
-                                    Image {
-                                        id:captureIcon3Id
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
-                                        anchors.centerIn: parent
-                                        source: "qrc:/UI/Assets/dashboard/capture.png"
-                                    }
-
-
-
-                                    MouseArea{
-                                        anchors.fill: parent
-                                        onClicked: {
-                                            camera2.save()
-
-
-                                        }
-                                    }
-                                }
-                                Item{
-                                    width:5
-                                }
-                                Item{
-                                    Layout.fillHeight: true
-                                    width: 30
-                                    Image {
-                                        id:screenSizeIcon3Id
-                                        sourceSize.width: 25
-                                        sourceSize.height: 25
-                                        anchors.centerIn: parent
-                                        source: "qrc:/UI/Assets/dashboard/expand.png"
-                                    }
-
-                                    MouseArea{
-                                        anchors.fill: parent
-
-                                        onClicked: {
-                                            fullScreenRect.visible = true
-                                            fullScreenView.enabled = true
-                                            fullScreenView.sourceItem = camera2
-                                            full_cam=3
                                         }
                                     }
                                 }
 
                                 Item {
-                                    width:5
+                                    height: parent.height * 0.1
                                 }
                             }
 
                         }
+
+
+
+                        //                        TabView{
+                        //                            id: g1
+                        //                            implicitWidth: widthScreen * 0.42
+                        //                            implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
+
+
+                        //                            Tab{
+                        //                                title: " Cam 2  "
+                        //                                id: t1
+                        //                                active:true
+
+                        //                                Rectangle{
+                        //                                    id:screen2
+                        //                                    width: widthScreen * 0.42
+                        //                                    height: ((heightScreen * 0.90)/2 ) - 5/2
+                        //                                    border.color: "#6fda9c"
+                        //                                    border.width: 2
+                        //                                    color: "#344955"
+                        //                                    radius: 15
+                        //                                    property alias videoPlayer1: videoPlayer1
+
+
+                        //                                    MediaPlayer {
+                        //                                        id: videoPlayer1
+
+                        //                                        muted: true
+                        //                                        autoPlay: true
+                        //                                        playlist: Playlist {
+                        //                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+                        //                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+                        //                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                        //                                        }
+                        //                                        //                                        playlist: Playlist {
+                        //                                        //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                        //                                        //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                        //                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                        //                                        //                                        }
+                        //                                    }
+
+                        //                                    VideoOutput {
+                        //                                        id: camera1
+                        //                                        anchors.fill: parent
+                        //                                        source: videoPlayer1
+                        //                                        fillMode: VideoOutput.PreserveAspectCrop
+                        //                                        function save() {
+                        //                                            fullScreenRect.visible = true
+                        //                                            fullScreenView.enabled = true
+                        //                                            full_cam=arrange_cam[1]
+                        //                                            fullScreenView.sourceItem = camera1
+                        //                                            fullScreenView.save()
+                        //                                            fullScreenRect.visible = false
+                        //                                            fullScreenView.enabled = false
+                        //                                            publisher.call_capImg(arrange_cam[1])
+
+                        //                                        }
+                        //                                    }
+                        //                                    Component.onCompleted: {
+                        //                                        videoPlayer1.playlist.currentIndex = 1;
+                        //                                        videoPlayer1.play();
+                        //                                    }
+                        //                                    Rectangle{
+                        //                                        id:videoToolBar2
+                        //                                        anchors.bottom: parent.bottom
+                        //                                        width: parent.width
+                        //                                        height: parent.height*0.1
+                        //                                        opacity: 0.5
+                        //                                    }
+                        //                                    RowLayout{
+                        //                                        anchors.fill:videoToolBar2
+                        //                                        Item {
+                        //                                            width: 50
+                        //                                        }
+                        //                                        Item{
+                        //                                            Layout.fillHeight: true
+                        //                                            width: 30
+
+                        //                                            Button {
+                        //                                                id: btnON3
+                        //                                                text : "Record"
+                        //                                                width : 100
+                        //                                                height : 25
+                        //                                                anchors.centerIn: parent
+
+                        //                                                background: Rectangle {
+                        //                                                    color:"#6fda9c"
+                        //                                                    radius: 8
+                        //                                                }
+
+                        //                                                onClicked: {
+                        //                                                    recCams.gstRecord3("Recording...");
+
+                        //                                                    btnON3.text = "recording...";
+
+                        //                                                }
+                        //                                            }
+
+                        //                                        }
+
+                        //                                        Item {
+                        //                                            width: 100
+                        //                                        }
+                        //                                        Item{
+                        //                                            Layout.fillHeight: true
+                        //                                            width: 30
+
+                        //                                            Button {
+                        //                                                id: btnSTOP3
+                        //                                                text : "Stop"
+                        //                                                width : 100
+                        //                                                height : 25
+                        //                                                anchors.centerIn: parent
+                        //                                                background: Rectangle {
+                        //                                                    color:"#6fda9c"
+                        //                                                    radius: 8
+                        //                                                }
+
+                        //                                                onClicked: {
+
+                        //                                                    recCams.gstStop3("Stop");
+                        //                                                    btnON3.text = "Record";
+                        //                                                }
+                        //                                            }
+
+
+                        //                                        }
+                        //                                        Item {
+                        //                                            Layout.fillWidth: true
+                        //                                        }
+                        //                                        Item{
+                        //                                            Layout.fillHeight: true
+                        //                                            width: 30
+                        //                                            Image {
+                        //                                                id:swap1
+                        //                                                sourceSize.width: 25
+                        //                                                sourceSize.height: 25
+                        //                                                anchors.centerIn: parent
+                        //                                                source: "qrc:/UI/Assets/dashboard/swap.png"
+                        //                                            }
+                        //                                            MouseArea{
+                        //                                                anchors.fill: parent
+                        //                                                onClicked: {
+                        //                                                    swapCam(1)
+
+
+                        //                                                }
+                        //                                            }
+                        //                                        }
+                        //                                        Item{
+                        //                                            width:5
+                        //                                        }
+
+                        //                                        Item{
+                        //                                            Layout.fillHeight: true
+                        //                                            width: 30
+                        //                                            Image {
+                        //                                                id:captureIcon2Id
+                        //                                                sourceSize.width: 25
+                        //                                                sourceSize.height: 25
+                        //                                                anchors.centerIn: parent
+                        //                                                source: "qrc:/UI/Assets/dashboard/capture.png"
+                        //                                            }
+                        //                                            MouseArea{
+                        //                                                anchors.fill: parent
+                        //                                                onClicked: {
+                        //                                                    camera1.save()
+                        //                                                }
+                        //                                            }
+                        //                                        }
+                        //                                        Item {
+                        //                                            width:5
+                        //                                        }
+                        //                                        Item{
+                        //                                            Layout.fillHeight: true
+                        //                                            width: 30
+                        //                                            Image {
+                        //                                                id:screenSizeIcon2Id
+                        //                                                sourceSize.width: 25
+                        //                                                sourceSize.height: 25
+                        //                                                anchors.centerIn: parent
+                        //                                                source: "qrc:/UI/Assets/dashboard/expand.png"
+                        //                                            }
+                        //                                            MouseArea{
+                        //                                                anchors.fill: parent
+                        //                                                onClicked: {
+                        //                                                    fullScreenRect.visible = true
+                        //                                                    fullScreenView.enabled = true
+                        //                                                    fullScreenView.sourceItem = camera1
+                        //                                                    full_cam=2
+                        //                                                }
+                        //                                            }
+                        //                                        }
+
+
+                        //                                        Item {
+                        //                                            width:5
+                        //                                        }
+                        //                                    }
+
+                        //                                }
+
+
+
+                        //                            }
+                        //                            Tab{
+                        //                                id: t2
+                        //                                title: " A Scan "
+                        //                                active: true
+
+                        //                                Item {
+
+                        //                                    CustomPlotItem {
+
+                        //                                        id: customPlot
+                        //                                        anchors.fill: parent
+
+                        //                                        Component.onCompleted: initCustomPlot()
+                        //                                        MouseArea{
+                        //                                            anchors.fill: parent
+                        //                                            onClicked: {
+                        ////                                                customPlot.saveImgk(1)
+                        //                                            }
+                        //                                        }
+                        //                                    }
+                        //                                }
+
+                        //                            }
+                        //                            style: TabViewStyle {
+                        //                                frameOverlap: 1
+                        //                                tabOverlap:1
+                        //                                tabsAlignment:Qt.AlignLeft
+                        //                                tab: Rectangle {
+                        //                                    color: styleData.selected ? "green" :"white"
+                        //                                    border.color:  "green"
+                        //                                    implicitWidth: Math.max(text.width + 4, 80)
+                        //                                    implicitHeight: 20
+                        //                                    radius: 2
+                        //                                    Text {
+                        //                                        id: text
+                        //                                        anchors.centerIn: parent
+                        //                                        text: styleData.title
+                        //                                        color: styleData.selected ? "white" : "black"
+                        //                                    }
+                        //                                }
+                        //                                frame: Rectangle { color: "black" }
+                        //                            }
+
+                        //                        }
+                        //                        Rectangle{
+                        //                            id:screen3
+                        //                            width: widthScreen * 0.42
+                        //                            height: (heightScreen *0.90)/2 - 5/2
+                        //                            border.color: "#6fda9c"
+                        //                            border.width: 2
+                        //                            color: "#344955"
+                        //                            radius: 15
+
+
+                        //                            MediaPlayer {
+                        //                                id: videoPlayer2
+                        //                                muted: true
+                        //                                autoPlay: true
+
+                        //                                playlist: Playlist {
+                        //                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
+                        //                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
+                        //                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                        //                                }
+                        //                                //                                        playlist: Playlist {
+                        //                                //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
+                        //                                //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
+                        //                                //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
+                        //                                //                                        }
+                        //                            }
+
+                        //                            VideoOutput {
+                        //                                id: camera2
+                        //                                anchors.fill: parent
+                        //                                source: videoPlayer2
+                        //                                fillMode: VideoOutput.PreserveAspectCrop
+
+                        //                                function save() {
+
+                        //                                    fullScreenRect.visible = true
+                        //                                    fullScreenView.enabled = true
+                        //                                    full_cam=arrange_cam[2]
+                        //                                    fullScreenView.sourceItem = camera2
+                        //                                    fullScreenView.save()
+                        //                                    fullScreenRect.visible = false
+                        //                                    fullScreenView.enabled = false
+                        //                                    publisher.call_capImg(arrange_cam[2])
+
+                        //                                }
+                        //                            }
+
+                        //                            Component.onCompleted: {
+                        //                                videoPlayer2.playlist.currentIndex = 2;
+                        //                                videoPlayer2.play();
+                        //                            }
+                        //                            Rectangle{
+                        //                                id:videoToolBar3
+                        //                                anchors.bottom: parent.bottom
+                        //                                width: parent.width
+                        //                                height: parent.height*0.1
+                        //                                opacity: 0.5
+                        //                            }
+                        //                            RowLayout{
+                        //                                anchors.fill:videoToolBar3
+                        //                                Item {
+                        //                                    width: 50
+                        //                                }
+
+                        //                                Item{
+                        //                                    Layout.fillHeight: true
+                        //                                    width: 30
+                        //                                    Button {
+                        //                                        id: btnON2
+                        //                                        text : "Record"
+                        //                                        width : 100
+                        //                                        height : 25
+                        //                                        anchors.centerIn: parent
+
+                        //                                        background: Rectangle {
+                        //                                            color:"#6fda9c"
+                        //                                            radius: 8
+                        //                                        }
+
+                        //                                        onClicked: {
+                        //                                            demo.gstRecord2("Recording...");
+
+                        //                                            btnON2.text = "recording...";
+
+                        //                                        }
+                        //                                    }
+                        //                                }
+                        //                                Item {
+                        //                                    width: 100
+                        //                                }
+                        //                                Item{
+                        //                                    Layout.fillHeight: true
+                        //                                    width: 30
+                        //                                    Button {
+                        //                                        id: btnSTOP2
+                        //                                        text : "Stop"
+                        //                                        width : 100
+                        //                                        height : 25
+                        //                                        anchors.centerIn: parent
+                        //                                        background: Rectangle {
+                        //                                            color:"#6fda9c"
+                        //                                            radius: 8
+                        //                                        }
+
+                        //                                        onClicked: {
+
+                        //                                            demo.gstStop2("Stop");
+                        //                                            btnON2.text = "Record";
+                        //                                        }
+                        //                                    }
+                        //                                }
+                        //                                Item {
+                        //                                    Layout.fillWidth: true
+                        //                                }
+                        //                                Item{
+                        //                                    Layout.fillHeight: true
+                        //                                    width: 30
+                        //                                    Image {
+                        //                                        id:swap2
+                        //                                        sourceSize.width: 25
+                        //                                        sourceSize.height: 25
+                        //                                        anchors.centerIn: parent
+                        //                                        source: "qrc:/UI/Assets/dashboard/swap.png"
+                        //                                    }
+                        //                                    MouseArea{
+                        //                                        anchors.fill: parent
+                        //                                        onClicked: {
+                        //                                            //swap main and third cam
+                        //                                            swapCam(2)
+
+
+                        //                                        }
+                        //                                    }
+                        //                                }
+                        //                                Item{
+                        //                                    width:5
+                        //                                }
+                        //                                Item{
+                        //                                    Layout.fillHeight: true
+                        //                                    width: 30
+                        //                                    Image {
+                        //                                        id:captureIcon3Id
+                        //                                        sourceSize.width: 25
+                        //                                        sourceSize.height: 25
+                        //                                        anchors.centerIn: parent
+                        //                                        source: "qrc:/UI/Assets/dashboard/capture.png"
+                        //                                    }
+
+
+
+                        //                                    MouseArea{
+                        //                                        anchors.fill: parent
+                        //                                        onClicked: {
+                        //                                            camera2.save()
+
+
+                        //                                        }
+                        //                                    }
+                        //                                }
+                        //                                Item{
+                        //                                    width:5
+                        //                                }
+                        //                                Item{
+                        //                                    Layout.fillHeight: true
+                        //                                    width: 30
+                        //                                    Image {
+                        //                                        id:screenSizeIcon3Id
+                        //                                        sourceSize.width: 25
+                        //                                        sourceSize.height: 25
+                        //                                        anchors.centerIn: parent
+                        //                                        source: "qrc:/UI/Assets/dashboard/expand.png"
+                        //                                    }
+
+                        //                                    MouseArea{
+                        //                                        anchors.fill: parent
+
+                        //                                        onClicked: {
+                        //                                            fullScreenRect.visible = true
+                        //                                            fullScreenView.enabled = true
+                        //                                            fullScreenView.sourceItem = camera2
+                        //                                            full_cam=3
+                        //                                        }
+                        //                                    }
+                        //                                }
+
+                        //                                Item {
+                        //                                    width:5
+                        //                                }
+                        //                            }
+
+                        //                        }
+
                     }
                 }
             }
@@ -2288,7 +2879,7 @@ Rectangle{
             Rectangle{
                 id:fullScreenRect
                 anchors.fill: parent
-                color:"#232F34"
+                color:secondBg
                 visible: false
                 ShaderEffectSource {
                     id: fullScreenView
