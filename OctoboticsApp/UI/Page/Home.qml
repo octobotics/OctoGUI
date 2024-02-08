@@ -722,27 +722,31 @@ Rectangle{
                 anchors.centerIn: parent
                 RowLayout {
                     Rectangle{
+                        id:rectBox1
                         width: widthScreen * 0.28
                         height: heightScreen * 0.25
                         border.color:borderSecondBg
                         color: secondBg
                         radius: 15
+                       Component.onCompleted: {
+                          console.log("h",height,"w",width)
+                         }
 
                         Row{
                             anchors.centerIn: parent
-                            spacing: parent.width * 0.1
+                            spacing: rectBox1.width * 0.1
                             Column{
                                 spacing: parent.height * 0.2
                                 RowLayout{
-                                    spacing: parent.width * 0.2
+                                    spacing: rectBox1.width * 0.1
                                     Item {
                                         id: connectionStatus
-                                        width: 70
-                                        height: 60
+                                        width: rectBox1.width * 0.130
+                                        height: rectBox1.height * 0.291
                                         Image {
                                             id: connectionStatusImg
-                                            width: 40
-                                            height: 40
+                                            width: rectBox1.width * 0.0744
+                                            height:rectBox1.height * 0.19
                                             anchors.centerIn: parent
                                             source:displayConnectionStatus(publisher.comStatus)
                                             onSourceChanged: {
@@ -762,11 +766,11 @@ Rectangle{
                                         }
                                     }
                                     SButton{
-                                        height: 20
+                                        height: rectBox1.height * 0.0987
                                         name:  "TD"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: 70
+                                        implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
 
                                             init_crawler(1)
@@ -776,8 +780,8 @@ Rectangle{
                                     }
                                     Item {
                                         id: batteryStatusId
-                                        width: 70
-                                        height: 60
+                                        width: rectBox1.width * 0.1302
+                                        height: rectBox1.height * 0.2962
                                         Image {
                                             id: batteryStatus
                                             anchors.fill: parent
@@ -797,33 +801,33 @@ Rectangle{
                                     }
                                 }
                                 RowLayout{
-                                    spacing: parent.width * 0.2
+                                    spacing: rectBox1.width * 0.1
                                     SButton{
-                                        height: 20
+                                        height: rectBox1.height * 0.0987
                                         name:  "P/P"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: 70
+                                        implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
 
                                         }
                                     }
                                     SButton{
-                                        height: 20
+                                        height: rectBox1.width * 0.1
                                         name:  "Led"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: 70
+                                        implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
 
                                         }
                                     }
                                     SButton{
-                                        height: 20
+                                        height: rectBox1.width * 0.1
                                         name:  "Log"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: 70
+                                        implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
 
                                         }
@@ -831,8 +835,8 @@ Rectangle{
                                 }
                             }
                             Item{
-                                height: heightScreen * 0.18
-                                width: 60
+                                height: rectBox1.height * 0.70
+                                width: rectBox1.width * 0.111
                                 Gauge {
                                     anchors.fill: parent
                                     minimumValue: 0
@@ -1029,6 +1033,7 @@ Rectangle{
 
                     }
                     Rectangle{
+                        id:rectBox2
                         width: widthScreen * 0.18
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
@@ -1039,10 +1044,11 @@ Rectangle{
                             anchors.topMargin: 10
                             Text {
                                 Layout.fillWidth: true
+                                height: rectBox2.height * 0.2
                                 text: qsTr("Speed")
                                 font.family: "Tahoma"
                                 font.bold: true
-                                font.pixelSize: 24
+                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
                                 color: textColor
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
@@ -1058,7 +1064,7 @@ Rectangle{
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize: 60
-                                     color: textColor
+                                    color: textColor
                                     verticalAlignment: Text.AlignVCenter
                                     horizontalAlignment: Text.AlignHCenter
                                 }
@@ -1087,6 +1093,7 @@ Rectangle{
                         }
                     }
                     Rectangle{
+                        id:rectBox3
                         width: widthScreen * 0.18
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
@@ -1097,11 +1104,12 @@ Rectangle{
                             anchors.topMargin: 10
                             Text {
                                 Layout.fillWidth: true
+                                height: rectBox3.height * 0.2
                                 text: qsTr("Linear Sensor Position")
                                 font.family: "Tahoma"
                                 font.bold: true
-                                font.pixelSize: 24
-                              color: textColor
+                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+                                 color: textColor
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
@@ -1145,6 +1153,7 @@ Rectangle{
                         }
                     }
                     Rectangle{
+                        id:rectBox4
                         width: widthScreen * 0.18
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
@@ -1155,10 +1164,11 @@ Rectangle{
                             anchors.topMargin: 10
                             Text {
                                 Layout.fillWidth: true
+                                height: rectBox4.height * 0.2
                                 text: qsTr("Angle Indicator")
                                 font.family: "Tahoma"
                                 font.bold: true
-                                font.pixelSize: 24
+                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
                                  color: textColor
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
@@ -1202,197 +1212,196 @@ Rectangle{
                         }
                     }
 
-                    // visble false
-//                    Rectangle{
-//                        id: crawlerr
-//                        width: widthScreen * 0.24
-//                        height: heightScreen * 0.25
-//                        border.color: "#6fda9c"
-//                        color: "#344955"
-//                        radius: 15
-//                        visible: false
 
-//                        ColumnLayout{
-//                            anchors.fill: parent
-//                            id:cr
+                    Rectangle{
 
-
-//                            Text {
-//                                Layout.fillWidth: true
-//                                text: qsTr("Crawler")
-//                                font.family: "Tahoma"
-//                                font.bold: true
-//                                font.pixelSize: 24
-//                                color: "#ffffff"
-//                                verticalAlignment: Text.AlignVCenter
-//                                horizontalAlignment: Text.AlignHCenter
-//                            }
+                        id: crawlerr
+                        width: widthScreen * 0.24
+                        height: heightScreen * 0.25
+                        border.color:borderSecondBg
+                        color: secondBg
+                        radius: 15
+                        ColumnLayout{
+                            anchors.fill: parent
+                            anchors.topMargin: 10
+                            id:cr
 
 
-//                            RowLayout{
-
-//                                SButton{
-//                                    Layout.leftMargin: widthScreen * 0.16/10
-//                                    Layout.topMargin: 10
-
-//                                    id: intCrawler
-//                                    height: 20
-//                                    name:  "Initialize"
-//                                    baseColor:  mainAppColor
-//                                    borderColor: mainAppColor
-//                                    implicitWidth: 70
-
-//                                    onClicked: {
-
-//                                        init_crawler(1)
-//                                        initCrawler()
-
-//                                    }
+                            Text {
+                                Layout.fillWidth: true
+                                height: crawlerr.height * 0.2
+                                text: qsTr("Crawler")
+                                font.family: "Tahoma"
+                                font.bold: true
+                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+                                color: textColor
+                                verticalAlignment: Text.AlignVCenter
+                                horizontalAlignment: Text.AlignHCenter
+                            }
 
 
-//                                }
-//                                SButton{
-//                                    Layout.topMargin: 10
-//                                    id: stpCrawler
-//                                    height: 20
-//                                    name:"Stop"
-//                                    baseColor:  "#FF2E2E"
-//                                    borderColor: "#FF2E2E"
-//                                    implicitWidth: 70
+                            Item{
+                                width: crawlerr.width
+                                height:rect.height
+                                RowLayout{
+                                    id:rect
+                                    anchors.centerIn: parent
+                                    SButton{
+                                        id: intCrawler
+                                        height: 20
+                                        name:  "Initialize"
+                                        baseColor:  mainAppColor
+                                        borderColor: mainAppColor
+                                        implicitWidth: 70
+                                        onClicked: {
 
-//                                    onClicked: {
-//                                        init_crawler(0)
-//                                        stopCrawler()
+                                            init_crawler(1)
+                                            initCrawler()
 
-
-//                                    }
-//                                }
-
-
-//                                SButton{
-//                                    Layout.topMargin: 10
-//                                    id: resetCrawler
-//                                    height: 20
-//                                    implicitWidth: 70
-
-//                                    name: "Reset"
-//                                    baseColor: mainAppColor
-//                                    borderColor: mainAppColor
-//                                    onClicked: {
-//                                        publisher.rst_crawler(1)
-//                                        rstCrawler()
-//                                    }
-
-//                                }
-//                                SButton{
-//                                    Layout.topMargin: 10
+                                        }
 
 
-//                                    id: crawlerStatus
-//                                    height: 20
-//                                    name:  "Status"
-//                                    baseColor:  mainAppColor
-//                                    borderColor: mainAppColor
-//                                    implicitWidth: 70
+                                    }
+                                    SButton{
+                                        id: stpCrawler
+                                        height: 20
+                                        name:"Stop"
+                                        baseColor:  "#FF2E2E"
+                                        borderColor: "#FF2E2E"
+                                        implicitWidth: 70
 
-//                                    onClicked: {
+                                        onClicked: {
+                                            init_crawler(0)
+                                            stopCrawler()
 
-//                                        crawlerDialog.text =  "\n\nErrors:\n\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n\n\n"+
-//                                                "\n\nTemperature:\n\n" +cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : "+crawlerTemp[3]+" deg"+"\n"
-//                                        crawlerDialog.icon = StandardIcon.Information
-//                                        crawlerDialog.open()
 
-//                                    }
-//                                }
+                                        }
+                                    }
 
-//                            }
+                                    SButton{
 
-//                            Item{
-//                                Layout.fillHeight: true
-//                                width: parent.width
+                                        id: resetCrawler
+                                        height: 20
+                                        implicitWidth: 70
 
-//                                Rectangle{
-//                                    id:rectId
-//                                    anchors.centerIn: parent
-//                                    anchors.verticalCenterOffset: 5
-//                                    width: widthScreen * 0.08
-//                                    height: heightScreen * 0.10
-//                                    color: "#232F34"
-//                                    Image {
-//                                        anchors.centerIn: parent
+                                        name: "Reset"
+                                        baseColor: mainAppColor
+                                        borderColor: mainAppColor
+                                        onClicked: {
+                                            publisher.rst_crawler(1)
+                                            rstCrawler()
+                                        }
 
-//                                        sourceSize.width: 40
-//                                        sourceSize.height: 40
-//                                        source:"qrc:/UI/Assets/dashboard/arrow.png"
-//                                    }
-//                                }
+                                    }
+                                    SButton{
+                                        id: crawlerStatus
+                                        height: 20
+                                        name:  "Status"
+                                        baseColor:  mainAppColor
+                                        borderColor: mainAppColor
+                                        implicitWidth: 70
 
-//                                Item {
-//                                    width: 25
-//                                    height: 25
-//                                    x:rectId.x - width
-//                                    y:rectId.y - height+25
-//                                    Image {
-//                                        id:fl
-//                                        anchors.centerIn: parent
-//                                        sourceSize.width: 25
-//                                        sourceSize.height: 25
-//                                        source: publisher.crawlStatus.frontLeft ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-//                                    }
+                                        onClicked: {
 
-//                                }
+                                            crawlerDialog.text =  "\n\nErrors:\n\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n\n\n"+
+                                                    "\n\nTemperature:\n\n" +cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : "+crawlerTemp[3]+" deg"+"\n"
+                                            crawlerDialog.icon = StandardIcon.Information
+                                            crawlerDialog.open()
 
-//                                Item {
-//                                    width: 25
-//                                    height: 25
-//                                    x:rectId.x + rectId.width
-//                                    y:rectId.y - height+25
-//                                    Image {
-//                                        id:fr
-//                                        anchors.centerIn: parent
-//                                        sourceSize.width: 25
-//                                        sourceSize.height: 25
-//                                        source:  publisher.crawlStatus.frontRight? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-//                                    }
+                                        }
+                                    }
 
-//                                }
+                                }
 
-//                                Item {
-//                                    width: 25
-//                                    height: 25
-//                                    x:rectId.x + rectId.width
-//                                    y:rectId.y + rectId.height-25
-//                                    Image {
-//                                        id:bl
-//                                        anchors.centerIn: parent
-//                                        sourceSize.width: 25
-//                                        sourceSize.height: 25
-//                                        source: publisher.crawlStatus.backLeft  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-//                                    }
+                            }
+                            Item{
+                                Layout.fillHeight: true
+                                width: parent.width
 
-//                                }
+                                Rectangle{
+                                    id:rectId
+                                    anchors.centerIn: parent
+                                    anchors.verticalCenterOffset: 5
+                                    width: widthScreen * 0.08
+                                    height: heightScreen * 0.10
+                                    color: "#232F34"
+                                    Image {
+                                        anchors.centerIn: parent
 
-//                                Item {
-//                                    width: 25
-//                                    height: 25
-//                                    x:rectId.x - width
-//                                    y:rectId.y + rectId.height-25
-//                                    Image {
-//                                        id:br
-//                                        anchors.centerIn: parent
-//                                        sourceSize.width: 25
-//                                        sourceSize.height: 25
-//                                        source: publisher.crawlStatus.backrRight ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
-//                                    }
+                                        sourceSize.width: 40
+                                        sourceSize.height: 40
+                                        source:"qrc:/UI/Assets/dashboard/arrow.png"
+                                    }
+                                }
 
-//                                }
+                                Item {
+                                    width: 25
+                                    height: 25
+                                    x:rectId.x - width
+                                    y:rectId.y - height+25
+                                    Image {
+                                        id:fl
+                                        anchors.centerIn: parent
+                                        sourceSize.width: 25
+                                        sourceSize.height: 25
+                                        source: publisher.crawlStatus.frontLeft ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+                                    }
 
-//                            }
+                                }
+
+                                Item {
+                                    width: 25
+                                    height: 25
+                                    x:rectId.x + rectId.width
+                                    y:rectId.y - height+25
+                                    Image {
+                                        id:fr
+                                        anchors.centerIn: parent
+                                        sourceSize.width: 25
+                                        sourceSize.height: 25
+                                        source:  publisher.crawlStatus.frontRight? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+                                    }
+
+                                }
+
+                                Item {
+                                    width: 25
+                                    height: 25
+                                    x:rectId.x + rectId.width
+                                    y:rectId.y + rectId.height-25
+                                    Image {
+                                        id:bl
+                                        anchors.centerIn: parent
+                                        sourceSize.width: 25
+                                        sourceSize.height: 25
+                                        source: publisher.crawlStatus.backLeft  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+                                    }
+
+                                }
+
+                                Item {
+                                    width: 25
+                                    height: 25
+                                    x:rectId.x - width
+                                    y:rectId.y + rectId.height-25
+                                    Image {
+                                        id:br
+                                        anchors.centerIn: parent
+                                        sourceSize.width: 25
+                                        sourceSize.height: 25
+                                        source: publisher.crawlStatus.backrRight ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+                                    }
+
+                                }
+
+                            }
 
 
 
-//                        }
-//                    }
+                        }
+                    }
+
+                // visble false
 //                    Rectangle{
 //                        width: widthScreen * 0.28
 //                        height: heightScreen * 0.25
