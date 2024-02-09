@@ -1100,6 +1100,7 @@ Rectangle{
                         color: secondBg
                         radius: 15
                         ColumnLayout{
+                            id:colum1
                             anchors.fill: parent
                             anchors.topMargin: 10
                             Text {
@@ -1113,42 +1114,44 @@ Rectangle{
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
-                            Row{
-                                Layout.fillHeight: true
-                                width: parent.width
-                                Text {
-                                    width: parent.width * 0.8
-                                    height: parent.height
+                            Text {
+                                    Layout.fillWidth: true
+                                    Layout.fillHeight: true
                                     textFormat: Text.RichText
                                     text: "30" + "<b style='font-size: 20px;'> mm<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize: 60
-                                     color: textColor
+                                    color: textColor
                                     verticalAlignment: Text.AlignVCenter
                                     horizontalAlignment: Text.AlignHCenter
                                 }
-                                Item {
-                                    width: parent.width * 0.2
-                                    height: parent.height
-                                    ColumnLayout{
-                                        height: parent.height
-                                        width: parent.width
-                                        Image {
-                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                        }
-                                        Item {
-                                            Layout.fillHeight: true
-                                        }
-                                        Image {
-                                            rotation: 180
-                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                        }
-                                    }
-                                }
-                            }
                             Item {
                                 height: parent.height * 0.1
+                            }
+                        }
+                        Item {
+                            width: parent.width
+                            height: parent.height * 0.1
+                            anchors.bottom: colum1.bottom
+                            anchors.bottomMargin: 28
+                            RowLayout{
+                                height: parent.height
+                                anchors.right: parent.right
+                                anchors.left: parent.left
+                                anchors.rightMargin: 40
+                                anchors.leftMargin: 40
+                                Image {
+                                    rotation: -90
+                                    source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                }
+                                Item {
+                                    Layout.fillWidth: true
+                                }
+                                Image {
+                                    rotation: 90
+                                    source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                }
                             }
                         }
                     }
@@ -1173,39 +1176,50 @@ Rectangle{
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
-                            Row{
-                                Layout.fillHeight: true
-                                width: parent.width
-                                Text {
-                                    width: parent.width * 0.8
-                                    height: parent.height
-                                    text: "30" + "\xB0"
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 60
-                                     color: textColor
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
-                                Item {
-                                    width: parent.width * 0.2
-                                    height: parent.height
-                                    ColumnLayout{
-                                        height: parent.height
-                                        width: parent.width
-                                        Image {
-                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                        }
-                                        Item {
-                                            Layout.fillHeight: true
-                                        }
-                                        Image {
-                                            rotation: 180
-                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                        }
-                                    }
-                                }
-                            }
+                                                            Text {
+                                                                 Layout.fillWidth: true
+                                                                height: parent.height
+                                                                text: "30" + "\xB0"
+                                                                font.family: "Tahoma"
+                                                                font.bold: true
+                                                                font.pixelSize: 60
+                                                                 color: textColor
+                                                                verticalAlignment: Text.AlignVCenter
+                                                                horizontalAlignment: Text.AlignHCenter
+                                                            }
+//                            Row{
+//                                Layout.fillHeight: true
+//                                width: parent.width
+//                                Text {
+//                                    width: parent.width * 0.8
+//                                    height: parent.height
+//                                    text: "30" + "\xB0"
+//                                    font.family: "Tahoma"
+//                                    font.bold: true
+//                                    font.pixelSize: 60
+//                                     color: textColor
+//                                    verticalAlignment: Text.AlignVCenter
+//                                    horizontalAlignment: Text.AlignHCenter
+//                                }
+//                                Item {
+//                                    width: parent.width * 0.2
+//                                    height: parent.height
+//                                    ColumnLayout{
+//                                        height: parent.height
+//                                        width: parent.width
+//                                        Image {
+//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                        }
+//                                        Item {
+//                                            Layout.fillHeight: true
+//                                        }
+//                                        Image {
+//                                            rotation: 180
+//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                        }
+//                                    }
+//                                }
+//                            }
                             Item {
                                 height: parent.height * 0.1
                             }
@@ -1214,7 +1228,6 @@ Rectangle{
 
 
                     Rectangle{
-
                         id: crawlerr
                         width: widthScreen * 0.24
                         height: heightScreen * 0.25
