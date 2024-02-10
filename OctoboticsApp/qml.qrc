@@ -33,5 +33,7 @@
         <file>Source/recordcams.h</file>
         <file>UI/Assets/alarm.wav</file>
         <file>UI/Assets/dashboard/info.png</file>
+        <file>UI/Page/SettingsPage.qml</file>
+        <file>UI/Assets/dashboard/up-arrow.png</file>
     </qresource>
 </RCC>

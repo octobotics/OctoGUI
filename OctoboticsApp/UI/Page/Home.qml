@@ -746,7 +746,7 @@ Rectangle{
                                         Image {
                                             id: connectionStatusImg
                                             width: rectBox1.width * 0.0744
-                                            height:rectBox1.height * 0.19
+                                            height: width
                                             anchors.centerIn: parent
                                             source:displayConnectionStatus(publisher.comStatus)
                                             onSourceChanged: {
