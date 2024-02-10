@@ -43,7 +43,7 @@ Window {
         name: "fontawesome1"
         source: "qrc:/UI/Assets/Font Awesome 6 Brands-Regular-400.otf"
     }
-    StackView{
+        StackView{
         id: stackView
         focus: true
         anchors.fill: parent
@@ -109,6 +109,11 @@ Window {
     {
         windowId.visibility = Qt.WindowFullScreen
         stackView.replace("qrc:/UI/Page/Home.qml")
+    }
+
+    //Setting Page
+    function showSettings(){
+        stackView.replace("qrc:/UI/Page/SettingsPage.qml")
     }
 
     function showConnect()
