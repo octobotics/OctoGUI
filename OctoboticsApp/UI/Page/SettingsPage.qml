@@ -16,6 +16,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import "../../UI/Components"
+import QtQuick.Dialogs 1.1
 Page {
     id: connectROSPage
     property color backGroundColor : "#356859"
@@ -30,6 +31,35 @@ Page {
 
     background: Rectangle {
         color: backGroundColor
+    }
+    // Import the Dialog component
+    MessageDialog {
+        id: commandDialog
+        width: parent.width * 0.8
+        height: parent.height * 0.4
+        visible: false
+
+
+        property bool loading: true
+        property bool success: false
+
+        Rectangle {
+            width: parent.width
+            height: parent.height
+            color: "lightgray"
+
+            Text {
+                anchors.centerIn: parent
+                text: loading ? "Loading..." : (success ? "Command executed successfully!" : "Command failed!")
+            }
+
+
+            Button {
+                text: "Okay"
+                visible: !loading
+                onClicked: commandDialog.visible = false
+            }
+        }
     }
 
     Rectangle {
@@ -52,8 +82,11 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                //connectROS.connectMasterURI(masterUriId.text,hostname.text)
-                showUserInfo()
+                commandDialog.visible = true;
+                commandDialog.loading = true;
+                commandDialog.success = false;
+
+                 commandExecutor.executeCommand("your_executable_or_command", ["arg1", "arg2"])
             }
         }
         CButton{
@@ -65,8 +98,10 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                //connectROS.connectMasterURI(masterUriId.text,hostname.text)
-                showUserInfo()
+                commandDialog.visible = true;
+                commandDialog.loading = true;
+                commandDialog.success = false;
+                 commandExecutor.executeCommand("your_executable_or_command", ["arg1", "arg2"])
             }
         }
         CButton{
@@ -78,8 +113,10 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                //connectROS.connectMasterURI(masterUriId.text,hostname.text)
-                showUserInfo()
+                commandDialog.visible = true;
+                commandDialog.loading = true;
+                commandDialog.success = false;
+                commandExecutor.executeCommand("your_executable_or_command", ["arg1", "arg2"])
             }
         }
         CButton{
@@ -94,6 +131,25 @@ Page {
                 //connectROS.connectMasterURI(masterUriId.text,hostname.text)
                 showUserInfo()
             }
+        }
+    }
+
+    Connections{
+        target: commandExecutor
+        onCommandOutput: {
+            console.log("Command Output: " + output);
+        }
+
+        onCommandError: {
+            console.error("Command Error: " + error);
+        }
+
+        onCommandFinished: {
+            commandDialog.loading = false;
+            commandDialog.success = (exitStatus === 0);
+
+            // Show the dialog
+            commandDialog.visible = true;
         }
     }
 }

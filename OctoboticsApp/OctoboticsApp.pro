@@ -13,6 +13,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Source/commandexecutor.cpp \
     Source/connectros.cpp \
         Source/publisher.cpp \
     Source/recordcams.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
+       Source/commandexecutor.h \
        Source/hellocpp.h \
        Source/include2.h \
        Source/qcustomplot.h \
