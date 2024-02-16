@@ -16,6 +16,7 @@
 
 
 #include "connectros.h"
+#include "QDebug"
 
 /*!
  * \brief ConnectROS::ConnectROS: constructor: set hostname and URI according the machine and robot that is being used
@@ -69,6 +70,7 @@ void ConnectROS::connectMasterURI(QString master, QString hostname)
         {
             dirScanSpectra.mkdir("SCREENSHOT");
         }
+        qDebug()<<"ROS Master";
         emit connectSuccess();
     }
     else

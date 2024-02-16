@@ -24,11 +24,11 @@ import QtGraphicalEffects 1.0
 import QtLocation 5.12
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.5
-import HelloCpp 1.0
+//import HelloCpp 1.0
 import "../../UI/Components"
 import CustomPlot 1.0
 import QtQuick.Dialogs 1.1
-import RecordCams 1.0
+//import RecordCams 1.0
 import QtQuick.Extras 1.4
 
 Rectangle{
@@ -2086,14 +2086,14 @@ Rectangle{
                             }
 
                         }
-                        HelloCpp {
-                            id: demo
+//                        HelloCpp {
+//                            id: demo
 
-                        }
-                        RecordCams
-                        {
-                            id: recCams
-                        }
+//                        }
+//                        RecordCams
+//                        {
+//                            id: recCams
+//                        }
 
 
                         VideoOutput {

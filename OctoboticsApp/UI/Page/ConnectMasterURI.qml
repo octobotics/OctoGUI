@@ -139,8 +139,8 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                //connectROS.connectMasterURI(masterUriId.text,hostname.text)
-                showSettings()
+                connectROS.connectMasterURI(masterUriId.text,hostname.text)
+                //showSettings()
             }
         }
     }
@@ -153,7 +153,8 @@ Page {
             connectBtn.name="Retry connection"
         }
         onConnectSuccess : {
-            showSettings();
+//            showSettings();
+            showUserInfo();
             publisher.initRosThread();
 //            cst.initRt();
         }

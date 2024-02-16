@@ -22,11 +22,11 @@ Page {
     property color mainAppColor: "#6fda9c"
     property color mainTextCOlor: "#f0f0f0"
 
-    Component.onCompleted: {
-           masterUriId.text = connectROS.masterURI
-        hostname.text = connectROS.host
+    //    Component.onCompleted: {
+    //           masterUriId.text = connectROS.masterURI
+    //        hostname.text = connectROS.host
 
-    }
+    //    }
 
     background: Rectangle {
         color: backGroundColor

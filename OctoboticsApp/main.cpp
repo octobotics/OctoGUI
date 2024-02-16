@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     QQmlContext *ctx = engine.rootContext();
     Publisher m_pub;
     ConnectROS m_connectROS;
-    qmlRegisterType<HelloCpp>("HelloCpp", 1, 0, "HelloCpp");
-    qmlRegisterType<recordCams>("RecordCams", 1, 0, "RecordCams");
+//    qmlRegisterType<HelloCpp>("HelloCpp", 1, 0, "HelloCpp");
+//    qmlRegisterType<recordCams>("RecordCams", 1, 0, "RecordCams");
 
     qmlRegisterType<CustomPlotItem>("CustomPlot", 1, 0, "CustomPlotItem");
 
