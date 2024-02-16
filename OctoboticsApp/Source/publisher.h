@@ -54,7 +54,9 @@ class Publisher : public QObject
     Q_PROPERTY(QVector<int> errValue READ getErrValue WRITE setErrValue NOTIFY errValueChanged)
     Q_PROPERTY(QVector<int> tempValue READ getTempValue WRITE setTempValue NOTIFY tempValueChanged)
     Q_PROPERTY(QVariantMap crawlStatus READ getCrawlStatus WRITE setCrawlStatus NOTIFY crawlStatusChanged)
-    Q_PROPERTY(QVariantMap velocityValue READ getVelocityValue WRITE setVelocityValue NOTIFY velocityValueChanged)
+
+    // Velocity
+    Q_PROPERTY(int velocityValue READ getVelocityValue WRITE setVelocityValue NOTIFY velocityValueChanged)
 
     // battery
     Q_PROPERTY(float batteryValue READ getBatteryValue WRITE setBatteryValue NOTIFY batteryValueChanged)
@@ -132,8 +134,8 @@ public slots:
     void setTempValue(QVector<int> value);
     QVector<int> getErrValue();
     void setErrValue(QVector<int> value);
-    QVariantMap getVelocityValue();
-    void setVelocityValue(QVariantMap value);
+
+
     QVariantMap getCrawlStatus();
     void setCrawlStatus(QVariantMap value);
 
@@ -143,7 +145,7 @@ public slots:
 
     void errorCallback(QVector<int> value);
     void tempCallback(QVector<int> value);
-    void velCallback(float current_vel_linear, float current_vel_angular, float max_linear, float max_angular);
+
     void crawlerCallback(bool frontLeft, bool frontRight, bool backrRight, bool backLeft);
 
     void initCrawler(bool k);
@@ -154,6 +156,10 @@ public slots:
     void setBatteryValue(float value);
     void battCallback(float value);
 
+    //Velocity
+     void velCallback(int current_vel_linear);
+     int getVelocityValue();
+     void setVelocityValue(int value);
 
     //current
     float getCurrentValue();
@@ -219,7 +225,7 @@ signals:
     void tempValueChanged(QVector<int> value);
     void rstCrawler(int value);
     void crawlStatusChanged(QVariantMap status);
-    void velocityValueChanged(QVariantMap value);
+    void velocityValueChanged(int value);
 
     //battery
     void batteryValueChanged(float value);
@@ -250,6 +256,7 @@ private:
     bool m_rstCrawlerValue;
     int m_comStatus;
     int m_armToolStatus;
+    int m_velocityValue;
     float m_batteryValue;
     float m_currentValue;
 
@@ -259,7 +266,7 @@ private:
     QString m_utData;
 
     QVariantMap m_crawlStatus;
-    QVariantMap m_velocityValue;
+
     QVariantMap m_utStatus;
     QVariantMap m_thickness;
 

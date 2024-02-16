@@ -32,11 +32,11 @@ void RosThread::run()
 
 
     //graph object
-    CustomPlotItem *m_cst = new CustomPlotItem();
+//    CustomPlotItem *m_cst = new CustomPlotItem();
     //graph signal to send data received from ros topic to customplotitem
-    connect(this, SIGNAL(graphCall(QVector<double>, QVector<double>, int64_t)), m_cst, SLOT(graphCall(QVector<double>,QVector<double>,int64_t)));
-    //graph signal to trigger graph image capture from ros service call
-    connect(this, SIGNAL(trigImg(int)), m_cst, SLOT(trigImg(int)));
+//    connect(this, SIGNAL(graphCall(QVector<double>, QVector<double>, int64_t)), m_cst, SLOT(graphCall(QVector<double>,QVector<double>,int64_t)));
+//    //graph signal to trigger graph image capture from ros service call
+//    connect(this, SIGNAL(trigImg(int)), m_cst, SLOT(trigImg(int)));
 
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
@@ -48,7 +48,7 @@ void RosThread::run()
     // ros subscribers
     comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/comm_status", 1, &RosThread::commCallback, this);
     tool_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/arm_tool_status", 1, &RosThread::armToolCallback, this);
-    vel_sub_ = m_nodeHandler->subscribe<octo_qt::ang_lin_arr>("/vel_status", 1, &RosThread::velCallback, this);
+    vel_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/motor_speed", 1, &RosThread::velCallback, this);
     crawler_status_sub_ = m_nodeHandler->subscribe<my_actuator::vitals>("/crawler_vitals",1, &RosThread::crawlerCallback, this);
     thick_sub_ = m_nodeHandler->subscribe<serialtoros::thick_arr>("/ut_thickness", 1, &RosThread::thicknessCallback, this);
     graph_sub_ = m_nodeHandler->subscribe<serialtoros::graph_arr>("/ut_graph", 1, &RosThread::graphCallback, this);
@@ -171,13 +171,11 @@ void RosThread::armToolCallback(const std_msgs::Int8::ConstPtr &msg)
  * \brief RosThread::velCallback Receives current and max velocities from crawler node and displays on circular gauge
  * \param msg
  */
-void RosThread::velCallback(const octo_qt::ang_lin_arr::ConstPtr &msg)
+void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
 {
-    auto current_vel_linear = msg->data[0];
-    auto current_vel_angular = msg->data[1];
-    auto max_linear = msg->data[2];
-    auto max_angular = msg->data[3];
-    emit velCallback(current_vel_linear, current_vel_angular, max_linear, max_angular);
+    auto current_vel_linear = msg->data;
+    qDebug()<<"Current_vel_Linear"<<current_vel_linear;
+    emit velCallback(current_vel_linear);
 }
 
 

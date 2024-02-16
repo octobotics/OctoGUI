@@ -1060,7 +1060,7 @@ Rectangle{
                                     width: parent.width * 0.8
                                     height: parent.height
                                     textFormat: Text.RichText
-                                    text: "30" + "<b style='font-size: 20px;'> mm/s<b>"
+                                    text: publisher.velocityValue + "<b style='font-size: 20px;'> mm/s<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize: 60

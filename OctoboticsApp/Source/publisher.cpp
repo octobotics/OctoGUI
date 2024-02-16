@@ -39,6 +39,7 @@ Publisher::Publisher(QObject *parent)
     m_stopCrawlerValue=0;
     m_rstCrawlerValue=0;
     m_currentValue=0.0;
+    m_velocityValue=0;
 
     m_armStatus = {0,0,0,0,0,0,0,0};
 }
@@ -86,7 +87,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(initCrawler(bool)), this, SLOT(initCrawler(bool)));
     connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
-    connect(this->rost, SIGNAL(velCallback(float, float, float, float)), this, SLOT(velCallback(float, float, float, float)));
+    connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
     connect(this->rost, SIGNAL(crawlerCallback(bool, bool,bool,bool)), this, SLOT(crawlerCallback(bool, bool,bool,bool)));
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
@@ -334,17 +335,22 @@ void Publisher::setErrValue(QVector<int> value)
     m_errValue = value;
     emit errValueChanged(value);
 }
-
-QVariantMap Publisher::getVelocityValue()
+//-----------------------Velocity--------------------------
+int Publisher::getVelocityValue()
 {
     return m_velocityValue;
 }
-void Publisher::setVelocityValue(QVariantMap value)
+void Publisher::setVelocityValue(int value)
 {
     m_velocityValue = value;
     emit velocityValueChanged(value);
 }
+void Publisher::velCallback(int current_vel_linear)
+{
 
+    setVelocityValue(current_vel_linear);
+}
+//----------------------------------------------------------
 QVariantMap Publisher::getCrawlStatus()
 {
     return m_crawlStatus;
@@ -374,15 +380,7 @@ void Publisher::tempCallback(QVector<int> value)
 {
     setTempValue(value);
 }
-void Publisher::velCallback(float current_vel_linear, float current_vel_angular, float max_linear, float max_angular)
-{
-    QVariantMap velocity;
-    velocity.insert("current_vel_linear", current_vel_linear);
-    velocity.insert("current_vel_angular", current_vel_angular);
-    velocity.insert("max_linear", max_linear);
-    velocity.insert("max_angular", max_angular);
-    setVelocityValue(velocity);
-}
+
 
 void Publisher::crawlerCallback(bool frontLeft, bool frontRight, bool backrRight, bool backLeft)
 {

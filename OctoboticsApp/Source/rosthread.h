@@ -60,7 +60,7 @@ public slots:
     //ros subscribers
     void commCallback(const std_msgs::Int8::ConstPtr &msg);
     void armToolCallback(const std_msgs::Int8ConstPtr &msg);
-    void velCallback(const octo_qt::ang_lin_arr::ConstPtr &msg);
+    void velCallback(const std_msgs::Int16::ConstPtr &msg);
     void crawlerCallback(const my_actuator::vitals::ConstPtr &msg);
     void thicknessCallback(const serialtoros::thick_arr::ConstPtr &msg);
     void graphCallback(const serialtoros::graph_arr::ConstPtr &msg);
@@ -92,7 +92,7 @@ signals:
     void battCallback(float value);
     void tempCallback(QVector<int> temp);
     void errorCallback(QVector<int> err);
-    void velCallback(float current_vel_linear, float current_vel_angular, float max_linear, float max_angular);
+    void velCallback(int current_vel_linear);
     void crawlerCallback(bool m1, bool m2, bool m3, bool m4);
     void armCallback(QVector<int> arm_status);
     void utCallback(int vel, int deepcoat, int echo);
