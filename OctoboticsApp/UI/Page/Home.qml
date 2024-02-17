@@ -837,7 +837,7 @@ Rectangle{
                             Item{
                                 height: rectBox1.height * 0.70
                                 width: rectBox1.width * 0.111
-                                Gauge {
+                                OctoGauge {
                                     anchors.fill: parent
                                     minimumValue: 0
                                     value: 50
@@ -1060,7 +1060,7 @@ Rectangle{
                                     width: parent.width * 0.8
                                     height: parent.height
                                     textFormat: Text.RichText
-                                    text: publisher.velocityValue + "<b style='font-size: 20px;'> mm/s<b>"
+                                    text:publisher.velocityValue + "<b style='font-size: 20px;'> mm/s<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize: 60
@@ -1074,15 +1074,24 @@ Rectangle{
                                     ColumnLayout{
                                         height: parent.height
                                         width: parent.width
-                                        Image {
-                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                        IButton{
+                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                            onClicked: {
+                                                //add logicr
+                                            }
                                         }
+
                                         Item {
                                             Layout.fillHeight: true
                                         }
-                                        Image {
-                                            rotation: 180
-                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                        IButton{
+                                            sourceRot: 180
+                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                            onClicked: {
+                                                //add logicr
+                                            }
                                         }
                                     }
                                 }
@@ -1141,16 +1150,24 @@ Rectangle{
                                 anchors.left: parent.left
                                 anchors.rightMargin: 40
                                 anchors.leftMargin: 40
-                                Image {
-                                    rotation: -90
-                                    source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                IButton{
+                                    sourceRot: -90
+                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                    onClicked: {
+                                        //add logicr
+                                    }
                                 }
                                 Item {
                                     Layout.fillWidth: true
                                 }
-                                Image {
-                                    rotation: 90
-                                    source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                IButton{
+                                    sourceRot: 90
+                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                    onClicked: {
+                                        //add logicr
+                                    }
                                 }
                             }
                         }
@@ -2062,7 +2079,7 @@ Rectangle{
                     spacing: 2
                     Rectangle {
                         id:screen1
-                        width: (widthScreen * 0.42) * 2
+                        width: (widthScreen * 0.60)
                         height: (heightScreen * 0.90)
                         border.color: borderSecondBg
                         color: secondBg
@@ -2257,10 +2274,10 @@ Rectangle{
 
                     }
                     ColumnLayout{
-                        width: widthScreen * 0.42
+                        width: widthScreen * 0.50
                         height: heightScreen * 0.90
                         Rectangle{
-                            implicitWidth: widthScreen * 0.42
+                            implicitWidth: widthScreen * 0.50
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
                             border.color: borderSecondBg
                             color: secondBg
@@ -2299,10 +2316,10 @@ Rectangle{
                         }
                         RowLayout{
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                            implicitWidth: widthScreen * 0.42
+                            implicitWidth: widthScreen * 0.50
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.42)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.50)/3)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2338,7 +2355,7 @@ Rectangle{
                             }
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.42)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.50)/3)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2375,7 +2392,7 @@ Rectangle{
                             }
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.42)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.50)/3)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2387,7 +2404,7 @@ Rectangle{
                                         text: qsTr("Odometer")
                                         font.family: "Tahoma"
                                         font.bold: true
-                                        font.pixelSize: 24
+                                         font.pixelSize: Math.min(parent.width, parent.height) * 0.1
                                          color: textColor
                                         verticalAlignment: Text.AlignVCenter
                                         horizontalAlignment: Text.AlignHCenter
@@ -2412,7 +2429,8 @@ Rectangle{
                             }
                         }
                         Rectangle{
-                            implicitWidth: widthScreen * 0.42
+                            id:emergencyBox
+                            implicitWidth: widthScreen * 0.50
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
                             border.color: borderSecondBg
                             color: secondBg
@@ -2432,7 +2450,7 @@ Rectangle{
                                 }
 
                                 Item {
-                                    height: 20
+                                    height: emergencyBox.height*0.30
                                     Layout.fillWidth: true
                                     SButton{
                                         anchors.centerIn: parent
@@ -2442,6 +2460,7 @@ Rectangle{
                                         baseColor:  "#911911"
                                         borderColor: "#911911"
                                         onClicked: {
+                                            //add logic
                                         }
                                     }
                                 }

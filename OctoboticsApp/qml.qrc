@@ -35,5 +35,8 @@
         <file>UI/Assets/dashboard/info.png</file>
         <file>UI/Page/SettingsPage.qml</file>
         <file>UI/Assets/dashboard/up-arrow.png</file>
+        <file>UI/Assets/dashboard/up-arrow_c.png</file>
+        <file>UI/Components/IButton.qml</file>
+        <file>UI/Components/OctoGauge.qml</file>
     </qresource>
 </RCC>
