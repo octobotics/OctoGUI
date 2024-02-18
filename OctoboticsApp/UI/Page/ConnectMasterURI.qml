@@ -153,8 +153,8 @@ Page {
             connectBtn.name="Retry connection"
         }
         onConnectSuccess : {
-//            showSettings();
-            showUserInfo();
+            showSettings();
+//            showUserInfo();
             publisher.initRosThread();
 //            cst.initRt();
         }
