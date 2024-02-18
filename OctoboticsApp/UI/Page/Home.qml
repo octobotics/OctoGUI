@@ -1125,7 +1125,7 @@ Rectangle{
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
                                     textFormat: Text.RichText
-                                    text: "30" + "<b style='font-size: 10px;'> mm<b>"
+                                    text: "30" + "<b style='font-size: 18px;'> mm<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize: 60
@@ -1191,10 +1191,10 @@ Rectangle{
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
-                                                            Text {
+                                                       Text {
                                                                  Layout.fillWidth: true
                                                                 height: parent.height
-                                                                text: "30" + "<b style='font-size: 20px;'> mm<b>"
+                                                                text: "30" + "<b style='font-size: 14px;'> mm<b>"
                                                                 font.family: "Tahoma"
                                                                 font.bold: true
                                                                 font.pixelSize: 60
@@ -1202,7 +1202,7 @@ Rectangle{
                                                                 verticalAlignment: Text.AlignVCenter
                                                                 horizontalAlignment: Text.AlignHCenter
                                                             }
-//                            Row{
+//                          /*  Row{
 //                                Layout.fillHeight: true
 //                                width: parent.width
 //                                Text {
@@ -1234,7 +1234,78 @@ Rectangle{
 //                                        }
 //                                    }
 //                                }
-//                            }
+//                            }*/
+                            Item {
+                                height: parent.height * 0.1
+                            }
+                        }
+                    }
+
+                    Rectangle{
+                        id:rectBox5
+                        width: widthScreen * 0.18
+                        height: heightScreen * 0.25
+                        border.color: borderSecondBg
+                        color: secondBg
+                        radius: 15
+                        ColumnLayout{
+                            anchors.fill: parent
+                            anchors.topMargin: 10
+                            Text {
+                                Layout.fillWidth: true
+                                height: rectBox4.height * 0.2
+                                text: qsTr("Angle Indicator")
+                                font.family: "Tahoma"
+                                font.bold: true
+                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+                                 color: textColor
+                                verticalAlignment: Text.AlignVCenter
+                                horizontalAlignment: Text.AlignHCenter
+                            }
+                                                       Text {
+                                                                 Layout.fillWidth: true
+                                                                height: parent.height
+                                                                text: "30" + "\xB0"
+                                                                font.family: "Tahoma"
+                                                                font.bold: true
+                                                                font.pixelSize: 60
+                                                                 color: textColor
+                                                                verticalAlignment: Text.AlignVCenter
+                                                                horizontalAlignment: Text.AlignHCenter
+                                                            }
+//                          /*  Row{
+//                                Layout.fillHeight: true
+//                                width: parent.width
+//                                Text {
+//                                    width: parent.width * 0.8
+//                                    height: parent.height
+//                                    text: "30" + "\xB0"
+//                                    font.family: "Tahoma"
+//                                    font.bold: true
+//                                    font.pixelSize: 60
+//                                     color: textColor
+//                                    verticalAlignment: Text.AlignVCenter
+//                                    horizontalAlignment: Text.AlignHCenter
+//                                }
+//                                Item {
+//                                    width: parent.width * 0.2
+//                                    height: parent.height
+//                                    ColumnLayout{
+//                                        height: parent.height
+//                                        width: parent.width
+//                                        Image {
+//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                        }
+//                                        Item {
+//                                            Layout.fillHeight: true
+//                                        }
+//                                        Image {
+//                                            rotation: 180
+//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                        }
+//                                    }
+//                                }
+//                            }*/
                             Item {
                                 height: parent.height * 0.1
                             }

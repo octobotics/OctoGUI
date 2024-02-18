@@ -116,10 +116,10 @@ Window {
     {
         stackView.replace("qrc:/UI/Page/ConnectMasterURI.qml")
     }
-//    //Setting Page
-//    function showSettings(){
-//        stackView.replace("qrc:/UI/Page/SettingsPage.qml")
-//    }
+    //Setting Page
+    function showSettings(){
+        stackView.replace("qrc:/UI/Page/SettingsPage.qml")
+    }
 
 
 
