@@ -2077,7 +2077,7 @@ Rectangle{
                     spacing: 2
                     Rectangle {
                         id:screen1
-                        width: (widthScreen * 0.60)
+                        width: (widthScreen * 0.65)
                         height: (heightScreen * 0.90)
                         border.color: borderSecondBg
                         color: secondBg
@@ -2272,10 +2272,10 @@ Rectangle{
 
                     }
                     ColumnLayout{
-                        width: widthScreen * 0.50
+                        width: widthScreen * 0.60
                         height: heightScreen * 0.90
                         Rectangle{
-                            implicitWidth: widthScreen * 0.50
+                            implicitWidth: widthScreen * 0.60
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
                             border.color: borderSecondBg
                             color: secondBg
@@ -2314,10 +2314,10 @@ Rectangle{
                         }
                         RowLayout{
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                            implicitWidth: widthScreen * 0.50
+                            implicitWidth: widthScreen * 0.60
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.50)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.60)/3)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2353,7 +2353,7 @@ Rectangle{
                             }
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.50)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.60)/3)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2390,7 +2390,7 @@ Rectangle{
                             }
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.50)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.60)/3)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2428,7 +2428,7 @@ Rectangle{
                         }
                         Rectangle{
                             id:emergencyBox
-                            implicitWidth: widthScreen * 0.50
+                            implicitWidth: widthScreen * 0.60
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
                             border.color: borderSecondBg
                             color: secondBg
