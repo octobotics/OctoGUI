@@ -772,10 +772,7 @@ Rectangle{
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
-
-                                            init_crawler(1)
-                                            initCrawler()
-
+                                            publisher.toolToggle = "3"
                                         }
                                     }
                                     Item {
@@ -809,7 +806,7 @@ Rectangle{
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
-
+                                            publisher.toolToggle = "4"
                                         }
                                     }
                                     SButton{
@@ -819,7 +816,7 @@ Rectangle{
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
-
+                                              publisher.toolToggle = "2"
                                         }
                                     }
                                     SButton{
@@ -829,6 +826,7 @@ Rectangle{
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
+
 
                                         }
                                     }
@@ -1115,7 +1113,7 @@ Rectangle{
                             Text {
                                 Layout.fillWidth: true
                                 height: rectBox3.height * 0.2
-                                text: qsTr("Linear Sensor Position")
+                                text: qsTr("Horizontal Slide Position")
                                 font.family: "Tahoma"
                                 font.bold: true
                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
@@ -1127,7 +1125,7 @@ Rectangle{
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
                                     textFormat: Text.RichText
-                                    text: "30" + "<b style='font-size: 20px;'> mm<b>"
+                                    text: "30" + "<b style='font-size: 10px;'> mm<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize: 60
@@ -1185,7 +1183,7 @@ Rectangle{
                             Text {
                                 Layout.fillWidth: true
                                 height: rectBox4.height * 0.2
-                                text: qsTr("Angle Indicator")
+                                text: qsTr("Linear Actuator")
                                 font.family: "Tahoma"
                                 font.bold: true
                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
@@ -1196,7 +1194,7 @@ Rectangle{
                                                             Text {
                                                                  Layout.fillWidth: true
                                                                 height: parent.height
-                                                                text: "30" + "\xB0"
+                                                                text: "30" + "<b style='font-size: 20px;'> mm<b>"
                                                                 font.family: "Tahoma"
                                                                 font.bold: true
                                                                 font.pixelSize: 60

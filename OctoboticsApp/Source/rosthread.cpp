@@ -62,11 +62,11 @@ void RosThread::run()
     send_img_srv_ = m_nodeHandler->advertiseService("img_send", &RosThread::imgCallback, this);
 
     //ros service clients
-    send_tool_srv_ =  m_nodeHandler->serviceClient<stm_client::relay_control>("/relay_toggle_channel");
+    send_tool_srv_ =  m_nodeHandler->serviceClient<stm_interface::RelayControl>("/relay_toggle_channel");
     switch_grinder_srv_ =  m_nodeHandler->serviceClient<std_srvs::Trigger>("/servo_trigger_channel");
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
-    crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_motors");
+    crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
     arm_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/init_teleop");
     arm_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/stop_teleop");
     arm_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/reset_motors");
@@ -345,7 +345,7 @@ void RosThread::sendToolData(QString value)
 
     }
     else{
-        stm_client::relay_control val;
+        stm_interface::RelayControl val;
         val.request.data = value.toInt();
 //        qDebug()<<"relay_value:"<<value;
         send_tool_srv_.call(val);

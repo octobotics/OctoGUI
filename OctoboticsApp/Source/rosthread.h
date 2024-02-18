@@ -28,7 +28,7 @@
 #include "std_msgs/Int8.h"
 #include "std_msgs/Int16.h"
 #include "std_msgs/Int64.h"
-#include "stm_client/relay_control.h"
+#include "stm_interface/RelayControl.h"
 #include "serialtoros/GraphPath.h"
 #include "my_actuator/vitals.h"
 #include "std_msgs/String.h"
