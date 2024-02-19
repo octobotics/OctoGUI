@@ -38,5 +38,6 @@
         <file>UI/Assets/dashboard/up-arrow_c.png</file>
         <file>UI/Components/IButton.qml</file>
         <file>UI/Components/OctoGauge.qml</file>
+        <file>UI/Assets/signal-status/warning.png</file>
     </qresource>
 </RCC>

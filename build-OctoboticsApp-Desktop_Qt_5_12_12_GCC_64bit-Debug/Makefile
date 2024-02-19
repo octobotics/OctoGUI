@@ -60,10 +60,8 @@ SOURCES       = ../OctoboticsApp/Source/connectros.cpp \
 		../OctoboticsApp/Source/qcustomplot.cpp \
 		../OctoboticsApp/Source/customplotitem.cpp \
 		../OctoboticsApp/main.cpp qrc_qml.cpp \
-		moc_hellocpp.cpp \
 		moc_qcustomplot.cpp \
 		moc_customplotitem.cpp \
-		moc_recordcams.cpp \
 		moc_connectros.cpp \
 		moc_publisher.cpp \
 		moc_rosthread.cpp
@@ -76,10 +74,8 @@ OBJECTS       = connectros.o \
 		customplotitem.o \
 		main.o \
 		qrc_qml.o \
-		moc_hellocpp.o \
 		moc_qcustomplot.o \
 		moc_customplotitem.o \
-		moc_recordcams.o \
 		moc_connectros.o \
 		moc_publisher.o \
 		moc_rosthread.o
@@ -763,6 +759,7 @@ qrc_qml.cpp: ../OctoboticsApp/qml.qrc \
 		../OctoboticsApp/UI/Assets/dashboard/remove.png \
 		../OctoboticsApp/UI/Assets/dashboard/swap.png \
 		../OctoboticsApp/UI/Assets/dashboard/up-arrow.png \
+		../OctoboticsApp/UI/Assets/dashboard/up-arrow_c.png \
 		../OctoboticsApp/UI/Assets/dashboard/settings.png \
 		../OctoboticsApp/UI/Assets/dashboard/arrow.png \
 		../OctoboticsApp/UI/Assets/dashboard/info.png \
@@ -772,7 +769,10 @@ qrc_qml.cpp: ../OctoboticsApp/qml.qrc \
 		../OctoboticsApp/UI/Assets/battery-status/battery-three-quarters-solid.png \
 		../OctoboticsApp/UI/Assets/battery-status/battery-half-solid.png \
 		../OctoboticsApp/UI/Assets/signal-status/wifi-signal.png \
+		../OctoboticsApp/UI/Assets/signal-status/warning.png \
 		../OctoboticsApp/UI/Assets/signal-status/no-wifi-signal.png \
+		../OctoboticsApp/UI/Components/OctoGauge.qml \
+		../OctoboticsApp/UI/Components/IButton.qml \
 		../OctoboticsApp/UI/Components/SButton.qml \
 		../OctoboticsApp/UI/Components/CButton.qml \
 		../OctoboticsApp/UI/Page/ToggleButton.qml \
@@ -780,126 +780,7 @@ qrc_qml.cpp: ../OctoboticsApp/qml.qrc \
 		../OctoboticsApp/UI/Page/SplashScreen.qml \
 		../OctoboticsApp/UI/Page/Login.qml \
 		../OctoboticsApp/UI/Page/Home.qml \
-		../OctoboticsApp/UI/Page/ConnectMasterURI.qml \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdebug.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtcore-config.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhash.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhashfunctions.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringliteral.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtextstream.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiodevice.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlocale.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvariant.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qshareddata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvector.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpoint.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qset.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontiguouscache.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../OctoboticsApp/Source/include2.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDateTime \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdatetime.h \
-		../OctoboticsApp/Source/recordcams.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QObject \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QObject \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtcore-config.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringliteral.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhashfunctions.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h
+		../OctoboticsApp/UI/Page/ConnectMasterURI.qml
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/rcc -name qml ../OctoboticsApp/qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -908,64 +789,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -pthread -Wall -W -dM -E -o moc_predefs.h ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_hellocpp.cpp moc_qcustomplot.cpp moc_customplotitem.cpp moc_recordcams.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
+compiler_moc_header_make_all: moc_qcustomplot.cpp moc_customplotitem.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_hellocpp.cpp moc_qcustomplot.cpp moc_customplotitem.cpp moc_recordcams.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
-moc_hellocpp.cpp: ../OctoboticsApp/Source/hellocpp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QObject \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtcore-config.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringliteral.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhashfunctions.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h \
-		moc_predefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
-	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/code/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/code/OctoGUI/OctoboticsApp -I/home/octo/code/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/code/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/hellocpp.h -o moc_hellocpp.cpp
-
+	-$(DEL_FILE) moc_qcustomplot.cpp moc_customplotitem.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
 moc_qcustomplot.cpp: ../OctoboticsApp/Source/qcustomplot.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
@@ -2174,9 +2000,9 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_control.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlRequest.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlResponse.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -2196,61 +2022,6 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		moc_predefs.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/code/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/code/OctoGUI/OctoboticsApp -I/home/octo/code/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/code/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/customplotitem.h -o moc_customplotitem.cpp
-
-moc_recordcams.cpp: ../OctoboticsApp/Source/recordcams.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QObject \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtcore-config.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringliteral.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhashfunctions.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h \
-		moc_predefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
-	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/code/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/code/OctoGUI/OctoboticsApp -I/home/octo/code/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/code/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/recordcams.h -o moc_recordcams.cpp
 
 moc_connectros.cpp: ../OctoboticsApp/Source/connectros.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug \
@@ -2462,9 +2233,9 @@ moc_publisher.cpp: ../OctoboticsApp/Source/publisher.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_control.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlRequest.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlResponse.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -3186,9 +2957,9 @@ moc_rosthread.cpp: ../OctoboticsApp/Source/rosthread.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_control.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlRequest.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlResponse.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -4163,9 +3934,9 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_control.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlRequest.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlResponse.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -4703,75 +4474,7 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o publisher.o ../OctoboticsApp/Source/publisher.cpp
 
-recordcams.o: ../OctoboticsApp/Source/recordcams.cpp ../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdebug.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtcore-config.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhash.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhashfunctions.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringliteral.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtextstream.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiodevice.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlocale.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvariant.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qshareddata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvector.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpoint.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qset.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontiguouscache.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../OctoboticsApp/Source/include2.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDateTime \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdatetime.h \
-		../OctoboticsApp/Source/recordcams.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QObject
+recordcams.o: ../OctoboticsApp/Source/recordcams.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o recordcams.o ../OctoboticsApp/Source/recordcams.cpp
 
 rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosthread.h \
@@ -4851,9 +4554,9 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_control.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlRequest.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlResponse.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -5496,75 +5199,7 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rosthread.o ../OctoboticsApp/Source/rosthread.cpp
 
-hellocpp.o: ../OctoboticsApp/Source/hellocpp.cpp ../OctoboticsApp/Source/hellocpp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QObject \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtcore-config.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsystemdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocessordetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcompilerdetection.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtypeinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsysinfo.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlogging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qflags.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbasicatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qgenericatomic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_cxx11.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobalstatic.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qrefcount.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qarraydata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringliteral.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhashfunctions.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpair.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearraylist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringlist.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregexp.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringmatcher.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qscopedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmetatype.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdebug.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhash.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmap.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtextstream.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiodevice.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlocale.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvariant.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qshareddata.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvector.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpoint.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qset.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontiguouscache.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../OctoboticsApp/Source/include.h \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDateTime \
-		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdatetime.h
+hellocpp.o: ../OctoboticsApp/Source/hellocpp.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hellocpp.o ../OctoboticsApp/Source/hellocpp.cpp
 
 qcustomplot.o: ../OctoboticsApp/Source/qcustomplot.cpp ../OctoboticsApp/Source/qcustomplot.h \
@@ -6773,9 +6408,9 @@ customplotitem.o: ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/So
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_control.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlRequest.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlResponse.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -6942,9 +6577,9 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_control.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlRequest.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/relay_controlResponse.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -7527,17 +7162,11 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
 
-moc_hellocpp.o: moc_hellocpp.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_hellocpp.o moc_hellocpp.cpp
-
 moc_qcustomplot.o: moc_qcustomplot.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qcustomplot.o moc_qcustomplot.cpp
 
 moc_customplotitem.o: moc_customplotitem.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_customplotitem.o moc_customplotitem.cpp
-
-moc_recordcams.o: moc_recordcams.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_recordcams.o moc_recordcams.cpp
 
 moc_connectros.o: moc_connectros.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_connectros.o moc_connectros.cpp

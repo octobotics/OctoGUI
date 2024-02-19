@@ -58,7 +58,7 @@ public slots:
     void capImgPub(int value);
 
     //ros subscribers
-    void commCallback(const std_msgs::Int8::ConstPtr &msg);
+    void commCallback(const std_msgs::Int16::ConstPtr &msg);
     void armToolCallback(const std_msgs::Int8ConstPtr &msg);
     void velCallback(const std_msgs::Int16::ConstPtr &msg);
     void crawlerCallback(const my_actuator::vitals::ConstPtr &msg);

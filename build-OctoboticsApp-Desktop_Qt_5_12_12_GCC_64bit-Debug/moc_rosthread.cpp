@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RosThread_t {
-    QByteArrayData data[82];
-    char stringdata0[1050];
+    QByteArrayData data[81];
+    char stringdata0[1025];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -87,33 +87,32 @@ QT_MOC_LITERAL(51, 474, 7), // "newLine"
 QT_MOC_LITERAL(52, 482, 9), // "sendUtVel"
 QT_MOC_LITERAL(53, 492, 10), // "sendUtData"
 QT_MOC_LITERAL(54, 503, 9), // "capImgPub"
-QT_MOC_LITERAL(55, 513, 24), // "std_msgs::Int8::ConstPtr"
-QT_MOC_LITERAL(56, 538, 3), // "msg"
-QT_MOC_LITERAL(57, 542, 22), // "std_msgs::Int8ConstPtr"
-QT_MOC_LITERAL(58, 565, 25), // "std_msgs::Int16::ConstPtr"
-QT_MOC_LITERAL(59, 591, 29), // "my_actuator::vitals::ConstPtr"
-QT_MOC_LITERAL(60, 621, 32), // "serialtoros::thick_arr::ConstPtr"
-QT_MOC_LITERAL(61, 654, 13), // "graphCallback"
-QT_MOC_LITERAL(62, 668, 32), // "serialtoros::graph_arr::ConstPtr"
-QT_MOC_LITERAL(63, 701, 30), // "serialtoros::VDE_arr::ConstPtr"
-QT_MOC_LITERAL(64, 732, 27), // "std_msgs::Float32::ConstPtr"
-QT_MOC_LITERAL(65, 760, 39), // "launch_crawler::SerialNumbers..."
-QT_MOC_LITERAL(66, 800, 33), // "stm_client::tool_status::Requ..."
-QT_MOC_LITERAL(67, 834, 3), // "req"
-QT_MOC_LITERAL(68, 838, 34), // "stm_client::tool_status::Resp..."
-QT_MOC_LITERAL(69, 873, 3), // "res"
-QT_MOC_LITERAL(70, 877, 11), // "imgCallback"
-QT_MOC_LITERAL(71, 889, 32), // "serialtoros::GraphPath::Request&"
-QT_MOC_LITERAL(72, 922, 33), // "serialtoros::GraphPath::Respo..."
-QT_MOC_LITERAL(73, 956, 12), // "sendToolData"
-QT_MOC_LITERAL(74, 969, 14), // "crawlerInitSrv"
-QT_MOC_LITERAL(75, 984, 13), // "reset_crawler"
-QT_MOC_LITERAL(76, 998, 3), // "val"
-QT_MOC_LITERAL(77, 1002, 10), // "armInitSrv"
-QT_MOC_LITERAL(78, 1013, 14), // "checkArmStatus"
-QT_MOC_LITERAL(79, 1028, 9), // "reset_arm"
-QT_MOC_LITERAL(80, 1038, 7), // "saveImg"
-QT_MOC_LITERAL(81, 1046, 3) // "img"
+QT_MOC_LITERAL(55, 513, 25), // "std_msgs::Int16::ConstPtr"
+QT_MOC_LITERAL(56, 539, 3), // "msg"
+QT_MOC_LITERAL(57, 543, 22), // "std_msgs::Int8ConstPtr"
+QT_MOC_LITERAL(58, 566, 29), // "my_actuator::vitals::ConstPtr"
+QT_MOC_LITERAL(59, 596, 32), // "serialtoros::thick_arr::ConstPtr"
+QT_MOC_LITERAL(60, 629, 13), // "graphCallback"
+QT_MOC_LITERAL(61, 643, 32), // "serialtoros::graph_arr::ConstPtr"
+QT_MOC_LITERAL(62, 676, 30), // "serialtoros::VDE_arr::ConstPtr"
+QT_MOC_LITERAL(63, 707, 27), // "std_msgs::Float32::ConstPtr"
+QT_MOC_LITERAL(64, 735, 39), // "launch_crawler::SerialNumbers..."
+QT_MOC_LITERAL(65, 775, 33), // "stm_client::tool_status::Requ..."
+QT_MOC_LITERAL(66, 809, 3), // "req"
+QT_MOC_LITERAL(67, 813, 34), // "stm_client::tool_status::Resp..."
+QT_MOC_LITERAL(68, 848, 3), // "res"
+QT_MOC_LITERAL(69, 852, 11), // "imgCallback"
+QT_MOC_LITERAL(70, 864, 32), // "serialtoros::GraphPath::Request&"
+QT_MOC_LITERAL(71, 897, 33), // "serialtoros::GraphPath::Respo..."
+QT_MOC_LITERAL(72, 931, 12), // "sendToolData"
+QT_MOC_LITERAL(73, 944, 14), // "crawlerInitSrv"
+QT_MOC_LITERAL(74, 959, 13), // "reset_crawler"
+QT_MOC_LITERAL(75, 973, 3), // "val"
+QT_MOC_LITERAL(76, 977, 10), // "armInitSrv"
+QT_MOC_LITERAL(77, 988, 14), // "checkArmStatus"
+QT_MOC_LITERAL(78, 1003, 9), // "reset_arm"
+QT_MOC_LITERAL(79, 1013, 7), // "saveImg"
+QT_MOC_LITERAL(80, 1021, 3) // "img"
 
     },
     "RosThread\0commCallback\0\0value\0"
@@ -130,9 +129,8 @@ QT_MOC_LITERAL(81, 1046, 3) // "img"
     "stopCrawler\0rstCrawler\0graphCall\0"
     "QVector<double>\0data\0tuple\0int64_t\0"
     "x_range\0addLine\0newLine\0sendUtVel\0"
-    "sendUtData\0capImgPub\0std_msgs::Int8::ConstPtr\0"
+    "sendUtData\0capImgPub\0std_msgs::Int16::ConstPtr\0"
     "msg\0std_msgs::Int8ConstPtr\0"
-    "std_msgs::Int16::ConstPtr\0"
     "my_actuator::vitals::ConstPtr\0"
     "serialtoros::thick_arr::ConstPtr\0"
     "graphCallback\0serialtoros::graph_arr::ConstPtr\0"
@@ -196,20 +194,20 @@ static const uint qt_meta_data_RosThread[] = {
       11,    1,  339,    2, 0x0a /* Public */,
       13,    1,  342,    2, 0x0a /* Public */,
       35,    1,  345,    2, 0x0a /* Public */,
-      61,    1,  348,    2, 0x0a /* Public */,
+      60,    1,  348,    2, 0x0a /* Public */,
       20,    1,  351,    2, 0x0a /* Public */,
       24,    1,  354,    2, 0x0a /* Public */,
       29,    1,  357,    2, 0x0a /* Public */,
       26,    1,  360,    2, 0x0a /* Public */,
       31,    2,  363,    2, 0x0a /* Public */,
-      70,    2,  368,    2, 0x0a /* Public */,
-      73,    1,  373,    2, 0x0a /* Public */,
-      74,    1,  376,    2, 0x0a /* Public */,
-      75,    1,  379,    2, 0x0a /* Public */,
-      77,    1,  382,    2, 0x0a /* Public */,
-      78,    0,  385,    2, 0x0a /* Public */,
-      79,    1,  386,    2, 0x0a /* Public */,
-      80,    1,  389,    2, 0x0a /* Public */,
+      69,    2,  368,    2, 0x0a /* Public */,
+      72,    1,  373,    2, 0x0a /* Public */,
+      73,    1,  376,    2, 0x0a /* Public */,
+      74,    1,  379,    2, 0x0a /* Public */,
+      76,    1,  382,    2, 0x0a /* Public */,
+      77,    0,  385,    2, 0x0a /* Public */,
+      78,    1,  386,    2, 0x0a /* Public */,
+      79,    1,  389,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -242,23 +240,23 @@ static const uint qt_meta_data_RosThread[] = {
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, 0x80000000 | 55,   56,
     QMetaType::Void, 0x80000000 | 57,   56,
+    QMetaType::Void, 0x80000000 | 55,   56,
     QMetaType::Void, 0x80000000 | 58,   56,
     QMetaType::Void, 0x80000000 | 59,   56,
-    QMetaType::Void, 0x80000000 | 60,   56,
+    QMetaType::Void, 0x80000000 | 61,   56,
     QMetaType::Void, 0x80000000 | 62,   56,
     QMetaType::Void, 0x80000000 | 63,   56,
+    QMetaType::Void, 0x80000000 | 63,   56,
     QMetaType::Void, 0x80000000 | 64,   56,
-    QMetaType::Void, 0x80000000 | 64,   56,
-    QMetaType::Void, 0x80000000 | 65,   56,
-    QMetaType::Bool, 0x80000000 | 66, 0x80000000 | 68,   67,   69,
-    QMetaType::Bool, 0x80000000 | 71, 0x80000000 | 72,   67,   69,
+    QMetaType::Bool, 0x80000000 | 65, 0x80000000 | 67,   66,   68,
+    QMetaType::Bool, 0x80000000 | 70, 0x80000000 | 71,   66,   68,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void, QMetaType::Int,   76,
+    QMetaType::Void, QMetaType::Int,   75,
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   76,
-    QMetaType::Void, QMetaType::QString,   81,
+    QMetaType::Void, QMetaType::Int,   75,
+    QMetaType::Void, QMetaType::QString,   80,
 
        0        // eod
 };
@@ -295,7 +293,7 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 23: _t->sendUtVel((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 24: _t->sendUtData((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 25: _t->capImgPub((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 26: _t->commCallback((*reinterpret_cast< const std_msgs::Int8::ConstPtr(*)>(_a[1]))); break;
+        case 26: _t->commCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
         case 27: _t->armToolCallback((*reinterpret_cast< const std_msgs::Int8ConstPtr(*)>(_a[1]))); break;
         case 28: _t->velCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
         case 29: _t->crawlerCallback((*reinterpret_cast< const my_actuator::vitals::ConstPtr(*)>(_a[1]))); break;

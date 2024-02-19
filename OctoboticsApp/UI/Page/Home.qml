@@ -261,6 +261,10 @@ Rectangle{
         if ( publisher.initCrawlerValue){
             crawlerDialog.text = "\n\n         Crawler Initialized         \n\n"
             crawlerDialog.icon = StandardIcon.Information
+            fr.source=  "qrc:/UI/Assets/dashboard/tick.png"
+            fl.source=  "qrc:/UI/Assets/dashboard/tick.png"
+            br.source=  "qrc:/UI/Assets/dashboard/tick.png"
+            bl.source=  "qrc:/UI/Assets/dashboard/tick.png"
         }
 
 
@@ -444,14 +448,20 @@ Rectangle{
     /*!
      * \brief  displayConnectionStatus: displays current connection status
      */
-    function displayConnectionStatus(status){
-        if(status === 0){
-            return "qrc:/UI/Assets/signal-status/no-wifi-signal.png"
-        }else
-        {
+    function displayConnectionStatus(wifiStatus){
+        var status= parseInt(wifiStatus)
+        if(status > 40 && status < 60){
             return "qrc:/UI/Assets/signal-status/wifi-signal.png"
+        }else if(status >= 60 && status < 70){
+            return "qrc:/UI/Assets/signal-status/warning.png"
+        }else if(status >  80){
+              alaramEffect.play()
+             return "qrc:/UI/Assets/signal-status/no-wifi-signal.png"
+        }else{
 
+            return "qrc:/UI/Assets/signal-status/no-wifi-signal.png"
         }
+
     }
     /*!
      * \brief  init_crawler: calls the crawler to initialize
@@ -749,20 +759,20 @@ Rectangle{
                                             height: width
                                             anchors.centerIn: parent
                                             source:displayConnectionStatus(publisher.comStatus)
-                                            onSourceChanged: {
-                                                if(publisher.comStatus){
-                                                    alertTimer.stop();
-                                                    alarmTone.stop()
-                                                    alertTimer.running = false
+//                                            onSourceChanged: {
+//                                                if(publisher.comStatus){
+//                                                    alertTimer.stop();
+//                                                   // alarmTone.stop()
+//                                                    alertTimer.running = false
 
-                                                }else{
+//                                                }else{
 
-                                                    alertTimer.start();
-                                                    alarmTone.play()
-                                                }
+//                                                    alertTimer.start();
+////                                                    alarmTone.play()
+//                                                }
 
 
-                                            }
+//                                            }
                                         }
                                     }
                                     SButton{
@@ -807,6 +817,7 @@ Rectangle{
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
                                             publisher.toolToggle = "4"
+                                            alaramEffect.play()
                                         }
                                     }
                                     SButton{
@@ -821,13 +832,13 @@ Rectangle{
                                     }
                                     SButton{
                                         height: rectBox1.width * 0.1
-                                        name:  "Log"
+                                        name:  "Motor"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
-
-
+                                            baseColor: "green"
+                                            publisher.toolToggle = "1"
                                         }
                                     }
                                 }
@@ -838,9 +849,14 @@ Rectangle{
                                 OctoGauge {
                                     anchors.fill: parent
                                     minimumValue: 0
-                                    value: 50
+                                    value: 10
                                     maximumValue: 100
                                     anchors.centerIn: parent
+                                    onValueChanged: {
+                                        if(value < 10){
+                                            alaramEffect.play()
+                                        }
+                                    }
                                 }
 
                             }
@@ -2526,9 +2542,11 @@ Rectangle{
                                         height: parent.height
                                         width: parent.width * 0.5
                                         name:  "STOP"
-                                        baseColor:  "#911911"
+                                        baseColor:  "#FF2E2E"
                                         borderColor: "#911911"
                                         onClicked: {
+                                           alaramEffect.play()
+
                                             //add logic
                                         }
                                     }
@@ -3090,7 +3108,10 @@ Rectangle{
             statusBar.color = "#00695C"
         }
     }
-
+    SoundEffect {
+            id: alaramEffect
+            source: "qrc:/UI/Assets/alarm.wav"
+        }
 }
 
 /*##^## Designer {

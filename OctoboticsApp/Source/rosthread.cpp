@@ -46,7 +46,7 @@ void RosThread::run()
     img_cap_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/img_cap", 1);
 
     // ros subscribers
-    comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/comm_status", 1, &RosThread::commCallback, this);
+    comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/comm_status", 1, &RosThread::commCallback, this);
     tool_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/arm_tool_status", 1, &RosThread::armToolCallback, this);
     vel_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/motor_speed", 1, &RosThread::velCallback, this);
     crawler_status_sub_ = m_nodeHandler->subscribe<my_actuator::vitals>("/crawler_vitals",1, &RosThread::crawlerCallback, this);
@@ -149,7 +149,7 @@ void RosThread::capImgPub(int value)
  * \brief RosThread::commCallback Subscriber Callback for communication status
  * \param msg gets 0 if connection lost and 1 if established
  */
-void RosThread::commCallback(const std_msgs::Int8::ConstPtr &msg)
+void RosThread::commCallback(const std_msgs::Int16::ConstPtr &msg)
 {
     auto int_msg = msg->data;
 
