@@ -32,7 +32,8 @@ Publisher::Publisher(QObject *parent)
     m_comStatus = 0;
     m_armToolStatus = 0;
     m_toggleValue = false;
-    m_initArmValue = 0;
+    m_slideCW = 0;
+    m_slideCCW = 0;
     m_rstArmValue = 0 ;
     m_stopArmValue= 0 ;
     m_initCrawlerValue= 0;
@@ -40,7 +41,7 @@ Publisher::Publisher(QObject *parent)
     m_rstCrawlerValue=0;
     m_currentValue=0.0;
     m_velocityValue=0;
-
+    m_waterValue = 100.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
 }
 
@@ -78,7 +79,9 @@ void Publisher::initRosThread()
     connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
     connect(this, SIGNAL(rstArm(int)), this->rost, SLOT(reset_arm(int)));
     connect(this, SIGNAL(trigArmStatusValueChanged()), this->rost, SLOT(checkArmStatus()));
-    connect(this->rost, SIGNAL(initArm(bool)), this, SLOT(initArm(bool)));
+
+    connect(this->rost, SIGNAL(slideCW(bool)), this, SLOT(slideCW(bool)));
+    connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
     connect(this->rost, SIGNAL(rstArm(bool)), this, SLOT(rstArm(bool)));
     connect(this->rost, SIGNAL(stopArm(bool)), this, SLOT(stopArm(bool)));
     connect(this->rost, SIGNAL(armCallback(QVector<int>)), this, SLOT(armCallback(QVector<int>)));
@@ -92,13 +95,17 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
-    connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
 
+    connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
+    connect(this,SIGNAL(value3(int)),this->rost,SLOT(slideCW(int)));
+    connect (this,SIGNAL(value4(int)),this->rost,SLOT(slideCCW(int)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
     // current
     connect(this->rost, SIGNAL(currentCallback(float)), this, SLOT(currentCallback(float)));
+
+    connect(this->rost, SIGNAL(waterCallback(float)),this ,SLOT(waterCallback(float)));
 
     // ut gauge
     connect(this, SIGNAL(utVelChanged(QString)), this->rost, SLOT(sendUtVel(QString)));
@@ -146,6 +153,28 @@ void Publisher::commCallback(int value)
 {
     setComStatus(value);
 }
+
+
+//---------------------------- Water Level -------------------------------
+
+float Publisher::getWaterLevel()
+{
+    return m_waterValue;
+
+}
+void Publisher::setWaterLevel(float level)
+{
+   m_waterValue = level ;
+   emit waterlevelValueChanged(level);
+}
+
+void Publisher::waterCallback(float level)
+{
+    setWaterLevel(level);
+
+}
+
+
 
 // ---------------------------crawler arm toggle status---------------------------
 bool Publisher::getToggleValue()
@@ -197,14 +226,25 @@ void Publisher::armToolCallback(int arg)
 // ---------------------------arm---------------------------
 
 
-bool Publisher::getInitArmValue()
+bool Publisher::getslideCWValue()
 {
-    return m_initArmValue;
+    return m_slideCW;
 }
-void Publisher::setInitArmValue(bool flag)
+void Publisher::setslideCWValue(bool flag)
 {
-    m_initArmValue = flag;
-    emit initArmValueChanged(flag);
+    m_slideCW = flag;
+    emit slideCWValueChanged(flag);
+}
+
+bool Publisher::getslideCCWValue()
+{
+    return m_slideCCW;
+}
+
+void Publisher::setslideCCWValue(bool flag)
+{
+    m_slideCCW = flag;
+    emit slideCCWValueChanged(flag);
 }
 
 
@@ -263,10 +303,16 @@ void Publisher::armCallback(QVector<int> status)
 }
 
 
-void Publisher::initArm(bool flag)
+void Publisher::slideCW(bool flag)
 {
-    setInitArmValue(flag);
+    setslideCWValue(flag);
 }
+
+void Publisher::slideCCW(bool flag)
+{
+    setslideCCWValue(flag);
+}
+
 void Publisher::stopArm(bool flag)
 {
     setStopArmValue(flag);
@@ -370,6 +416,14 @@ void Publisher::rst_crawler(int val)
 }
 void Publisher::call_crawlerinit(int val)
 {    emit value2(val);
+}
+void Publisher::call_slidecw(int val)
+{
+    emit value3(val);
+}
+void Publisher::call_slideccw(int val)
+{
+    emit value4(val);
 }
 
 void Publisher::errorCallback(QVector<int> value)

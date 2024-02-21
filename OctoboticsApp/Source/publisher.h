@@ -42,7 +42,8 @@ class Publisher : public QObject
     Q_PROPERTY(QString toolToggle READ getToolToggle WRITE setToolToggle NOTIFY toolToggleChanged)
 
     // arm
-    Q_PROPERTY(bool initArmValue READ getInitArmValue WRITE setInitArmValue NOTIFY initArmValueChanged)
+    Q_PROPERTY(bool slideCW READ getslideCWValue WRITE setslideCWValue NOTIFY slideCWValueChanged)
+    Q_PROPERTY(bool slideCCW READ getslideCCWValue WRITE setslideCCWValue NOTIFY slideCCWValueChanged)
     Q_PROPERTY(bool stopArmValue READ getStopArmValue WRITE setStopArmValue NOTIFY stopArmValueChanged)
     Q_PROPERTY(bool rstArmValue READ getRstArmValue WRITE setRstArmValue NOTIFY rstArmValueChanged)
     Q_PROPERTY(QVector<int> armStatus READ getArmStatus WRITE setArmStatus NOTIFY armStatusChanged)
@@ -54,6 +55,8 @@ class Publisher : public QObject
     Q_PROPERTY(QVector<int> errValue READ getErrValue WRITE setErrValue NOTIFY errValueChanged)
     Q_PROPERTY(QVector<int> tempValue READ getTempValue WRITE setTempValue NOTIFY tempValueChanged)
     Q_PROPERTY(QVariantMap crawlStatus READ getCrawlStatus WRITE setCrawlStatus NOTIFY crawlStatusChanged)
+    Q_PROPERTY(float waterLevel READ getWaterLevel WRITE setWaterLevel NOTIFY waterlevelValueChanged)
+
 
     // Velocity
     Q_PROPERTY(int velocityValue READ getVelocityValue WRITE setVelocityValue NOTIFY velocityValueChanged)
@@ -99,9 +102,17 @@ public slots:
     void setArmToolStatus(int value);
     void armToolCallback(int arg);
 
-    //arm
-    bool getInitArmValue();
-    void setInitArmValue(bool k);
+    //Hzl_Slider
+    bool getslideCWValue();
+    void setslideCWValue(bool k);
+
+    bool getslideCCWValue();
+    void setslideCCWValue(bool k);
+
+    //Water Level
+    float getWaterLevel();
+    void setWaterLevel(float level);
+
 
     bool getStopArmValue();
     void setStopArmValue(bool k);
@@ -118,7 +129,8 @@ public slots:
     void rst_arm(int val);
     void armCallback(QVector<int> status);
 
-    void initArm(bool k);
+    void slideCW(bool k);
+    void slideCCW(bool k);
     void stopArm(bool k );
     void rstArm(bool k);
 
@@ -141,7 +153,11 @@ public slots:
 
 
     void rst_crawler(int val);
+
     void call_crawlerinit(int val);
+
+    void call_slidecw(int val);
+    void call_slideccw(int val);
 
     void errorCallback(QVector<int> value);
     void tempCallback(QVector<int> value);
@@ -165,6 +181,8 @@ public slots:
     float getCurrentValue();
     void setCurrentValue(float value);
     void currentCallback(float value);
+
+    void waterCallback(float level);
 
     //ut gauge
     QString getUtData();
@@ -196,6 +214,8 @@ signals:
     void message1(QString msg);
     void value(int value);
     void value2(int value);
+    void value3(int value);
+    void value4(int value);
 
 
 
@@ -210,7 +230,9 @@ signals:
     void toolToggleChanged(QString value);
 
     //arm
-    void initArmValueChanged(bool value);
+    void slideCWValueChanged(bool value);
+    void slideCCWValueChanged(bool value);
+
     void rstArmValueChanged(bool value);
     void stopArmValueChanged(bool value);
     void rstArm(int value);
@@ -226,6 +248,8 @@ signals:
     void rstCrawler(int value);
     void crawlStatusChanged(QVariantMap status);
     void velocityValueChanged(int value);
+
+    void waterlevelValueChanged(float level);
 
     //battery
     void batteryValueChanged(float value);
@@ -248,7 +272,8 @@ private:
     RosThread *rost;
     QCustomPlot*  m_CustomPlot;
     bool m_toggleValue;
-    bool m_initArmValue;
+    bool m_slideCW;
+    bool m_slideCCW;
     bool m_rstArmValue;
     bool m_stopArmValue;
     bool m_initCrawlerValue;
@@ -259,6 +284,7 @@ private:
     int m_velocityValue;
     float m_batteryValue;
     float m_currentValue;
+    float m_waterValue;
 
 
     QString m_utVel;

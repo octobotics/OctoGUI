@@ -58,6 +58,7 @@ public slots:
     void capImgPub(int value);
 
     //ros subscribers
+    void waterCallback(const std_msgs::Float32::ConstPtr &msg);
     void commCallback(const std_msgs::Int16::ConstPtr &msg);
     void armToolCallback(const std_msgs::Int8ConstPtr &msg);
     void velCallback(const std_msgs::Int16::ConstPtr &msg);
@@ -77,7 +78,9 @@ public slots:
     void sendToolData(QString value);
     void crawlerInitSrv(int value);
     void reset_crawler(int val);
-    void armInitSrv(int value);
+
+    void slideCW(int value);
+    void slideCCW(int value);
     void checkArmStatus();
     void reset_arm(int val);
     void saveImg(QString img);
@@ -87,6 +90,7 @@ public:
 
 signals:
     //signals
+    void waterCallback(float level);
     void commCallback(int value);
     void armToolCallback(int value);
     void battCallback(float value);
@@ -104,7 +108,8 @@ signals:
     void trigImg(int k);
     void thicknessCallback(float thickness, float unit);
 
-    void initArm(bool k);
+    void slideCW(bool k);
+    void slideCCW(bool k);
     void stopArm(bool k );
     void rstArm(bool k);
     void initCrawler(bool k);
@@ -132,6 +137,8 @@ private:
     ros::Subscriber f_sub_;
     ros::Subscriber current_sub_;
     ros::Subscriber uid_sub_;
+    ros::Subscriber water_level_;
+    ros::Subscriber lac_pos_ ;
 
     //ros Service Server
     ros::ServiceServer toggle_srv_;
@@ -143,9 +150,11 @@ private:
     ros::ServiceClient crawler_init_srv_;
     ros::ServiceClient crawler_stop_srv_;
     ros::ServiceClient crawler_reset_srv_;
-    ros::ServiceClient arm_init_srv_;
-    ros::ServiceClient arm_stop_srv_;
-    ros::ServiceClient arm_reset_srv_;
+
+    ros::ServiceClient hzl_slide_cw_;
+    ros::ServiceClient hzl_slide_ccw_;
+    ros::ServiceClient arm_stop_srv_; // lac+
+    ros::ServiceClient arm_reset_srv_; // lac -
     ros::ServiceClient get_arm_status_srv_;
 
     //variables

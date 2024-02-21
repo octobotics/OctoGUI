@@ -367,12 +367,12 @@ Rectangle{
         switch (id) {
         case 1:
             var tab1 = g1.getTab(0).item
-            tab1.videoPlayer1.playlist.currentIndex = arrange_cam[0]
+            tab1.videoPlayer1.playlist.currentIndex =
             tab1.videoPlayer1.play()
             console.log ("swapped with cam: ",id+1)
             break
         case 2:
-            videoPlayer2.playlist.currentIndex = arrange_cam[0]
+            videoPlayer2.playlist.currentIndex =
             videoPlayer2.play()
             console.log ("swapped with cam: ",id+1)
 
@@ -383,7 +383,7 @@ Rectangle{
             break
         }
         k = arrange_cam[id]
-        arrange_cam[id] = arrange_cam[0]
+        arrange_cam[id] =
         arrange_cam[0] = k
     }
 
@@ -471,6 +471,10 @@ Rectangle{
         publisher.call_crawlerinit(ccw)
 
     }
+
+//    function slide_cw(cw){
+//        publisher.call_slidecw(cw)
+//    }
 
     ColumnLayout{
         anchors.fill: parent
@@ -849,7 +853,7 @@ Rectangle{
                                 OctoGauge {
                                     anchors.fill: parent
                                     minimumValue: 0
-                                    value: 10
+                                    value: parseFloat(Math.round(publisher.waterLevel));
                                     maximumValue: 100
                                     anchors.centerIn: parent
                                     onValueChanged: {
@@ -1141,7 +1145,7 @@ Rectangle{
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
                                     textFormat: Text.RichText
-                                    text: "30" + "<b style='font-size: 18px;'> mm<b>"
+                                    text: parseInt(publisher.currentValue) + "<b style='font-size: 18px;'> mm<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize: 60
@@ -1169,6 +1173,7 @@ Rectangle{
                                     defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                     onClicked: {
+                                        publisher.call_slidecw(1)
                                         //add logicr
                                     }
                                 }
@@ -1180,7 +1185,7 @@ Rectangle{
                                     defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                     onClicked: {
-                                        //add logicr
+                                        publisher.call_slideccw(1)
                                     }
                                 }
                             }
@@ -1203,21 +1208,21 @@ Rectangle{
                                 font.family: "Tahoma"
                                 font.bold: true
                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                                 color: textColor
+                                color: textColor
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
-                                                       Text {
-                                                                 Layout.fillWidth: true
-                                                                height: parent.height
-                                                                text: "30" + "<b style='font-size: 14px;'> mm<b>"
-                                                                font.family: "Tahoma"
-                                                                font.bold: true
-                                                                font.pixelSize: 60
-                                                                 color: textColor
-                                                                verticalAlignment: Text.AlignVCenter
-                                                                horizontalAlignment: Text.AlignHCenter
-                                                            }
+                            Text {
+                                  Layout.fillWidth: true
+                                  height: parent.height
+                                  text: "30" + "<b style='font-size: 14px;'> mm<b>"
+                                  font.family: "Tahoma"
+                                  font.bold: true
+                                  font.pixelSize: 60
+                                  color: textColor
+                                  verticalAlignment: Text.AlignVCenter
+                                  horizontalAlignment: Text.AlignHCenter
+                                }
 //                          /*  Row{
 //                                Layout.fillHeight: true
 //                                width: parent.width
@@ -1253,6 +1258,39 @@ Rectangle{
 //                            }*/
                             Item {
                                 height: parent.height * 0.1
+                            }
+                        }
+                  Item {
+                            width: parent.width
+                            height: parent.height * 0.1
+                            anchors.bottom: colum1.bottom
+                            anchors.bottomMargin: 10
+                            RowLayout{
+                                height: parent.height
+                                anchors.right: parent.right
+                                anchors.left: parent.left
+                                anchors.rightMargin: 40
+                                anchors.leftMargin: 40
+                                IButton{
+                                    sourceRot: -90
+                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                    onClicked: {
+                                        publisher.stopArmValue(1)
+                                        //add logicr
+                                    }
+                                }
+                     Item {
+                             Layout.fillWidth: true
+                                }
+                                IButton{
+                                    sourceRot: 90
+                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                    onClicked: {
+                                        publisher.rstArmValue(1)
+                                    }
+                                }
                             }
                         }
                     }
@@ -2182,9 +2220,8 @@ Rectangle{
                             //                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
                             //                            }
                             playlist: Playlist {
-                                PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                                PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                                PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
+                                PlaylistItem { source: "rtsp://0.0.0.0:8554/back" }
+//
                             }
 
                         }

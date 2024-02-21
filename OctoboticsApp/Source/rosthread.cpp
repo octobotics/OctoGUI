@@ -46,6 +46,7 @@ void RosThread::run()
     img_cap_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/img_cap", 1);
 
     // ros subscribers
+    water_level_ = m_nodeHandler->subscribe<std_msgs::Float32>("/cumulative_volume",1,&RosThread::waterCallback,this);
     comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/comm_status", 1, &RosThread::commCallback, this);
     tool_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/arm_tool_status", 1, &RosThread::armToolCallback, this);
     vel_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/motor_speed", 1, &RosThread::velCallback, this);
@@ -54,7 +55,7 @@ void RosThread::run()
     graph_sub_ = m_nodeHandler->subscribe<serialtoros::graph_arr>("/ut_graph", 1, &RosThread::graphCallback, this);
     ut_sub_ = m_nodeHandler->subscribe<serialtoros::VDE_arr>("/ut_VDE_values", 1, &RosThread::utCallback, this);
     f_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/force_status", 1, &RosThread::fCallback, this);
-    current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/current_status", 1, &RosThread::currentCallback, this);
+    current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
 
     // ros service servers
@@ -67,9 +68,10 @@ void RosThread::run()
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
-    arm_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/init_teleop");
-    arm_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/stop_teleop");
-    arm_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/reset_motors");
+    hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
+    hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
+    arm_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
+    arm_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reduce_three_service");
     get_arm_status_srv_ = m_nodeHandler->serviceClient<octo_arm_teleop::GUI_adra_stat>("/gui_adra_status_srv");
 
     //ros spin
@@ -272,8 +274,16 @@ void RosThread::fCallback(const std_msgs::Float32::ConstPtr &msg)
  */
 void RosThread::currentCallback(const std_msgs::Float32::ConstPtr &msg)
 {
-    auto current = msg->data;
+    auto current = msg->data * 2083.33;
+
     emit currentCallback(current);
+}
+
+void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
+{
+    auto level = msg->data;
+
+    emit waterCallback(level);
 }
 
 
@@ -429,44 +439,47 @@ void RosThread::reset_crawler(int val)
  * \brief RosThread::armInitSrv calls the service to initialialize and stop the arm
  * \param value 0: stop arm  1: init arm
  */
-void RosThread::armInitSrv(int value)
+void RosThread::slideCW(int value)
 {
     int k = value;
     std_srvs::Trigger b;
     if(k){
 
-        qDebug() << "init arm";
-        arm_init_srv_.call(b);
+        qDebug() << "init Slide";
+        hzl_slide_cw_.call(b);
         if (b.response.success){
-            qDebug() << "initialized arm";
-            emit initArm(1);
+            qDebug() << "Slider DeActivated";
+            emit slideCW(0);
 
         }
         else {
-            qDebug() << "error initializing arm";
-            emit initArm(0);
+            qDebug() << "Moving";
+            emit slideCW(0);
 
         }
-    }
-    else{
-
-        qDebug() << "stop arm";
-        arm_stop_srv_.call(b);
-        if (b.response.success){
-            qDebug() << "stopped arm";
-            emit stopArm(1);
-
-
-        }
-        else {
-            qDebug() << "error stopping arm";
-            emit stopArm(0);
-
-        }
-    }
-
+    } 
 }
 
+void RosThread::slideCCW(int value)
+{
+    int k = value;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "init Slide";
+        hzl_slide_ccw_.call(b);
+        if (b.response.success){
+            qDebug() << "Slider DeActivated";
+            emit slideCCW(0);
+
+        }
+        else {
+            qDebug() << "Moving";
+            emit slideCCW(0);
+
+        }
+    }
+}
 
 
 
