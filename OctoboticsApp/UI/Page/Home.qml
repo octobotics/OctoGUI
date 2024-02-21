@@ -1223,76 +1223,48 @@ Rectangle{
                                   verticalAlignment: Text.AlignVCenter
                                   horizontalAlignment: Text.AlignHCenter
                                 }
-//                          /*  Row{
-//                                Layout.fillHeight: true
-//                                width: parent.width
-//                                Text {
-//                                    width: parent.width * 0.8
-//                                    height: parent.height
-//                                    text: "30" + "\xB0"
-//                                    font.family: "Tahoma"
-//                                    font.bold: true
-//                                    font.pixelSize: 60
-//                                     color: textColor
-//                                    verticalAlignment: Text.AlignVCenter
-//                                    horizontalAlignment: Text.AlignHCenter
-//                                }
-//                                Item {
-//                                    width: parent.width * 0.2
-//                                    height: parent.height
-//                                    ColumnLayout{
-//                                        height: parent.height
-//                                        width: parent.width
-//                                        Image {
-//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                        }
-//                                        Item {
-//                                            Layout.fillHeight: true
-//                                        }
-//                                        Image {
-//                                            rotation: 180
-//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                        }
-//                                    }
-//                                }
-//                            }*/
+                            Item {
+                                      width: parent.width
+                                      height: parent.height * 0.1
+                                      anchors.bottom: colum1.bottom
+                                      anchors.bottomMargin: 10
+
+                                      RowLayout{
+                                          height: parent.height
+                                          anchors.right: parent.right
+                                          anchors.left: parent.left
+                                          anchors.rightMargin: 40
+                                          anchors.leftMargin: 40
+                                          IButton{
+                                              sourceRot: -90
+                                              defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                              clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                              onClicked: {
+                                                  publisher.call_laccw(1);
+                                                  //add logicr
+                                              }
+                                          }
+                               Item {
+                                       Layout.fillWidth: true
+                                          }
+                                          IButton{
+                                              sourceRot: 90
+                                              defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                              clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                              onClicked: {
+                                                  publisher.call_lacccw(1);
+                                              }
+                                          }
+                                      }
+                                  }
+
                             Item {
                                 height: parent.height * 0.1
                             }
+
                         }
-                  Item {
-                            width: parent.width
-                            height: parent.height * 0.1
-                            anchors.bottom: colum1.bottom
-                            anchors.bottomMargin: 10
-                            RowLayout{
-                                height: parent.height
-                                anchors.right: parent.right
-                                anchors.left: parent.left
-                                anchors.rightMargin: 40
-                                anchors.leftMargin: 40
-                                IButton{
-                                    sourceRot: -90
-                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                    onClicked: {
-                                        publisher.stopArmValue(1)
-                                        //add logicr
-                                    }
-                                }
-                     Item {
-                             Layout.fillWidth: true
-                                }
-                                IButton{
-                                    sourceRot: 90
-                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                    onClicked: {
-                                        publisher.rstArmValue(1)
-                                    }
-                                }
-                            }
-                        }
+
+
                     }
 
                     Rectangle{
@@ -2462,7 +2434,7 @@ Rectangle{
                                             Layout.fillWidth: true
                                             Layout.fillHeight: true
                                             textFormat: Text.RichText
-                                            text: "30" + "<b style='font-size: 20px;'> mtr<b>"
+                                            text: publisher.tripValue + "<b style='font-size: 20px;'> mtr<b>"
                                             font.family: "Tahoma"
                                             font.bold: true
                                             font.pixelSize: 60
@@ -2470,6 +2442,36 @@ Rectangle{
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter
                                         }
+
+                                    RowLayout{
+                                        height: parent.height
+                                        anchors.right: parent.right
+                                        anchors.left: parent.left
+                                        anchors.rightMargin: 40
+                                        anchors.leftMargin: 40
+                                        IButton{
+                                            sourceRot: -90
+                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                            onClicked: {
+                                                publisher.call_laccw(1);
+                                                //add logicr
+                                            }
+                                        }
+                             Item {
+                                     Layout.fillWidth: true
+                                        }
+                                        IButton{
+                                            sourceRot: 90
+                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                            onClicked: {
+                                                publisher.call_lacccw(1);
+                                            }
+                                        }
+                                    }
+                                }
+
                                     Item {
                                         height: parent.height * 0.1
                                     }
@@ -2535,7 +2537,7 @@ Rectangle{
                                             Layout.fillWidth: true
                                             Layout.fillHeight: true
                                             textFormat: Text.RichText
-                                            text: "30" + "<b style='font-size: 20px;'> mtr<b>"
+                                            text: publisher.odomValue + "<b style='font-size: 20px;'> mtr<b>"
                                             font.family: "Tahoma"
                                             font.bold: true
                                             font.pixelSize: 60

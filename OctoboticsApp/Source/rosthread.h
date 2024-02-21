@@ -27,6 +27,7 @@
 #include "stm_client/tool_status.h"
 #include "std_msgs/Int8.h"
 #include "std_msgs/Int16.h"
+#include "std_msgs/Int32.h"
 #include "std_msgs/Int64.h"
 #include "stm_interface/RelayControl.h"
 #include "serialtoros/GraphPath.h"
@@ -62,6 +63,8 @@ public slots:
     void commCallback(const std_msgs::Int16::ConstPtr &msg);
     void armToolCallback(const std_msgs::Int8ConstPtr &msg);
     void velCallback(const std_msgs::Int16::ConstPtr &msg);
+    void odomCallback(const std_msgs::Int32::ConstPtr &msg);
+    void tripCallback(const std_msgs::Int32::ConstPtr &msg);
     void crawlerCallback(const my_actuator::vitals::ConstPtr &msg);
     void thicknessCallback(const serialtoros::thick_arr::ConstPtr &msg);
     void graphCallback(const serialtoros::graph_arr::ConstPtr &msg);
@@ -81,6 +84,8 @@ public slots:
 
     void slideCW(int value);
     void slideCCW(int value);
+    void lacCW(int value);
+    void lacCCW(int value);
     void checkArmStatus();
     void reset_arm(int val);
     void saveImg(QString img);
@@ -97,6 +102,8 @@ signals:
     void tempCallback(QVector<int> temp);
     void errorCallback(QVector<int> err);
     void velCallback(int current_vel_linear);
+    void odomCallback(int current_odom);
+    void tripCallback(int current_trip);
     void crawlerCallback(bool m1, bool m2, bool m3, bool m4);
     void armCallback(QVector<int> arm_status);
     void utCallback(int vel, int deepcoat, int echo);
@@ -108,8 +115,13 @@ signals:
     void trigImg(int k);
     void thicknessCallback(float thickness, float unit);
 
+    //--------------------------
     void slideCW(bool k);
     void slideCCW(bool k);
+    void lacCW(bool k);
+    void lacCCW(bool k);
+    //--------------------------
+
     void stopArm(bool k );
     void rstArm(bool k);
     void initCrawler(bool k);
@@ -130,6 +142,8 @@ private:
     ros::Subscriber comm_sub_;
     ros::Subscriber tool_sub_;
     ros::Subscriber vel_sub_;
+    ros::Subscriber odometer_;
+    ros::Subscriber tripmeter_;
     ros::Subscriber crawler_status_sub_;
     ros::Subscriber thick_sub_;
     ros::Subscriber graph_sub_;
@@ -153,8 +167,10 @@ private:
 
     ros::ServiceClient hzl_slide_cw_;
     ros::ServiceClient hzl_slide_ccw_;
-    ros::ServiceClient arm_stop_srv_; // lac+
-    ros::ServiceClient arm_reset_srv_; // lac -
+    ros::ServiceClient arm_stop_srv_; //
+    ros::ServiceClient arm_reset_srv_; //
+    ros::ServiceClient lac_cw_;
+    ros::ServiceClient lac_ccw_;
     ros::ServiceClient get_arm_status_srv_;
 
     //variables

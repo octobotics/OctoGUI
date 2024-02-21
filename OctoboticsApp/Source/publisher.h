@@ -44,6 +44,10 @@ class Publisher : public QObject
     // arm
     Q_PROPERTY(bool slideCW READ getslideCWValue WRITE setslideCWValue NOTIFY slideCWValueChanged)
     Q_PROPERTY(bool slideCCW READ getslideCCWValue WRITE setslideCCWValue NOTIFY slideCCWValueChanged)
+    Q_PROPERTY(bool lacCW READ getlacCWValue WRITE setlacCWValue NOTIFY lacCWValueChanged)
+    Q_PROPERTY(bool lacCCW READ getlacCCWValue WRITE setlacCCWValue NOTIFY lacCCWValueChanged)
+
+
     Q_PROPERTY(bool stopArmValue READ getStopArmValue WRITE setStopArmValue NOTIFY stopArmValueChanged)
     Q_PROPERTY(bool rstArmValue READ getRstArmValue WRITE setRstArmValue NOTIFY rstArmValueChanged)
     Q_PROPERTY(QVector<int> armStatus READ getArmStatus WRITE setArmStatus NOTIFY armStatusChanged)
@@ -60,6 +64,8 @@ class Publisher : public QObject
 
     // Velocity
     Q_PROPERTY(int velocityValue READ getVelocityValue WRITE setVelocityValue NOTIFY velocityValueChanged)
+    Q_PROPERTY(int odomValue READ getodomValue WRITE setodomValue NOTIFY odomValueChanged)
+    Q_PROPERTY(int tripValue READ gettripValue WRITE settripValue NOTIFY tripValueChanged)
 
     // battery
     Q_PROPERTY(float batteryValue READ getBatteryValue WRITE setBatteryValue NOTIFY batteryValueChanged)
@@ -109,6 +115,12 @@ public slots:
     bool getslideCCWValue();
     void setslideCCWValue(bool k);
 
+    bool getlacCWValue();
+    void setlacCWValue(bool k);
+
+    bool getlacCCWValue();
+    void setlacCCWValue(bool k);
+
     //Water Level
     float getWaterLevel();
     void setWaterLevel(float level);
@@ -131,6 +143,10 @@ public slots:
 
     void slideCW(bool k);
     void slideCCW(bool k);
+
+    void lacCW(bool k);
+    void lacCCW(bool k);
+
     void stopArm(bool k );
     void rstArm(bool k);
 
@@ -159,6 +175,9 @@ public slots:
     void call_slidecw(int val);
     void call_slideccw(int val);
 
+    void call_laccw(int val);
+    void call_lacccw(int val);
+
     void errorCallback(QVector<int> value);
     void tempCallback(QVector<int> value);
 
@@ -176,6 +195,16 @@ public slots:
      void velCallback(int current_vel_linear);
      int getVelocityValue();
      void setVelocityValue(int value);
+
+     //Odometer
+     void odomCallback(int current_odom);
+     int getodomValue();
+     void setodomValue(int current_odom);
+
+     //Tripmeter
+     void tripCallback(int current_trip);
+     int gettripValue();
+     void settripValue(int current_trip);
 
     //current
     float getCurrentValue();
@@ -216,6 +245,8 @@ signals:
     void value2(int value);
     void value3(int value);
     void value4(int value);
+    void value5(int value);
+    void value6(int value);
 
 
 
@@ -233,6 +264,9 @@ signals:
     void slideCWValueChanged(bool value);
     void slideCCWValueChanged(bool value);
 
+    void lacCWValueChanged(bool value);
+    void lacCCWValueChanged(bool value);
+
     void rstArmValueChanged(bool value);
     void stopArmValueChanged(bool value);
     void rstArm(int value);
@@ -247,7 +281,10 @@ signals:
     void tempValueChanged(QVector<int> value);
     void rstCrawler(int value);
     void crawlStatusChanged(QVariantMap status);
+
     void velocityValueChanged(int value);
+    void odomValueChanged(int current_odom);
+    void tripValueChanged(int current_trip);
 
     void waterlevelValueChanged(float level);
 
@@ -274,6 +311,8 @@ private:
     bool m_toggleValue;
     bool m_slideCW;
     bool m_slideCCW;
+    bool m_lacCW;
+    bool m_lacCCW;
     bool m_rstArmValue;
     bool m_stopArmValue;
     bool m_initCrawlerValue;
@@ -285,6 +324,8 @@ private:
     float m_batteryValue;
     float m_currentValue;
     float m_waterValue;
+    int m_odom;
+    int m_trip;
 
 
     QString m_utVel;

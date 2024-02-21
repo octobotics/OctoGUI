@@ -34,6 +34,8 @@ Publisher::Publisher(QObject *parent)
     m_toggleValue = false;
     m_slideCW = 0;
     m_slideCCW = 0;
+    m_lacCCW = 0;
+    m_lacCW = 0;
     m_rstArmValue = 0 ;
     m_stopArmValue= 0 ;
     m_initCrawlerValue= 0;
@@ -41,6 +43,8 @@ Publisher::Publisher(QObject *parent)
     m_rstCrawlerValue=0;
     m_currentValue=0.0;
     m_velocityValue=0;
+    m_odom = 0;
+    m_trip = 0;
     m_waterValue = 100.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
 }
@@ -76,12 +80,15 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(armToolCallback(int)), this, SLOT(armToolCallback(int)));
 
     // arm
-    connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
+//    connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
     connect(this, SIGNAL(rstArm(int)), this->rost, SLOT(reset_arm(int)));
     connect(this, SIGNAL(trigArmStatusValueChanged()), this->rost, SLOT(checkArmStatus()));
 
     connect(this->rost, SIGNAL(slideCW(bool)), this, SLOT(slideCW(bool)));
     connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
+    connect(this->rost,SIGNAL(lacCW(bool)),this,SLOT(lacCW(bool)));
+    connect(this->rost,SIGNAL(lacCCW(bool)),this,SLOT(lacCCW(bool)));
+
     connect(this->rost, SIGNAL(rstArm(bool)), this, SLOT(rstArm(bool)));
     connect(this->rost, SIGNAL(stopArm(bool)), this, SLOT(stopArm(bool)));
     connect(this->rost, SIGNAL(armCallback(QVector<int>)), this, SLOT(armCallback(QVector<int>)));
@@ -91,6 +98,8 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
     connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
+    connect(this->rost, SIGNAL(odomCallback(int)), this, SLOT(odomCallback(int)));
+    connect(this->rost, SIGNAL(tripCallback(int)), this, SLOT(tripCallback(int)));
     connect(this->rost, SIGNAL(crawlerCallback(bool, bool,bool,bool)), this, SLOT(crawlerCallback(bool, bool,bool,bool)));
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
@@ -99,6 +108,10 @@ void Publisher::initRosThread()
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
     connect(this,SIGNAL(value3(int)),this->rost,SLOT(slideCW(int)));
     connect (this,SIGNAL(value4(int)),this->rost,SLOT(slideCCW(int)));
+    connect(this,SIGNAL(value5(int)),this->rost,SLOT(lacCW(int)));
+    connect(this,SIGNAL(value6(int)),this->rost,SLOT(lacCCW(int)));
+
+
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
@@ -247,6 +260,28 @@ void Publisher::setslideCCWValue(bool flag)
     emit slideCCWValueChanged(flag);
 }
 
+bool Publisher::getlacCWValue()
+{
+    return m_lacCW;
+}
+void Publisher::setlacCWValue(bool flag)
+{
+    m_lacCW = flag;
+    emit lacCWValueChanged(flag);
+
+}
+
+bool Publisher::getlacCCWValue()
+{
+    return m_lacCCW;
+}
+void Publisher::setlacCCWValue(bool flag)
+{
+    m_lacCCW = flag;
+    emit lacCCWValueChanged(flag);
+
+}
+
 
 bool Publisher::getStopArmValue()
 {
@@ -311,6 +346,16 @@ void Publisher::slideCW(bool flag)
 void Publisher::slideCCW(bool flag)
 {
     setslideCCWValue(flag);
+}
+
+void Publisher::lacCW(bool flag)
+{
+    setlacCWValue(flag);
+}
+
+void Publisher::lacCCW(bool flag)
+{
+    setlacCCWValue(flag);
 }
 
 void Publisher::stopArm(bool flag)
@@ -396,6 +441,38 @@ void Publisher::velCallback(int current_vel_linear)
 
     setVelocityValue(current_vel_linear);
 }
+
+//----------------------ODOMETER---------------------------
+int Publisher::getodomValue()
+{
+    return m_odom;
+}
+void Publisher::setodomValue(int current_odom)
+{
+    m_odom = current_odom;
+    emit odomValueChanged(current_odom);
+}
+void Publisher::odomCallback(int current_odom)
+{
+    setodomValue(current_odom);
+}
+
+//----------------------TRIPMETER---------------------------
+int Publisher::gettripValue()
+{
+    return m_trip;
+}
+void Publisher::settripValue(int current_odom)
+{
+    m_trip = current_odom;
+    emit tripValueChanged(current_odom);
+}
+void Publisher::tripCallback(int current_odom)
+{
+    settripValue(current_odom);
+
+}
+
 //----------------------------------------------------------
 QVariantMap Publisher::getCrawlStatus()
 {
@@ -425,6 +502,17 @@ void Publisher::call_slideccw(int val)
 {
     emit value4(val);
 }
+
+void Publisher::call_laccw(int val)
+{
+    emit value5(val);
+}
+
+void Publisher::call_lacccw(int val)
+{
+    emit value6(val);
+}
+
 
 void Publisher::errorCallback(QVector<int> value)
 {
