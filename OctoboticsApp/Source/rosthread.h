@@ -59,6 +59,7 @@ public slots:
     void capImgPub(int value);
 
     //ros subscribers
+    void lacCallback(const std_msgs::Int32::ConstPtr &msg);
     void waterCallback(const std_msgs::Float32::ConstPtr &msg);
     void commCallback(const std_msgs::Int16::ConstPtr &msg);
     void armToolCallback(const std_msgs::Int8ConstPtr &msg);
@@ -82,6 +83,7 @@ public slots:
     void crawlerInitSrv(int value);
     void reset_crawler(int val);
 
+    void resetTrip(int value);
     void slideCW(int value);
     void slideCCW(int value);
     void lacCW(int value);
@@ -95,6 +97,7 @@ public:
 
 signals:
     //signals
+    void lacCallback(int lac_value);
     void waterCallback(float level);
     void commCallback(int value);
     void armToolCallback(int value);
@@ -120,6 +123,7 @@ signals:
     void slideCCW(bool k);
     void lacCW(bool k);
     void lacCCW(bool k);
+    void resetTrip(bool k);
     //--------------------------
 
     void stopArm(bool k );
@@ -171,6 +175,7 @@ private:
     ros::ServiceClient arm_reset_srv_; //
     ros::ServiceClient lac_cw_;
     ros::ServiceClient lac_ccw_;
+    ros::ServiceClient trip_reset_;
     ros::ServiceClient get_arm_status_srv_;
 
     //variables

@@ -44,7 +44,9 @@ Publisher::Publisher(QObject *parent)
     m_currentValue=0.0;
     m_velocityValue=0;
     m_odom = 0;
+    m_lacValue=0;
     m_trip = 0;
+    m_tripReset = 0;
     m_waterValue = 100.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
 }
@@ -88,7 +90,8 @@ void Publisher::initRosThread()
     connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
     connect(this->rost,SIGNAL(lacCW(bool)),this,SLOT(lacCW(bool)));
     connect(this->rost,SIGNAL(lacCCW(bool)),this,SLOT(lacCCW(bool)));
-
+    connect(this->rost,SIGNAL(lacCallback(int)),this, SLOT(lacCallback));
+    connect(this->rost,SIGNAL(resetTrip(bool k)),this,SLOT(resetTrip(bool)));
     connect(this->rost, SIGNAL(rstArm(bool)), this, SLOT(rstArm(bool)));
     connect(this->rost, SIGNAL(stopArm(bool)), this, SLOT(stopArm(bool)));
     connect(this->rost, SIGNAL(armCallback(QVector<int>)), this, SLOT(armCallback(QVector<int>)));
@@ -110,7 +113,7 @@ void Publisher::initRosThread()
     connect (this,SIGNAL(value4(int)),this->rost,SLOT(slideCCW(int)));
     connect(this,SIGNAL(value5(int)),this->rost,SLOT(lacCW(int)));
     connect(this,SIGNAL(value6(int)),this->rost,SLOT(lacCCW(int)));
-
+    connect(this,SIGNAL(value7(int)),this->rost,SLOT(resetTrip(int)));
 
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
@@ -282,6 +285,16 @@ void Publisher::setlacCCWValue(bool flag)
 
 }
 
+bool Publisher::getresetTripValue()
+{
+    return m_tripReset;
+}
+void Publisher::setresetTripValue(bool flag)
+{
+    m_tripReset = flag;
+    emit resetTripValueChanged(flag);
+}
+
 
 bool Publisher::getStopArmValue()
 {
@@ -337,6 +350,10 @@ void Publisher::armCallback(QVector<int> status)
     setArmStatus(status);
 }
 
+void Publisher::resetTrip(bool flag)
+{
+    setresetTripValue(flag);
+}
 
 void Publisher::slideCW(bool flag)
 {
@@ -442,6 +459,23 @@ void Publisher::velCallback(int current_vel_linear)
     setVelocityValue(current_vel_linear);
 }
 
+//-----------------------lac Value----------
+
+int Publisher::getlacValue()
+{
+    return m_lacValue;
+}
+
+void Publisher::setlacValue(int lac_value)
+{
+    m_lacValue = lac_value;
+    emit lacValueChanged(lac_value);
+}
+void Publisher::lacCallback(int lac_value)
+{
+    setlacValue(lac_value);
+}
+
 //----------------------ODOMETER---------------------------
 int Publisher::getodomValue()
 {
@@ -511,6 +545,11 @@ void Publisher::call_laccw(int val)
 void Publisher::call_lacccw(int val)
 {
     emit value6(val);
+}
+
+void Publisher::call_resetTrip(int val)
+{
+    emit value7(val);
 }
 
 

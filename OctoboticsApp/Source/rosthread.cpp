@@ -59,6 +59,8 @@ void RosThread::run()
     f_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/force_status", 1, &RosThread::fCallback, this);
     current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
+    lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/servo_pose",1,&RosThread::lacCallback,this);
+
 
     // ros service servers
     toggle_srv_ = m_nodeHandler->advertiseService("toggle_robot", &RosThread::toggleCallback, this);
@@ -72,8 +74,10 @@ void RosThread::run()
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
+
     lac_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
     lac_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reduce_three_service");
+    trip_reset_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_tripmeter");
     get_arm_status_srv_ = m_nodeHandler->serviceClient<octo_arm_teleop::GUI_adra_stat>("/gui_adra_status_srv");
 
     //ros spin
@@ -185,14 +189,23 @@ void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
 void RosThread::odomCallback(const std_msgs::Int32::ConstPtr &msg)
 {
     auto current_odom = msg->data;
+    current_odom = current_odom/1000 ;
     qDebug()<<"Current_odom"<<current_odom;
     emit odomCallback(current_odom);
 }
 void RosThread::tripCallback(const std_msgs::Int32::ConstPtr &msg)
 {
-    auto current_trip = msg->data;
+    auto current_trip = msg->data ;
+    current_trip = current_trip/1000 ;
     qDebug()<<"Current_trip"<<current_trip;
     emit tripCallback(current_trip);
+}
+
+void RosThread::lacCallback(const std_msgs::Int32::ConstPtr &msg)
+{
+    auto lac_value = msg->data;
+    lac_value = lac_value/25.5 ;
+    emit lacCallback(lac_value);
 }
 
 
@@ -204,6 +217,7 @@ void RosThread::tripCallback(const std_msgs::Int32::ConstPtr &msg)
 void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
 {
     float voltage = msg->voltage;
+
     qDebug()<<"volt"<<voltage;
     bot_err.resize(4);
     act_temp.resize(4);
@@ -461,9 +475,10 @@ void RosThread::slideCW(int value)
 
         qDebug() << "init Slide";
         hzl_slide_cw_.call(b);
+        emit slideCW(0);
         if (b.response.success){
             qDebug() << "Slider DeActivated";
-            emit slideCW(0);
+//            emit slideCW(0);
 
         }
         else {
@@ -482,9 +497,10 @@ void RosThread::slideCCW(int value)
 
         qDebug() << "init Slide";
         hzl_slide_ccw_.call(b);
+        emit slideCCW(0);
         if (b.response.success){
             qDebug() << "Slider DeActivated";
-            emit slideCCW(0);
+
 
         }
         else {
@@ -493,6 +509,28 @@ void RosThread::slideCCW(int value)
 
         }
     }
+}
+
+void RosThread::resetTrip(int value)
+{
+    int k =value;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "init Reset";
+        trip_reset_.call(b);
+        if (b.response.success){
+            qDebug() << "Trip Reset";
+            emit resetTrip(0);
+
+        }
+        else {
+            qDebug() << "Moving";
+            emit resetTrip(0);
+
+        }
+    }
+
 }
 
 void RosThread::lacCW(int value)

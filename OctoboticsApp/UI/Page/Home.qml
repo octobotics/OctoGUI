@@ -1145,10 +1145,10 @@ Rectangle{
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
                                     textFormat: Text.RichText
-                                    text: parseInt(publisher.currentValue) + "<b style='font-size: 18px;'> mm<b>"
+                                    text: Math.round(publisher.currentValue*100)/100 + "<b style='font-size: 18px;'> mm<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
-                                    font.pixelSize: 60
+                                    font.pixelSize:text.length < 12 ? 60 : 30
                                     color: textColor
                                     verticalAlignment: Text.AlignVCenter
                                     horizontalAlignment: Text.AlignHCenter
@@ -1174,6 +1174,7 @@ Rectangle{
                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                     onClicked: {
                                         publisher.call_slidecw(1)
+
                                         //add logicr
                                     }
                                 }
@@ -1186,6 +1187,7 @@ Rectangle{
                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                     onClicked: {
                                         publisher.call_slideccw(1)
+
                                     }
                                 }
                             }
@@ -1215,7 +1217,8 @@ Rectangle{
                             Text {
                                   Layout.fillWidth: true
                                   height: parent.height
-                                  text: "30" + "<b style='font-size: 14px;'> mm<b>"
+                                  textFormat: Text.RichText
+                                  text: publisher.lacValue + "<b style='font-size: 14px;'> mm<b>"
                                   font.family: "Tahoma"
                                   font.bold: true
                                   font.pixelSize: 60
@@ -2442,39 +2445,53 @@ Rectangle{
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter
                                         }
-
-                                    RowLayout{
-                                        height: parent.height
-                                        anchors.right: parent.right
-                                        anchors.left: parent.left
-                                        anchors.rightMargin: 40
-                                        anchors.leftMargin: 40
-                                        IButton{
-                                            sourceRot: -90
-                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                    Item{
+                                        height: (((heightScreen * 0.90)/3 )-5/2)*0.2
+                                        Layout.fillWidth: true
+                                        SButton{
+                                            name:  "RESET"
+                                            baseColor:  buttonBg
+                                            borderColor: buttonBg
+                                            anchors.fill: parent
+                                            anchors.leftMargin: 30
+                                            anchors.rightMargin: 30
                                             onClicked: {
-                                                publisher.call_laccw(1);
-                                                //add logicr
-                                            }
-                                        }
-                             Item {
-                                     Layout.fillWidth: true
-                                        }
-                                        IButton{
-                                            sourceRot: 90
-                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                            onClicked: {
-                                                publisher.call_lacccw(1);
+                                                publisher.call_resetTrip(1)
                                             }
                                         }
                                     }
-                                }
-
-                                    Item {
-                                        height: parent.height * 0.1
+                                    Item{
+                                        height: 16
+                                        Layout.fillWidth: true
                                     }
+
+
+//                                    ColumnLayout{
+//                                        anchors.bottom: parent.bottom
+//                                        anchors.horizontalCenter: parent.horizontalCenter
+//                                        SButton{
+//                                            height: 16
+//                                            name:  "RESET"
+//                                            baseColor:  buttonBg
+//                                            borderColor: buttonBg
+//                                            Layout.fillHeight: true
+//                                            Layout.alignment: Qt.AlignTop
+//                                            implicitWidth:(widthScreen * 0.42)/4
+//                                            onClicked: {
+//                                                publisher.call_resetTrip(1)
+//                                            }
+//                                        }
+//                                        Item {
+//                                            height: parent.height * 0.4
+//                                        }
+
+//                                    }
+
+
+
+//                                    Item {
+//                                        height: parent.height * 0.1
+//                                    }
                                 }
                             }
                             Rectangle{
