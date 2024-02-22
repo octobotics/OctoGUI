@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *  \file      rosthread.cpp
  *  \brief     Communicates with ros master using publishers, subscribers and services.
  *  \details   This class is a ros node that communicates with ros master
@@ -59,7 +59,8 @@ void RosThread::run()
     f_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/force_status", 1, &RosThread::fCallback, this);
     current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
-    lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/servo_pose",1,&RosThread::lacCallback,this);
+    lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
+    voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1,&RosThread::voltageCallback,this);
 
 
     // ros service servers
@@ -152,6 +153,14 @@ void RosThread::capImgPub(int value)
 
 }
 
+void RosThread::voltageCallback(const std_msgs::Int16::ConstPtr &msg)
+{
+    auto value = msg->data ;
+
+    emit voltageCallback(value);
+
+}
+
 
 /*!
  * \brief RosThread::commCallback Subscriber Callback for communication status
@@ -203,9 +212,9 @@ void RosThread::tripCallback(const std_msgs::Int32::ConstPtr &msg)
 
 void RosThread::lacCallback(const std_msgs::Int32::ConstPtr &msg)
 {
-    auto lac_value = msg->data;
-    lac_value = lac_value/25.5 ;
+    int lac_value = msg->data;
     emit lacCallback(lac_value);
+
 }
 
 

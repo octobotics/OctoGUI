@@ -796,12 +796,12 @@ Rectangle{
                                         Image {
                                             id: batteryStatus
                                             anchors.fill: parent
-                                            source:displaybatterStatus(publisher.batteryValue)
+                                            source:displaybatterStatus(publisher.voltageValue)
                                         }
 
                                         Text {
                                             id: batteryStatusValue
-                                            text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
+                                            text: parseFloat((Math.round((publisher.voltageValue)*100))/100)
 
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter

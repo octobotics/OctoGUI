@@ -49,6 +49,7 @@ Publisher::Publisher(QObject *parent)
     m_tripReset = 0;
     m_waterValue = 100.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
+    m_voltage = 0;
 }
 
 /*!
@@ -86,11 +87,12 @@ void Publisher::initRosThread()
     connect(this, SIGNAL(rstArm(int)), this->rost, SLOT(reset_arm(int)));
     connect(this, SIGNAL(trigArmStatusValueChanged()), this->rost, SLOT(checkArmStatus()));
 
+    connect(this->rost,SIGNAL(voltageCallback(int)),this,SLOT(voltageCallback(int)));
     connect(this->rost, SIGNAL(slideCW(bool)), this, SLOT(slideCW(bool)));
     connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
     connect(this->rost,SIGNAL(lacCW(bool)),this,SLOT(lacCW(bool)));
     connect(this->rost,SIGNAL(lacCCW(bool)),this,SLOT(lacCCW(bool)));
-    connect(this->rost,SIGNAL(lacCallback(int)),this, SLOT(lacCallback));
+    connect(this->rost,SIGNAL(lacCallback(int)),this, SLOT(lacCallback(int)));
     connect(this->rost,SIGNAL(resetTrip(bool k)),this,SLOT(resetTrip(bool)));
     connect(this->rost, SIGNAL(rstArm(bool)), this, SLOT(rstArm(bool)));
     connect(this->rost, SIGNAL(stopArm(bool)), this, SLOT(stopArm(bool)));
@@ -188,6 +190,24 @@ void Publisher::waterCallback(float level)
 {
     setWaterLevel(level);
 
+}
+
+//-----------------------------Voltage-------------------------------------------
+
+int Publisher::getvoltageValue()
+{
+    return m_voltage;
+}
+
+void Publisher::setvoltageValue(int value)
+{
+    m_voltage = value;
+    emit voltageValueChanged(value);
+}
+
+void Publisher::voltageCallback(int value)
+{
+    setvoltageValue(value);
 }
 
 

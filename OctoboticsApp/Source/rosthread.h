@@ -73,6 +73,7 @@ public slots:
     void fCallback(const std_msgs::Float32::ConstPtr &msg);
     void currentCallback(const std_msgs::Float32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
+    void voltageCallback(const std_msgs::Int16::ConstPtr &msg);
 
     //ros service servers
     bool toggleCallback(stm_client::tool_status::Request &req, stm_client::tool_status::Response &res);
@@ -97,7 +98,8 @@ public:
 
 signals:
     //signals
-    void lacCallback(int lac_value);
+
+    void voltageCallback(int value);
     void waterCallback(float level);
     void commCallback(int value);
     void armToolCallback(int value);
@@ -123,6 +125,7 @@ signals:
     void slideCCW(bool k);
     void lacCW(bool k);
     void lacCCW(bool k);
+    void lacCallback(int lac_value);
     void resetTrip(bool k);
     //--------------------------
 
@@ -157,6 +160,7 @@ private:
     ros::Subscriber uid_sub_;
     ros::Subscriber water_level_;
     ros::Subscriber lac_pos_ ;
+    ros::Subscriber voltage_;
 
     //ros Service Server
     ros::ServiceServer toggle_srv_;
