@@ -76,7 +76,7 @@ void RosThread::run()
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
-    camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("zed2i/zed_node/start_remote_stream");
+    camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
 
     lac_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
@@ -160,7 +160,7 @@ void RosThread::armToolCallback(const std_msgs::Int8::ConstPtr &msg)
 void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
 {
     auto current_vel_linear = msg->data;
-    qDebug()<<"Current_vel_Linear"<<current_vel_linear;
+
     emit velCallback(current_vel_linear);
 }
 
@@ -168,14 +168,14 @@ void RosThread::odomCallback(const std_msgs::Int32::ConstPtr &msg)
 {
     auto current_odom = msg->data;
     current_odom = current_odom/1000 ;
-    qDebug()<<"Current_odom"<<current_odom;
+//    qDebug()<<"Current_odom"<<current_odom;
     emit odomCallback(current_odom);
 }
 void RosThread::tripCallback(const std_msgs::Int32::ConstPtr &msg)
 {
     auto current_trip = msg->data ;
     current_trip = current_trip/1000 ;
-    qDebug()<<"Current_trip"<<current_trip;
+//    qDebug()<<"Current_trip"<<current_trip;
     emit tripCallback(current_trip);
 }
 
@@ -196,7 +196,7 @@ void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
 {
     float voltage = msg->voltage;
 
-    qDebug()<<"volt"<<voltage;
+//    qDebug()<<"volt"<<voltage;
     bot_err.resize(4);
     act_temp.resize(4);
     for(int i =0; i<4; i++)
@@ -531,12 +531,13 @@ void RosThread::cameraInit(int value)
     int k =value;
     zed_interfaces::start_remote_stream b;
     if (k){
-        qDebug() << "Init Camera";
         camera_init_.call(b);
         if(b.response.result){
             qDebug() << "Camera Started";
             emit cameraInit(0);
         }
+        else
+            qDebug()<< "Camera Start Failed";
     }
 }
 

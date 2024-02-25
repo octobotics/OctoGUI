@@ -24,6 +24,7 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
+       Source/ScriptRunner.h \
        Source/hellocpp.h \
        Source/include2.h \
        Source/qcustomplot.h \

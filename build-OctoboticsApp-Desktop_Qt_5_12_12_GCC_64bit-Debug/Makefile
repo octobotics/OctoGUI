@@ -60,6 +60,7 @@ SOURCES       = ../OctoboticsApp/Source/connectros.cpp \
 		../OctoboticsApp/Source/qcustomplot.cpp \
 		../OctoboticsApp/Source/customplotitem.cpp \
 		../OctoboticsApp/main.cpp qrc_qml.cpp \
+		moc_ScriptRunner.cpp \
 		moc_qcustomplot.cpp \
 		moc_customplotitem.cpp \
 		moc_connectros.cpp \
@@ -74,6 +75,7 @@ OBJECTS       = connectros.o \
 		customplotitem.o \
 		main.o \
 		qrc_qml.o \
+		moc_ScriptRunner.o \
 		moc_qcustomplot.o \
 		moc_customplotitem.o \
 		moc_connectros.o \
@@ -274,7 +276,8 @@ DIST          = ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_pre.prf 
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/exceptions.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/lex.prf \
-		../OctoboticsApp/OctoboticsApp.pro ../OctoboticsApp/Source/hellocpp.h \
+		../OctoboticsApp/OctoboticsApp.pro ../OctoboticsApp/Source/ScriptRunner.h \
+		../OctoboticsApp/Source/hellocpp.h \
 		../OctoboticsApp/Source/include2.h \
 		../OctoboticsApp/Source/qcustomplot.h \
 		../OctoboticsApp/Source/customplotitem.h \
@@ -712,7 +715,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../OctoboticsApp/qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../OctoboticsApp/Source/hellocpp.h ../OctoboticsApp/Source/include2.h ../OctoboticsApp/Source/qcustomplot.h ../OctoboticsApp/Source/customplotitem.h ../OctoboticsApp/Source/recordcams.h ../OctoboticsApp/Source/connectros.h ../OctoboticsApp/Source/include.h ../OctoboticsApp/Source/publisher.h ../OctoboticsApp/Source/rosthread.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../OctoboticsApp/Source/ScriptRunner.h ../OctoboticsApp/Source/hellocpp.h ../OctoboticsApp/Source/include2.h ../OctoboticsApp/Source/qcustomplot.h ../OctoboticsApp/Source/customplotitem.h ../OctoboticsApp/Source/recordcams.h ../OctoboticsApp/Source/connectros.h ../OctoboticsApp/Source/include.h ../OctoboticsApp/Source/publisher.h ../OctoboticsApp/Source/rosthread.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../OctoboticsApp/Source/connectros.cpp ../OctoboticsApp/Source/publisher.cpp ../OctoboticsApp/Source/recordcams.cpp ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/hellocpp.cpp ../OctoboticsApp/Source/qcustomplot.cpp ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/main.cpp $(DISTDIR)/
 
 
@@ -789,9 +792,69 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -pthread -Wall -W -dM -E -o moc_predefs.h ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_qcustomplot.cpp moc_customplotitem.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
+compiler_moc_header_make_all: moc_ScriptRunner.cpp moc_qcustomplot.cpp moc_customplotitem.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_qcustomplot.cpp moc_customplotitem.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
+	-$(DEL_FILE) moc_ScriptRunner.cpp moc_qcustomplot.cpp moc_customplotitem.cpp moc_connectros.cpp moc_publisher.cpp moc_rosthread.cpp
+moc_ScriptRunner.cpp: ../OctoboticsApp/Source/ScriptRunner.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QObject \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtcore-config.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringliteral.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QProcess \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qprocess.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhash.h \
+		moc_predefs.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
+	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/code/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/code/OctoGUI/OctoboticsApp -I/home/octo/code/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/code/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/ScriptRunner.h -o moc_ScriptRunner.cpp
+
 moc_qcustomplot.cpp: ../OctoboticsApp/Source/qcustomplot.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
@@ -1999,6 +2062,7 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/tool_statusResponse.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
+		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
@@ -2019,6 +2083,12 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
 		moc_predefs.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/code/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/code/OctoGUI/OctoboticsApp -I/home/octo/code/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/code/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/customplotitem.h -o moc_customplotitem.cpp
@@ -2232,6 +2302,7 @@ moc_publisher.cpp: ../OctoboticsApp/Source/publisher.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/tool_statusResponse.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
+		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
@@ -2876,6 +2947,12 @@ moc_publisher.cpp: ../OctoboticsApp/Source/publisher.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
 		moc_predefs.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/code/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/code/OctoGUI/OctoboticsApp -I/home/octo/code/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/code/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/publisher.h -o moc_publisher.cpp
@@ -2956,6 +3033,7 @@ moc_rosthread.cpp: ../OctoboticsApp/Source/rosthread.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/tool_statusResponse.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
+		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
@@ -3601,6 +3679,12 @@ moc_rosthread.cpp: ../OctoboticsApp/Source/rosthread.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
 		moc_predefs.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/code/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/code/OctoGUI/OctoboticsApp -I/home/octo/code/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/code/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/rosthread.h -o moc_rosthread.cpp
@@ -3933,6 +4017,7 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_custom_service/include/stm_client/tool_statusResponse.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
+		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
@@ -4471,7 +4556,13 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_stat.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
+		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o publisher.o ../OctoboticsApp/Source/publisher.cpp
 
 recordcams.o: ../OctoboticsApp/Source/recordcams.cpp 
@@ -4553,6 +4644,7 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_custom_service/include/stm_client/tool_statusResponse.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
+		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
@@ -5196,7 +5288,13 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_stat.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
+		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rosthread.o ../OctoboticsApp/Source/rosthread.cpp
 
 hellocpp.o: ../OctoboticsApp/Source/hellocpp.cpp 
@@ -6407,6 +6505,7 @@ customplotitem.o: ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/So
 		../OctoboticsApp/ros_custom_service/include/stm_client/tool_statusResponse.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
+		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
@@ -6425,7 +6524,13 @@ customplotitem.o: ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/So
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_stat.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
+		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o customplotitem.o ../OctoboticsApp/Source/customplotitem.cpp
 
 main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
@@ -6576,6 +6681,7 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/tool_statusResponse.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int8.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
+		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
@@ -7151,16 +7257,27 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtGui/QGuiApplication \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtQml/QQmlApplicationEngine \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtQml/QQmlContext \
 		../OctoboticsApp/Source/hellocpp.h \
-		../OctoboticsApp/Source/recordcams.h
+		../OctoboticsApp/Source/recordcams.h \
+		../OctoboticsApp/Source/ScriptRunner.h \
+		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QProcess
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../OctoboticsApp/main.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
+
+moc_ScriptRunner.o: moc_ScriptRunner.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ScriptRunner.o moc_ScriptRunner.cpp
 
 moc_qcustomplot.o: moc_qcustomplot.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qcustomplot.o moc_qcustomplot.cpp

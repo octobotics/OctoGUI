@@ -16,6 +16,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import "../../UI/Components"
+import QtQml.Models 2.11
+import camera 1.0
 Page {
     id: connectROSPage
     property color backGroundColor : "#356859"
@@ -27,6 +29,12 @@ Page {
     //        hostname.text = connectROS.host
 
     //    }
+
+
+    CameraRunner {
+        id: cameraRunner
+    }
+
 
     background: Rectangle {
         color: backGroundColor
@@ -54,6 +62,7 @@ Page {
             onClicked: {
                 //connectROS.connectMasterURI(masterUriId.text,hostname.text)
                 publisher.call_cameraInit(1)
+
             }
         }
         CButton{
@@ -66,7 +75,7 @@ Page {
             borderColor: mainAppColor
             onClicked: {
                 //connectROS.connectMasterURI(masterUriId.text,hostname.text)
-                showUserInfo()
+                cameraRunner.runCamera()
             }
         }
         CButton{
@@ -74,12 +83,12 @@ Page {
             height: 50
             Layout.preferredWidth: connectROSPage.width - 20
             Layout.alignment: Qt.AlignHCenter
-            name: "setting 3"
+            name: "Run Joystick"
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
                 //connectROS.connectMasterURI(masterUriId.text,hostname.text)
-                showUserInfo()
+
             }
         }
         CButton{

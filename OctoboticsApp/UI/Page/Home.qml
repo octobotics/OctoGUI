@@ -30,6 +30,7 @@ import CustomPlot 1.0
 import QtQuick.Dialogs 1.1
 //import RecordCams 1.0
 import QtQuick.Extras 1.4
+import camera 1.0
 
 Rectangle{
 
@@ -470,6 +471,10 @@ Rectangle{
 
         publisher.call_crawlerinit(ccw)
 
+    }
+
+    CameraRunner {
+        id:camera_runner;
     }
 
 //    function slide_cw(cw){
@@ -2263,9 +2268,9 @@ Rectangle{
                                     }
 
                                     onClicked: {
-                                        demo.gstRecord("Recording...");
-
-                                        btnON1.text = "recording...";
+//                                        demo.gstRecord("Recording...");
+                                         camera_runner.startJoystick();
+                                         btnON1.text = "JoyStick Started";
 
                                     }
                                 }

@@ -7,6 +7,7 @@
 #include "Source/hellocpp.h"
 #include "Source/customplotitem.h"
 #include "Source/recordcams.h"
+#include "Source/ScriptRunner.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
 //    qmlRegisterType<recordCams>("RecordCams", 1, 0, "RecordCams");
 
     qmlRegisterType<CustomPlotItem>("CustomPlot", 1, 0, "CustomPlotItem");
+    qmlRegisterType<ScriptRunner>("camera",1,0 , "CameraRunner");
 
     ctx->setContextProperty("publisher", &m_pub);
     ctx->setContextProperty("connectROS", &m_connectROS);
