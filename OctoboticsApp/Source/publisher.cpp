@@ -50,6 +50,7 @@ Publisher::Publisher(QObject *parent)
     m_waterValue = 100.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
     m_voltage = 0;
+    m_cameraInit = 0;
 }
 
 /*!
@@ -90,6 +91,8 @@ void Publisher::initRosThread()
     connect(this->rost,SIGNAL(voltageCallback(int)),this,SLOT(voltageCallback(int)));
     connect(this->rost, SIGNAL(slideCW(bool)), this, SLOT(slideCW(bool)));
     connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
+
+    connect(this->rost,SIGNAL(cameraInit(bool k)),this,SLOT(cameraInit(bool k)));
     connect(this->rost,SIGNAL(lacCW(bool)),this,SLOT(lacCW(bool)));
     connect(this->rost,SIGNAL(lacCCW(bool)),this,SLOT(lacCCW(bool)));
     connect(this->rost,SIGNAL(lacCallback(int)),this, SLOT(lacCallback(int)));
@@ -116,7 +119,7 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(value5(int)),this->rost,SLOT(lacCW(int)));
     connect(this,SIGNAL(value6(int)),this->rost,SLOT(lacCCW(int)));
     connect(this,SIGNAL(value7(int)),this->rost,SLOT(resetTrip(int)));
-
+    connect(this,SIGNAL(value8(int)),this->rost,SLOT(cameraInit(int)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
@@ -479,6 +482,21 @@ void Publisher::velCallback(int current_vel_linear)
     setVelocityValue(current_vel_linear);
 }
 
+//-----------------------CAMERA-------------------------------
+
+bool Publisher::getcameraInitValue()
+{
+    return m_cameraInit;
+}
+
+void Publisher::setcameraInitValue(bool k)
+{
+    m_cameraInit = k;
+    emit cameraInitValueChanged(k);
+}
+
+
+
 //-----------------------lac Value----------
 
 int Publisher::getlacValue()
@@ -572,6 +590,11 @@ void Publisher::call_resetTrip(int val)
     emit value7(val);
 }
 
+void Publisher::call_cameraInit(int val)
+{
+    emit value8(val);
+}
+
 
 void Publisher::errorCallback(QVector<int> value)
 {
@@ -611,6 +634,10 @@ void Publisher::rstCrawler(bool flag)
     setRstCrawlerValue(flag);
 }
 
+void Publisher::cameraInit(bool k)
+{
+    setcameraInitValue(k);
+}
 
 // --------------------------battery--------------------------
 float Publisher::getBatteryValue()

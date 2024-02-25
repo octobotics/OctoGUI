@@ -48,12 +48,12 @@ Page {
             height: 50
             Layout.preferredWidth: connectROSPage.width - 20
             Layout.alignment: Qt.AlignHCenter
-            name: "setting 1"
+            name: "Start Camera"
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
                 //connectROS.connectMasterURI(masterUriId.text,hostname.text)
-                showUserInfo()
+                publisher.call_cameraInit(1)
             }
         }
         CButton{

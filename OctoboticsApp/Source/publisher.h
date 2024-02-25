@@ -42,6 +42,8 @@ class Publisher : public QObject
     Q_PROPERTY(QString toolToggle READ getToolToggle WRITE setToolToggle NOTIFY toolToggleChanged)
 
     // arm
+
+    Q_PROPERTY(bool cameraInit READ getcameraInitValue WRITE setcameraInitValue NOTIFY cameraInitValueChanged)
     Q_PROPERTY(bool slideCW READ getslideCWValue WRITE setslideCWValue NOTIFY slideCWValueChanged)
     Q_PROPERTY(bool slideCCW READ getslideCCWValue WRITE setslideCCWValue NOTIFY slideCCWValueChanged)
     Q_PROPERTY(bool lacCW READ getlacCWValue WRITE setlacCWValue NOTIFY lacCWValueChanged)
@@ -103,6 +105,9 @@ public slots:
     void setToggleValue(bool flag);
     void toggleCallback(bool flag);
 
+    bool getcameraInitValue();
+    void setcameraInitValue(bool k);
+
 
     //arm tool
     QString getToolToggle();
@@ -134,6 +139,8 @@ public slots:
 
 
 
+
+
     bool getStopArmValue();
     void setStopArmValue(bool k);
 
@@ -153,6 +160,8 @@ public slots:
     void slideCCW(bool k);
 
     void resetTrip(bool k);
+
+    void cameraInit(bool k);
 
     void lacCW(bool k);
     void lacCCW(bool k);
@@ -189,6 +198,8 @@ public slots:
     void call_lacccw(int val);
 
     void call_resetTrip(int val);
+
+    void call_cameraInit(int val);
 
     void errorCallback(QVector<int> value);
     void tempCallback(QVector<int> value);
@@ -270,6 +281,7 @@ signals:
     void value5(int value);
     void value6(int value);
     void value7(int value);
+    void value8(int value);
 
 
 
@@ -286,6 +298,8 @@ signals:
     //arm
     void slideCWValueChanged(bool value);
     void slideCCWValueChanged(bool value);
+
+    void cameraInitValueChanged(bool value);
 
     void lacCWValueChanged(bool value);
     void lacCCWValueChanged(bool value);
@@ -347,6 +361,7 @@ private:
     bool m_initCrawlerValue;
     bool m_stopCrawlerValue;
     bool m_rstCrawlerValue;
+    bool m_cameraInit;
     int m_comStatus;
     int m_armToolStatus;
     int m_velocityValue;
@@ -358,6 +373,7 @@ private:
     int m_tripReset;
     int m_lacValue;
     int m_voltage;
+
 
 
     QString m_utVel;

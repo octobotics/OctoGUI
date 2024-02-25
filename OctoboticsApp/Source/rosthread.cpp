@@ -25,6 +25,7 @@ QString GraphPath_ = "";
 void RosThread::run()
 {
 
+
     qDebug() << "RosThread run called";
 
     //ros node handler
@@ -75,6 +76,8 @@ void RosThread::run()
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
+    camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("zed2i/zed_node/start_remote_stream");
+    camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
 
     lac_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
     lac_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reduce_three_service");
@@ -559,6 +562,20 @@ void RosThread::lacCW(int value)
             qDebug() << "Moving";
             emit lacCW(0);
 
+        }
+    }
+}
+
+void RosThread::cameraInit(int value)
+{
+    int k =value;
+    zed_interfaces::start_remote_stream b;
+    if (k){
+        qDebug() << "Init Camera";
+        camera_init_.call(b);
+        if(b.response.result){
+            qDebug() << "Camera Started";
+            emit cameraInit(0);
         }
     }
 }

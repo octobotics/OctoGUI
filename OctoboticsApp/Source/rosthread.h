@@ -41,6 +41,8 @@
 #include "launch_crawler/SerialNumbers.h"
 #include "octo_arm_teleop/GUI_adra_stat.h"
 #include "stm_client/cam_array.h"
+#include "zed_interfaces/start_remote_stream.h"
+#include "zed_interfaces/stop_remote_stream.h"
 
 /*!
  * \brief The RosThread class is a QThread to run a ros node
@@ -89,6 +91,7 @@ public slots:
     void slideCCW(int value);
     void lacCW(int value);
     void lacCCW(int value);
+    void cameraInit(int value);
     void checkArmStatus();
     void reset_arm(int val);
     void saveImg(QString img);
@@ -98,6 +101,8 @@ public:
 
 signals:
     //signals
+
+
 
     void voltageCallback(int value);
     void waterCallback(float level);
@@ -134,6 +139,7 @@ signals:
     void initCrawler(bool k);
     void stopCrawler(bool k );
     void rstCrawler(bool k);
+    void cameraInit(bool k);
 
     void graphCall(QVector<double> data, QVector<double> tuple,int64_t x_range);
 
@@ -181,6 +187,8 @@ private:
     ros::ServiceClient lac_ccw_;
     ros::ServiceClient trip_reset_;
     ros::ServiceClient get_arm_status_srv_;
+    ros::ServiceClient camera_init_ ;
+    ros::ServiceClient camera_stop_ ;
 
     //variables
     QVector<int> bot_err;
