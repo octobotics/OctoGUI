@@ -37,7 +37,7 @@
 #include <QString>
 #include <QThread>
 #include "customplotitem.h"
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include "launch_crawler/SerialNumbers.h"
 #include "octo_arm_teleop/GUI_adra_stat.h"
 #include "stm_client/cam_array.h"
@@ -56,9 +56,9 @@ public slots:
     void addLine(QString newLine);
 
     //ros publishers
-    void sendUtVel(QString value);
-    void sendUtData(QString value);
-    void capImgPub(int value);
+//    void sendUtVel(QString value);
+//    void sendUtData(QString value);
+//    void capImgPub(int value);
 
     //ros subscribers
     void lacCallback(const std_msgs::Int32::ConstPtr &msg);
@@ -71,11 +71,11 @@ public slots:
     void crawlerCallback(const my_actuator::vitals::ConstPtr &msg);
     void thicknessCallback(const serialtoros::thick_arr::ConstPtr &msg);
     void graphCallback(const serialtoros::graph_arr::ConstPtr &msg);
-    void utCallback(const serialtoros::VDE_arr::ConstPtr &msg);
+//    void utCallback(const serialtoros::VDE_arr::ConstPtr &msg);
     void fCallback(const std_msgs::Float32::ConstPtr &msg);
     void currentCallback(const std_msgs::Float32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
-    void voltageCallback(const std_msgs::Int16::ConstPtr &msg);
+//    void voltageCallback(const std_msgs::Int16::ConstPtr &msg);
 
     //ros service servers
     bool toggleCallback(stm_client::tool_status::Request &req, stm_client::tool_status::Response &res);
@@ -104,7 +104,7 @@ signals:
 
 
 
-    void voltageCallback(int value);
+//    void voltageCallback(int value);
     void waterCallback(float level);
     void commCallback(int value);
     void armToolCallback(int value);
@@ -116,7 +116,7 @@ signals:
     void tripCallback(int current_trip);
     void crawlerCallback(bool m1, bool m2, bool m3, bool m4);
     void armCallback(QVector<int> arm_status);
-    void utCallback(int vel, int deepcoat, int echo);
+//    void utCallback(int vel, int deepcoat, int echo);
     void fCallback(float force);
     void uidCallback(QVector<QString> uid);
     void currentCallback(float current);
@@ -160,7 +160,7 @@ private:
     ros::Subscriber crawler_status_sub_;
     ros::Subscriber thick_sub_;
     ros::Subscriber graph_sub_;
-    ros::Subscriber ut_sub_;
+//    ros::Subscriber ut_sub_;
     ros::Subscriber f_sub_;
     ros::Subscriber current_sub_;
     ros::Subscriber uid_sub_;

@@ -74,7 +74,7 @@ class Publisher : public QObject
 
     // current
     Q_PROPERTY(float currentValue READ getCurrentValue WRITE setCurrentValue NOTIFY currentValueChanged)
-    Q_PROPERTY(int voltageValue READ getvoltageValue WRITE setvoltageValue NOTIFY voltageValueChanged)
+//    Q_PROPERTY(int voltageValue READ getvoltageValue WRITE setvoltageValue NOTIFY voltageValueChanged)
 
     // ut gauge
     Q_PROPERTY(QString utData READ getUtData WRITE setUtData NOTIFY utDataChanged)
@@ -215,9 +215,9 @@ public slots:
     void setBatteryValue(float value);
     void battCallback(float value);
 
-    int  getvoltageValue();
-    void setvoltageValue(int value);
-    void voltageCallback(int value);
+//    int  getvoltageValue();
+//    void setvoltageValue(int value);
+//    void voltageCallback(int value);
 
     //Velocity
      void velCallback(int current_vel_linear);
@@ -306,8 +306,8 @@ signals:
 
     void lacValueChanged(int lac_value);
 
-    void voltageValueChanged(int value);
 
+//    void voltageValueChanged(int value);
     void resetTripValueChanged(bool value);
 
     void rstArmValueChanged(bool value);
@@ -372,7 +372,7 @@ private:
     int m_trip;
     int m_tripReset;
     int m_lacValue;
-    int m_voltage;
+
 
 
 

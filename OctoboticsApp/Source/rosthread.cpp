@@ -56,12 +56,12 @@ void RosThread::run()
     crawler_status_sub_ = m_nodeHandler->subscribe<my_actuator::vitals>("/crawler_vitals",1, &RosThread::crawlerCallback, this);
     thick_sub_ = m_nodeHandler->subscribe<serialtoros::thick_arr>("/ut_thickness", 1, &RosThread::thicknessCallback, this);
     graph_sub_ = m_nodeHandler->subscribe<serialtoros::graph_arr>("/ut_graph", 1, &RosThread::graphCallback, this);
-    ut_sub_ = m_nodeHandler->subscribe<serialtoros::VDE_arr>("/ut_VDE_values", 1, &RosThread::utCallback, this);
+
     f_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/force_status", 1, &RosThread::fCallback, this);
     current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
     lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
-    voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1,&RosThread::voltageCallback,this);
+//    voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1,&RosThread::voltageCallback,this);
 
 
     // ros service servers
@@ -106,63 +106,29 @@ void RosThread::addLine(QString newLine)
  * \brief RosThread::sendUtVel Publishes UT Velocity from UI to serialtoros node
  * \param value gets value from user input in UI
  */
-void RosThread::sendUtVel(QString value)
-{
-    ros::Rate rate(10);
-    std_msgs::Int64 msg;
-    msg.data = value.toInt();
-    vel_pub_.publish(msg);
-}
+
 
 
 /*!
  * \brief RosThread::sendUtData Publishes Deepcoat and Xrange values to serialtoros node
  * \param value 0: sends 0 to deepcoat 1: sends 1 to deepcoat 128: sends 128 to xrange( to start receiving graph data from UT node)
  */
-void RosThread::sendUtData(QString value)
-{
-    ros::Rate rate(10);
-    std_msgs::Float32 xrange;
-    std_msgs::Int8 dc;
-    if(value == "0")
-    {
-        dc.data = value.toInt();
-        ut_dc_pub_.publish(dc);
 
-    }
-    else if(value == "1")
-    {
-        dc.data = value.toInt();
-        ut_dc_pub_.publish(dc);
-
-    }
-    else if(value == "128")
-    {
-        xrange.data = value.toInt();
-        ut_xrange_pub_.publish(xrange);
-    }
-}
 
 
 /*!
  * \brief RosThread::capImgPub publisher to trigger local image capture from cameras in xavier
  * \param value
  */
-void RosThread::capImgPub(int value)
-{
-    std_msgs::Int8 k;
-    k.data= value;
-    img_cap_pub_.publish(k);
 
-}
 
-void RosThread::voltageCallback(const std_msgs::Int16::ConstPtr &msg)
-{
-    auto value = msg->data ;
+//void RosThread::voltageCallback(const std_msgs::Int16::ConstPtr &msg)
+//{
+//    auto value = msg->data ;
 
-    emit voltageCallback(value);
+//    emit voltageCallback(value);
 
-}
+//}
 
 
 /*!
@@ -290,13 +256,7 @@ void RosThread::graphCallback(const serialtoros::graph_arr::ConstPtr &msg)
  * \brief RosThread::utCallback gets current velocity, deepcoat and echo values from UT serial node and displays in the UI
  * \param msg
  */
-void RosThread::utCallback(const serialtoros::VDE_arr::ConstPtr &msg)
-{
-    auto vel = msg->data[0];
-    auto deepcoat = msg->data[2];
-    auto echo = msg->data[1];
-    emit utCallback(vel, deepcoat, echo);
-}
+
 
 
 /*!

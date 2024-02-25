@@ -46,16 +46,16 @@ Rectangle{
     property color buttonBg: "#c792ea"
     property color textColor: "#c792ea"
 
-    property var armErr: ({   0 : "NO Error [Radhe Radhe]",
+    property var armErr: ({   0 : "NO Error [ALL OK]",
                               6 : "Storage data error",
                               13 : "Multi-turn calibrate error",
                               23 : "Current temperature out of range	",
                               24 : "Current voltage out of range",
                               34 : "Target position out of range"
                           })
-    property var cErr: ({   0 : "NO Error [Radhe Radhe]",
+    property var cErr: ({   0 : "NO Error [ALL OK]",
                             1 : "Motor Stalled [Critical]",
-                            2 : "Low Pressure [Donno Dude]",
+                            2 : "Low Pressure [RESET MOTORS]",
                             3 : " Over Voltage [Moderate]",
                             4 : "Over Current [Critical]",
                             5 : "Power Overrun [Moderate]",
@@ -796,12 +796,12 @@ Rectangle{
                                         Image {
                                             id: batteryStatus
                                             anchors.fill: parent
-                                            source:displaybatterStatus(publisher.voltageValue)
+                                            source:displaybatterStatus(publisher.batteryValue)
                                         }
 
                                         Text {
                                             id: batteryStatusValue
-                                            text: parseFloat((Math.round((publisher.voltageValue)*100))/100)
+                                            text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
 
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter
@@ -2195,8 +2195,8 @@ Rectangle{
                             //                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
                             //                            }
                             playlist: Playlist {
-                                PlaylistItem { source: "rtsp://0.0.0.0:8554/back" }
-//
+                                   PlaylistItem { source:"gst-pipeline: udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw, width=(int)1280, height=(int)720 ! autovideosink"}
+
                             }
 
                         }
