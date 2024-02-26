@@ -42,9 +42,6 @@ void RosThread::run()
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
-    ut_dc_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/send_ut_deepcoat", 1);
-    ut_xrange_pub_ = m_nodeHandler->advertise<std_msgs::Int16 >("/send_ut_xrange", 1);
-    img_cap_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/img_cap", 1);
 
     // ros subscribers
     water_level_ = m_nodeHandler->subscribe<std_msgs::Float32>("/cumulative_volume",1,&RosThread::waterCallback,this);
@@ -54,10 +51,9 @@ void RosThread::run()
     odometer_ = m_nodeHandler->subscribe<std_msgs::Int32>("/odometer",1,&RosThread::odomCallback,this);
     tripmeter_ = m_nodeHandler->subscribe<std_msgs::Int32>("/tripmeter",1, &RosThread::tripCallback,this);
     crawler_status_sub_ = m_nodeHandler->subscribe<my_actuator::vitals>("/crawler_vitals",1, &RosThread::crawlerCallback, this);
-    thick_sub_ = m_nodeHandler->subscribe<serialtoros::thick_arr>("/ut_thickness", 1, &RosThread::thicknessCallback, this);
-    graph_sub_ = m_nodeHandler->subscribe<serialtoros::graph_arr>("/ut_graph", 1, &RosThread::graphCallback, this);
 
-    f_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/force_status", 1, &RosThread::fCallback, this);
+
+
     current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
     lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
@@ -66,7 +62,6 @@ void RosThread::run()
 
     // ros service servers
     toggle_srv_ = m_nodeHandler->advertiseService("toggle_robot", &RosThread::toggleCallback, this);
-    send_img_srv_ = m_nodeHandler->advertiseService("img_send", &RosThread::imgCallback, this);
 
     //ros service clients
     send_tool_srv_ =  m_nodeHandler->serviceClient<stm_interface::RelayControl>("/relay_toggle_channel");
@@ -218,39 +213,13 @@ void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
  * \brief RosThread::thicknessCallback gets thickness from ut serial node and displays on UI
  * \param msg
  */
-void RosThread::thicknessCallback(const serialtoros::thick_arr::ConstPtr &msg)
-{
-    float thickness_ = msg->data[0];
-    thickness_  = round(thickness_ * 100) / 100;
 
-    auto unit_ = msg->data[1];
-    emit thicknessCallback(thickness_, unit_);
-}
 
 /*!
  * \brief RosThread::graphCallback gets graph values from UT serial node
  * \param msg
  */
-void RosThread::graphCallback(const serialtoros::graph_arr::ConstPtr &msg)
-{
-    auto data_ = msg->data;
-    auto tuple_ = msg->echo_arr;
-    int64_t x_range_= msg->x_range;
 
-    size_t n = sizeof(data_)/sizeof(data_[0]);
-    QVector<double> v(320), tuple(3);// initialize with entries 0..320
-
-
-    tuple[0] = tuple_[0];
-    tuple[1] = tuple_[1];
-    tuple[2] = tuple_[2];
-
-    // loop through the array elements
-    for (size_t i = 0; i < n; i++) {
-        v[i] = data_[i];
-    }
-    emit  graphCall(v, tuple,x_range_);
-}
 
 /*!
  * \brief RosThread::utCallback gets current velocity, deepcoat and echo values from UT serial node and displays in the UI
@@ -263,11 +232,7 @@ void RosThread::graphCallback(const serialtoros::graph_arr::ConstPtr &msg)
  * \brief RosThread::fCallback gets force value from sensor
  * \param msg
  */
-void RosThread::fCallback(const std_msgs::Float32::ConstPtr &msg)
-{
-    auto force = msg->data;
-    emit fCallback(force);
-}
+
 
 /*!
  * \brief RosThread::currentCallback gets current value from stm32 and displays on UI
@@ -326,21 +291,6 @@ bool RosThread::toggleCallback(stm_client::tool_status::Request &req, stm_client
  * \param res
  * \return
  */
-bool RosThread::imgCallback(serialtoros::GraphPath::Request &req, serialtoros::GraphPath::Response &res )
-{
-
-    qDebug()<< "imgcallback" << req.req;
-    if (req.req ==1 )
-    {   int i = 1;
-        emit trigImg(1);
-        qDebug()<<GraphPath_;
-        ros::Duration(0.2).sleep();
-
-        res.path = GraphPath_.toStdString();
-        GraphPath_ = "";
-    }
-    return true;
-}
 
 
 /*!

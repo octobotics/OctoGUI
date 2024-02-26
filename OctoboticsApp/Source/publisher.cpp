@@ -128,11 +128,7 @@ void Publisher::initRosThread()
 
     connect(this->rost, SIGNAL(waterCallback(float)),this ,SLOT(waterCallback(float)));
 
-    // ut gauge
-    connect(this, SIGNAL(utVelChanged(QString)), this->rost, SLOT(sendUtVel(QString)));
-    connect(this, SIGNAL(utDataChanged(QString)), this->rost, SLOT(sendUtData(QString)));
-    connect(this->rost, SIGNAL(utCallback(int, int, int)), this, SLOT(utCallback(int, int, int)));
-    connect(this->rost,SIGNAL(thicknessCallback(float, float)), this , SLOT(thicknessCallback(float, float)));
+
 
     // unique id
     connect(this->rost, SIGNAL(uidCallback(QVector<QString>)), this, SLOT(uidCallback(QVector<QString>)));
@@ -660,60 +656,13 @@ void Publisher::setCurrentValue(float value)
 }
 
 // --------------------------ut gauge--------------------------
-QVariantMap Publisher::getUtstatus()
-{
-    return m_utStatus;
-}
-void Publisher::setUtstatus(QVariantMap value)
-{
-    m_utStatus = value;
-    emit utstatusChanged(value);
-}
 
-void Publisher::utCallback(int vel, int deepcoat, int echo)
-{
-    QVariantMap utstatus;
-    utstatus.insert("vel", vel);
-    utstatus.insert("deepcoat", deepcoat);
-    utstatus.insert("echo", echo);
-    setUtstatus(utstatus);
-}
-void Publisher::thicknessCallback(float thickness, float unit)
-{
-    QVariantMap thicknessCallback;
-    thicknessCallback.insert("thickness",thickness);
-    thicknessCallback.insert("unit",unit);
-    setThickness(thicknessCallback);
-}
-void Publisher::setThickness(QVariantMap value)
-{
-    m_thickness = value;
-    emit thicknessChanged(m_thickness);
-}
-QVariantMap Publisher::getThickness()
-{
-    return m_thickness;
-}
-QString Publisher::getUtVel()
-{
-    return m_utVel;
-}
-void Publisher::setUtVel(QString value)
-{
-    m_utVel = value;
-    emit utVelChanged(value);
-}
 
-QString Publisher::getUtData()
-{
-    return m_utData;
-}
-void Publisher::setUtData(QString value)
-{
 
-    m_utData = value;
-    emit utDataChanged(value);
-}
+
+
+
+
 
 
 

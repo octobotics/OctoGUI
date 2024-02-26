@@ -56,9 +56,7 @@ public slots:
     void addLine(QString newLine);
 
     //ros publishers
-//    void sendUtVel(QString value);
-//    void sendUtData(QString value);
-//    void capImgPub(int value);
+
 
     //ros subscribers
     void lacCallback(const std_msgs::Int32::ConstPtr &msg);
@@ -69,17 +67,13 @@ public slots:
     void odomCallback(const std_msgs::Int32::ConstPtr &msg);
     void tripCallback(const std_msgs::Int32::ConstPtr &msg);
     void crawlerCallback(const my_actuator::vitals::ConstPtr &msg);
-    void thicknessCallback(const serialtoros::thick_arr::ConstPtr &msg);
-    void graphCallback(const serialtoros::graph_arr::ConstPtr &msg);
-//    void utCallback(const serialtoros::VDE_arr::ConstPtr &msg);
-    void fCallback(const std_msgs::Float32::ConstPtr &msg);
+
     void currentCallback(const std_msgs::Float32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
 //    void voltageCallback(const std_msgs::Int16::ConstPtr &msg);
 
     //ros service servers
     bool toggleCallback(stm_client::tool_status::Request &req, stm_client::tool_status::Response &res);
-    bool imgCallback(serialtoros::GraphPath::Request &req, serialtoros::GraphPath::Response &res );
 
     //ros service clients
     void sendToolData(QString value);
@@ -116,14 +110,13 @@ signals:
     void tripCallback(int current_trip);
     void crawlerCallback(bool m1, bool m2, bool m3, bool m4);
     void armCallback(QVector<int> arm_status);
-//    void utCallback(int vel, int deepcoat, int echo);
-    void fCallback(float force);
+
     void uidCallback(QVector<QString> uid);
     void currentCallback(float current);
 
     void toggleCallback(bool flag);
     void trigImg(int k);
-    void thicknessCallback(float thickness, float unit);
+
 
     //--------------------------
     void slideCW(bool k);
@@ -141,16 +134,15 @@ signals:
     void rstCrawler(bool k);
     void cameraInit(bool k);
 
-    void graphCall(QVector<double> data, QVector<double> tuple,int64_t x_range);
+
 
 private:
     ros::NodeHandlePtr m_nodeHandler;
 
     ros::Publisher m_publisher;
     ros::Publisher vel_pub_;
-    ros::Publisher ut_dc_pub_;
-    ros::Publisher ut_xrange_pub_;
-    ros::Publisher img_cap_pub_;
+
+//    ros::Publisher img_cap_pub_;
 
     ros::Subscriber comm_sub_;
     ros::Subscriber tool_sub_;
@@ -158,10 +150,8 @@ private:
     ros::Subscriber odometer_;
     ros::Subscriber tripmeter_;
     ros::Subscriber crawler_status_sub_;
-    ros::Subscriber thick_sub_;
-    ros::Subscriber graph_sub_;
-//    ros::Subscriber ut_sub_;
-    ros::Subscriber f_sub_;
+
+
     ros::Subscriber current_sub_;
     ros::Subscriber uid_sub_;
     ros::Subscriber water_level_;

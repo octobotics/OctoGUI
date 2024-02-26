@@ -739,6 +739,7 @@ Rectangle{
 
             ColumnLayout{
                 anchors.centerIn: parent
+                spacing: rectBox1.height * 0.1
                 RowLayout {
                     Rectangle{
                         id:rectBox1
@@ -851,6 +852,42 @@ Rectangle{
                                         }
                                     }
                                 }
+                                RowLayout{
+                                    spacing: rectBox1.width * 0.33
+                                    SButton{
+                                        height: rectBox1.height * 0.0987
+                                        name:  "JoyStick OFF/ON"
+                                        baseColor:  buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: rectBox1.width * 0.26040
+                                        onClicked: {
+
+                                        }
+                                    }
+                                    SButton{
+                                        height: rectBox1.width * 0.33
+                                        name:  "Led"
+                                        baseColor:  buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: rectBox1.width * 0.13020
+                                        onClicked: {
+
+                                        }
+                                    }
+//                                    SButton{
+//                                        height: rectBox1.width * 0.1
+//                                        name:  "Motor"
+
+//                                        baseColor:  buttonBg
+//                                        borderColor: buttonBg
+//                                        implicitWidth: rectBox1.width * 0.13020
+//                                        onClicked: {
+//                                            baseColor: "green"
+//                                            publisher.toolToggle = "1"
+//                                        }
+//                                    }
+                                }
+
                             }
                             Item{
                                 height: rectBox1.height * 0.70
@@ -869,192 +906,14 @@ Rectangle{
                                 }
 
                             }
+
+
                         }
 
 
-
-                        //                        ColumnLayout{
-                        //                            anchors.fill: parent
-                        //                            spacing: 0
-                        //                            RowLayout{
-                        //                                Text {
-                        //                                    Layout.fillWidth: true
-                        //                                    text: qsTr("Tool")
-                        //                                    font.family: "Tahoma"
-                        //                                    font.bold: true
-                        //                                    font.pixelSize: 24
-                        //                                    color: "#FFFFFF"
-                        //                                    horizontalAlignment: Text.AlignHCenter
-                        //                                    verticalAlignment: Text.AlignVCenter
-                        //                                }
-                        //                            }
-                        //                            RowLayout{
-                        //                                Layout.fillHeight: true
-                        //                                width: parent.width
-
-                        //                                Item{
-                        //                                    Layout.fillHeight: true
-                        //                                    Layout.fillWidth: true
-                        //                                    ColumnLayout{
-                        //                                        anchors.centerIn: parent
-                        //                                        RowLayout{
-
-                        //                                            Image {
-                        //                                                id:magnetStatus
-                        //                                                sourceSize.width: 35
-                        //                                                sourceSize.height: 35
-                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                        //                                            }
-
-                        //                                            Button {
-                        //                                                id: magnet
-                        //                                                text : "Magnet"
-                        //                                                implicitWidth : 70
-                        //                                                implicitHeight : 30
-
-                        //                                                background: Rectangle {
-                        //                                                    color:"#6fda9c"
-                        //                                                    radius: 5
-                        //                                                    opacity: magnet.down ? 0.5 : 1
-
-                        //                                                }
-
-                        //                                                onClicked: {
-                        //                                                    publisher.toolToggle = "7"
-
-                        //                                                }
-                        //                                            }
-
-                        //                                            Item{
-                        //                                                width: 8
-                        //                                            }
-
-
-                        //                                            Image {
-                        //                                                id:pumpStatus
-                        //                                                sourceSize.width: 35
-                        //                                                sourceSize.height: 35
-                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                        //                                            }
-
-                        //                                            Button {
-                        //                                                id: pump
-                        //                                                text : "Pump"
-                        //                                                implicitWidth : 70
-                        //                                                implicitHeight : 30
-
-                        //                                                background: Rectangle {
-                        //                                                    color:"#6fda9c"
-                        //                                                    radius: 5
-                        //                                                    opacity: pump.down ? 0.5 : 1
-
-                        //                                                }
-
-                        //                                                onClicked: {
-                        //                                                    publisher.toolToggle = "4"
-
-                        //                                                }
-                        //                                            }
-                        //                                            Item{
-                        //                                                width: 8
-                        //                                            }
-                        //                                            Image {
-                        //                                                id:grinderStatus
-                        //                                                sourceSize.width: 35
-                        //                                                sourceSize.height: 35
-                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                        //                                            }
-
-                        //                                            Button {
-                        //                                                id: grinder
-                        //                                                text : "Grinder"
-                        //                                                implicitWidth : 70
-                        //                                                implicitHeight : 30
-
-                        //                                                background: Rectangle {
-                        //                                                    color:"#6fda9c"
-                        //                                                    radius: 5
-                        //                                                    opacity: grinder.down ? 0.5 : 1
-
-                        //                                                }
-
-                        //                                                onClicked: {
-                        //                                                    publisher.toolToggle = "0"
-
-                        //                                                }
-                        //                                            }
-                        //                                        }
-                        //                                        Item {
-                        //                                            height:20
-                        //                                        }
-                        //                                        RowLayout{
-
-                        //                                            Image {
-                        //                                                id:flightStatus
-                        //                                                sourceSize.width: 35
-                        //                                                sourceSize.height: 35
-                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                        //                                            }
-                        //                                            Button {
-                        //                                                id: flight
-                        //                                                text : "Upper Light"
-                        //                                                implicitWidth : 120
-                        //                                                implicitHeight : 30
-
-                        //                                                background: Rectangle {
-                        //                                                    color:"#6fda9c"
-                        //                                                    radius: 5
-                        //                                                    opacity: flight.down ? 0.5 : 1
-
-                        //                                                }
-
-                        //                                                onClicked: {
-                        //                                                    publisher.toolToggle = "6"
-
-                        //                                                }
-                        //                                            }
-                        //                                            Item {
-                        //                                                width:30
-                        //                                            }
-
-
-
-                        //                                            Image {
-                        //                                                id:blightStatus
-                        //                                                sourceSize.width: 35
-                        //                                                sourceSize.height: 35
-                        //                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-                        //                                            }
-                        //                                            Button {
-                        //                                                id: blight
-                        //                                                text : "Bottom Light"
-                        //                                                implicitWidth : 120
-                        //                                                implicitHeight : 30
-
-                        //                                                background: Rectangle {
-                        //                                                    color:"#6fda9c"
-                        //                                                    radius: 5
-                        //                                                    opacity: blight.down ? 0.5 : 1
-
-                        //                                                }
-
-                        //                                                onClicked: {
-                        //                                                    publisher.toolToggle = "5"
-
-                        //                                                }
-                        //                                            }
-
-
-                        //                                        }
-
-                        //                                    }
-
-                        //                                }
-                        //                            }
-
-                        //                        }
-
                     }
+
+
                     Rectangle{
                         id:rectBox2
                         width: widthScreen * 0.18
@@ -2445,7 +2304,7 @@ Rectangle{
                                             text: publisher.tripValue + "<b style='font-size: 20px;'> mtr<b>"
                                             font.family: "Tahoma"
                                             font.bold: true
-                                            font.pixelSize: 60
+                                            font.pixelSize: 30
                                              color: textColor
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter
@@ -2562,7 +2421,7 @@ Rectangle{
                                             text: publisher.odomValue + "<b style='font-size: 20px;'> mtr<b>"
                                             font.family: "Tahoma"
                                             font.bold: true
-                                            font.pixelSize: 60
+                                            font.pixelSize: 30
                                              color: textColor
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter

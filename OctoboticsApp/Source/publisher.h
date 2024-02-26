@@ -77,10 +77,7 @@ class Publisher : public QObject
 //    Q_PROPERTY(int voltageValue READ getvoltageValue WRITE setvoltageValue NOTIFY voltageValueChanged)
 
     // ut gauge
-    Q_PROPERTY(QString utData READ getUtData WRITE setUtData NOTIFY utDataChanged)
-    Q_PROPERTY(QString utVel READ getUtVel WRITE setUtVel NOTIFY utVelChanged)
-    Q_PROPERTY(QVariantMap utstatus READ getUtstatus WRITE setUtstatus NOTIFY utstatusChanged)
-    Q_PROPERTY(QVariantMap thickness READ getThickness WRITE setThickness NOTIFY thicknessChanged)
+
 
     // unique id
     Q_PROPERTY(QVector<QString> uid READ getUid WRITE setUid NOTIFY uidChanged)
@@ -246,21 +243,7 @@ public slots:
 
     void waterCallback(float level);
 
-    //ut gauge
-    QString getUtData();
-    void setUtData(QString value);
 
-    QString getUtVel();
-    void setUtVel(QString value);
-
-    QVariantMap getUtstatus();
-    void setUtstatus(QVariantMap value);
-
-    QVariantMap getThickness();
-    void setThickness(QVariantMap value);
-
-    void utCallback(int vel, int deepcoat, int echo);
-    void thicknessCallback(float thickness, float unit);
 
     //unique id
     QVector<QString> getUid();
@@ -337,11 +320,6 @@ signals:
     //current
     void currentValueChanged(float value);
 
-    //ut gauge
-    void utstatusChanged(QVariantMap status);
-    void thicknessChanged(QVariantMap status);
-    void utVelChanged(QString value);
-    void utDataChanged(QString value);
 
     //unique id
     void uidChanged(QVector<QString> value);
@@ -376,7 +354,7 @@ private:
 
 
 
-    QString m_utVel;
+
     QString m_toolToggle;
     QString m_utData;
 
