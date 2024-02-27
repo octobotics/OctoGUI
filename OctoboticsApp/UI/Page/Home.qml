@@ -854,26 +854,33 @@ Rectangle{
                                 }
                                 RowLayout{
                                     spacing: rectBox1.width * 0.33
+                                    Item {
+                                            Layout.fillWidth: true
+                                        }
+
                                     SButton{
                                         height: rectBox1.height * 0.0987
                                         name:  "JoyStick OFF/ON"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.26040
+                                        implicitWidth: rectBox1.width * 0.32
+                                        Layout.alignment: Qt.AlignCenter
                                         onClicked: {
+                                            camera_runner.startJoystick();
 
                                         }
                                     }
-                                    SButton{
-                                        height: rectBox1.width * 0.33
-                                        name:  "Led"
-                                        baseColor:  buttonBg
-                                        borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.13020
-                                        onClicked: {
 
-                                        }
-                                    }
+//                                    SButton{
+//                                        height: rectBox1.width * 0.33
+//                                        name:  "Spare"
+//                                        baseColor:  buttonBg
+//                                        borderColor: buttonBg
+//                                        implicitWidth: rectBox1.width * 0.13020
+//                                        onClicked: {
+
+//                                        }
+//                                    }
 //                                    SButton{
 //                                        height: rectBox1.width * 0.1
 //                                        name:  "Motor"
@@ -2114,25 +2121,25 @@ Rectangle{
                                 Layout.fillHeight: true
                                 width: 30
 
-                                Button {
-                                    id: btnON1
-                                    text : "Record"
-                                    width : 100
-                                    height : 25
-                                    anchors.centerIn: parent
+//                                Button {
+//                                    id: btnON1
+//                                    text : "Record"
+//                                    width : 100
+//                                    height : 25
+//                                    anchors.centerIn: parent
 
-                                    background: Rectangle {
-                                        color:buttonBg
-                                        radius: 8
-                                    }
+//                                    background: Rectangle {
+//                                        color:buttonBg
+//                                        radius: 8
+//                                    }
 
-                                    onClicked: {
-//                                        demo.gstRecord("Recording...");
-                                         camera_runner.startJoystick();
-                                         btnON1.text = "JoyStick Started";
+//                                    onClicked: {
+////                                        demo.gstRecord("Recording...");
 
-                                    }
-                                }
+//                                         btnON1.text = "JoyStick Started";
+
+//                                    }
+//                                }
 
                             }
 
@@ -2143,23 +2150,23 @@ Rectangle{
                                 Layout.fillHeight: true
                                 width: 30
 
-                                Button {
-                                    id: btnSTOP1
-                                    text : "Stop"
-                                    width : 100
-                                    height : 25
-                                    anchors.centerIn: parent
-                                    background: Rectangle {
-                                        color:buttonBg
-                                        radius: 8
-                                    }
+//                                Button {
+//                                    id: btnSTOP1
+//                                    text : "Stop"
+//                                    width : 100
+//                                    height : 25
+//                                    anchors.centerIn: parent
+//                                    background: Rectangle {
+//                                        color:buttonBg
+//                                        radius: 8
+//                                    }
 
-                                    onClicked: {
+//                                    onClicked: {
 
-                                        demo.gstStop("Stop");
-                                        btnON1.text = "Record";
-                                    }
-                                }
+//                                        demo.gstStop("Stop");
+//                                        btnON1.text = "Record";
+//                                    }
+//                                }
 
                             }
                             Item {
