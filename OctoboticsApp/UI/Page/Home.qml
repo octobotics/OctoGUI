@@ -46,6 +46,10 @@ Rectangle{
     property color borderSecondBg: "#ab47bc"
     property color buttonBg: "#c792ea"
     property color textColor: "#c792ea"
+    property var crawler: publisher.crawlStatus
+    onCrawlerChanged: {
+        console.log("crawler",crawler)
+    }
 
     property var armErr: ({   0 : "NO Error [ALL OK]",
                               6 : "Storage data error",
@@ -67,10 +71,10 @@ Rectangle{
                             10 : "Very High Temperature [Moderate]",
                             11 : "Encoder Calibration Error [Moderate]"})
     property var cMotors: ({
-                               0 : "Front Left",
-                               1 : "Front Right",
-                               2 : "Rear Right",
-                               3 : "Rear Left"
+                               0 : "Rear Right",
+                               1 : "Rear Left",
+                               2 : "Front Left",
+                               3 : "Front Right"
                            })
     property var armMotors: ({
                                  0 : "Base",
@@ -1141,76 +1145,76 @@ Rectangle{
 
                     }
 
-                    Rectangle{
-                        id:rectBox5
-                        width: widthScreen * 0.18
-                        height: heightScreen * 0.25
-                        border.color: borderSecondBg
-                        color: secondBg
-                        radius: 15
-                        ColumnLayout{
-                            anchors.fill: parent
-                            anchors.topMargin: 10
-                            Text {
-                                Layout.fillWidth: true
-                                height: rectBox4.height * 0.2
-                                text: qsTr("Angle Indicator")
-                                font.family: "Tahoma"
-                                font.bold: true
-                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                                 color: textColor
-                                verticalAlignment: Text.AlignVCenter
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                                                       Text {
-                                                                 Layout.fillWidth: true
-                                                                height: parent.height
-                                                                text: "30" + "\xB0"
-                                                                font.family: "Tahoma"
-                                                                font.bold: true
-                                                                font.pixelSize: 60
-                                                                 color: textColor
-                                                                verticalAlignment: Text.AlignVCenter
-                                                                horizontalAlignment: Text.AlignHCenter
-                                                            }
-//                          /*  Row{
-//                                Layout.fillHeight: true
-//                                width: parent.width
-//                                Text {
-//                                    width: parent.width * 0.8
-//                                    height: parent.height
-//                                    text: "30" + "\xB0"
-//                                    font.family: "Tahoma"
-//                                    font.bold: true
-//                                    font.pixelSize: 60
-//                                     color: textColor
-//                                    verticalAlignment: Text.AlignVCenter
-//                                    horizontalAlignment: Text.AlignHCenter
-//                                }
-//                                Item {
-//                                    width: parent.width * 0.2
-//                                    height: parent.height
-//                                    ColumnLayout{
-//                                        height: parent.height
-//                                        width: parent.width
-//                                        Image {
-//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                        }
-//                                        Item {
-//                                            Layout.fillHeight: true
-//                                        }
-//                                        Image {
-//                                            rotation: 180
-//                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                        }
-//                                    }
-//                                }
-//                            }*/
-                            Item {
-                                height: parent.height * 0.1
-                            }
-                        }
-                    }
+//                    Rectangle{
+//                        id:rectBox5
+//                        width: widthScreen * 0.18
+//                        height: heightScreen * 0.25
+//                        border.color: borderSecondBg
+//                        color: secondBg
+//                        radius: 15
+//                        ColumnLayout{
+//                            anchors.fill: parent
+//                            anchors.topMargin: 10
+//                            Text {
+//                                Layout.fillWidth: true
+//                                height: rectBox4.height * 0.2
+//                                text: qsTr("Angle Indicator")
+//                                font.family: "Tahoma"
+//                                font.bold: true
+//                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+//                                 color: textColor
+//                                verticalAlignment: Text.AlignVCenter
+//                                horizontalAlignment: Text.AlignHCenter
+//                            }
+//                                                       Text {
+//                                                                 Layout.fillWidth: true
+//                                                                height: parent.height
+//                                                                text: "30" + "\xB0"
+//                                                                font.family: "Tahoma"
+//                                                                font.bold: true
+//                                                                font.pixelSize: 60
+//                                                                 color: textColor
+//                                                                verticalAlignment: Text.AlignVCenter
+//                                                                horizontalAlignment: Text.AlignHCenter
+//                                                            }
+////                          /*  Row{
+////                                Layout.fillHeight: true
+////                                width: parent.width
+////                                Text {
+////                                    width: parent.width * 0.8
+////                                    height: parent.height
+////                                    text: "30" + "\xB0"
+////                                    font.family: "Tahoma"
+////                                    font.bold: true
+////                                    font.pixelSize: 60
+////                                     color: textColor
+////                                    verticalAlignment: Text.AlignVCenter
+////                                    horizontalAlignment: Text.AlignHCenter
+////                                }
+////                                Item {
+////                                    width: parent.width * 0.2
+////                                    height: parent.height
+////                                    ColumnLayout{
+////                                        height: parent.height
+////                                        width: parent.width
+////                                        Image {
+////                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+////                                        }
+////                                        Item {
+////                                            Layout.fillHeight: true
+////                                        }
+////                                        Image {
+////                                            rotation: 180
+////                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
+////                                        }
+////                                    }
+////                                }
+////                            }*/
+//                            Item {
+//                                height: parent.height * 0.1
+//                            }
+//                        }
+//                    }
 
 
                     Rectangle{
@@ -1343,7 +1347,7 @@ Rectangle{
                                         anchors.centerIn: parent
                                         sourceSize.width: 25
                                         sourceSize.height: 25
-                                        source: publisher.crawlStatus.frontLeft ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+                                        source: publisher.crawlStatus.backrRight ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
                                     }
 
                                 }
@@ -1373,7 +1377,7 @@ Rectangle{
                                         anchors.centerIn: parent
                                         sourceSize.width: 25
                                         sourceSize.height: 25
-                                        source: publisher.crawlStatus.backLeft  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+                                        source: publisher.crawlStatus.frontLeft  ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
                                     }
 
                                 }
@@ -1388,7 +1392,7 @@ Rectangle{
                                         anchors.centerIn: parent
                                         sourceSize.width: 25
                                         sourceSize.height: 25
-                                        source: publisher.crawlStatus.backrRight ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
+                                        source: publisher.crawlStatus.backLeft ? "qrc:/UI/Assets/dashboard/tick.png" : "qrc:/UI/Assets/dashboard/remove.png"
                                     }
 
                                 }
@@ -2066,7 +2070,7 @@ Rectangle{
                             //                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
                             //                            }
                             playlist: Playlist {
-                                   PlaylistItem { source:"gst-pipeline: udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! videoscale ! video/x-raw, width=(int)1280, height=(int)720 ! autovideosink"}
+                                   PlaylistItem { source:"gst-pipeline: udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! videoflip method=5 ! videoscale ! video/x-raw, width=(int)1280, height=(int)720 ! autovideosink"}
 
                             }
 
@@ -2473,6 +2477,8 @@ Rectangle{
                                         borderColor: "#911911"
                                         onClicked: {
                                            alaramEffect.play()
+                                           publisher.rst_crawler(1)
+                                           rstCrawler()
 
                                             //add logic
                                         }

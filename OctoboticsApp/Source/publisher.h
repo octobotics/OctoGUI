@@ -268,7 +268,7 @@ public slots:
     void uidCallback(QVector<QString> value);
 
     //image
-    void call_capImg(int val);
+//    void call_capImg(int val);
 
 
 signals:
@@ -344,7 +344,7 @@ signals:
     void uidChanged(QVector<QString> value);
 
     //image capture
-    void capImg(int value);
+//    void capImg(int value);
 private:
     RosThread *rost;
     QCustomPlot*  m_CustomPlot;
@@ -381,8 +381,8 @@ private:
 
     QVariantMap m_crawlStatus;
 
-    QVariantMap m_utStatus;
-    QVariantMap m_thickness;
+//    QVariantMap m_utStatus;
+//    QVariantMap m_thickness;
 
     QVector<int> m_armStatus;
     QVector<int> m_errValue;

@@ -112,7 +112,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
     connect(this->rost, SIGNAL(odomCallback(int)), this, SLOT(odomCallback(int)));
     connect(this->rost, SIGNAL(tripCallback(int)), this, SLOT(tripCallback(int)));
-    connect(this->rost, SIGNAL(crawlerCallback(bool, bool,bool,bool)), this, SLOT(crawlerCallback(bool, bool,bool,bool)));
+    connect(this->rost, SIGNAL(crawlerCallback(bool,bool,bool,bool)), this, SLOT(crawlerCallback(bool,bool,bool,bool)));
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
@@ -138,7 +138,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(uidCallback(QVector<QString>)), this, SLOT(uidCallback(QVector<QString>)));
 
     //image capture
-    connect(this, SIGNAL(capImg(int)), this->rost, SLOT(capImgPub(int)));
+//    connect(this, SIGNAL(capImg(int)), this->rost, SLOT(capImgPub(int)));
 
     //////////////
 
@@ -612,7 +612,9 @@ void Publisher::call_cameraInit(int val)
 
 void Publisher::errorCallback(QVector<int> value)
 {
+
     setErrValue(value);
+    qDebug()<< Q_FUNC_INFO << value;
 }
 void Publisher::tempCallback(QVector<int> value)
 {
@@ -628,6 +630,7 @@ void Publisher::crawlerCallback(bool frontLeft, bool frontRight, bool backrRight
     crawlerCallback.insert("frontRight", frontRight);
     crawlerCallback.insert("backrRight", backrRight);
     crawlerCallback.insert("backLeft", backLeft);
+    qDebug()<<Q_FUNC_INFO << crawlerCallback;
     setCrawlStatus(crawlerCallback);
 }
 
@@ -716,10 +719,7 @@ void Publisher::uidCallback(QVector<QString> value)
 
 
 //--------------------------image capture--------------------------
-void Publisher::call_capImg(int val)
-{
-    emit capImg(val);
-}
+
 
 //////////////
 
