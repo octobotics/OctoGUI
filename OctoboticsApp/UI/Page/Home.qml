@@ -1004,7 +1004,7 @@ Rectangle{
                             Text {
                                 Layout.fillWidth: true
                                 height: rectBox3.height * 0.2
-                                text: qsTr("Horizontal Slide Position")
+                                text: qsTr("Linear Speed ")
                                 font.family: "Tahoma"
                                 font.bold: true
                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
@@ -1016,7 +1016,7 @@ Rectangle{
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
                                     textFormat: Text.RichText
-                                    text: Math.round(publisher.currentValue*100)/100 + "<b style='font-size: 18px;'> mm<b>"
+                                    text: Math.round(publisher.speedsetting) + "<b style='font-size: 18px;'> mm/s<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize:text.length < 12 ? 60 : 30
@@ -1077,7 +1077,7 @@ Rectangle{
                             Text {
                                 Layout.fillWidth: true
                                 height: rectBox4.height * 0.2
-                                text: qsTr("Linear Actuator")
+                                text: qsTr("Angular Speed")
                                 font.family: "Tahoma"
                                 font.bold: true
                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
@@ -1089,10 +1089,10 @@ Rectangle{
                                   Layout.fillWidth: true
                                   height: parent.height
                                   textFormat: Text.RichText
-                                  text: publisher.lacValue + "<b style='font-size: 14px;'> mm<b>"
+                                  text: publisher.anglesetting + "<b style='font-size: 14px;'> Deg/s<b>"
                                   font.family: "Tahoma"
                                   font.bold: true
-                                  font.pixelSize: 60
+                                  font.pixelSize: 30
                                   color: textColor
                                   verticalAlignment: Text.AlignVCenter
                                   horizontalAlignment: Text.AlignHCenter

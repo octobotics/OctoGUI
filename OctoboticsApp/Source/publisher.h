@@ -72,6 +72,9 @@ class Publisher : public QObject
     // battery
     Q_PROPERTY(float batteryValue READ getBatteryValue WRITE setBatteryValue NOTIFY batteryValueChanged)
 
+    Q_PROPERTY(int speedsetting READ getspeedsettingValue WRITE setspeedsettingValue NOTIFY speedsettingValueChanged )
+
+    Q_PROPERTY(int anglesetting READ getangularspeedValue WRITE setangularspeedValue NOTIFY angularspeedValueChanged)
     // current
     Q_PROPERTY(float currentValue READ getCurrentValue WRITE setCurrentValue NOTIFY currentValueChanged)
 //    Q_PROPERTY(int voltageValue READ getvoltageValue WRITE setvoltageValue NOTIFY voltageValueChanged)
@@ -94,6 +97,18 @@ public slots:
     int getComStatus();
     void setComStatus(int value);
     void commCallback(int value);
+
+
+
+    int getangularspeedValue();
+    void setangularspeedValue(int angularspeed);
+    void angularspeedCallback(int angularspeed);
+
+    int getspeedsettingValue();
+    void setspeedsettingValue(int speedsetting);
+    void velstatusCallback(int speedsetting);
+
+
 
 
 
@@ -245,6 +260,8 @@ public slots:
 
 
 
+
+
     //unique id
     QVector<QString> getUid();
     void setUid(QVector<QString> value);
@@ -267,7 +284,9 @@ signals:
     void value8(int value);
 
 
+    void speedsettingValueChanged(int speedsetting);
 
+    void angularspeedValueChanged(int angularspeed);
     //communcation
     void comStatusChanged(int value);
 
@@ -350,6 +369,8 @@ private:
     int m_trip;
     int m_tripReset;
     int m_lacValue;
+    int m_speedsettingvalue;
+    int m_anglesettingvalue;
 
 
 

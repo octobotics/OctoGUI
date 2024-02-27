@@ -49,8 +49,9 @@ Publisher::Publisher(QObject *parent)
     m_tripReset = 0;
     m_waterValue = 100.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
-
+    m_speedsettingvalue = 0;
     m_cameraInit = 0;
+    m_anglesettingvalue=0;
 }
 
 /*!
@@ -88,6 +89,9 @@ void Publisher::initRosThread()
     connect(this, SIGNAL(rstArm(int)), this->rost, SLOT(reset_arm(int)));
     connect(this, SIGNAL(trigArmStatusValueChanged()), this->rost, SLOT(checkArmStatus()));
 
+    connect(this->rost,SIGNAL(velstatusCallback(int)),this,SLOT(velstatusCallback(int)));
+
+    connect(this->rost,SIGNAL(angularspeedCallback(int)),this,SLOT(angularspeedCallback(int)));
 
     connect(this->rost, SIGNAL(slideCW(bool)), this, SLOT(slideCW(bool)));
     connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
@@ -191,11 +195,39 @@ void Publisher::waterCallback(float level)
 
 }
 
-//-----------------------------Voltage-------------------------------------------
+//-----------------------------Linear and Angular Speed-------------------------------------------
 
+int Publisher::getspeedsettingValue()
+{
+    return m_speedsettingvalue;
+}
 
+void Publisher::setspeedsettingValue(int speedsetting)
+{
+    m_speedsettingvalue = speedsetting;
+    emit speedsettingValueChanged(speedsetting);
+}
 
+void Publisher::velstatusCallback(int speedsetting)
+{
+    setspeedsettingValue(speedsetting);
+}
 
+int Publisher::getangularspeedValue()
+{
+    return m_anglesettingvalue;
+}
+
+void Publisher::setangularspeedValue(int angularspeed)
+{
+    m_anglesettingvalue = angularspeed;
+    emit angularspeedValueChanged(angularspeed);
+}
+
+void Publisher::angularspeedCallback(int angularspeed)
+{
+    setangularspeedValue(angularspeed);
+}
 
 // ---------------------------crawler arm toggle status---------------------------
 bool Publisher::getToggleValue()

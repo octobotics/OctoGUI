@@ -67,6 +67,7 @@ public slots:
     void odomCallback(const std_msgs::Int32::ConstPtr &msg);
     void tripCallback(const std_msgs::Int32::ConstPtr &msg);
     void crawlerCallback(const my_actuator::vitals::ConstPtr &msg);
+    void velstatusCallback(const octo_qt::ang_lin_arr::ConstPtr &msg);
 
     void currentCallback(const std_msgs::Float32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
@@ -127,6 +128,9 @@ signals:
     void resetTrip(bool k);
     //--------------------------
 
+    void velstatusCallback(int speedsetting);
+    void angularspeedCallback(int angularspeed);
+
     void stopArm(bool k );
     void rstArm(bool k);
     void initCrawler(bool k);
@@ -157,6 +161,7 @@ private:
     ros::Subscriber water_level_;
     ros::Subscriber lac_pos_ ;
     ros::Subscriber voltage_;
+    ros::Subscriber velstatus_;
 
     //ros Service Server
     ros::ServiceServer toggle_srv_;
@@ -187,6 +192,7 @@ private:
     QMap<int, QString> error_;
     QMap<int, QString> c_motors_;
     QVector<QString> uids_;
+
 
 };
 #endif // ROSTHREAD_H

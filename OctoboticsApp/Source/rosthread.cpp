@@ -51,7 +51,7 @@ void RosThread::run()
     odometer_ = m_nodeHandler->subscribe<std_msgs::Int32>("/odometer",1,&RosThread::odomCallback,this);
     tripmeter_ = m_nodeHandler->subscribe<std_msgs::Int32>("/tripmeter",1, &RosThread::tripCallback,this);
     crawler_status_sub_ = m_nodeHandler->subscribe<my_actuator::vitals>("/crawler_vitals",1, &RosThread::crawlerCallback, this);
-
+    velstatus_ = m_nodeHandler->subscribe<octo_qt::ang_lin_arr>("/vel_status",1,&RosThread::velstatusCallback,this);
 
 
     current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
@@ -266,6 +266,18 @@ void RosThread::uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg)
     }
     emit uidCallback(uids_);
 
+}
+
+void RosThread::velstatusCallback(const octo_qt::ang_lin_arr::ConstPtr &msg)
+{
+    int speedsetting = msg->data[2];
+    speedsetting = speedsetting * 10;
+    qDebug()<< "Speedsetting in mm/s%d" << speedsetting;
+
+    int angularspeed = msg->data[3];
+
+    emit velstatusCallback(speedsetting);
+    emit angularspeedCallback(angularspeed);
 }
 
 
