@@ -46,7 +46,7 @@ void RosThread::run()
 
     // ros subscribers
     water_level_ = m_nodeHandler->subscribe<std_msgs::Float32>("/cumulative_volume",1,&RosThread::waterCallback,this);
-    comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/comm_status", 1, &RosThread::commCallback, this);
+    comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/wifi_strength", 1, &RosThread::commCallback, this);
     tool_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/arm_tool_status", 1, &RosThread::armToolCallback, this);
     vel_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/motor_speed", 1, &RosThread::velCallback, this);
     odometer_ = m_nodeHandler->subscribe<std_msgs::Int32>("/odometer",1,&RosThread::odomCallback,this);

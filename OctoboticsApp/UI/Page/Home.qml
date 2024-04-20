@@ -417,7 +417,7 @@ Rectangle{
      */
     function displaybatterStatus(level)
     {
-        var percentage = ((level - 44)*100) / (50 - 44);
+        var percentage = ((level - 22)*100) / (27 - 22);
 
         console.log("batt level",level)
         if (percentage < 20){
@@ -456,10 +456,10 @@ Rectangle{
      * \brief  displayConnectionStatus: displays current connection status
      */
     function displayConnectionStatus(wifiStatus){
-        var status= parseInt(wifiStatus)
+        var status= parseInt(publisher.comStatus)
         if(status > 40 && status < 60){
             return "qrc:/UI/Assets/signal-status/wifi-signal.png"
-        }else if(status >= 60 && status < 70){
+        }else if(status >= 65 && status < 70){
             return "qrc:/UI/Assets/signal-status/warning.png"
         }else if(status >  80){
               alaramEffect.play()
