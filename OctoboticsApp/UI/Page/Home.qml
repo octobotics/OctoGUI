@@ -971,6 +971,7 @@ Rectangle{
                                             defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                             clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                             onClicked: {
+                                                publisher.call_speedIncrease(1);
                                                 //add logicr
                                             }
                                         }
@@ -983,6 +984,7 @@ Rectangle{
                                             defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                             clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                             onClicked: {
+                                                publisher.call_speedDecrease(1);
                                                 //add logicr
                                             }
                                         }

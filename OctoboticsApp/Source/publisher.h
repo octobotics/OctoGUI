@@ -46,6 +46,8 @@ class Publisher : public QObject
     Q_PROPERTY(bool cameraInit READ getcameraInitValue WRITE setcameraInitValue NOTIFY cameraInitValueChanged)
     Q_PROPERTY(bool slideCW READ getslideCWValue WRITE setslideCWValue NOTIFY slideCWValueChanged)
     Q_PROPERTY(bool slideCCW READ getslideCCWValue WRITE setslideCCWValue NOTIFY slideCCWValueChanged)
+    Q_PROPERTY(bool speedIncrease READ getspeedIncrease WRITE setspeedIncrease NOTIFY speedIncreaseValueChanged)
+    Q_PROPERTY(bool speedDecrease READ getspeedDecrease WRITE setspeedDecrease NOTIFY speedDecreaseValueChanged)
     Q_PROPERTY(bool lacCW READ getlacCWValue WRITE setlacCWValue NOTIFY lacCWValueChanged)
     Q_PROPERTY(bool lacCCW READ getlacCCWValue WRITE setlacCCWValue NOTIFY lacCCWValueChanged)
     Q_PROPERTY(int lacValue READ getlacValue WRITE setlacValue NOTIFY lacValueChanged)
@@ -135,8 +137,16 @@ public slots:
     bool getslideCCWValue();
     void setslideCCWValue(bool k);
 
+    bool getspeedIncrease();
+    void setspeedIncrease(bool k);
+
+    bool getspeedDecrease();
+    void setspeedDecrease(bool k);
+
     bool getlacCWValue();
     void setlacCWValue(bool k);
+
+
 
     bool getlacCCWValue();
     void setlacCCWValue(bool k);
@@ -170,6 +180,9 @@ public slots:
 
     void slideCW(bool k);
     void slideCCW(bool k);
+
+    void speedIncrease(bool k);
+    void speedDecrease(bool k);
 
     void resetTrip(bool k);
 
@@ -209,6 +222,9 @@ public slots:
     void call_laccw(int val);
     void call_lacccw(int val);
 
+    void call_speedIncrease(int val);
+    void call_speedDecrease(int val);
+
     void call_resetTrip(int val);
 
     void call_cameraInit(int val);
@@ -226,6 +242,9 @@ public slots:
     float getBatteryValue();
     void setBatteryValue(float value);
     void battCallback(float value);
+
+
+
 
 //    int  getvoltageValue();
 //    void setvoltageValue(int value);
@@ -283,6 +302,8 @@ signals:
     void value6(int value);
     void value7(int value);
     void value8(int value);
+    void value9(int value);
+    void value10(int value);
 
 
     void speedsettingValueChanged(int speedsetting);
@@ -301,6 +322,9 @@ signals:
     //arm
     void slideCWValueChanged(bool value);
     void slideCCWValueChanged(bool value);
+
+    void speedIncreaseValueChanged(bool value);
+    void speedDecreaseValueChanged(bool value);
 
     void cameraInitValueChanged(bool value);
 
@@ -355,6 +379,8 @@ private:
     bool m_toggleValue;
     bool m_slideCW;
     bool m_slideCCW;
+    bool m_speedIncrease;
+    bool m_speedDecrease;
     bool m_lacCW;
     bool m_lacCCW;
     bool m_rstArmValue;

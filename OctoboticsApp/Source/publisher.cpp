@@ -28,12 +28,14 @@ Publisher::Publisher(QObject *parent)
     : QObject(parent)
 {
     qDebug() << "MainWindow constructor";
-    m_batteryValue = 46;
+    m_batteryValue = 27;
     m_comStatus = 0;
     m_armToolStatus = 0;
     m_toggleValue = false;
     m_slideCW = 0;
     m_slideCCW = 0;
+    m_speedIncrease = 0;
+    m_speedDecrease = 0;
     m_lacCCW = 0;
     m_lacCW = 0;
     m_rstArmValue = 0 ;
@@ -47,7 +49,7 @@ Publisher::Publisher(QObject *parent)
     m_lacValue=0;
     m_trip = 0;
     m_tripReset = 0;
-    m_waterValue = 100.00;
+    m_waterValue = 0.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
     m_speedsettingvalue = 0;
     m_cameraInit = 0;
@@ -96,6 +98,9 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(slideCW(bool)), this, SLOT(slideCW(bool)));
     connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
 
+    connect(this->rost,SIGNAL(speedIncrease(bool)),this,SLOT(speedIncrease(bool)));
+    connect(this->rost,SIGNAL(speedDecrease(bool)),this,SLOT(speedDecrease(bool)));
+
     connect(this->rost,SIGNAL(cameraInit(bool k)),this,SLOT(cameraInit(bool k)));
     connect(this->rost,SIGNAL(lacCW(bool)),this,SLOT(lacCW(bool)));
     connect(this->rost,SIGNAL(lacCCW(bool)),this,SLOT(lacCCW(bool)));
@@ -124,6 +129,8 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(value6(int)),this->rost,SLOT(lacCCW(int)));
     connect(this,SIGNAL(value7(int)),this->rost,SLOT(resetTrip(int)));
     connect(this,SIGNAL(value8(int)),this->rost,SLOT(cameraInit(int)));
+    connect(this,SIGNAL(value9(int)),this->rost,SLOT(speedIncrease(int)));
+    connect(this,SIGNAL(value10(int)),this->rost,SLOT(speedDecrease(int)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
@@ -200,6 +207,30 @@ void Publisher::waterCallback(float level)
 {
     setWaterLevel(level);
 
+}
+
+//----------------------------Speed Increase And Decrease ------------------
+
+bool Publisher::getspeedIncrease()
+{
+    return m_speedIncrease;
+}
+
+void Publisher::setspeedIncrease(bool value)
+{
+    m_speedIncrease = value;
+    emit speedIncreaseValueChanged(value);
+}
+
+bool Publisher::getspeedDecrease()
+{
+    return m_speedDecrease;
+}
+
+void Publisher::setspeedDecrease(bool value)
+{
+    m_speedDecrease = value;
+    emit speedDecreaseValueChanged(value);
 }
 
 //-----------------------------Linear and Angular Speed-------------------------------------------
@@ -409,6 +440,16 @@ void Publisher::slideCCW(bool flag)
     setslideCCWValue(flag);
 }
 
+void Publisher::speedIncrease(bool flag)
+{
+    setspeedIncrease(flag);
+}
+
+void Publisher::speedDecrease(bool flag)
+{
+    setspeedDecrease(flag);
+}
+
 void Publisher::lacCW(bool flag)
 {
     setlacCWValue(flag);
@@ -616,6 +657,15 @@ void Publisher::call_cameraInit(int val)
     emit value8(val);
 }
 
+void Publisher::call_speedIncrease(int val)
+{
+    emit value9(val);
+}
+
+void Publisher::call_speedDecrease(int val)
+{
+    emit value10(val);
+}
 
 void Publisher::errorCallback(QVector<int> value)
 {

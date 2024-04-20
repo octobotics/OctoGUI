@@ -65,6 +65,8 @@ void RosThread::run()
     toggle_srv_ = m_nodeHandler->advertiseService("toggle_robot", &RosThread::toggleCallback, this);
 
     //ros service clients
+
+
     send_tool_srv_ =  m_nodeHandler->serviceClient<stm_interface::RelayControl>("/relay_toggle_channel");
     switch_grinder_srv_ =  m_nodeHandler->serviceClient<std_srvs::Trigger>("/servo_trigger_channel");
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
@@ -72,6 +74,8 @@ void RosThread::run()
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
+    crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_linear_velocity");
+    crawler_speed_Decrease_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/decrease_linear_velocity");
     camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
 
@@ -452,6 +456,56 @@ void RosThread::slideCCW(int value)
         }
     }
 }
+
+void RosThread::speedIncrease(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+    b.request.data = true;
+
+    if(k) {
+        crawler_speed_Increase_.call(b);
+        emit speedIncrease(1);
+
+        if (b.response.success){
+            qDebug() << "Speed Increased";
+        }
+
+        else {
+            qDebug() << "Speed Increasing";
+            emit speedIncrease(1);
+        }
+
+
+    }
+
+}
+
+void RosThread::speedDecrease(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+    b.request.data = true;
+
+    if(k) {
+        crawler_speed_Decrease_.call(b);
+        emit speedDecrease(1);
+
+        if (b.response.success){
+            qDebug() << "Speed Decreasing";
+        }
+
+        else {
+            qDebug() << "Speed Decreasing";
+            emit speedDecrease(1);
+        }
+
+
+    }
+
+}
+
+
 
 void RosThread::resetTrip(int value)
 {

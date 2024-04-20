@@ -34,6 +34,7 @@
 #include "my_actuator/vitals.h"
 #include "std_msgs/String.h"
 #include "std_srvs/Trigger.h"
+#include "std_srvs/SetBool.h"
 #include <QString>
 #include <QThread>
 #include "customplotitem.h"
@@ -85,6 +86,8 @@ public slots:
     void resetTrip(int value);
     void slideCW(int value);
     void slideCCW(int value);
+    void speedIncrease(int value);
+    void speedDecrease(int value);
     void lacCW(int value);
     void lacCCW(int value);
     void cameraInit(int value);
@@ -127,6 +130,8 @@ signals:
     void lacCCW(bool k);
     void lacCallback(int lac_value);
     void resetTrip(bool k);
+    void speedIncrease(bool k);
+    void speedDecrease(bool k);
     //--------------------------
 
     void velstatusCallback(int speedsetting);
@@ -175,6 +180,8 @@ private:
     ros::ServiceClient crawler_init_srv_;
     ros::ServiceClient crawler_stop_srv_;
     ros::ServiceClient crawler_reset_srv_;
+    ros::ServiceClient crawler_speed_Increase_;
+    ros::ServiceClient crawler_speed_Decrease_;
 
     ros::ServiceClient hzl_slide_cw_;
     ros::ServiceClient hzl_slide_ccw_;
