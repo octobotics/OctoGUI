@@ -907,10 +907,10 @@ Rectangle{
                                     anchors.fill: parent
                                     minimumValue: 0
                                     value: parseFloat(Math.round(publisher.waterLevel));
-                                    maximumValue: 100
+                                    maximumValue: 1500
                                     anchors.centerIn: parent
                                     onValueChanged: {
-                                        if(value < 10){
+                                        if(value > 1300){
                                             alaramEffect.play()
                                         }
                                     }
