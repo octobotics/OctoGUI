@@ -140,6 +140,8 @@ void Publisher::initRosThread()
     //image capture
 //    connect(this, SIGNAL(capImg(int)), this->rost, SLOT(capImgPub(int)));
 
+    connect(this,SIGNAL(automode(int)),this->rost, SLOT(automodePub(int)));
+
     //////////////
 
     this->rost->start();
@@ -173,6 +175,11 @@ void Publisher::setComStatus(int value)
 void Publisher::commCallback(int value)
 {
     setComStatus(value);
+}
+
+void Publisher::call_automode(int val)
+{
+    emit automode(val);
 }
 
 

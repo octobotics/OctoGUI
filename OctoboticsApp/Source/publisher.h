@@ -270,6 +270,7 @@ public slots:
     //image
 //    void call_capImg(int val);
 
+    void call_automode(int val);
 
 signals:
     void message(QString msg);
@@ -345,6 +346,9 @@ signals:
 
     //image capture
 //    void capImg(int value);
+
+    void automode(int value);
+
 private:
     RosThread *rost;
     QCustomPlot*  m_CustomPlot;

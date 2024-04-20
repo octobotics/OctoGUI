@@ -57,6 +57,7 @@ public slots:
 
     //ros publishers
 
+    void automodePub(int value);
 
     //ros subscribers
     void lacCallback(const std_msgs::Int32::ConstPtr &msg);
@@ -145,6 +146,7 @@ private:
 
     ros::Publisher m_publisher;
     ros::Publisher vel_pub_;
+    ros::Publisher automode_pub_;
 
 //    ros::Publisher img_cap_pub_;
 

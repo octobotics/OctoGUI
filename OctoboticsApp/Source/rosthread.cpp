@@ -42,6 +42,7 @@ void RosThread::run()
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
+    automode_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/navigation_control",1);
 
     // ros subscribers
     water_level_ = m_nodeHandler->subscribe<std_msgs::Float32>("/cumulative_volume",1,&RosThread::waterCallback,this);
@@ -94,6 +95,13 @@ void RosThread::addLine(QString newLine)
     std_msgs::String msg;
     msg.data = newLine.toUtf8().constData();
     m_publisher.publish(msg);
+}
+
+void RosThread::automodePub(int value)
+{
+    std_msgs::Int32 k;
+    k.data = value;
+    automode_pub_.publish(k);
 }
 
 

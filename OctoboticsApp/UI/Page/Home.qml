@@ -2264,6 +2264,7 @@ Rectangle{
                                     borderColor: buttonBg
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+                                        publisher.call_automode(1)
                                     }
                                 }
                                 SButton{
@@ -2273,6 +2274,7 @@ Rectangle{
                                     borderColor: buttonBg
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+                                        publisher.call_automode(0)
                                     }
                                 }
                                 SButton{
