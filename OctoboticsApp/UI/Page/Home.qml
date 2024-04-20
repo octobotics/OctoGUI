@@ -135,17 +135,19 @@ Rectangle{
     property real battStatus: publisher.batteryValue
     onBattStatusChanged: {
 
-        if (battStatus<=45 && battStatus>44 && battCnt<=3){
+        if (battStatus<=25 && battStatus>24 && battCnt<=3){
             battDialog.text = "\n\n         Battery LOW         \n\n"
             battDialog.icon = StandardIcon.Critical
             battDialog.open()
             battCnt++
+            alaramEffect.play()
         }
-        else if((battStatus<= 44))
+        else if((battStatus<= 24))
         {
             battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
             battDialog.icon = StandardIcon.Critical
             battDialog.open()
+            alaramEffect.play()
         }
 
 
@@ -907,13 +909,33 @@ Rectangle{
                                     anchors.fill: parent
                                     minimumValue: 0
                                     value: parseFloat(Math.round(publisher.waterLevel));
-                                    maximumValue: 1500
+                                    maximumValue: 100
                                     anchors.centerIn: parent
                                     onValueChanged: {
-                                        if(value > 1300){
+                                        if(value > 85 ){
                                             alaramEffect.play()
                                         }
                                     }
+
+                                    Label {
+                                           id: maxLabel
+                                           text: parent.maximumValue.toString()
+                                           font.pixelSize: 2  // Set your desired font size here
+                                           anchors.right: parent.right
+                                           anchors.top: parent.top
+                                           anchors.margins: 10
+                                       }
+
+                                       // Add a custom Label for minimumValue
+                                       Label {
+                                           id: minLabel
+                                           text: parent.minimumValue.toString()
+                                           font.pixelSize: 2  // Set your desired font size here
+                                           anchors.left: parent.left
+                                           anchors.bottom: parent.bottom
+                                           anchors.margins: 10
+                                       }
+
                                 }
 
                             }
