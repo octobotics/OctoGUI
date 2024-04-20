@@ -135,14 +135,14 @@ Rectangle{
     property real battStatus: publisher.batteryValue
     onBattStatusChanged: {
 
-        if (battStatus<=25 && battStatus>24 && battCnt<=3){
+        if (battStatus<=24 && battStatus>23 && battCnt<=3){
             battDialog.text = "\n\n         Battery LOW         \n\n"
             battDialog.icon = StandardIcon.Critical
             battDialog.open()
             battCnt++
             alaramEffect.play()
         }
-        else if((battStatus<= 24))
+        else if((battStatus<= 23))
         {
             battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
             battDialog.icon = StandardIcon.Critical
@@ -2503,8 +2503,9 @@ Rectangle{
                                         borderColor: "#911911"
                                         onClicked: {
                                            alaramEffect.play()
-                                           publisher.rst_crawler(1)
-                                           rstCrawler()
+                                           init_crawler(0)
+                                           stopCrawler()
+
 
                                             //add logic
                                         }

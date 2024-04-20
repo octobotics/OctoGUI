@@ -469,7 +469,7 @@ void RosThread::speedIncrease(int value)
 
     if(k) {
         crawler_speed_Increase_.call(b);
-        emit speedIncrease(1);
+        emit speedIncrease(0);
 
         if (b.response.success){
             qDebug() << "Speed Increased";
@@ -477,7 +477,7 @@ void RosThread::speedIncrease(int value)
 
         else {
             qDebug() << "Speed Increasing";
-            emit speedIncrease(1);
+            emit speedIncrease(0);
         }
 
 
@@ -493,7 +493,7 @@ void RosThread::speedDecrease(int value)
 
     if(k) {
         crawler_speed_Decrease_.call(b);
-        emit speedDecrease(1);
+        emit speedDecrease(0);
 
         if (b.response.success){
             qDebug() << "Speed Decreasing";
@@ -501,7 +501,7 @@ void RosThread::speedDecrease(int value)
 
         else {
             qDebug() << "Speed Decreasing";
-            emit speedDecrease(1);
+            emit speedDecrease(0);
         }
 
 
