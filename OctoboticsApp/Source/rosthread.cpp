@@ -172,11 +172,13 @@ void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
     emit velCallback(current_vel_linear);
 }
 
+//----------Pump Calibration----------------------------
+
 void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
 {
     auto level = msg->data;
 
-    level = level/1500 ;
+    level = level/10000 ;
 
     emit waterCallback(level);
 }
