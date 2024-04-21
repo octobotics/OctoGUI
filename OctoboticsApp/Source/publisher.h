@@ -344,7 +344,6 @@ signals:
 //    void voltageValueChanged(int value);
     void resetTripValueChanged(bool value);
 
-    void waterlevelValueChanged(bool value);
 
     void rstwaterlevelValueChanged(bool value);
 

@@ -172,6 +172,15 @@ void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
     emit velCallback(current_vel_linear);
 }
 
+void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
+{
+    auto level = msg->data;
+
+    level = level/1500 ;
+
+    emit waterCallback(level);
+}
+
 void RosThread::odomCallback(const std_msgs::Int32::ConstPtr &msg)
 {
     auto current_odom = msg->data;
@@ -258,14 +267,7 @@ void RosThread::currentCallback(const std_msgs::Float32::ConstPtr &msg)
     emit currentCallback(current);
 }
 
-void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
-{
-    auto level = msg->data;
 
-    level = level/1500 ;
-
-    emit waterCallback(level);
-}
 
 
 /*!
