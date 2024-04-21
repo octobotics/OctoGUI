@@ -84,6 +84,7 @@ public slots:
     void reset_crawler(int val);
 
     void resetTrip(int value);
+    void reset_water(int value);
     void slideCW(int value);
     void slideCCW(int value);
     void speedIncrease(int value);
@@ -143,6 +144,7 @@ signals:
     void stopCrawler(bool k );
     void rstCrawler(bool k);
     void cameraInit(bool k);
+    void rstwaterlevel(bool k);
 
 
 
@@ -184,6 +186,7 @@ private:
     ros::ServiceClient crawler_speed_Decrease_;
 
     ros::ServiceClient hzl_slide_cw_;
+    ros::ServiceClient reset_waterlevel_;
     ros::ServiceClient hzl_slide_ccw_;
     ros::ServiceClient arm_stop_srv_; //
     ros::ServiceClient arm_reset_srv_; //

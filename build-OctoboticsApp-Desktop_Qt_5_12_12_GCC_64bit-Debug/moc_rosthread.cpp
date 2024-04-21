@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RosThread_t {
-    QByteArrayData data[77];
-    char stringdata0[961];
+    QByteArrayData data[79];
+    char stringdata0[987];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -86,29 +86,31 @@ QT_MOC_LITERAL(50, 519, 11), // "initCrawler"
 QT_MOC_LITERAL(51, 531, 11), // "stopCrawler"
 QT_MOC_LITERAL(52, 543, 10), // "rstCrawler"
 QT_MOC_LITERAL(53, 554, 10), // "cameraInit"
-QT_MOC_LITERAL(54, 565, 7), // "addLine"
-QT_MOC_LITERAL(55, 573, 7), // "newLine"
-QT_MOC_LITERAL(56, 581, 11), // "automodePub"
-QT_MOC_LITERAL(57, 593, 25), // "std_msgs::Int32::ConstPtr"
-QT_MOC_LITERAL(58, 619, 3), // "msg"
-QT_MOC_LITERAL(59, 623, 27), // "std_msgs::Float32::ConstPtr"
-QT_MOC_LITERAL(60, 651, 25), // "std_msgs::Int16::ConstPtr"
-QT_MOC_LITERAL(61, 677, 22), // "std_msgs::Int8ConstPtr"
-QT_MOC_LITERAL(62, 700, 29), // "my_actuator::vitals::ConstPtr"
-QT_MOC_LITERAL(63, 730, 30), // "octo_qt::ang_lin_arr::ConstPtr"
-QT_MOC_LITERAL(64, 761, 39), // "launch_crawler::SerialNumbers..."
-QT_MOC_LITERAL(65, 801, 33), // "stm_client::tool_status::Requ..."
-QT_MOC_LITERAL(66, 835, 3), // "req"
-QT_MOC_LITERAL(67, 839, 34), // "stm_client::tool_status::Resp..."
-QT_MOC_LITERAL(68, 874, 3), // "res"
-QT_MOC_LITERAL(69, 878, 12), // "sendToolData"
-QT_MOC_LITERAL(70, 891, 14), // "crawlerInitSrv"
-QT_MOC_LITERAL(71, 906, 13), // "reset_crawler"
-QT_MOC_LITERAL(72, 920, 3), // "val"
-QT_MOC_LITERAL(73, 924, 14), // "checkArmStatus"
-QT_MOC_LITERAL(74, 939, 9), // "reset_arm"
-QT_MOC_LITERAL(75, 949, 7), // "saveImg"
-QT_MOC_LITERAL(76, 957, 3) // "img"
+QT_MOC_LITERAL(54, 565, 13), // "rstwaterlevel"
+QT_MOC_LITERAL(55, 579, 7), // "addLine"
+QT_MOC_LITERAL(56, 587, 7), // "newLine"
+QT_MOC_LITERAL(57, 595, 11), // "automodePub"
+QT_MOC_LITERAL(58, 607, 25), // "std_msgs::Int32::ConstPtr"
+QT_MOC_LITERAL(59, 633, 3), // "msg"
+QT_MOC_LITERAL(60, 637, 27), // "std_msgs::Float32::ConstPtr"
+QT_MOC_LITERAL(61, 665, 25), // "std_msgs::Int16::ConstPtr"
+QT_MOC_LITERAL(62, 691, 22), // "std_msgs::Int8ConstPtr"
+QT_MOC_LITERAL(63, 714, 29), // "my_actuator::vitals::ConstPtr"
+QT_MOC_LITERAL(64, 744, 30), // "octo_qt::ang_lin_arr::ConstPtr"
+QT_MOC_LITERAL(65, 775, 39), // "launch_crawler::SerialNumbers..."
+QT_MOC_LITERAL(66, 815, 33), // "stm_client::tool_status::Requ..."
+QT_MOC_LITERAL(67, 849, 3), // "req"
+QT_MOC_LITERAL(68, 853, 34), // "stm_client::tool_status::Resp..."
+QT_MOC_LITERAL(69, 888, 3), // "res"
+QT_MOC_LITERAL(70, 892, 12), // "sendToolData"
+QT_MOC_LITERAL(71, 905, 14), // "crawlerInitSrv"
+QT_MOC_LITERAL(72, 920, 13), // "reset_crawler"
+QT_MOC_LITERAL(73, 934, 3), // "val"
+QT_MOC_LITERAL(74, 938, 11), // "reset_water"
+QT_MOC_LITERAL(75, 950, 14), // "checkArmStatus"
+QT_MOC_LITERAL(76, 965, 9), // "reset_arm"
+QT_MOC_LITERAL(77, 975, 7), // "saveImg"
+QT_MOC_LITERAL(78, 983, 3) // "img"
 
     },
     "RosThread\0waterCallback\0\0level\0"
@@ -126,9 +128,10 @@ QT_MOC_LITERAL(76, 957, 3) // "img"
     "velstatusCallback\0speedsetting\0"
     "angularspeedCallback\0angularspeed\0"
     "stopArm\0rstArm\0initCrawler\0stopCrawler\0"
-    "rstCrawler\0cameraInit\0addLine\0newLine\0"
-    "automodePub\0std_msgs::Int32::ConstPtr\0"
-    "msg\0std_msgs::Float32::ConstPtr\0"
+    "rstCrawler\0cameraInit\0rstwaterlevel\0"
+    "addLine\0newLine\0automodePub\0"
+    "std_msgs::Int32::ConstPtr\0msg\0"
+    "std_msgs::Float32::ConstPtr\0"
     "std_msgs::Int16::ConstPtr\0"
     "std_msgs::Int8ConstPtr\0"
     "my_actuator::vitals::ConstPtr\0"
@@ -137,8 +140,8 @@ QT_MOC_LITERAL(76, 957, 3) // "img"
     "stm_client::tool_status::Request&\0req\0"
     "stm_client::tool_status::Response&\0"
     "res\0sendToolData\0crawlerInitSrv\0"
-    "reset_crawler\0val\0checkArmStatus\0"
-    "reset_arm\0saveImg\0img"
+    "reset_crawler\0val\0reset_water\0"
+    "checkArmStatus\0reset_arm\0saveImg\0img"
 };
 #undef QT_MOC_LITERAL
 
@@ -148,75 +151,77 @@ static const uint qt_meta_data_RosThread[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      59,   14, // methods
+      61,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      31,       // signalCount
+      32,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  309,    2, 0x06 /* Public */,
-       4,    1,  312,    2, 0x06 /* Public */,
-       6,    1,  315,    2, 0x06 /* Public */,
-       7,    1,  318,    2, 0x06 /* Public */,
-       8,    1,  321,    2, 0x06 /* Public */,
-      11,    1,  324,    2, 0x06 /* Public */,
-      13,    1,  327,    2, 0x06 /* Public */,
-      15,    1,  330,    2, 0x06 /* Public */,
-      17,    1,  333,    2, 0x06 /* Public */,
-      19,    4,  336,    2, 0x06 /* Public */,
-      24,    1,  345,    2, 0x06 /* Public */,
-      26,    1,  348,    2, 0x06 /* Public */,
-      29,    1,  351,    2, 0x06 /* Public */,
-      31,    1,  354,    2, 0x06 /* Public */,
-      33,    1,  357,    2, 0x06 /* Public */,
-      35,    1,  360,    2, 0x06 /* Public */,
-      36,    1,  363,    2, 0x06 /* Public */,
-      37,    1,  366,    2, 0x06 /* Public */,
-      38,    1,  369,    2, 0x06 /* Public */,
-      39,    1,  372,    2, 0x06 /* Public */,
-      41,    1,  375,    2, 0x06 /* Public */,
-      42,    1,  378,    2, 0x06 /* Public */,
-      43,    1,  381,    2, 0x06 /* Public */,
-      44,    1,  384,    2, 0x06 /* Public */,
-      46,    1,  387,    2, 0x06 /* Public */,
-      48,    1,  390,    2, 0x06 /* Public */,
-      49,    1,  393,    2, 0x06 /* Public */,
-      50,    1,  396,    2, 0x06 /* Public */,
-      51,    1,  399,    2, 0x06 /* Public */,
-      52,    1,  402,    2, 0x06 /* Public */,
-      53,    1,  405,    2, 0x06 /* Public */,
+       1,    1,  319,    2, 0x06 /* Public */,
+       4,    1,  322,    2, 0x06 /* Public */,
+       6,    1,  325,    2, 0x06 /* Public */,
+       7,    1,  328,    2, 0x06 /* Public */,
+       8,    1,  331,    2, 0x06 /* Public */,
+      11,    1,  334,    2, 0x06 /* Public */,
+      13,    1,  337,    2, 0x06 /* Public */,
+      15,    1,  340,    2, 0x06 /* Public */,
+      17,    1,  343,    2, 0x06 /* Public */,
+      19,    4,  346,    2, 0x06 /* Public */,
+      24,    1,  355,    2, 0x06 /* Public */,
+      26,    1,  358,    2, 0x06 /* Public */,
+      29,    1,  361,    2, 0x06 /* Public */,
+      31,    1,  364,    2, 0x06 /* Public */,
+      33,    1,  367,    2, 0x06 /* Public */,
+      35,    1,  370,    2, 0x06 /* Public */,
+      36,    1,  373,    2, 0x06 /* Public */,
+      37,    1,  376,    2, 0x06 /* Public */,
+      38,    1,  379,    2, 0x06 /* Public */,
+      39,    1,  382,    2, 0x06 /* Public */,
+      41,    1,  385,    2, 0x06 /* Public */,
+      42,    1,  388,    2, 0x06 /* Public */,
+      43,    1,  391,    2, 0x06 /* Public */,
+      44,    1,  394,    2, 0x06 /* Public */,
+      46,    1,  397,    2, 0x06 /* Public */,
+      48,    1,  400,    2, 0x06 /* Public */,
+      49,    1,  403,    2, 0x06 /* Public */,
+      50,    1,  406,    2, 0x06 /* Public */,
+      51,    1,  409,    2, 0x06 /* Public */,
+      52,    1,  412,    2, 0x06 /* Public */,
+      53,    1,  415,    2, 0x06 /* Public */,
+      54,    1,  418,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      54,    1,  408,    2, 0x0a /* Public */,
-      56,    1,  411,    2, 0x0a /* Public */,
-      39,    1,  414,    2, 0x0a /* Public */,
-       1,    1,  417,    2, 0x0a /* Public */,
-       4,    1,  420,    2, 0x0a /* Public */,
-       6,    1,  423,    2, 0x0a /* Public */,
-      13,    1,  426,    2, 0x0a /* Public */,
-      15,    1,  429,    2, 0x0a /* Public */,
-      17,    1,  432,    2, 0x0a /* Public */,
-      19,    1,  435,    2, 0x0a /* Public */,
-      44,    1,  438,    2, 0x0a /* Public */,
-      29,    1,  441,    2, 0x0a /* Public */,
-      26,    1,  444,    2, 0x0a /* Public */,
-      31,    2,  447,    2, 0x0a /* Public */,
-      69,    1,  452,    2, 0x0a /* Public */,
-      70,    1,  455,    2, 0x0a /* Public */,
-      71,    1,  458,    2, 0x0a /* Public */,
-      41,    1,  461,    2, 0x0a /* Public */,
-      35,    1,  464,    2, 0x0a /* Public */,
-      36,    1,  467,    2, 0x0a /* Public */,
-      42,    1,  470,    2, 0x0a /* Public */,
-      43,    1,  473,    2, 0x0a /* Public */,
-      37,    1,  476,    2, 0x0a /* Public */,
-      38,    1,  479,    2, 0x0a /* Public */,
-      53,    1,  482,    2, 0x0a /* Public */,
-      73,    0,  485,    2, 0x0a /* Public */,
-      74,    1,  486,    2, 0x0a /* Public */,
-      75,    1,  489,    2, 0x0a /* Public */,
+      55,    1,  421,    2, 0x0a /* Public */,
+      57,    1,  424,    2, 0x0a /* Public */,
+      39,    1,  427,    2, 0x0a /* Public */,
+       1,    1,  430,    2, 0x0a /* Public */,
+       4,    1,  433,    2, 0x0a /* Public */,
+       6,    1,  436,    2, 0x0a /* Public */,
+      13,    1,  439,    2, 0x0a /* Public */,
+      15,    1,  442,    2, 0x0a /* Public */,
+      17,    1,  445,    2, 0x0a /* Public */,
+      19,    1,  448,    2, 0x0a /* Public */,
+      44,    1,  451,    2, 0x0a /* Public */,
+      29,    1,  454,    2, 0x0a /* Public */,
+      26,    1,  457,    2, 0x0a /* Public */,
+      31,    2,  460,    2, 0x0a /* Public */,
+      70,    1,  465,    2, 0x0a /* Public */,
+      71,    1,  468,    2, 0x0a /* Public */,
+      72,    1,  471,    2, 0x0a /* Public */,
+      41,    1,  474,    2, 0x0a /* Public */,
+      74,    1,  477,    2, 0x0a /* Public */,
+      35,    1,  480,    2, 0x0a /* Public */,
+      36,    1,  483,    2, 0x0a /* Public */,
+      42,    1,  486,    2, 0x0a /* Public */,
+      43,    1,  489,    2, 0x0a /* Public */,
+      37,    1,  492,    2, 0x0a /* Public */,
+      38,    1,  495,    2, 0x0a /* Public */,
+      53,    1,  498,    2, 0x0a /* Public */,
+      75,    0,  501,    2, 0x0a /* Public */,
+      76,    1,  502,    2, 0x0a /* Public */,
+      77,    1,  505,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Float,    3,
@@ -250,25 +255,27 @@ static const uint qt_meta_data_RosThread[] = {
     QMetaType::Void, QMetaType::Bool,   34,
     QMetaType::Void, QMetaType::Bool,   34,
     QMetaType::Void, QMetaType::Bool,   34,
+    QMetaType::Void, QMetaType::Bool,   34,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,   55,
+    QMetaType::Void, QMetaType::QString,   56,
     QMetaType::Void, QMetaType::Int,    5,
-    QMetaType::Void, 0x80000000 | 57,   58,
-    QMetaType::Void, 0x80000000 | 59,   58,
-    QMetaType::Void, 0x80000000 | 60,   58,
-    QMetaType::Void, 0x80000000 | 61,   58,
-    QMetaType::Void, 0x80000000 | 60,   58,
-    QMetaType::Void, 0x80000000 | 57,   58,
-    QMetaType::Void, 0x80000000 | 57,   58,
-    QMetaType::Void, 0x80000000 | 62,   58,
-    QMetaType::Void, 0x80000000 | 63,   58,
-    QMetaType::Void, 0x80000000 | 59,   58,
-    QMetaType::Void, 0x80000000 | 64,   58,
-    QMetaType::Bool, 0x80000000 | 65, 0x80000000 | 67,   66,   68,
+    QMetaType::Void, 0x80000000 | 58,   59,
+    QMetaType::Void, 0x80000000 | 60,   59,
+    QMetaType::Void, 0x80000000 | 61,   59,
+    QMetaType::Void, 0x80000000 | 62,   59,
+    QMetaType::Void, 0x80000000 | 61,   59,
+    QMetaType::Void, 0x80000000 | 58,   59,
+    QMetaType::Void, 0x80000000 | 58,   59,
+    QMetaType::Void, 0x80000000 | 63,   59,
+    QMetaType::Void, 0x80000000 | 64,   59,
+    QMetaType::Void, 0x80000000 | 60,   59,
+    QMetaType::Void, 0x80000000 | 65,   59,
+    QMetaType::Bool, 0x80000000 | 66, 0x80000000 | 68,   67,   69,
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Void, QMetaType::Int,    5,
-    QMetaType::Void, QMetaType::Int,   72,
+    QMetaType::Void, QMetaType::Int,   73,
+    QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
@@ -278,8 +285,8 @@ static const uint qt_meta_data_RosThread[] = {
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   72,
-    QMetaType::Void, QMetaType::QString,   76,
+    QMetaType::Void, QMetaType::Int,   73,
+    QMetaType::Void, QMetaType::QString,   78,
 
        0        // eod
 };
@@ -321,35 +328,37 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 28: _t->stopCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 29: _t->rstCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 30: _t->cameraInit((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 31: _t->addLine((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 32: _t->automodePub((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 33: _t->lacCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
-        case 34: _t->waterCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
-        case 35: _t->commCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
-        case 36: _t->armToolCallback((*reinterpret_cast< const std_msgs::Int8ConstPtr(*)>(_a[1]))); break;
-        case 37: _t->velCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
-        case 38: _t->odomCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
-        case 39: _t->tripCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
-        case 40: _t->crawlerCallback((*reinterpret_cast< const my_actuator::vitals::ConstPtr(*)>(_a[1]))); break;
-        case 41: _t->velstatusCallback((*reinterpret_cast< const octo_qt::ang_lin_arr::ConstPtr(*)>(_a[1]))); break;
-        case 42: _t->currentCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
-        case 43: _t->uidCallback((*reinterpret_cast< const launch_crawler::SerialNumbers::ConstPtr(*)>(_a[1]))); break;
-        case 44: { bool _r = _t->toggleCallback((*reinterpret_cast< stm_client::tool_status::Request(*)>(_a[1])),(*reinterpret_cast< stm_client::tool_status::Response(*)>(_a[2])));
+        case 31: _t->rstwaterlevel((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 32: _t->addLine((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 33: _t->automodePub((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 34: _t->lacCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
+        case 35: _t->waterCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
+        case 36: _t->commCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
+        case 37: _t->armToolCallback((*reinterpret_cast< const std_msgs::Int8ConstPtr(*)>(_a[1]))); break;
+        case 38: _t->velCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
+        case 39: _t->odomCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
+        case 40: _t->tripCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
+        case 41: _t->crawlerCallback((*reinterpret_cast< const my_actuator::vitals::ConstPtr(*)>(_a[1]))); break;
+        case 42: _t->velstatusCallback((*reinterpret_cast< const octo_qt::ang_lin_arr::ConstPtr(*)>(_a[1]))); break;
+        case 43: _t->currentCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
+        case 44: _t->uidCallback((*reinterpret_cast< const launch_crawler::SerialNumbers::ConstPtr(*)>(_a[1]))); break;
+        case 45: { bool _r = _t->toggleCallback((*reinterpret_cast< stm_client::tool_status::Request(*)>(_a[1])),(*reinterpret_cast< stm_client::tool_status::Response(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 45: _t->sendToolData((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 46: _t->crawlerInitSrv((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 47: _t->reset_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 48: _t->resetTrip((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 49: _t->slideCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 50: _t->slideCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 51: _t->speedIncrease((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 52: _t->speedDecrease((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 53: _t->lacCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 54: _t->lacCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 55: _t->cameraInit((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 56: _t->checkArmStatus(); break;
-        case 57: _t->reset_arm((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 58: _t->saveImg((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 46: _t->sendToolData((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 47: _t->crawlerInitSrv((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 48: _t->reset_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 49: _t->resetTrip((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 50: _t->reset_water((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 51: _t->slideCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 52: _t->slideCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 53: _t->speedIncrease((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 54: _t->speedDecrease((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 55: _t->lacCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 56: _t->lacCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 57: _t->cameraInit((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 58: _t->checkArmStatus(); break;
+        case 59: _t->reset_arm((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 60: _t->saveImg((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -603,6 +612,13 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
                 return;
             }
         }
+        {
+            using _t = void (RosThread::*)(bool );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::rstwaterlevel)) {
+                *result = 31;
+                return;
+            }
+        }
     }
 }
 
@@ -635,13 +651,13 @@ int RosThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 59)
+        if (_id < 61)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 59;
+        _id -= 61;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 59)
+        if (_id < 61)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 59;
+        _id -= 61;
     }
     return _id;
 }
@@ -861,6 +877,13 @@ void RosThread::cameraInit(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 30, _a);
+}
+
+// SIGNAL 31
+void RosThread::rstwaterlevel(bool _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 31, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

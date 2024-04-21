@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *  \file      publisher.cpp
  *  \brief     Connects ros data with qt.
  *  \details   This class acts as a mediator between ros node and our qml page. It coverts data, notifies any changes in data from both UI and ros node.
@@ -43,6 +43,7 @@ Publisher::Publisher(QObject *parent)
     m_initCrawlerValue= 0;
     m_stopCrawlerValue=0;
     m_rstCrawlerValue=0;
+    m_rstwaterlevelValue=0;
     m_currentValue=0.0;
     m_velocityValue=0;
     m_odom = 0;
@@ -114,6 +115,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(initCrawler(bool)), this, SLOT(initCrawler(bool)));
     connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
+    connect(this->rost, SIGNAL(rstwaterlevel(bool)),this,SLOT(rstwaterlevel(bool)));
     connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
     connect(this->rost, SIGNAL(odomCallback(int)), this, SLOT(odomCallback(int)));
     connect(this->rost, SIGNAL(tripCallback(int)), this, SLOT(tripCallback(int)));
@@ -121,6 +123,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
+    connect(this,SIGNAL(rstWaterLevel(int)),this->rost,SLOT(reset_water(int)));
 
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
     connect(this,SIGNAL(value3(int)),this->rost,SLOT(slideCW(int)));
@@ -131,6 +134,7 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(value8(int)),this->rost,SLOT(cameraInit(int)));
     connect(this,SIGNAL(value9(int)),this->rost,SLOT(speedIncrease(int)));
     connect(this,SIGNAL(value10(int)),this->rost,SLOT(speedDecrease(int)));
+    connect(this,SIGNAL(value11(int)),this->rost,SLOT(reset_water(int)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
@@ -485,6 +489,16 @@ void Publisher::setInitCrawlerValue(bool flag)
     emit initCrawlerValueChanged(flag);
 }
 
+bool Publisher::getrstwaterlevelValue()
+{
+    return m_rstwaterlevelValue;
+}
+void Publisher::setrstwaterlevelValue(bool value)
+{
+    m_rstwaterlevelValue = value;
+    emit rstwaterlevelValueChanged(value);
+}
+
 
 bool Publisher::getStopCrawlerValue()
 {
@@ -619,7 +633,10 @@ void Publisher::setCrawlStatus(QVariantMap value)
 }
 
 
-
+void Publisher::reset_water(int val)
+{
+      emit rstWaterLevel(val);
+}
 
 
 void Publisher::rst_crawler(int val)
@@ -667,6 +684,11 @@ void Publisher::call_speedDecrease(int val)
     emit value10(val);
 }
 
+void Publisher::call_resetWaterLevel(int val)
+{
+    emit value11(val);
+}
+
 void Publisher::errorCallback(QVector<int> value)
 {
 
@@ -706,6 +728,11 @@ void Publisher::stopCrawler(bool flag)
 void Publisher::rstCrawler(bool flag)
 {
     setRstCrawlerValue(flag);
+}
+
+void Publisher::rstwaterlevel(bool flag)
+{
+    setrstwaterlevelValue(flag);
 }
 
 void Publisher::cameraInit(bool k)

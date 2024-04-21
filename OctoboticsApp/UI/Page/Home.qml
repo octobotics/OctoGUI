@@ -765,7 +765,7 @@ Rectangle{
                                 spacing: parent.height * 0.1
 
                                 RowLayout{
-                                    spacing: rectBox1.width * 0.1
+                                    spacing: rectBox1.width * 0.07
                                     Item {
                                         id: connectionStatus
                                         width: rectBox1.width * 0.130
@@ -793,12 +793,14 @@ Rectangle{
                                         }
                                     }
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.height * 0.0987
                                         name:  "TD"
-                                        baseColor:  buttonBg
+                                        baseColor: isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
+                                            isPressed = !isPressed
                                             publisher.toolToggle = "3"
                                         }
                                     }
@@ -825,43 +827,48 @@ Rectangle{
                                     }
                                 }
                                 RowLayout{
-                                    spacing: rectBox1.width * 0.1
+                                    spacing: rectBox1.width * 0.07
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.height * 0.0987
                                         name:  "P/P"
-                                        baseColor:  buttonBg
+                                        baseColor: isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
+                                            isPressed = !isPressed
                                             publisher.toolToggle = "4"
-                                            alaramEffect.play()
+
                                         }
                                     }
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.width * 0.1
                                         name:  "Led"
-                                        baseColor:  buttonBg
+                                        baseColor: isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
+                                              isPressed = !isPressed
                                               publisher.toolToggle = "2"
                                         }
                                     }
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.width * 0.1
                                         name:  "Motor"
-                                        baseColor:  buttonBg
+                                        baseColor: isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
-                                            baseColor: "green"
+                                            isPressed = !isPressed
                                             publisher.toolToggle = "1"
                                         }
                                     }
 
                                 }
                                 RowLayout{
-                                    spacing: rectBox1.width * 0.13
+                                    spacing: rectBox1.width * 0.05
                                     Item {
                                             Layout.fillWidth: false
                                         }
@@ -875,20 +882,22 @@ Rectangle{
                                         implicitWidth: rectBox1.width * 0.20
                                         onClicked: {
                                             baseColor: "green"
-                                            publisher.toolToggle = "1"
+                                            publisher.call_resetWaterLevel(1);
                                         }
                                     }
 
 
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.height * 0.0987
                                         name:  "JoyStick OFF/ON"
-                                        baseColor:  buttonBg
+                                        baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.32
                                         Layout.alignment: Qt.AlignCenter
                                         onClicked: {
                                             camera_runner.startJoystick();
+                                            isPressed = !isPressed
 
                                         }
                                     }
@@ -906,7 +915,7 @@ Rectangle{
                                     value: parseFloat(Math.round(publisher.waterLevel));
                                     maximumValue: 100
                                     anchors.centerIn: parent
-                                    color: value > 85 ? "red" : "green"
+//                                    color: value > 85 ? "red" : "green"
                                     onValueChanged: {
                                         if(value > 85 ){
 

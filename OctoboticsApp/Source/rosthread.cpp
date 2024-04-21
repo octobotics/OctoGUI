@@ -72,6 +72,7 @@ void RosThread::run()
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
+    reset_waterlevel_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reset_cumulative_volume");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
     crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_linear_velocity");
@@ -414,6 +415,27 @@ void RosThread::reset_crawler(int val)
     }
 }
 
+void RosThread::reset_water(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "reset Waterlevel";
+        reset_waterlevel_.call(b);
+        if (b.response.success){
+            qDebug() << "reset Water Level";
+            emit rstwaterlevel(1);
+
+        }
+        else {
+            qDebug() << "error resetting crawler";
+            emit rstwaterlevel(0);
+
+
+        }
+    }
+}
 
 /*!
  * \brief RosThread::armInitSrv calls the service to initialialize and stop the arm

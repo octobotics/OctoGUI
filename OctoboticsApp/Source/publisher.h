@@ -60,6 +60,7 @@ class Publisher : public QObject
     Q_PROPERTY(bool initCrawlerValue READ getInitCrawlerValue WRITE setInitCrawlerValue NOTIFY initCrawlerValueChanged)
     Q_PROPERTY(bool stopCrawlerValue READ getStopCrawlerValue WRITE setStopCrawlerValue NOTIFY stopCrawlerValueChanged)
     Q_PROPERTY(bool rstCrawlerValue READ getRstCrawlerValue WRITE setRstCrawlerValue NOTIFY rstCrawlerValueChanged)
+    Q_PROPERTY(bool rstwaterlevelValue READ getrstwaterlevelValue WRITE setrstwaterlevelValue NOTIFY rstwaterlevelValueChanged)
     Q_PROPERTY(QVector<int> errValue READ getErrValue WRITE setErrValue NOTIFY errValueChanged)
     Q_PROPERTY(QVector<int> tempValue READ getTempValue WRITE setTempValue NOTIFY tempValueChanged)
     Q_PROPERTY(QVariantMap crawlStatus READ getCrawlStatus WRITE setCrawlStatus NOTIFY crawlStatusChanged)
@@ -202,6 +203,9 @@ public slots:
     bool getRstCrawlerValue();
     void setRstCrawlerValue(bool k);
 
+    bool getrstwaterlevelValue();
+    void setrstwaterlevelValue(bool k);
+
     QVector<int> getTempValue();
     void setTempValue(QVector<int> value);
     QVector<int> getErrValue();
@@ -213,6 +217,7 @@ public slots:
 
 
     void rst_crawler(int val);
+    void reset_water(int val);
 
     void call_crawlerinit(int val);
 
@@ -226,6 +231,7 @@ public slots:
     void call_speedDecrease(int val);
 
     void call_resetTrip(int val);
+    void call_resetWaterLevel(int val);
 
     void call_cameraInit(int val);
 
@@ -237,6 +243,7 @@ public slots:
     void initCrawler(bool k);
     void stopCrawler(bool k );
     void rstCrawler(bool k);
+    void rstwaterlevel(bool k);
 
     //battery
     float getBatteryValue();
@@ -304,7 +311,7 @@ signals:
     void value8(int value);
     void value9(int value);
     void value10(int value);
-
+    void value11(int value);
 
     void speedsettingValueChanged(int speedsetting);
 
@@ -337,6 +344,10 @@ signals:
 //    void voltageValueChanged(int value);
     void resetTripValueChanged(bool value);
 
+    void waterlevelValueChanged(bool value);
+
+    void rstwaterlevelValueChanged(bool value);
+
     void rstArmValueChanged(bool value);
     void stopArmValueChanged(bool value);
     void rstArm(int value);
@@ -350,6 +361,7 @@ signals:
     void errValueChanged(QVector<int> value);
     void tempValueChanged(QVector<int> value);
     void rstCrawler(int value);
+    void rstWaterLevel(int value);
     void crawlStatusChanged(QVariantMap status);
 
     void velocityValueChanged(int value);
@@ -388,6 +400,7 @@ private:
     bool m_initCrawlerValue;
     bool m_stopCrawlerValue;
     bool m_rstCrawlerValue;
+    bool m_rstwaterlevelValue;
     bool m_cameraInit;
     int m_comStatus;
     int m_armToolStatus;
