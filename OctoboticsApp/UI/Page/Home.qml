@@ -760,9 +760,10 @@ Rectangle{
 
                         Row{
                             anchors.centerIn: parent
-                            spacing: rectBox1.width * 0.1
+                            spacing: rectBox1.width * 0.08
                             Column{
-                                spacing: parent.height * 0.2
+                                spacing: parent.height * 0.1
+
                                 RowLayout{
                                     spacing: rectBox1.width * 0.1
                                     Item {
@@ -857,12 +858,27 @@ Rectangle{
                                             publisher.toolToggle = "1"
                                         }
                                     }
+
                                 }
                                 RowLayout{
-                                    spacing: rectBox1.width * 0.33
+                                    spacing: rectBox1.width * 0.13
                                     Item {
-                                            Layout.fillWidth: true
+                                            Layout.fillWidth: false
                                         }
+
+                                    SButton{
+                                        height: rectBox1.width * 0.1
+                                        name:  "0 Gauge"
+
+                                        baseColor:  buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: rectBox1.width * 0.20
+                                        onClicked: {
+                                            baseColor: "green"
+                                            publisher.toolToggle = "1"
+                                        }
+                                    }
+
 
                                     SButton{
                                         height: rectBox1.height * 0.0987
@@ -877,31 +893,10 @@ Rectangle{
                                         }
                                     }
 
-//                                    SButton{
-//                                        height: rectBox1.width * 0.33
-//                                        name:  "Spare"
-//                                        baseColor:  buttonBg
-//                                        borderColor: buttonBg
-//                                        implicitWidth: rectBox1.width * 0.13020
-//                                        onClicked: {
-
-//                                        }
-//                                    }
-//                                    SButton{
-//                                        height: rectBox1.width * 0.1
-//                                        name:  "Motor"
-
-//                                        baseColor:  buttonBg
-//                                        borderColor: buttonBg
-//                                        implicitWidth: rectBox1.width * 0.13020
-//                                        onClicked: {
-//                                            baseColor: "green"
-//                                            publisher.toolToggle = "1"
-//                                        }
-//                                    }
                                 }
 
                             }
+
                             Item{
                                 height: rectBox1.height * 0.70
                                 width: rectBox1.width * 0.111
@@ -911,8 +906,10 @@ Rectangle{
                                     value: parseFloat(Math.round(publisher.waterLevel));
                                     maximumValue: 100
                                     anchors.centerIn: parent
+                                    color: value > 85 ? "red" : "green"
                                     onValueChanged: {
                                         if(value > 85 ){
+
                                             alaramEffect.play()
                                         }
                                     }
