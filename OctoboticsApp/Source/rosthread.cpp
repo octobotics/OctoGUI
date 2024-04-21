@@ -262,11 +262,7 @@ void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
 {
     auto level = msg->data;
 
-    level = level/100 ;
-
-    level = level/15 ;
-
-    qDebug()<<level ;
+    level = level/1500 ;
 
     emit waterCallback(level);
 }

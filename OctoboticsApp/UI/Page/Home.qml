@@ -50,6 +50,11 @@ Rectangle{
     onCrawlerChanged: {
         console.log("crawler",crawler)
     }
+    property int water: publisher.waterLevel
+
+    onWaterChanged: {
+        console.log("water",water)
+    }
 
     property var armErr: ({   0 : "NO Error [ALL OK]",
                               6 : "Storage data error",
@@ -760,7 +765,7 @@ Rectangle{
 
                         Row{
                             anchors.centerIn: parent
-                            spacing: rectBox1.width * 0.08
+                            spacing: rectBox1.width * 0.06
                             Column{
                                 spacing: parent.height * 0.1
 
@@ -909,19 +914,39 @@ Rectangle{
                             Item{
                                 height: rectBox1.height * 0.70
                                 width: rectBox1.width * 0.111
-                                OctoGauge {
+//                                Text {
+//                                    width: parent.width * 0.8
+//                                    height: parent.height
+//                                    textFormat: Text.RichText
+//                                    text:publisher.waterLevel + "<b style='font-size: 10px;'> ml<b>"
+//                                    font.family: "Tahoma"
+//                                    font.bold: true
+//                                    font.pixelSize: 25
+//                                    color: textColor
+//                                    verticalAlignment: Text.AlignVCenter
+//                                    horizontalAlignment: Text.AlignHCenter
+//                                }
+                                    OctoGauge {
                                     anchors.fill: parent
                                     minimumValue: 0
                                     value: parseFloat(Math.round(publisher.waterLevel));
                                     maximumValue: 100
                                     anchors.centerIn: parent
-//                                    color: value > 85 ? "red" : "green"
+                                    color: value > 85 ? "red" : "green"
                                     onValueChanged: {
                                         if(value > 85 ){
 
                                             alaramEffect.play()
                                         }
                                     }
+                                    Timer {
+                                           interval: 100 // Update every second
+                                           running: true
+                                           repeat: true
+                                           onTriggered: {
+                                               value = parseFloat(Math.round(publisher.waterLevel));
+                                           }
+                                       }
 
                                     Label {
                                            id: maxLabel
