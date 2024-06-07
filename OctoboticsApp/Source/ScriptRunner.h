@@ -12,13 +12,20 @@ public:
     Q_INVOKABLE void runCamera()
     {
         qDebug() << " Run Camera Called";
-        QProcess::startDetached("/bin/bash",QStringList() << "/home/octo/Desktop/camera.sh");
+        QProcess::startDetached("/bin/bash",QStringList() << "/home/sensei/Desktop/camera.sh");
     }
 
     Q_INVOKABLE void startJoystick()
     {
         qDebug() << " Run Joystick";
-        QProcess::startDetached("/bin/bash",QStringList() << "/home/octo/Desktop/joystick.sh");
+        QProcess::startDetached("/bin/bash",QStringList() << "/home/sensei/Desktop/joystick.sh");
+    }
+
+    Q_INVOKABLE void recordCamera()
+    {
+        qDebug() <<"Record Camera";
+        QProcess::startDetached("/bin/bash",QStringList() << "/home/sensei/Desktop/record.sh");
+
     }
 };
 

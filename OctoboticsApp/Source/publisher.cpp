@@ -36,6 +36,7 @@ Publisher::Publisher(QObject *parent)
     m_slideCCW = 0;
     m_speedIncrease = 0;
     m_speedDecrease = 0;
+    m_joystickonoff = 0;
     m_lacCCW = 0;
     m_lacCW = 0;
     m_rstArmValue = 0 ;
@@ -43,6 +44,7 @@ Publisher::Publisher(QObject *parent)
     m_initCrawlerValue= 0;
     m_stopCrawlerValue=0;
     m_rstCrawlerValue=0;
+    m_shdCrawlerValue=0;
     m_rstwaterlevelValue=0;
     m_currentValue=0.0;
     m_velocityValue=0;
@@ -101,7 +103,7 @@ void Publisher::initRosThread()
 
     connect(this->rost,SIGNAL(speedIncrease(bool)),this,SLOT(speedIncrease(bool)));
     connect(this->rost,SIGNAL(speedDecrease(bool)),this,SLOT(speedDecrease(bool)));
-
+    connect(this->rost,SIGNAL(joystickonoffb(bool)),this,SLOT(joystickonoff(bool)));
     connect(this->rost,SIGNAL(cameraInit(bool k)),this,SLOT(cameraInit(bool k)));
     connect(this->rost,SIGNAL(lacCW(bool)),this,SLOT(lacCW(bool)));
     connect(this->rost,SIGNAL(lacCCW(bool)),this,SLOT(lacCCW(bool)));
@@ -115,6 +117,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(initCrawler(bool)), this, SLOT(initCrawler(bool)));
     connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
+    connect(this->rost, SIGNAL(shdCrawler(bool)),this,SLOT(shdCrawler(bool)));
     connect(this->rost, SIGNAL(rstwaterlevel(bool)),this,SLOT(rstwaterlevel(bool)));
     connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
     connect(this->rost, SIGNAL(odomCallback(int)), this, SLOT(odomCallback(int)));
@@ -123,7 +126,8 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
-    connect(this,SIGNAL(rstWaterLevel(int)),this->rost,SLOT(reset_water(int)));
+    connect(this, SIGNAL(shdCrawler(int)),this->rost, SLOT(shutdown_crawler(int)));
+    connect(this, SIGNAL(rstWaterLevel(int)),this->rost,SLOT(reset_water(int)));
 
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
     connect(this,SIGNAL(value3(int)),this->rost,SLOT(slideCW(int)));
@@ -135,6 +139,7 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(value9(int)),this->rost,SLOT(speedIncrease(int)));
     connect(this,SIGNAL(value10(int)),this->rost,SLOT(speedDecrease(int)));
     connect(this,SIGNAL(value11(int)),this->rost,SLOT(reset_water(int)));
+    connect(this,SIGNAL(value12(int)),this->rost,SLOT(joystickonoff(int)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
@@ -236,6 +241,21 @@ void Publisher::setspeedDecrease(bool value)
     m_speedDecrease = value;
     emit speedDecreaseValueChanged(value);
 }
+
+//-------------------------------Joystick One and OFF ----------------------------
+
+bool Publisher::getjoystickonoff()
+
+{
+    return m_joystickonoff;
+}
+
+void Publisher::setjoystickonoff(bool value)
+{
+    m_joystickonoff = value;
+    emit joystickonoffValueChanged(value);
+}
+
 
 //-----------------------------Linear and Angular Speed-------------------------------------------
 
@@ -454,6 +474,11 @@ void Publisher::speedDecrease(bool flag)
     setspeedDecrease(flag);
 }
 
+void Publisher::joystickonoff(bool flag)
+{
+    setjoystickonoff(flag);
+}
+
 void Publisher::lacCW(bool flag)
 {
     setlacCWValue(flag);
@@ -518,6 +543,16 @@ void Publisher::setRstCrawlerValue(bool flag)
 {
     m_rstCrawlerValue = flag;
     emit rstCrawlerValueChanged(flag);
+}
+
+bool Publisher::getshdCrawlerValue()
+{
+    return m_shdCrawlerValue;
+}
+void Publisher::setshdCrawlerValue(bool flag)
+{
+    m_shdCrawlerValue = flag;
+    emit shdCrawlerValueChanged(flag);
 }
 
 
@@ -642,6 +677,11 @@ void Publisher::reset_water(int val)
 void Publisher::rst_crawler(int val)
 {    emit rstCrawler(val);
 }
+
+void Publisher::shd_crawler(int val)
+{
+    emit shdCrawler(val);
+}
 void Publisher::call_crawlerinit(int val)
 {    emit value2(val);
 }
@@ -689,6 +729,11 @@ void Publisher::call_resetWaterLevel(int val)
     emit value11(val);
 }
 
+void Publisher::call_joystickonoff(int val)
+{
+    emit value12(val);
+}
+
 void Publisher::errorCallback(QVector<int> value)
 {
 
@@ -728,6 +773,11 @@ void Publisher::stopCrawler(bool flag)
 void Publisher::rstCrawler(bool flag)
 {
     setRstCrawlerValue(flag);
+}
+
+void Publisher::shdCrawler(bool flag)
+{
+    setshdCrawlerValue(flag);
 }
 
 void Publisher::rstwaterlevel(bool flag)
