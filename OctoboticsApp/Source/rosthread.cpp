@@ -69,6 +69,7 @@ void RosThread::run()
 
     send_tool_srv_ =  m_nodeHandler->serviceClient<stm_interface::RelayControl>("/relay_toggle_channel");
     switch_grinder_srv_ =  m_nodeHandler->serviceClient<std_srvs::Trigger>("/servo_trigger_channel");
+    shutdown_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/shutdown");
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
@@ -77,6 +78,7 @@ void RosThread::run()
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
     crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_linear_velocity");
     crawler_speed_Decrease_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/decrease_linear_velocity");
+    joystickonoff_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_joy");
     camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
 
@@ -415,6 +417,28 @@ void RosThread::reset_crawler(int val)
     }
 }
 
+void RosThread::shutdown_crawler(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+
+        shutdown_.call(b);
+        if (b.response.success){
+
+            emit shdCrawler(1);
+
+        }
+        else {
+
+            emit shdCrawler(0);
+
+
+        }
+    }
+}
+
 void RosThread::reset_water(int val)
 {
     int k = val;
@@ -460,7 +484,7 @@ void RosThread::slideCW(int value)
             emit slideCW(0);
 
         }
-    } 
+    }
 }
 
 void RosThread::slideCCW(int value)
@@ -533,7 +557,44 @@ void RosThread::speedDecrease(int value)
 
 }
 
+void RosThread::joystickonoff(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
 
+    if(k)
+    {
+        b.request.data = true;
+        joystickonoff_.call(b);
+        emit joystickonoffb(0);
+
+        if (b.response.success)
+        {
+            qDebug() << "Joystick On Called";
+        }
+        else {
+
+            qDebug() << "Joystick On Called";
+        }
+    }
+    else
+    {
+        b.request.data = false;
+        joystickonoff_.call(b);
+        emit joystickonoffb(0);
+        if (b.response.success)
+        {
+            qDebug() << "Joystick Off Called";
+
+        }
+        else {
+
+            qDebug() << "Joystick Off Called";
+
+    }
+}
+
+}
 
 void RosThread::resetTrip(int value)
 {

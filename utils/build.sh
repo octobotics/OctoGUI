@@ -5,7 +5,7 @@ sleep 3
 mkdir build
 echo -e "\e[1;32m=============Build Folder Created=============\e[0m"
 echo "Script executed from: ${PWD}"
-Qmake=/home/$USER/Qt5.12.12/5.12.12/gcc_64/bin/qmake
+Qmake=/home/sensei/qt_5/5.12.12/gcc_64/bin/qmake
 File=build/OctoboticsApp    
 if [[ ! -f $File ]] ; then
     echo -e "\e[1;31m File -> OctoboticsApp is not there, aborting.\e[0m"

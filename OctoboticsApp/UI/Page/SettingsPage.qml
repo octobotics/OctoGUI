@@ -77,6 +77,7 @@ Page {
             onClicked: {
                 //connectROS.connectMasterURI(masterUriId.text,hostname.text)
                 cameraRunner.runCamera()
+
             }
         }
         CButton{
@@ -88,8 +89,7 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                camera_runner.startJoystick();
-                //connectROS.connectMasterURI(masterUriId.text,hostname.text)
+                cameraRunner.startJoystick()
 
             }
         }

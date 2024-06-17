@@ -140,14 +140,14 @@ Rectangle{
     property real battStatus: publisher.batteryValue
     onBattStatusChanged: {
 
-        if (battStatus<=24 && battStatus>23 && battCnt<=3){
+        if (battStatus<=24.0 && battStatus>23.5 && battCnt<=3){
             battDialog.text = "\n\n         Battery LOW         \n\n"
             battDialog.icon = StandardIcon.Critical
             battDialog.open()
             battCnt++
             alaramEffect.play()
         }
-        else if((battStatus<= 23))
+        else if((battStatus<= 23.5))
         {
             battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
             battDialog.icon = StandardIcon.Critical
@@ -892,6 +892,21 @@ Rectangle{
                                     }
 
 
+//                                    SButton{
+//                                        property bool isPressed: false
+//                                        height: rectBox1.height * 0.0987
+//                                        name:  "JoyStick OFF/ON"
+//                                        baseColor:  isPressed ? "green" : buttonBg
+//                                        borderColor: buttonBg
+//                                        implicitWidth: rectBox1.width * 0.32
+//                                        Layout.alignment: Qt.AlignCenter
+//                                        onClicked: {
+//                                            publisher.call_joystickonoff(1);
+//                                            isPressed = !isPressed
+
+//                                        }
+//                                    }
+
                                     SButton{
                                         property bool isPressed: false
                                         height: rectBox1.height * 0.0987
@@ -901,9 +916,8 @@ Rectangle{
                                         implicitWidth: rectBox1.width * 0.32
                                         Layout.alignment: Qt.AlignCenter
                                         onClicked: {
-                                            camera_runner.startJoystick();
+                                            publisher.call_joystickonoff(isPressed ? 0 : 1);
                                             isPressed = !isPressed
-
                                         }
                                     }
 
@@ -2180,25 +2194,25 @@ Rectangle{
                                 Layout.fillHeight: true
                                 width: 30
 
-//                                Button {
-//                                    id: btnON1
-//                                    text : "Record"
-//                                    width : 100
-//                                    height : 25
-//                                    anchors.centerIn: parent
+                                Button {
+                                    id: btnON1
+                                    text : "Record"
+                                    width : 100
+                                    height : 25
+                                    anchors.centerIn: parent
 
-//                                    background: Rectangle {
-//                                        color:buttonBg
-//                                        radius: 8
-//                                    }
+                                    background: Rectangle {
+                                        color:buttonBg
+                                        radius: 8
+                                     }
 
-//                                    onClicked: {
-////                                        demo.gstRecord("Recording...");
+                                     onClicked: {
+                                         camera_runner.recordCamera()
 
-//                                         btnON1.text = "JoyStick Started";
+                                         btnON1.text = "Record On";
 
-//                                    }
-//                                }
+                                    }
+                                }
 
                             }
 
@@ -2330,6 +2344,9 @@ Rectangle{
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
                                         publisher.call_automode(0)
+                                        init_crawler(0)
+                                        stopCrawler()
+                                        camera_runner.startJoystick();
                                     }
                                 }
                                 SButton{
@@ -2339,6 +2356,18 @@ Rectangle{
                                     borderColor: buttonBg
                                      implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+
+                                    }
+                                }
+                                SButton{
+                                    height: 20
+                                    name:  "SHUTDOWN"
+                                    baseColor:  "#FF2E2E"
+                                    borderColor: "#911911"
+                                     implicitWidth:(widthScreen * 0.42)/2
+                                    onClicked: {
+                                        publisher.shd_crawler(1)
+
                                     }
                                 }
                             }
@@ -2534,8 +2563,8 @@ Rectangle{
                                         borderColor: "#911911"
                                         onClicked: {
                                            alaramEffect.play()
-                                           init_crawler(0)
                                            stopCrawler()
+                                           init_crawler(0)
 
 
                                             //add logic

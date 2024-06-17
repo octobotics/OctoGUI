@@ -82,6 +82,7 @@ public slots:
     void sendToolData(QString value);
     void crawlerInitSrv(int value);
     void reset_crawler(int val);
+    void shutdown_crawler(int val);
 
     void resetTrip(int value);
     void reset_water(int value);
@@ -89,6 +90,7 @@ public slots:
     void slideCCW(int value);
     void speedIncrease(int value);
     void speedDecrease(int value);
+    void joystickonoff(int value);
     void lacCW(int value);
     void lacCCW(int value);
     void cameraInit(int value);
@@ -133,6 +135,7 @@ signals:
     void resetTrip(bool k);
     void speedIncrease(bool k);
     void speedDecrease(bool k);
+    void joystickonoffb(bool k);
     //--------------------------
 
     void velstatusCallback(int speedsetting);
@@ -143,6 +146,7 @@ signals:
     void initCrawler(bool k);
     void stopCrawler(bool k );
     void rstCrawler(bool k);
+    void shdCrawler(bool k);
     void cameraInit(bool k);
     void rstwaterlevel(bool k);
 
@@ -184,6 +188,7 @@ private:
     ros::ServiceClient crawler_reset_srv_;
     ros::ServiceClient crawler_speed_Increase_;
     ros::ServiceClient crawler_speed_Decrease_;
+    ros::ServiceClient joystickonoff_;
 
     ros::ServiceClient hzl_slide_cw_;
     ros::ServiceClient reset_waterlevel_;
@@ -196,6 +201,7 @@ private:
     ros::ServiceClient get_arm_status_srv_;
     ros::ServiceClient camera_init_ ;
     ros::ServiceClient camera_stop_ ;
+    ros::ServiceClient shutdown_ ;
 
     //variables
     QVector<int> bot_err;
