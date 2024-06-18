@@ -279,6 +279,7 @@ DIST          = ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_pre.prf 
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_post.prf \
+		../OctoboticsApp/.qmake.stash \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/default_pre.prf \
@@ -501,6 +502,7 @@ Makefile: ../OctoboticsApp/OctoboticsApp.pro ../../../Qt5.12.12/5.12.12/gcc_64/m
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/default_pre.prf \
@@ -698,6 +700,7 @@ Makefile: ../OctoboticsApp/OctoboticsApp.pro ../../../Qt5.12.12/5.12.12/gcc_64/m
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/qt_config.prf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/toolchain.prf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/default_pre.prf:
@@ -2153,6 +2156,9 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/Trigger.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerResponse.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QThread \
 		../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_custom_service/include/launch_crawler/SerialNumbers.h \
@@ -2393,6 +2399,9 @@ moc_publisher.cpp: ../OctoboticsApp/Source/publisher.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/Trigger.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerResponse.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QString \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
@@ -3124,6 +3133,9 @@ moc_rosthread.cpp: ../OctoboticsApp/Source/rosthread.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/Trigger.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerResponse.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QString \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
@@ -4108,6 +4120,9 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_lib/include/std_srvs/Trigger.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerResponse.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QString \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QThread \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qthread.h \
@@ -4735,6 +4750,9 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_lib/include/std_srvs/Trigger.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerResponse.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QString \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
@@ -6596,6 +6614,9 @@ customplotitem.o: ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/So
 		../OctoboticsApp/ros_lib/include/std_srvs/Trigger.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerResponse.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QThread \
 		../OctoboticsApp/ros_custom_service/include/launch_crawler/SerialNumbers.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_stat.h \
@@ -6772,6 +6793,9 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/Trigger.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/TriggerResponse.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QString \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/QThread \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtCore/qthread.h \
