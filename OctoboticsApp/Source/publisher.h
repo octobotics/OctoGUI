@@ -46,6 +46,10 @@ class Publisher : public QObject
     Q_PROPERTY(bool cameraInit READ getcameraInitValue WRITE setcameraInitValue NOTIFY cameraInitValueChanged)
     Q_PROPERTY(bool slideCW READ getslideCWValue WRITE setslideCWValue NOTIFY slideCWValueChanged)
     Q_PROPERTY(bool slideCCW READ getslideCCWValue WRITE setslideCCWValue NOTIFY slideCCWValueChanged)
+    Q_PROPERTY(bool speedIncrease READ getspeedIncrease WRITE setspeedIncrease NOTIFY speedIncreaseValueChanged)
+    Q_PROPERTY(bool speedDecrease READ getspeedDecrease WRITE setspeedDecrease NOTIFY speedDecreaseValueChanged)
+    Q_PROPERTY(bool joystickonoff READ getjoystickonoff WRITE setjoystickonoff NOTIFY joystickonoffValueChanged)
+
     Q_PROPERTY(bool lacCW READ getlacCWValue WRITE setlacCWValue NOTIFY lacCWValueChanged)
     Q_PROPERTY(bool lacCCW READ getlacCCWValue WRITE setlacCCWValue NOTIFY lacCCWValueChanged)
     Q_PROPERTY(int lacValue READ getlacValue WRITE setlacValue NOTIFY lacValueChanged)
@@ -58,6 +62,8 @@ class Publisher : public QObject
     Q_PROPERTY(bool initCrawlerValue READ getInitCrawlerValue WRITE setInitCrawlerValue NOTIFY initCrawlerValueChanged)
     Q_PROPERTY(bool stopCrawlerValue READ getStopCrawlerValue WRITE setStopCrawlerValue NOTIFY stopCrawlerValueChanged)
     Q_PROPERTY(bool rstCrawlerValue READ getRstCrawlerValue WRITE setRstCrawlerValue NOTIFY rstCrawlerValueChanged)
+    Q_PROPERTY(bool shdCrawlerValue READ getshdCrawlerValue WRITE setshdCrawlerValue NOTIFY shdCrawlerValueChanged)
+    Q_PROPERTY(bool rstwaterlevelValue READ getrstwaterlevelValue WRITE setshdCrawlerValue NOTIFY shdCrawlerValueChanged)
     Q_PROPERTY(QVector<int> errValue READ getErrValue WRITE setErrValue NOTIFY errValueChanged)
     Q_PROPERTY(QVector<int> tempValue READ getTempValue WRITE setTempValue NOTIFY tempValueChanged)
     Q_PROPERTY(QVariantMap crawlStatus READ getCrawlStatus WRITE setCrawlStatus NOTIFY crawlStatusChanged)
@@ -135,6 +141,15 @@ public slots:
     bool getslideCCWValue();
     void setslideCCWValue(bool k);
 
+    bool getspeedIncrease();
+    void setspeedIncrease(bool k);
+
+    bool getjoystickonoff();
+    void setjoystickonoff(bool k);
+
+    bool getspeedDecrease();
+    void setspeedDecrease(bool k);
+
     bool getlacCWValue();
     void setlacCWValue(bool k);
 
@@ -171,6 +186,10 @@ public slots:
     void slideCW(bool k);
     void slideCCW(bool k);
 
+    void speedIncrease(bool k);
+    void speedDecrease(bool k);
+    void joystickonoff(bool k);
+
     void resetTrip(bool k);
 
     void cameraInit(bool k);
@@ -188,6 +207,12 @@ public slots:
     void setStopCrawlerValue(bool k);
     bool getRstCrawlerValue();
     void setRstCrawlerValue(bool k);
+    bool getshdCrawlerValue();
+    void setshdCrawlerValue(bool k);
+
+    bool getrstwaterlevelValue();
+    void setrstwaterlevelValue(bool k);
+
 
     QVector<int> getTempValue();
     void setTempValue(QVector<int> value);
@@ -200,6 +225,8 @@ public slots:
 
 
     void rst_crawler(int val);
+    void shd_crawler(int val);
+    void reset_water(int val);
 
     void call_crawlerinit(int val);
 
@@ -209,7 +236,12 @@ public slots:
     void call_laccw(int val);
     void call_lacccw(int val);
 
+    void call_speedIncrease(int val);
+    void call_speedDecrease(int val);
+    void call_joystickonoff(int val);
+
     void call_resetTrip(int val);
+    void call_resetWaterLevel(int val);
 
     void call_cameraInit(int val);
 
@@ -221,6 +253,8 @@ public slots:
     void initCrawler(bool k);
     void stopCrawler(bool k );
     void rstCrawler(bool k);
+    void shdCrawler(bool k);
+    void rstwaterlevel(bool k);
 
     //battery
     float getBatteryValue();
@@ -282,6 +316,11 @@ signals:
     void value6(int value);
     void value7(int value);
     void value8(int value);
+    void value9(int value);
+    void value10(int value);
+    void value11(int value);
+    void value12(int value);
+
 
 
     void speedsettingValueChanged(int speedsetting);
@@ -301,6 +340,11 @@ signals:
     void slideCWValueChanged(bool value);
     void slideCCWValueChanged(bool value);
 
+    void speedIncreaseValueChanged(bool value);
+    void speedDecreaseValueChanged(bool value);
+    void joystickonoffValueChanged(bool value);
+
+
     void cameraInitValueChanged(bool value);
 
     void lacCWValueChanged(bool value);
@@ -312,6 +356,7 @@ signals:
 //    void voltageValueChanged(int value);
     void resetTripValueChanged(bool value);
 
+    void rstwaterlevelValueChanged(bool value);
     void rstArmValueChanged(bool value);
     void stopArmValueChanged(bool value);
     void rstArm(int value);
@@ -322,9 +367,12 @@ signals:
     void initCrawlerValueChanged(bool value);
     void stopCrawlerValueChanged(bool value);
     void rstCrawlerValueChanged(bool value);
+    void shdCrawlerValueChanged(bool value);
     void errValueChanged(QVector<int> value);
     void tempValueChanged(QVector<int> value);
     void rstCrawler(int value);
+    void shdCrawler(int value);
+    void rstWaterLevel(int value);
     void crawlStatusChanged(QVariantMap status);
 
     void velocityValueChanged(int value);
@@ -353,11 +401,16 @@ private:
     bool m_slideCCW;
     bool m_lacCW;
     bool m_lacCCW;
+    bool m_speedIncrease;
+    bool m_speedDecrease;
+    bool m_joystickonoff;
     bool m_rstArmValue;
     bool m_stopArmValue;
     bool m_initCrawlerValue;
     bool m_stopCrawlerValue;
     bool m_rstCrawlerValue;
+    bool m_shdCrawlerValue;
+    bool m_rstwaterlevelValue;
     bool m_cameraInit;
     int m_comStatus;
     int m_armToolStatus;

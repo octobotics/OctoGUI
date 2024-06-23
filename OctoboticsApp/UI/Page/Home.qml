@@ -130,18 +130,21 @@ Rectangle{
     }
 
     /*!
-     * \brief  battStatus: gets battery value from ros and gives a popup on low battery
+     * \brief  battStatus: gets battery value from ros and gives a popup on low
+
+
+
      */
     property real battStatus: publisher.batteryValue
     onBattStatusChanged: {
 
-        if (battStatus<=45 && battStatus>44 && battCnt<=3){
+        if (battStatus<=29 && battStatus>28 && battCnt<=3){
             battDialog.text = "\n\n         Battery LOW         \n\n"
             battDialog.icon = StandardIcon.Critical
             battDialog.open()
             battCnt++
         }
-        else if((battStatus<= 44))
+        else if((battStatus<= 28))
         {
             battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
             battDialog.icon = StandardIcon.Critical
@@ -790,12 +793,14 @@ Rectangle{
                                         }
                                     }
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.height * 0.0987
                                         name:  "TD"
-                                        baseColor:  buttonBg
+                                        baseColor: isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
+                                            isPressed = !isPressed
                                             publisher.toolToggle = "3"
                                         }
                                     }
@@ -824,34 +829,39 @@ Rectangle{
                                 RowLayout{
                                     spacing: rectBox1.width * 0.05
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.height * 0.0987
                                         name:  "P/P"
-                                        baseColor:  buttonBg
+                                        baseColor: isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
+                                            isPressed = !isPressed
                                             publisher.toolToggle = "4"
-                                            alaramEffect.play()
+
                                         }
                                     }
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.width * 0.1
                                         name:  "Led"
-                                        baseColor:  buttonBg
+                                        baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.13020
                                         onClicked: {
+                                              isPressed = !isPressed
                                               publisher.toolToggle = "2"
                                         }
                                     }
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.width * 0.1
                                         name:  "Motor"
-                                        baseColor:  buttonBg
+                                        baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.15
                                         onClicked: {
-                                            baseColor: "green"
+                                            isPressed = !isPressed
                                             publisher.toolToggle = "1"
                                         }
                                     }
@@ -863,13 +873,15 @@ Rectangle{
                                         }
 
                                     SButton{
+                                        property bool isPressed: false
                                         height: rectBox1.height * 0.0987
                                         name:  "JoyStick OFF/ON"
-                                        baseColor:  buttonBg
+                                        baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.45
                                         Layout.alignment: Qt.AlignCenter
                                         onClicked: {
+
                                             camera_runner.startJoystick();
 
                                         }

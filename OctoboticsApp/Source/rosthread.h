@@ -29,6 +29,7 @@
 #include "std_msgs/Int16.h"
 #include "std_msgs/Int32.h"
 #include "std_msgs/Int64.h"
+#include "std_srvs/SetBool.h"
 #include "stm_interface/RelayControl.h"
 #include "serialtoros/GraphPath.h"
 #include "my_actuator/vitals.h"
@@ -80,10 +81,15 @@ public slots:
     void sendToolData(QString value);
     void crawlerInitSrv(int value);
     void reset_crawler(int val);
+    void shutdown_crawler(int val);
 
     void resetTrip(int value);
+    void reset_water(int value);
     void slideCW(int value);
     void slideCCW(int value);
+    void speedIncrease(int value);
+    void speedDecrease(int value);
+    void joystickonoff(int value);
     void lacCW(int value);
     void lacCCW(int value);
     void cameraInit(int value);
@@ -126,6 +132,9 @@ signals:
     void lacCCW(bool k);
     void lacCallback(int lac_value);
     void resetTrip(bool k);
+    void speedIncrease(bool k);
+    void speedDecrease(bool k);
+    void joystickonoffb(bool k);
     //--------------------------
 
     void velstatusCallback(int speedsetting);
@@ -136,7 +145,9 @@ signals:
     void initCrawler(bool k);
     void stopCrawler(bool k );
     void rstCrawler(bool k);
+    void shdCrawler(bool k);
     void cameraInit(bool k);
+    void rstwaterlevel(bool k);
 
 
 
@@ -145,6 +156,7 @@ private:
 
     ros::Publisher m_publisher;
     ros::Publisher vel_pub_;
+    ros::Publisher automode_pub_ ;
 
 //    ros::Publisher img_cap_pub_;
 
@@ -173,8 +185,12 @@ private:
     ros::ServiceClient crawler_init_srv_;
     ros::ServiceClient crawler_stop_srv_;
     ros::ServiceClient crawler_reset_srv_;
+    ros::ServiceClient crawler_speed_Increase_;
+    ros::ServiceClient crawler_speed_Decrease_;
+    ros::ServiceClient joystickonoff_;
 
     ros::ServiceClient hzl_slide_cw_;
+    ros::ServiceClient reset_waterlevel_;
     ros::ServiceClient hzl_slide_ccw_;
     ros::ServiceClient arm_stop_srv_; //
     ros::ServiceClient arm_reset_srv_; //
@@ -184,6 +200,7 @@ private:
     ros::ServiceClient get_arm_status_srv_;
     ros::ServiceClient camera_init_ ;
     ros::ServiceClient camera_stop_ ;
+    ros::ServiceClient shutdown_ ;
 
     //variables
     QVector<int> bot_err;

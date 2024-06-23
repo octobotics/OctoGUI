@@ -56,12 +56,13 @@ Page {
             height: 50
             Layout.preferredWidth: connectROSPage.width - 20
             Layout.alignment: Qt.AlignHCenter
-            name: "Start Camera"
+            name: "Initialize Camera"
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
                 //connectROS.connectMasterURI(masterUriId.text,hostname.text)
                 publisher.call_cameraInit(1)
+                publisher.toolToggle = "1"
 
             }
         }
@@ -70,7 +71,7 @@ Page {
             height: 50
             Layout.preferredWidth: connectROSPage.width - 20
             Layout.alignment: Qt.AlignHCenter
-            name: "setting 2"
+            name: "Start Camera"
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
@@ -87,7 +88,7 @@ Page {
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
-                //connectROS.connectMasterURI(masterUriId.text,hostname.text)
+                cameraRunner.startJoystick()
 
             }
         }

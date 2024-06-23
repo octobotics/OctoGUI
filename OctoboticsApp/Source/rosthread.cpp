@@ -42,6 +42,8 @@ void RosThread::run()
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
+    automode_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/navigation_control",1);
+
 
     // ros subscribers
     water_level_ = m_nodeHandler->subscribe<std_msgs::Float32>("/cumulative_volume",1,&RosThread::waterCallback,this);
@@ -57,7 +59,7 @@ void RosThread::run()
     current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
     lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
-//    voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1,&RosThread::voltageCallback,this);
+ // voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1,&RosThread::voltageCallback,this);
 
 
     // ros service servers
@@ -69,8 +71,12 @@ void RosThread::run()
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
+    reset_waterlevel_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reset_cumulative_volume");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
+    crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/set_linear_velocity");
+    crawler_speed_Decrease_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/decrease_linear_velocity");
+    joystickonoff_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_joy");
     camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
 
@@ -159,6 +165,15 @@ void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
     emit velCallback(current_vel_linear);
 }
 
+void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
+{
+    auto level = msg->data;
+
+    level = level/10000 ;
+
+    emit waterCallback(level);
+}
+
 void RosThread::odomCallback(const std_msgs::Int32::ConstPtr &msg)
 {
     auto current_odom = msg->data;
@@ -245,12 +260,7 @@ void RosThread::currentCallback(const std_msgs::Float32::ConstPtr &msg)
     emit currentCallback(current);
 }
 
-void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
-{
-    auto level = msg->data;
 
-    emit waterCallback(level);
-}
 
 
 /*!
@@ -390,6 +400,50 @@ void RosThread::reset_crawler(int val)
         else {
             qDebug() << "error resetting crawler";
             emit rstCrawler(0);
+
+
+        }
+    }
+}
+
+void RosThread::shutdown_crawler(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+
+        shutdown_.call(b);
+        if (b.response.success){
+
+            emit shdCrawler(1);
+
+        }
+        else {
+
+            emit shdCrawler(0);
+
+
+        }
+    }
+}
+
+void RosThread::reset_water(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "reset Waterlevel";
+        reset_waterlevel_.call(b);
+        if (b.response.success){
+            qDebug() << "reset Water Level";
+            emit rstwaterlevel(1);
+
+        }
+        else {
+            qDebug() << "error resetting crawler";
+            emit rstwaterlevel(0);
 
 
         }
