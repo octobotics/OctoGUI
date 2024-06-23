@@ -747,7 +747,7 @@ Rectangle{
                 RowLayout {
                     Rectangle{
                         id:rectBox1
-                        width: widthScreen * 0.28
+                        width: widthScreen * 0.20
                         height: heightScreen * 0.25
                         border.color:borderSecondBg
                         color: secondBg
@@ -758,11 +758,11 @@ Rectangle{
 
                         Row{
                             anchors.centerIn: parent
-                            spacing: rectBox1.width * 0.1
+                            spacing: rectBox1.width * 0.01
                             Column{
-                                spacing: parent.height * 0.2
+                                spacing: parent.height * 0.15
                                 RowLayout{
-                                    spacing: rectBox1.width * 0.1
+                                    spacing: rectBox1.width * 0.05
                                     Item {
                                         id: connectionStatus
                                         width: rectBox1.width * 0.130
@@ -822,7 +822,7 @@ Rectangle{
                                     }
                                 }
                                 RowLayout{
-                                    spacing: rectBox1.width * 0.1
+                                    spacing: rectBox1.width * 0.05
                                     SButton{
                                         height: rectBox1.height * 0.0987
                                         name:  "P/P"
@@ -849,7 +849,7 @@ Rectangle{
                                         name:  "Motor"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.13020
+                                        implicitWidth: rectBox1.width * 0.15
                                         onClicked: {
                                             baseColor: "green"
                                             publisher.toolToggle = "1"
@@ -857,7 +857,7 @@ Rectangle{
                                     }
                                 }
                                 RowLayout{
-                                    spacing: rectBox1.width * 0.33
+                                    spacing: rectBox1.width * 0.08
                                     Item {
                                             Layout.fillWidth: true
                                         }
@@ -867,7 +867,7 @@ Rectangle{
                                         name:  "JoyStick OFF/ON"
                                         baseColor:  buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.32
+                                        implicitWidth: rectBox1.width * 0.45
                                         Layout.alignment: Qt.AlignCenter
                                         onClicked: {
                                             camera_runner.startJoystick();
@@ -875,34 +875,12 @@ Rectangle{
                                         }
                                     }
 
-//                                    SButton{
-//                                        height: rectBox1.width * 0.33
-//                                        name:  "Spare"
-//                                        baseColor:  buttonBg
-//                                        borderColor: buttonBg
-//                                        implicitWidth: rectBox1.width * 0.13020
-//                                        onClicked: {
-
-//                                        }
-//                                    }
-//                                    SButton{
-//                                        height: rectBox1.width * 0.1
-//                                        name:  "Motor"
-
-//                                        baseColor:  buttonBg
-//                                        borderColor: buttonBg
-//                                        implicitWidth: rectBox1.width * 0.13020
-//                                        onClicked: {
-//                                            baseColor: "green"
-//                                            publisher.toolToggle = "1"
-//                                        }
-//                                    }
                                 }
 
                             }
                             Item{
-                                height: rectBox1.height * 0.70
-                                width: rectBox1.width * 0.111
+                                height: rectBox1.height * 0.65
+                                width: rectBox1.width * 0.100
                                 OctoGauge {
                                     anchors.fill: parent
                                     minimumValue: 0
@@ -996,7 +974,7 @@ Rectangle{
                     }
                     Rectangle{
                         id:rectBox3
-                        width: widthScreen * 0.18
+                        width: widthScreen * 0.19
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
                         color: secondBg
@@ -1068,6 +1046,7 @@ Rectangle{
                             }
                         }
                     }
+
                     Rectangle{
                         id:rectBox4
                         width: widthScreen * 0.18
@@ -1093,7 +1072,7 @@ Rectangle{
                                   Layout.fillWidth: true
                                   height: parent.height
                                   textFormat: Text.RichText
-                                  text: publisher.lacValue + "<b style='font-size: 14px;'> Deg/s<b>"
+                                  text: publisher.lacValue + "<b style='font-size: 18px;'> mm<b>"
                                   font.family: "Tahoma"
                                   font.bold: true
                                   font.pixelSize: 30
@@ -1144,77 +1123,117 @@ Rectangle{
 
 
                     }
+                    Rectangle{
+                                           id:rectBox5
+                                           width: widthScreen * 0.12
+                                           height: heightScreen * 0.25
+                                           border.color: borderSecondBg
+                                           color: secondBg
+                                           radius: 15
+                                           ColumnLayout{
 
-//                    Rectangle{
-//                        id:rectBox5
-//                        width: widthScreen * 0.18
-//                        height: heightScreen * 0.25
-//                        border.color: borderSecondBg
-//                        color: secondBg
-//                        radius: 15
-//                        ColumnLayout{
-//                            anchors.fill: parent
-//                            anchors.topMargin: 10
-//                            Text {
-//                                Layout.fillWidth: true
-//                                height: rectBox4.height * 0.2
-//                                text: qsTr("Angle Indicator")
-//                                font.family: "Tahoma"
-//                                font.bold: true
-//                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-//                                 color: textColor
-//                                verticalAlignment: Text.AlignVCenter
-//                                horizontalAlignment: Text.AlignHCenter
-//                            }
-//                                                       Text {
-//                                                                 Layout.fillWidth: true
-//                                                                height: parent.height
-//                                                                text: "30" + "\xB0"
-//                                                                font.family: "Tahoma"
-//                                                                font.bold: true
-//                                                                font.pixelSize: 60
-//                                                                 color: textColor
-//                                                                verticalAlignment: Text.AlignVCenter
-//                                                                horizontalAlignment: Text.AlignHCenter
-//                                                            }
-////                          /*  Row{
-////                                Layout.fillHeight: true
-////                                width: parent.width
-////                                Text {
-////                                    width: parent.width * 0.8
-////                                    height: parent.height
-////                                    text: "30" + "\xB0"
-////                                    font.family: "Tahoma"
-////                                    font.bold: true
-////                                    font.pixelSize: 60
-////                                     color: textColor
-////                                    verticalAlignment: Text.AlignVCenter
-////                                    horizontalAlignment: Text.AlignHCenter
-////                                }
-////                                Item {
-////                                    width: parent.width * 0.2
-////                                    height: parent.height
-////                                    ColumnLayout{
-////                                        height: parent.height
-////                                        width: parent.width
-////                                        Image {
-////                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-////                                        }
-////                                        Item {
-////                                            Layout.fillHeight: true
-////                                        }
-////                                        Image {
-////                                            rotation: 180
-////                                            source: "qrc:/UI/Assets/dashboard/up-arrow.png"
-////                                        }
-////                                    }
-////                                }
-////                            }*/
-//                            Item {
-//                                height: parent.height * 0.1
-//                            }
-//                        }
-//                    }
+                                               anchors.fill: parent
+                                               anchors.topMargin: 10
+                                               Text {
+                                                   Layout.fillWidth: true
+                                                   height: rectBox5.height * 0.2
+                                                   text: qsTr("Linear Speed ")
+                                                   font.family: "Tahoma"
+                                                   font.bold: true
+                                                   font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+                                                   color: textColor
+                                                   verticalAlignment: Text.AlignVCenter
+                                                   horizontalAlignment: Text.AlignHCenter
+                                               }
+                                               Text {
+                                                       Layout.fillWidth: true
+                                                       height: parent.height
+                                                       textFormat: Text.RichText
+                                                       text: Math.round(publisher.speedsetting) + "<b style='font-size: 18px;'> mm/s<b>"
+                                                       font.family: "Tahoma"
+                                                       font.bold: true
+                                                       font.pixelSize:text.length < 12 ? 60 : 30
+                                                       color: textColor
+                                                       verticalAlignment: Text.AlignVCenter
+                                                       horizontalAlignment: Text.AlignHCenter
+                                                   }
+                                               Item {
+                                                   height: parent.height * 0.1
+                                               }
+                                           }
+                                           Item {
+                                               width: parent.width
+                                               height: parent.height * 0.1
+                                               anchors.bottom: colum1.bottom
+                                               anchors.bottomMargin: 28
+
+                                           }
+                                       }
+
+                    Rectangle{
+                                            id:rectBox6
+                                            width: widthScreen * 0.12
+                                            height: heightScreen * 0.25
+                                            border.color: borderSecondBg
+                                            color: secondBg
+                                            radius: 15
+                                            ColumnLayout{
+                                                anchors.fill: parent
+                                                anchors.topMargin: 10
+                                                Text {
+                                                    Layout.fillWidth: true
+                                                    height: rectBox4.height * 0.2
+                                                    text: qsTr("Angular Speed")
+                                                    font.family: "Tahoma"
+                                                    font.bold: true
+                                                    font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+                                                    color: textColor
+                                                    verticalAlignment: Text.AlignVCenter
+                                                    horizontalAlignment: Text.AlignHCenter
+                                                }
+                                                Text {
+                                                      Layout.fillWidth: true
+                                                      height: parent.height
+                                                      textFormat: Text.RichText
+                                                      text: publisher.anglesetting + "<b style='font-size: 18px;'> Deg/s<b>"
+                                                      font.family: "Tahoma"
+                                                      font.bold: true
+                                                      font.pixelSize: 30
+                                                      color: textColor
+                                                      verticalAlignment: Text.AlignVCenter
+                                                      horizontalAlignment: Text.AlignHCenter
+                                                    }
+                                                Item {
+                                                          width: parent.width
+                                                          height: parent.height * 0.1
+                                                          anchors.bottom: colum1.bottom
+                                                          anchors.bottomMargin: 10
+
+                                                          RowLayout{
+                                                              height: parent.height
+                                                              anchors.right: parent.right
+                                                              anchors.left: parent.left
+                                                              anchors.rightMargin: 40
+                                                              anchors.leftMargin: 40
+
+                                                   Item {
+                                                           Layout.fillWidth: true
+                                                              }
+
+                                                          }
+                                                      }
+
+                                                Item {
+                                                    height: parent.height * 0.1
+                                                }
+
+                                            }
+
+
+                                        }
+
+
+
 
 
                     Rectangle{
