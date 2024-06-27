@@ -578,6 +578,92 @@ void RosThread::lacCCW(int value)
     }
 }
 
+void RosThread::speedIncrease(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+    b.request.data = true;
+
+    if(k) {
+        crawler_speed_Increase_.call(b);
+        emit speedIncrease(0);
+
+        if (b.response.success){
+            qDebug() << "Speed Increased";
+        }
+
+        else {
+            qDebug() << "Speed Increasing";
+            emit speedIncrease(0);
+        }
+
+
+    }
+
+}
+
+void RosThread::speedDecrease(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+    b.request.data = true;
+
+    if(k) {
+        crawler_speed_Decrease_.call(b);
+        emit speedDecrease(0);
+
+        if (b.response.success){
+            qDebug() << "Speed Decreasing";
+        }
+
+        else {
+            qDebug() << "Speed Decreasing";
+            emit speedDecrease(0);
+        }
+
+
+    }
+
+}
+
+void RosThread::joystickonoff(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+
+    if(k)
+    {
+        b.request.data = true;
+        joystickonoff_.call(b);
+        emit joystickonoffb(0);
+
+        if (b.response.success)
+        {
+            qDebug() << "Joystick On Called";
+        }
+        else {
+
+            qDebug() << "Joystick On Called";
+        }
+    }
+    else
+    {
+        b.request.data = false;
+        joystickonoff_.call(b);
+        emit joystickonoffb(0);
+        if (b.response.success)
+        {
+            qDebug() << "Joystick Off Called";
+
+        }
+        else {
+
+            qDebug() << "Joystick Off Called";
+
+    }
+}
+
+}
 
 
 
