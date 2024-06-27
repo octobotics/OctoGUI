@@ -1059,8 +1059,82 @@ Rectangle{
                         }
                     }
 
+//                    Rectangle{
+//                        id:rectBox4
+//                        width: widthScreen * 0.18
+//                        height: heightScreen * 0.25
+//                        border.color: borderSecondBg
+//                        color: secondBg
+//                        radius: 15
+//                        ColumnLayout{
+//                            anchors.fill: parent
+//                            anchors.topMargin: 10
+//                            Text {
+//                                Layout.fillWidth: true
+//                                height: rectBox4.height * 0.2
+//                                text: qsTr("Linear Actuator")
+//                                font.family: "Tahoma"
+//                                font.bold: true
+//                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+//                                color: textColor
+//                                verticalAlignment: Text.AlignVCenter
+//                                horizontalAlignment: Text.AlignHCenter
+//                            }
+//                            Text {
+//                                  Layout.fillWidth: true
+//                                  height: parent.height
+//                                  textFormat: Text.RichText
+//                                  text: publisher.lacValue + "<b style='font-size: 18px;'> mm<b>"
+//                                  font.family: "Tahoma"
+//                                  font.bold: true
+//                                  font.pixelSize: 30
+//                                  color: textColor
+//                                  verticalAlignment: Text.AlignVCenter
+//                                  horizontalAlignment: Text.AlignHCenter
+//                                }
+//                            Item {
+//                                width: parent.width
+//                                height: parent.height * 0.1
+//                                anchors.bottom: parent.bottom
+//                                anchors.bottomMargin: 20
+
+//                                ColumnLayout{
+//                                    width: parent.width
+//                                    anchors.centerIn: parent
+//                                    IButton{
+//                                        // Assuming no rotation is needed for the up arrow
+//                                        sourceRot: 0
+//                                        defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                        clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+//                                        onClicked: {
+//                                            publisher.call_laccw(1);
+//                                            // Add logic here
+//                                        }
+//                                    }
+//                                    IButton{
+//                                        // Rotate the image to make it a down arrow
+//                                        sourceRot: 180
+//                                        defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                        clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+//                                        onClicked: {
+//                                            publisher.call_lacccw(1);
+//                                        }
+//                                    }
+//                                }
+//                            }
+
+//                            Item {
+//                                height: parent.height * 0.1
+//                            }
+
+//                        }
+
+
+//                    }
+
+
                     Rectangle{
-                        id:rectBox4
+                        id: rectBox4
                         width: widthScreen * 0.18
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
@@ -1080,61 +1154,48 @@ Rectangle{
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
-                            Text {
-                                  Layout.fillWidth: true
-                                  height: parent.height
-                                  textFormat: Text.RichText
-                                  text: publisher.lacValue + "<b style='font-size: 18px;'> mm<b>"
-                                  font.family: "Tahoma"
-                                  font.bold: true
-                                  font.pixelSize: 30
-                                  color: textColor
-                                  verticalAlignment: Text.AlignVCenter
-                                  horizontalAlignment: Text.AlignHCenter
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 30 // Adjust spacing as needed
+
+                                Text {
+                                    text: publisher.lacValue + " mm"
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 30
+                                    color: textColor
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
                                 }
-                            Item {
-                                      width: parent.width
-                                      height: parent.height * 0.1
-                                      anchors.bottom: colum1.bottom
-                                      anchors.bottomMargin: 10
 
-                                      RowLayout{
-                                          height: parent.height
-                                          anchors.right: parent.right
-                                          anchors.left: parent.left
-                                          anchors.rightMargin: 40
-                                          anchors.leftMargin: 40
-                                          IButton{
-                                              sourceRot: -90
-                                              defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                              clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                              onClicked: {
-                                                  publisher.call_laccw(1);
-                                                  //add logicr
-                                              }
-                                          }
-                               Item {
-                                       Layout.fillWidth: true
-                                          }
-                                          IButton{
-                                              sourceRot: 90
-                                              defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                              clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                              onClicked: {
-                                                  publisher.call_lacccw(1);
-                                              }
-                                          }
-                                      }
-                                  }
-
-                            Item {
-                                height: parent.height * 0.1
+                                IButton{
+                                    // Assuming no rotation is needed for the up arrow
+                                    sourceRot: 0
+                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                    onClicked: {
+                                        publisher.call_lacccw(1);
+                                        // Add logic here
+                                    }
+                                }
+                                IButton{
+                                    // Rotate the image to make it a down arrow
+                                    sourceRot: 180
+                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+                                    onClicked: {
+                                        publisher.call_laccw(1);
+                                    }
+                                }
                             }
 
+//                            Item {
+//                                height: parent.height * 0.1
+//                            }
                         }
-
-
                     }
+
+
                     Rectangle{
                                            id:rectBox5
                                            width: widthScreen * 0.12
@@ -2295,6 +2356,8 @@ Rectangle{
                                     borderColor: buttonBg
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+                                        publisher.call_automode(1)
+
                                     }
                                 }
                                 SButton{
@@ -2304,6 +2367,10 @@ Rectangle{
                                     borderColor: buttonBg
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+                                        publisher.call_automode(0)
+                                        init_crawler(0)
+                                        stopCrawler()
+                                        camera_runner.startJoystick();
                                     }
                                 }
                                 SButton{
@@ -2313,6 +2380,17 @@ Rectangle{
                                     borderColor: buttonBg
                                      implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+                                    }
+                                }
+
+                                SButton{
+                                    height: 20
+                                    name: "SHUTDOWN"
+                                    baseColor: "#FF2E2E"
+                                    borderColor: "#911911"
+                                     implicitWidth:(widthScreen * 0.42)/2
+                                    onClicked: {
+                                        publisher.shd_crawler(1)
                                     }
                                 }
                             }
@@ -2508,8 +2586,8 @@ Rectangle{
                                         borderColor: "#911911"
                                         onClicked: {
                                            alaramEffect.play()
-                                           publisher.rst_crawler(1)
-                                           rstCrawler()
+                                           stopCrawler()
+                                           init_crawler(0)
 
                                             //add logic
                                         }

@@ -226,7 +226,7 @@ public slots:
 
     void rst_crawler(int val);
     void shd_crawler(int val);
-    void reset_water(int val);
+    //void reset_water(int val);
 
     void call_crawlerinit(int val);
 
@@ -253,8 +253,8 @@ public slots:
     void initCrawler(bool k);
     void stopCrawler(bool k );
     void rstCrawler(bool k);
-    void shdCrawler(bool k);
-    void rstwaterlevel(bool k);
+    //void shdCrawler(bool k);
+    //void rstwaterlevel(bool k);
 
     //battery
     float getBatteryValue();
