@@ -78,6 +78,8 @@ class Publisher : public QObject
     // battery
     Q_PROPERTY(float batteryValue READ getBatteryValue WRITE setBatteryValue NOTIFY batteryValueChanged)
 
+    Q_PROPERTY(int angleValue READ getAngleValue WRITE setAngleValue NOTIFY angleValueChanged)
+
     Q_PROPERTY(int speedsetting READ getspeedsettingValue WRITE setspeedsettingValue NOTIFY speedsettingValueChanged )
 
     Q_PROPERTY(int anglesetting READ getangularspeedValue WRITE setangularspeedValue NOTIFY angularspeedValueChanged)
@@ -260,6 +262,9 @@ public slots:
     float getBatteryValue();
     void setBatteryValue(float value);
     void battCallback(float value);
+    int getAngleValue();
+    void setAngleValue(int value);
+    void angleCallbackp(int value);
 
 //    int  getvoltageValue();
 //    void setvoltageValue(int value);
@@ -385,6 +390,8 @@ signals:
     //battery
     void batteryValueChanged(float value);
 
+    void angleValueChanged(int value);
+
     //current
     void currentValueChanged(float value);
 
@@ -427,6 +434,7 @@ private:
     int m_lacValue;
     int m_speedsettingvalue;
     int m_anglesettingvalue;
+    int m_angleValue;
 
 
 

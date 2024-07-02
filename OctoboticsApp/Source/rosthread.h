@@ -30,6 +30,7 @@
 #include "std_msgs/Int32.h"
 #include "std_msgs/Int64.h"
 #include "std_srvs/SetBool.h"
+#include "geometry_msgs/Vector3.h"
 #include "stm_interface/RelayControl.h"
 #include "serialtoros/GraphPath.h"
 #include "my_actuator/vitals.h"
@@ -69,6 +70,7 @@ public slots:
     void tripCallback(const std_msgs::Int32::ConstPtr &msg);
     void crawlerCallback(const my_actuator::vitals::ConstPtr &msg);
     void velstatusCallback(const octo_qt::ang_lin_arr::ConstPtr &msg);
+    void angleCallback(const geometry_msgs::Vector3::ConstPtr &msg);
 
     void currentCallback(const std_msgs::Float32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
@@ -110,6 +112,7 @@ signals:
     void commCallback(int value);
     void armToolCallback(int value);
     void battCallback(float value);
+    void angleCallback(int angle);
     void tempCallback(QVector<int> temp);
     void errorCallback(QVector<int> err);
     void velCallback(int current_vel_linear);
@@ -167,6 +170,7 @@ private:
     ros::Subscriber odometer_;
     ros::Subscriber tripmeter_;
     ros::Subscriber crawler_status_sub_;
+    ros::Subscriber angle_measure_;
 
 
     ros::Subscriber current_sub_;

@@ -155,7 +155,7 @@ Rectangle{
     }
 
     /*!
-     * \brief  armStatus: gets arm error and temperature from ros and gives a popup if any issue
+     * \brief  armStatus: ge ts arm error and temperature from ros and gives a popup if any issue
      */
     property variant armStatus: publisher.armStatus
     onArmStatusChanged: {
@@ -252,8 +252,8 @@ Rectangle{
     property variant crawlerTemp: publisher.tempValue
     onCrawlerTempChanged:  {
 
-        if(crawlerTemp[0]>125 || crawlerTemp[1]>125 || crawlerTemp[2]>125 || crawlerTemp[3]>125){
-            crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : Temperature greater than "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : Temperature greater than "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : Temperature greater than "+crawlerTemp[3]+" deg"+"\n"
+        if(crawlerTemp[0]>125 || crawlerTemp[0]>125 || crawlerTemp[0]>125 || crawlerTemp[0]>125){
+            crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"
             crawlerDialog.title = "Crawler Temperature Error"
             crawlerDialog.icon = StandardIcon.Critical
             crawlerDialog.open()
@@ -1399,8 +1399,8 @@ Rectangle{
 
                                         onClicked: {
 
-                                            crawlerDialog.text =  "\n\nErrors:\n\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n\n\n"+
-                                                    "\n\nTemperature:\n\n" +cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : "+crawlerTemp[3]+" deg"+"\n"
+                                            crawlerDialog.text =  "\n\nErrors:\n\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n\n\n"+
+                                                    "\n\nTemperature:\n\n" +cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"+cMotors[0]+" : "+crawlerTemp[0]+" deg"+"\n"
                                             crawlerDialog.icon = StandardIcon.Information
                                             crawlerDialog.open()
 
@@ -2494,7 +2494,7 @@ Rectangle{
                                     anchors.topMargin: 10
                                     Text {
                                         Layout.fillWidth: true
-                                        text: qsTr("Encoder")
+                                        text: qsTr("Angle Value")
                                         font.family: "Tahoma"
                                         font.bold: true
                                         font.pixelSize: 24
@@ -2506,11 +2506,11 @@ Rectangle{
                                             Layout.fillWidth: true
                                             Layout.fillHeight: true
                                             textFormat: Text.RichText
-                                            text: "30" + "<b style='font-size: 20px;'> mm<b>"
+                                            text: publisher.angleValue + "<b style='font-size: 20px;'> Deg<b>"
                                             font.family: "Tahoma"
                                             font.bold: true
                                             font.pixelSize: 60
-                                             color: textColor
+                                             color: "orange"
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter
                                         }

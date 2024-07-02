@@ -57,6 +57,7 @@ Publisher::Publisher(QObject *parent)
     m_speedsettingvalue = 0;
     m_cameraInit = 0;
     m_anglesettingvalue=0;
+    m_angleValue = 0;
 }
 
 /*!
@@ -143,6 +144,8 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(value12(int)),this->rost,SLOT(joystickonoff(int)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
+
+    connect(this->rost,SIGNAL(angleCallback(int)),this , SLOT(angleCallbackp(int)));
 
     // current
     connect(this->rost, SIGNAL(currentCallback(float)), this, SLOT(currentCallback(float)));
@@ -786,6 +789,22 @@ void Publisher::setBatteryValue(float value)
 void Publisher::battCallback(float value)
 {
     setBatteryValue(value);
+}
+
+//------------------------ANGLE Inclination------------
+
+void Publisher::angleCallbackp(int value)
+{
+    setAngleValue(value);
+}
+int Publisher::getAngleValue()
+{
+    return m_angleValue;
+}
+void Publisher::setAngleValue(int value)
+{
+    m_angleValue = value;
+    emit angleValueChanged(value);
 }
 
 // current

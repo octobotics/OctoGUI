@@ -60,6 +60,7 @@ void RosThread::run()
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
     lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
     voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1, &RosThread::batteryCallback,this);
+    angle_measure_ = m_nodeHandler->subscribe<geometry_msgs::Vector3>("/imu/angles",1,&RosThread::angleCallback, this);
 
 
     // ros service servers
@@ -207,6 +208,12 @@ void RosThread::batteryCallback(const std_msgs::Int16::ConstPtr &msg)
     float voltage = msg->data;
 
     emit battCallback(voltage);
+}
+
+void RosThread::angleCallback(const geometry_msgs::Vector3::ConstPtr &msg)
+{
+    int angle = msg->y;
+    emit angleCallback(angle);
 }
 
 
