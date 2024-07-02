@@ -45,6 +45,7 @@ Publisher::Publisher(QObject *parent)
     m_stopCrawlerValue =0;
     m_rstCrawlerValue = 0;
     m_shdCrawlerValue = 0;
+    m_stopautoValue = 0;
     m_rstwaterlevelValue = 0;
     m_currentValue=0.0;
     m_velocityValue=0;
@@ -120,6 +121,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
     connect(this->rost, SIGNAL(shdCrawler(bool)),this, SLOT(shdCrawler(bool)));
+    connect(this->rost, SIGNAL(stopauto(bool)), this, SLOT(stopautop(bool)));
     connect(this->rost, SIGNAL(rstwaterlevel(bool)),this,SLOT(rstwaterlevel(bool)));
     connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
     connect(this->rost, SIGNAL(odomCallback(int)), this, SLOT(odomCallback(int)));
@@ -129,6 +131,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
     connect(this,SIGNAL(shdCrawler(int)),this->rost, SLOT(shutdown_crawler(int)));
+    connect(this,SIGNAL(stopautoSrvp(int)),this->rost, SLOT(stopautoSrv(int)));
     connect(this,SIGNAL(rstWaterLevel(int)),this->rost,SLOT(reset_water(int)));
 
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
@@ -200,6 +203,11 @@ void Publisher::commCallback(int value)
 void Publisher::call_automode(int val)
 {
     emit automode(val);
+}
+
+void Publisher::call_stopautomode(int val)
+{
+    emit stopautoSrvp(val);
 }
 
 //---------------------------- Water Level -------------------------------
@@ -547,6 +555,17 @@ void Publisher::setRstCrawlerValue(bool flag)
     emit rstCrawlerValueChanged(flag);
 }
 
+void Publisher::setstopautoValue(bool flag)
+{
+    m_stopautoValue = flag;
+    emit stopautoValueChanged(flag);
+}
+
+bool Publisher::getstopautoValue()
+{
+    return m_stopautoValue;
+}
+
 bool Publisher::getshdCrawlerValue()
 {
     return m_shdCrawlerValue;
@@ -766,10 +785,19 @@ void Publisher::stopCrawler(bool flag)
 }
 
 
+
+
 void Publisher::rstCrawler(bool flag)
 {
     setRstCrawlerValue(flag);
 }
+
+void Publisher::stopautop(bool flag)
+{
+    setstopautoValue(flag);
+}
+
+
 
 void Publisher::cameraInit(bool k)
 {

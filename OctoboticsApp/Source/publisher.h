@@ -62,6 +62,7 @@ class Publisher : public QObject
     Q_PROPERTY(bool initCrawlerValue READ getInitCrawlerValue WRITE setInitCrawlerValue NOTIFY initCrawlerValueChanged)
     Q_PROPERTY(bool stopCrawlerValue READ getStopCrawlerValue WRITE setStopCrawlerValue NOTIFY stopCrawlerValueChanged)
     Q_PROPERTY(bool rstCrawlerValue READ getRstCrawlerValue WRITE setRstCrawlerValue NOTIFY rstCrawlerValueChanged)
+    Q_PROPERTY(bool stopautoValue READ getstopautoValue WRITE setstopautoValue NOTIFY stopautoValueChanged)
     Q_PROPERTY(bool shdCrawlerValue READ getshdCrawlerValue WRITE setshdCrawlerValue NOTIFY shdCrawlerValueChanged)
     Q_PROPERTY(bool rstwaterlevelValue READ getrstwaterlevelValue WRITE setshdCrawlerValue NOTIFY shdCrawlerValueChanged)
     Q_PROPERTY(QVector<int> errValue READ getErrValue WRITE setErrValue NOTIFY errValueChanged)
@@ -211,6 +212,8 @@ public slots:
     void setRstCrawlerValue(bool k);
     bool getshdCrawlerValue();
     void setshdCrawlerValue(bool k);
+    void setstopautoValue(bool k);
+    bool getstopautoValue();
 
     bool getrstwaterlevelValue();
     void setrstwaterlevelValue(bool k);
@@ -254,6 +257,7 @@ public slots:
 
     void initCrawler(bool k);
     void stopCrawler(bool k );
+    void stopautop(bool k);
     void rstCrawler(bool k);
     //void shdCrawler(bool k);
     //void rstwaterlevel(bool k);
@@ -310,6 +314,7 @@ public slots:
 //    void call_capImg(int val);
 
     void call_automode(int val);
+    void call_stopautomode(int val);
 
 signals:
     void message(QString msg);
@@ -365,6 +370,7 @@ signals:
     void rstwaterlevelValueChanged(bool value);
     void rstArmValueChanged(bool value);
     void stopArmValueChanged(bool value);
+    void stopautoValueChanged(bool value);
     void rstArm(int value);
     void trigArmStatusValueChanged();
     void armStatusChanged(QVector<int> status);
@@ -403,6 +409,7 @@ signals:
 //    void capImg(int value);
 
     void automode(int value);
+    void stopautoSrvp(int value);
 private:
     RosThread *rost;
     QCustomPlot*  m_CustomPlot;
@@ -420,6 +427,7 @@ private:
     bool m_stopCrawlerValue;
     bool m_rstCrawlerValue;
     bool m_shdCrawlerValue;
+    bool m_stopautoValue;
     bool m_rstwaterlevelValue;
     bool m_cameraInit;
     int m_comStatus;

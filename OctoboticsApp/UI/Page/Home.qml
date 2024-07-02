@@ -2373,9 +2373,10 @@ Rectangle{
                                     onClicked: {
                                         isPressed = !isPressed
                                         publisher.call_automode(0)
+                                        publisher.call_stopautomode(1)
                                         init_crawler(0)
                                         stopCrawler()
-                                        camera_runner.startJoystick();
+//                                        camera_runner.startJoystick();
                                     }
                                 }
                                 SButton{

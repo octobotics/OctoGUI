@@ -73,6 +73,7 @@ void RosThread::run()
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
     crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
     reset_waterlevel_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reset_cumulative_volume");
+    stopauto_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/stop_auto");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
     crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/set_linear_velocity");
@@ -80,6 +81,7 @@ void RosThread::run()
     joystickonoff_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_joy");
     camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
+
 
     lac_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
     lac_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reduce_three_service");
@@ -399,6 +401,28 @@ void RosThread::crawlerInitSrv(int value)
     }
 }
 
+void RosThread::stopautoSrv(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+
+        stopauto_.call(b);
+        if (b.response.success){
+
+            emit stopauto(1);
+
+        }
+        else {
+            qDebug()<<"BT NOT Running";
+
+            emit stopauto(0);
+
+
+        }
+    }
+}
 
 /*!
  * \brief RosThread::reset_crawler calls a service to reset crawler
