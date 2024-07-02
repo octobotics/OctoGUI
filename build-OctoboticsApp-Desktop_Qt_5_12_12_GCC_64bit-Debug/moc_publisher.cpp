@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Publisher_t {
-    QByteArrayData data[214];
-    char stringdata0[3111];
+    QByteArrayData data[216];
+    char stringdata0[3134];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -97,155 +97,157 @@ QT_MOC_LITERAL(61, 923, 19), // "batteryValueChanged"
 QT_MOC_LITERAL(62, 943, 19), // "currentValueChanged"
 QT_MOC_LITERAL(63, 963, 10), // "uidChanged"
 QT_MOC_LITERAL(64, 974, 16), // "QVector<QString>"
-QT_MOC_LITERAL(65, 991, 13), // "initRosThread"
-QT_MOC_LITERAL(66, 1005, 21), // "on_pushButton_pressed"
-QT_MOC_LITERAL(67, 1027, 23), // "on_pushButton_2_pressed"
-QT_MOC_LITERAL(68, 1051, 12), // "getComStatus"
-QT_MOC_LITERAL(69, 1064, 12), // "setComStatus"
-QT_MOC_LITERAL(70, 1077, 12), // "commCallback"
-QT_MOC_LITERAL(71, 1090, 20), // "getangularspeedValue"
-QT_MOC_LITERAL(72, 1111, 20), // "setangularspeedValue"
-QT_MOC_LITERAL(73, 1132, 20), // "angularspeedCallback"
-QT_MOC_LITERAL(74, 1153, 20), // "getspeedsettingValue"
-QT_MOC_LITERAL(75, 1174, 20), // "setspeedsettingValue"
-QT_MOC_LITERAL(76, 1195, 17), // "velstatusCallback"
-QT_MOC_LITERAL(77, 1213, 14), // "getToggleValue"
-QT_MOC_LITERAL(78, 1228, 14), // "setToggleValue"
-QT_MOC_LITERAL(79, 1243, 4), // "flag"
-QT_MOC_LITERAL(80, 1248, 14), // "toggleCallback"
-QT_MOC_LITERAL(81, 1263, 18), // "getcameraInitValue"
-QT_MOC_LITERAL(82, 1282, 18), // "setcameraInitValue"
-QT_MOC_LITERAL(83, 1301, 1), // "k"
-QT_MOC_LITERAL(84, 1303, 13), // "getToolToggle"
-QT_MOC_LITERAL(85, 1317, 13), // "setToolToggle"
-QT_MOC_LITERAL(86, 1331, 16), // "getArmToolStatus"
-QT_MOC_LITERAL(87, 1348, 16), // "setArmToolStatus"
-QT_MOC_LITERAL(88, 1365, 15), // "armToolCallback"
-QT_MOC_LITERAL(89, 1381, 3), // "arg"
-QT_MOC_LITERAL(90, 1385, 15), // "getslideCWValue"
-QT_MOC_LITERAL(91, 1401, 15), // "setslideCWValue"
-QT_MOC_LITERAL(92, 1417, 16), // "getslideCCWValue"
-QT_MOC_LITERAL(93, 1434, 16), // "setslideCCWValue"
-QT_MOC_LITERAL(94, 1451, 16), // "getspeedIncrease"
-QT_MOC_LITERAL(95, 1468, 16), // "setspeedIncrease"
-QT_MOC_LITERAL(96, 1485, 16), // "getjoystickonoff"
-QT_MOC_LITERAL(97, 1502, 16), // "setjoystickonoff"
-QT_MOC_LITERAL(98, 1519, 16), // "getspeedDecrease"
-QT_MOC_LITERAL(99, 1536, 16), // "setspeedDecrease"
-QT_MOC_LITERAL(100, 1553, 13), // "getlacCWValue"
-QT_MOC_LITERAL(101, 1567, 13), // "setlacCWValue"
-QT_MOC_LITERAL(102, 1581, 14), // "getlacCCWValue"
-QT_MOC_LITERAL(103, 1596, 14), // "setlacCCWValue"
-QT_MOC_LITERAL(104, 1611, 17), // "getresetTripValue"
-QT_MOC_LITERAL(105, 1629, 17), // "setresetTripValue"
-QT_MOC_LITERAL(106, 1647, 13), // "getWaterLevel"
-QT_MOC_LITERAL(107, 1661, 13), // "setWaterLevel"
-QT_MOC_LITERAL(108, 1675, 15), // "getStopArmValue"
-QT_MOC_LITERAL(109, 1691, 15), // "setStopArmValue"
-QT_MOC_LITERAL(110, 1707, 14), // "setRstArmValue"
-QT_MOC_LITERAL(111, 1722, 14), // "getRstArmValue"
-QT_MOC_LITERAL(112, 1737, 12), // "getArmStatus"
-QT_MOC_LITERAL(113, 1750, 12), // "setArmStatus"
-QT_MOC_LITERAL(114, 1763, 12), // "call_arminit"
-QT_MOC_LITERAL(115, 1776, 3), // "val"
-QT_MOC_LITERAL(116, 1780, 14), // "trig_armStatus"
-QT_MOC_LITERAL(117, 1795, 7), // "rst_arm"
-QT_MOC_LITERAL(118, 1803, 11), // "armCallback"
-QT_MOC_LITERAL(119, 1815, 7), // "slideCW"
-QT_MOC_LITERAL(120, 1823, 8), // "slideCCW"
-QT_MOC_LITERAL(121, 1832, 13), // "speedIncrease"
-QT_MOC_LITERAL(122, 1846, 13), // "speedDecrease"
-QT_MOC_LITERAL(123, 1860, 13), // "joystickonoff"
-QT_MOC_LITERAL(124, 1874, 9), // "resetTrip"
-QT_MOC_LITERAL(125, 1884, 10), // "cameraInit"
-QT_MOC_LITERAL(126, 1895, 5), // "lacCW"
-QT_MOC_LITERAL(127, 1901, 6), // "lacCCW"
-QT_MOC_LITERAL(128, 1908, 7), // "stopArm"
-QT_MOC_LITERAL(129, 1916, 19), // "getInitCrawlerValue"
-QT_MOC_LITERAL(130, 1936, 19), // "setInitCrawlerValue"
-QT_MOC_LITERAL(131, 1956, 19), // "getStopCrawlerValue"
-QT_MOC_LITERAL(132, 1976, 19), // "setStopCrawlerValue"
-QT_MOC_LITERAL(133, 1996, 18), // "getRstCrawlerValue"
-QT_MOC_LITERAL(134, 2015, 18), // "setRstCrawlerValue"
-QT_MOC_LITERAL(135, 2034, 18), // "getshdCrawlerValue"
-QT_MOC_LITERAL(136, 2053, 18), // "setshdCrawlerValue"
-QT_MOC_LITERAL(137, 2072, 21), // "getrstwaterlevelValue"
-QT_MOC_LITERAL(138, 2094, 21), // "setrstwaterlevelValue"
-QT_MOC_LITERAL(139, 2116, 12), // "getTempValue"
-QT_MOC_LITERAL(140, 2129, 12), // "setTempValue"
-QT_MOC_LITERAL(141, 2142, 11), // "getErrValue"
-QT_MOC_LITERAL(142, 2154, 11), // "setErrValue"
-QT_MOC_LITERAL(143, 2166, 14), // "getCrawlStatus"
-QT_MOC_LITERAL(144, 2181, 14), // "setCrawlStatus"
-QT_MOC_LITERAL(145, 2196, 11), // "rst_crawler"
-QT_MOC_LITERAL(146, 2208, 11), // "shd_crawler"
-QT_MOC_LITERAL(147, 2220, 16), // "call_crawlerinit"
-QT_MOC_LITERAL(148, 2237, 12), // "call_slidecw"
-QT_MOC_LITERAL(149, 2250, 13), // "call_slideccw"
-QT_MOC_LITERAL(150, 2264, 10), // "call_laccw"
-QT_MOC_LITERAL(151, 2275, 11), // "call_lacccw"
-QT_MOC_LITERAL(152, 2287, 18), // "call_speedIncrease"
-QT_MOC_LITERAL(153, 2306, 18), // "call_speedDecrease"
-QT_MOC_LITERAL(154, 2325, 18), // "call_joystickonoff"
-QT_MOC_LITERAL(155, 2344, 14), // "call_resetTrip"
-QT_MOC_LITERAL(156, 2359, 20), // "call_resetWaterLevel"
-QT_MOC_LITERAL(157, 2380, 15), // "call_cameraInit"
-QT_MOC_LITERAL(158, 2396, 13), // "errorCallback"
-QT_MOC_LITERAL(159, 2410, 12), // "tempCallback"
-QT_MOC_LITERAL(160, 2423, 15), // "crawlerCallback"
-QT_MOC_LITERAL(161, 2439, 9), // "frontLeft"
-QT_MOC_LITERAL(162, 2449, 10), // "frontRight"
-QT_MOC_LITERAL(163, 2460, 10), // "backrRight"
-QT_MOC_LITERAL(164, 2471, 8), // "backLeft"
-QT_MOC_LITERAL(165, 2480, 11), // "initCrawler"
-QT_MOC_LITERAL(166, 2492, 11), // "stopCrawler"
-QT_MOC_LITERAL(167, 2504, 15), // "getBatteryValue"
-QT_MOC_LITERAL(168, 2520, 15), // "setBatteryValue"
-QT_MOC_LITERAL(169, 2536, 12), // "battCallback"
-QT_MOC_LITERAL(170, 2549, 11), // "velCallback"
-QT_MOC_LITERAL(171, 2561, 18), // "current_vel_linear"
-QT_MOC_LITERAL(172, 2580, 16), // "getVelocityValue"
-QT_MOC_LITERAL(173, 2597, 16), // "setVelocityValue"
-QT_MOC_LITERAL(174, 2614, 11), // "lacCallback"
-QT_MOC_LITERAL(175, 2626, 11), // "getlacValue"
-QT_MOC_LITERAL(176, 2638, 11), // "setlacValue"
-QT_MOC_LITERAL(177, 2650, 12), // "odomCallback"
-QT_MOC_LITERAL(178, 2663, 12), // "getodomValue"
-QT_MOC_LITERAL(179, 2676, 12), // "setodomValue"
-QT_MOC_LITERAL(180, 2689, 12), // "tripCallback"
-QT_MOC_LITERAL(181, 2702, 12), // "gettripValue"
-QT_MOC_LITERAL(182, 2715, 12), // "settripValue"
-QT_MOC_LITERAL(183, 2728, 15), // "getCurrentValue"
-QT_MOC_LITERAL(184, 2744, 15), // "setCurrentValue"
-QT_MOC_LITERAL(185, 2760, 15), // "currentCallback"
-QT_MOC_LITERAL(186, 2776, 13), // "waterCallback"
-QT_MOC_LITERAL(187, 2790, 6), // "getUid"
-QT_MOC_LITERAL(188, 2797, 6), // "setUid"
-QT_MOC_LITERAL(189, 2804, 11), // "uidCallback"
-QT_MOC_LITERAL(190, 2816, 9), // "comStatus"
-QT_MOC_LITERAL(191, 2826, 11), // "toggleValue"
-QT_MOC_LITERAL(192, 2838, 13), // "armToolStatus"
-QT_MOC_LITERAL(193, 2852, 10), // "toolToggle"
-QT_MOC_LITERAL(194, 2863, 8), // "lacValue"
-QT_MOC_LITERAL(195, 2872, 12), // "stopArmValue"
-QT_MOC_LITERAL(196, 2885, 11), // "rstArmValue"
-QT_MOC_LITERAL(197, 2897, 9), // "armStatus"
-QT_MOC_LITERAL(198, 2907, 16), // "initCrawlerValue"
-QT_MOC_LITERAL(199, 2924, 16), // "stopCrawlerValue"
-QT_MOC_LITERAL(200, 2941, 15), // "rstCrawlerValue"
-QT_MOC_LITERAL(201, 2957, 15), // "shdCrawlerValue"
-QT_MOC_LITERAL(202, 2973, 18), // "rstwaterlevelValue"
-QT_MOC_LITERAL(203, 2992, 8), // "errValue"
-QT_MOC_LITERAL(204, 3001, 9), // "tempValue"
-QT_MOC_LITERAL(205, 3011, 11), // "crawlStatus"
-QT_MOC_LITERAL(206, 3023, 10), // "waterLevel"
-QT_MOC_LITERAL(207, 3034, 13), // "velocityValue"
-QT_MOC_LITERAL(208, 3048, 9), // "odomValue"
-QT_MOC_LITERAL(209, 3058, 9), // "tripValue"
-QT_MOC_LITERAL(210, 3068, 12), // "batteryValue"
-QT_MOC_LITERAL(211, 3081, 12), // "anglesetting"
-QT_MOC_LITERAL(212, 3094, 12), // "currentValue"
-QT_MOC_LITERAL(213, 3107, 3) // "uid"
+QT_MOC_LITERAL(65, 991, 8), // "automode"
+QT_MOC_LITERAL(66, 1000, 13), // "initRosThread"
+QT_MOC_LITERAL(67, 1014, 21), // "on_pushButton_pressed"
+QT_MOC_LITERAL(68, 1036, 23), // "on_pushButton_2_pressed"
+QT_MOC_LITERAL(69, 1060, 12), // "getComStatus"
+QT_MOC_LITERAL(70, 1073, 12), // "setComStatus"
+QT_MOC_LITERAL(71, 1086, 12), // "commCallback"
+QT_MOC_LITERAL(72, 1099, 20), // "getangularspeedValue"
+QT_MOC_LITERAL(73, 1120, 20), // "setangularspeedValue"
+QT_MOC_LITERAL(74, 1141, 20), // "angularspeedCallback"
+QT_MOC_LITERAL(75, 1162, 20), // "getspeedsettingValue"
+QT_MOC_LITERAL(76, 1183, 20), // "setspeedsettingValue"
+QT_MOC_LITERAL(77, 1204, 17), // "velstatusCallback"
+QT_MOC_LITERAL(78, 1222, 14), // "getToggleValue"
+QT_MOC_LITERAL(79, 1237, 14), // "setToggleValue"
+QT_MOC_LITERAL(80, 1252, 4), // "flag"
+QT_MOC_LITERAL(81, 1257, 14), // "toggleCallback"
+QT_MOC_LITERAL(82, 1272, 18), // "getcameraInitValue"
+QT_MOC_LITERAL(83, 1291, 18), // "setcameraInitValue"
+QT_MOC_LITERAL(84, 1310, 1), // "k"
+QT_MOC_LITERAL(85, 1312, 13), // "getToolToggle"
+QT_MOC_LITERAL(86, 1326, 13), // "setToolToggle"
+QT_MOC_LITERAL(87, 1340, 16), // "getArmToolStatus"
+QT_MOC_LITERAL(88, 1357, 16), // "setArmToolStatus"
+QT_MOC_LITERAL(89, 1374, 15), // "armToolCallback"
+QT_MOC_LITERAL(90, 1390, 3), // "arg"
+QT_MOC_LITERAL(91, 1394, 15), // "getslideCWValue"
+QT_MOC_LITERAL(92, 1410, 15), // "setslideCWValue"
+QT_MOC_LITERAL(93, 1426, 16), // "getslideCCWValue"
+QT_MOC_LITERAL(94, 1443, 16), // "setslideCCWValue"
+QT_MOC_LITERAL(95, 1460, 16), // "getspeedIncrease"
+QT_MOC_LITERAL(96, 1477, 16), // "setspeedIncrease"
+QT_MOC_LITERAL(97, 1494, 16), // "getjoystickonoff"
+QT_MOC_LITERAL(98, 1511, 16), // "setjoystickonoff"
+QT_MOC_LITERAL(99, 1528, 16), // "getspeedDecrease"
+QT_MOC_LITERAL(100, 1545, 16), // "setspeedDecrease"
+QT_MOC_LITERAL(101, 1562, 13), // "getlacCWValue"
+QT_MOC_LITERAL(102, 1576, 13), // "setlacCWValue"
+QT_MOC_LITERAL(103, 1590, 14), // "getlacCCWValue"
+QT_MOC_LITERAL(104, 1605, 14), // "setlacCCWValue"
+QT_MOC_LITERAL(105, 1620, 17), // "getresetTripValue"
+QT_MOC_LITERAL(106, 1638, 17), // "setresetTripValue"
+QT_MOC_LITERAL(107, 1656, 13), // "getWaterLevel"
+QT_MOC_LITERAL(108, 1670, 13), // "setWaterLevel"
+QT_MOC_LITERAL(109, 1684, 15), // "getStopArmValue"
+QT_MOC_LITERAL(110, 1700, 15), // "setStopArmValue"
+QT_MOC_LITERAL(111, 1716, 14), // "setRstArmValue"
+QT_MOC_LITERAL(112, 1731, 14), // "getRstArmValue"
+QT_MOC_LITERAL(113, 1746, 12), // "getArmStatus"
+QT_MOC_LITERAL(114, 1759, 12), // "setArmStatus"
+QT_MOC_LITERAL(115, 1772, 12), // "call_arminit"
+QT_MOC_LITERAL(116, 1785, 3), // "val"
+QT_MOC_LITERAL(117, 1789, 14), // "trig_armStatus"
+QT_MOC_LITERAL(118, 1804, 7), // "rst_arm"
+QT_MOC_LITERAL(119, 1812, 11), // "armCallback"
+QT_MOC_LITERAL(120, 1824, 7), // "slideCW"
+QT_MOC_LITERAL(121, 1832, 8), // "slideCCW"
+QT_MOC_LITERAL(122, 1841, 13), // "speedIncrease"
+QT_MOC_LITERAL(123, 1855, 13), // "speedDecrease"
+QT_MOC_LITERAL(124, 1869, 13), // "joystickonoff"
+QT_MOC_LITERAL(125, 1883, 9), // "resetTrip"
+QT_MOC_LITERAL(126, 1893, 10), // "cameraInit"
+QT_MOC_LITERAL(127, 1904, 5), // "lacCW"
+QT_MOC_LITERAL(128, 1910, 6), // "lacCCW"
+QT_MOC_LITERAL(129, 1917, 7), // "stopArm"
+QT_MOC_LITERAL(130, 1925, 19), // "getInitCrawlerValue"
+QT_MOC_LITERAL(131, 1945, 19), // "setInitCrawlerValue"
+QT_MOC_LITERAL(132, 1965, 19), // "getStopCrawlerValue"
+QT_MOC_LITERAL(133, 1985, 19), // "setStopCrawlerValue"
+QT_MOC_LITERAL(134, 2005, 18), // "getRstCrawlerValue"
+QT_MOC_LITERAL(135, 2024, 18), // "setRstCrawlerValue"
+QT_MOC_LITERAL(136, 2043, 18), // "getshdCrawlerValue"
+QT_MOC_LITERAL(137, 2062, 18), // "setshdCrawlerValue"
+QT_MOC_LITERAL(138, 2081, 21), // "getrstwaterlevelValue"
+QT_MOC_LITERAL(139, 2103, 21), // "setrstwaterlevelValue"
+QT_MOC_LITERAL(140, 2125, 12), // "getTempValue"
+QT_MOC_LITERAL(141, 2138, 12), // "setTempValue"
+QT_MOC_LITERAL(142, 2151, 11), // "getErrValue"
+QT_MOC_LITERAL(143, 2163, 11), // "setErrValue"
+QT_MOC_LITERAL(144, 2175, 14), // "getCrawlStatus"
+QT_MOC_LITERAL(145, 2190, 14), // "setCrawlStatus"
+QT_MOC_LITERAL(146, 2205, 11), // "rst_crawler"
+QT_MOC_LITERAL(147, 2217, 11), // "shd_crawler"
+QT_MOC_LITERAL(148, 2229, 16), // "call_crawlerinit"
+QT_MOC_LITERAL(149, 2246, 12), // "call_slidecw"
+QT_MOC_LITERAL(150, 2259, 13), // "call_slideccw"
+QT_MOC_LITERAL(151, 2273, 10), // "call_laccw"
+QT_MOC_LITERAL(152, 2284, 11), // "call_lacccw"
+QT_MOC_LITERAL(153, 2296, 18), // "call_speedIncrease"
+QT_MOC_LITERAL(154, 2315, 18), // "call_speedDecrease"
+QT_MOC_LITERAL(155, 2334, 18), // "call_joystickonoff"
+QT_MOC_LITERAL(156, 2353, 14), // "call_resetTrip"
+QT_MOC_LITERAL(157, 2368, 20), // "call_resetWaterLevel"
+QT_MOC_LITERAL(158, 2389, 15), // "call_cameraInit"
+QT_MOC_LITERAL(159, 2405, 13), // "errorCallback"
+QT_MOC_LITERAL(160, 2419, 12), // "tempCallback"
+QT_MOC_LITERAL(161, 2432, 15), // "crawlerCallback"
+QT_MOC_LITERAL(162, 2448, 9), // "frontLeft"
+QT_MOC_LITERAL(163, 2458, 10), // "frontRight"
+QT_MOC_LITERAL(164, 2469, 10), // "backrRight"
+QT_MOC_LITERAL(165, 2480, 8), // "backLeft"
+QT_MOC_LITERAL(166, 2489, 11), // "initCrawler"
+QT_MOC_LITERAL(167, 2501, 11), // "stopCrawler"
+QT_MOC_LITERAL(168, 2513, 15), // "getBatteryValue"
+QT_MOC_LITERAL(169, 2529, 15), // "setBatteryValue"
+QT_MOC_LITERAL(170, 2545, 12), // "battCallback"
+QT_MOC_LITERAL(171, 2558, 11), // "velCallback"
+QT_MOC_LITERAL(172, 2570, 18), // "current_vel_linear"
+QT_MOC_LITERAL(173, 2589, 16), // "getVelocityValue"
+QT_MOC_LITERAL(174, 2606, 16), // "setVelocityValue"
+QT_MOC_LITERAL(175, 2623, 11), // "lacCallback"
+QT_MOC_LITERAL(176, 2635, 11), // "getlacValue"
+QT_MOC_LITERAL(177, 2647, 11), // "setlacValue"
+QT_MOC_LITERAL(178, 2659, 12), // "odomCallback"
+QT_MOC_LITERAL(179, 2672, 12), // "getodomValue"
+QT_MOC_LITERAL(180, 2685, 12), // "setodomValue"
+QT_MOC_LITERAL(181, 2698, 12), // "tripCallback"
+QT_MOC_LITERAL(182, 2711, 12), // "gettripValue"
+QT_MOC_LITERAL(183, 2724, 12), // "settripValue"
+QT_MOC_LITERAL(184, 2737, 15), // "getCurrentValue"
+QT_MOC_LITERAL(185, 2753, 15), // "setCurrentValue"
+QT_MOC_LITERAL(186, 2769, 15), // "currentCallback"
+QT_MOC_LITERAL(187, 2785, 13), // "waterCallback"
+QT_MOC_LITERAL(188, 2799, 6), // "getUid"
+QT_MOC_LITERAL(189, 2806, 6), // "setUid"
+QT_MOC_LITERAL(190, 2813, 11), // "uidCallback"
+QT_MOC_LITERAL(191, 2825, 13), // "call_automode"
+QT_MOC_LITERAL(192, 2839, 9), // "comStatus"
+QT_MOC_LITERAL(193, 2849, 11), // "toggleValue"
+QT_MOC_LITERAL(194, 2861, 13), // "armToolStatus"
+QT_MOC_LITERAL(195, 2875, 10), // "toolToggle"
+QT_MOC_LITERAL(196, 2886, 8), // "lacValue"
+QT_MOC_LITERAL(197, 2895, 12), // "stopArmValue"
+QT_MOC_LITERAL(198, 2908, 11), // "rstArmValue"
+QT_MOC_LITERAL(199, 2920, 9), // "armStatus"
+QT_MOC_LITERAL(200, 2930, 16), // "initCrawlerValue"
+QT_MOC_LITERAL(201, 2947, 16), // "stopCrawlerValue"
+QT_MOC_LITERAL(202, 2964, 15), // "rstCrawlerValue"
+QT_MOC_LITERAL(203, 2980, 15), // "shdCrawlerValue"
+QT_MOC_LITERAL(204, 2996, 18), // "rstwaterlevelValue"
+QT_MOC_LITERAL(205, 3015, 8), // "errValue"
+QT_MOC_LITERAL(206, 3024, 9), // "tempValue"
+QT_MOC_LITERAL(207, 3034, 11), // "crawlStatus"
+QT_MOC_LITERAL(208, 3046, 10), // "waterLevel"
+QT_MOC_LITERAL(209, 3057, 13), // "velocityValue"
+QT_MOC_LITERAL(210, 3071, 9), // "odomValue"
+QT_MOC_LITERAL(211, 3081, 9), // "tripValue"
+QT_MOC_LITERAL(212, 3091, 12), // "batteryValue"
+QT_MOC_LITERAL(213, 3104, 12), // "anglesetting"
+QT_MOC_LITERAL(214, 3117, 12), // "currentValue"
+QT_MOC_LITERAL(215, 3130, 3) // "uid"
 
     },
     "Publisher\0message\0\0msg\0message1\0value\0"
@@ -274,9 +276,10 @@ QT_MOC_LITERAL(213, 3107, 3) // "uid"
     "current_odom\0tripValueChanged\0"
     "current_trip\0waterlevelValueChanged\0"
     "level\0batteryValueChanged\0currentValueChanged\0"
-    "uidChanged\0QVector<QString>\0initRosThread\0"
-    "on_pushButton_pressed\0on_pushButton_2_pressed\0"
-    "getComStatus\0setComStatus\0commCallback\0"
+    "uidChanged\0QVector<QString>\0automode\0"
+    "initRosThread\0on_pushButton_pressed\0"
+    "on_pushButton_2_pressed\0getComStatus\0"
+    "setComStatus\0commCallback\0"
     "getangularspeedValue\0setangularspeedValue\0"
     "angularspeedCallback\0getspeedsettingValue\0"
     "setspeedsettingValue\0velstatusCallback\0"
@@ -324,15 +327,15 @@ QT_MOC_LITERAL(213, 3107, 3) // "uid"
     "settripValue\0getCurrentValue\0"
     "setCurrentValue\0currentCallback\0"
     "waterCallback\0getUid\0setUid\0uidCallback\0"
-    "comStatus\0toggleValue\0armToolStatus\0"
-    "toolToggle\0lacValue\0stopArmValue\0"
-    "rstArmValue\0armStatus\0initCrawlerValue\0"
-    "stopCrawlerValue\0rstCrawlerValue\0"
-    "shdCrawlerValue\0rstwaterlevelValue\0"
-    "errValue\0tempValue\0crawlStatus\0"
-    "waterLevel\0velocityValue\0odomValue\0"
-    "tripValue\0batteryValue\0anglesetting\0"
-    "currentValue\0uid"
+    "call_automode\0comStatus\0toggleValue\0"
+    "armToolStatus\0toolToggle\0lacValue\0"
+    "stopArmValue\0rstArmValue\0armStatus\0"
+    "initCrawlerValue\0stopCrawlerValue\0"
+    "rstCrawlerValue\0shdCrawlerValue\0"
+    "rstwaterlevelValue\0errValue\0tempValue\0"
+    "crawlStatus\0waterLevel\0velocityValue\0"
+    "odomValue\0tripValue\0batteryValue\0"
+    "anglesetting\0currentValue\0uid"
 };
 #undef QT_MOC_LITERAL
 
@@ -342,187 +345,189 @@ static const uint qt_meta_data_Publisher[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-     171,   14, // methods
-      34, 1310, // properties
+     173,   14, // methods
+      34, 1326, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      53,       // signalCount
+      54,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  869,    2, 0x06 /* Public */,
-       4,    1,  872,    2, 0x06 /* Public */,
-       5,    1,  875,    2, 0x06 /* Public */,
-       6,    1,  878,    2, 0x06 /* Public */,
-       7,    1,  881,    2, 0x06 /* Public */,
-       8,    1,  884,    2, 0x06 /* Public */,
-       9,    1,  887,    2, 0x06 /* Public */,
-      10,    1,  890,    2, 0x06 /* Public */,
-      11,    1,  893,    2, 0x06 /* Public */,
-      12,    1,  896,    2, 0x06 /* Public */,
-      13,    1,  899,    2, 0x06 /* Public */,
-      14,    1,  902,    2, 0x06 /* Public */,
-      15,    1,  905,    2, 0x06 /* Public */,
-      16,    1,  908,    2, 0x06 /* Public */,
-      17,    1,  911,    2, 0x06 /* Public */,
-      19,    1,  914,    2, 0x06 /* Public */,
-      21,    1,  917,    2, 0x06 /* Public */,
-      22,    1,  920,    2, 0x06 /* Public */,
-      23,    1,  923,    2, 0x06 /* Public */,
-      24,    1,  926,    2, 0x06 /* Public */,
-      25,    1,  929,    2, 0x06 /* Public */,
-      26,    1,  932,    2, 0x06 /* Public */,
-      27,    1,  935,    2, 0x06 /* Public */,
-      28,    1,  938,    2, 0x06 /* Public */,
-      29,    1,  941,    2, 0x06 /* Public */,
-      30,    1,  944,    2, 0x06 /* Public */,
-      31,    1,  947,    2, 0x06 /* Public */,
-      32,    1,  950,    2, 0x06 /* Public */,
-      33,    1,  953,    2, 0x06 /* Public */,
-      35,    1,  956,    2, 0x06 /* Public */,
-      36,    1,  959,    2, 0x06 /* Public */,
-      37,    1,  962,    2, 0x06 /* Public */,
-      38,    1,  965,    2, 0x06 /* Public */,
-      39,    1,  968,    2, 0x06 /* Public */,
-      40,    0,  971,    2, 0x06 /* Public */,
-      41,    1,  972,    2, 0x06 /* Public */,
-      44,    1,  975,    2, 0x06 /* Public */,
-      45,    1,  978,    2, 0x06 /* Public */,
-      46,    1,  981,    2, 0x06 /* Public */,
-      47,    1,  984,    2, 0x06 /* Public */,
-      48,    1,  987,    2, 0x06 /* Public */,
-      49,    1,  990,    2, 0x06 /* Public */,
-      50,    1,  993,    2, 0x06 /* Public */,
-      51,    1,  996,    2, 0x06 /* Public */,
-      52,    1,  999,    2, 0x06 /* Public */,
-      53,    1, 1002,    2, 0x06 /* Public */,
-      54,    1, 1005,    2, 0x06 /* Public */,
-      55,    1, 1008,    2, 0x06 /* Public */,
-      57,    1, 1011,    2, 0x06 /* Public */,
-      59,    1, 1014,    2, 0x06 /* Public */,
-      61,    1, 1017,    2, 0x06 /* Public */,
-      62,    1, 1020,    2, 0x06 /* Public */,
-      63,    1, 1023,    2, 0x06 /* Public */,
+       1,    1,  879,    2, 0x06 /* Public */,
+       4,    1,  882,    2, 0x06 /* Public */,
+       5,    1,  885,    2, 0x06 /* Public */,
+       6,    1,  888,    2, 0x06 /* Public */,
+       7,    1,  891,    2, 0x06 /* Public */,
+       8,    1,  894,    2, 0x06 /* Public */,
+       9,    1,  897,    2, 0x06 /* Public */,
+      10,    1,  900,    2, 0x06 /* Public */,
+      11,    1,  903,    2, 0x06 /* Public */,
+      12,    1,  906,    2, 0x06 /* Public */,
+      13,    1,  909,    2, 0x06 /* Public */,
+      14,    1,  912,    2, 0x06 /* Public */,
+      15,    1,  915,    2, 0x06 /* Public */,
+      16,    1,  918,    2, 0x06 /* Public */,
+      17,    1,  921,    2, 0x06 /* Public */,
+      19,    1,  924,    2, 0x06 /* Public */,
+      21,    1,  927,    2, 0x06 /* Public */,
+      22,    1,  930,    2, 0x06 /* Public */,
+      23,    1,  933,    2, 0x06 /* Public */,
+      24,    1,  936,    2, 0x06 /* Public */,
+      25,    1,  939,    2, 0x06 /* Public */,
+      26,    1,  942,    2, 0x06 /* Public */,
+      27,    1,  945,    2, 0x06 /* Public */,
+      28,    1,  948,    2, 0x06 /* Public */,
+      29,    1,  951,    2, 0x06 /* Public */,
+      30,    1,  954,    2, 0x06 /* Public */,
+      31,    1,  957,    2, 0x06 /* Public */,
+      32,    1,  960,    2, 0x06 /* Public */,
+      33,    1,  963,    2, 0x06 /* Public */,
+      35,    1,  966,    2, 0x06 /* Public */,
+      36,    1,  969,    2, 0x06 /* Public */,
+      37,    1,  972,    2, 0x06 /* Public */,
+      38,    1,  975,    2, 0x06 /* Public */,
+      39,    1,  978,    2, 0x06 /* Public */,
+      40,    0,  981,    2, 0x06 /* Public */,
+      41,    1,  982,    2, 0x06 /* Public */,
+      44,    1,  985,    2, 0x06 /* Public */,
+      45,    1,  988,    2, 0x06 /* Public */,
+      46,    1,  991,    2, 0x06 /* Public */,
+      47,    1,  994,    2, 0x06 /* Public */,
+      48,    1,  997,    2, 0x06 /* Public */,
+      49,    1, 1000,    2, 0x06 /* Public */,
+      50,    1, 1003,    2, 0x06 /* Public */,
+      51,    1, 1006,    2, 0x06 /* Public */,
+      52,    1, 1009,    2, 0x06 /* Public */,
+      53,    1, 1012,    2, 0x06 /* Public */,
+      54,    1, 1015,    2, 0x06 /* Public */,
+      55,    1, 1018,    2, 0x06 /* Public */,
+      57,    1, 1021,    2, 0x06 /* Public */,
+      59,    1, 1024,    2, 0x06 /* Public */,
+      61,    1, 1027,    2, 0x06 /* Public */,
+      62,    1, 1030,    2, 0x06 /* Public */,
+      63,    1, 1033,    2, 0x06 /* Public */,
+      65,    1, 1036,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      65,    0, 1026,    2, 0x0a /* Public */,
-      66,    0, 1027,    2, 0x0a /* Public */,
-      67,    0, 1028,    2, 0x0a /* Public */,
-      68,    0, 1029,    2, 0x0a /* Public */,
-      69,    1, 1030,    2, 0x0a /* Public */,
-      70,    1, 1033,    2, 0x0a /* Public */,
-      71,    0, 1036,    2, 0x0a /* Public */,
-      72,    1, 1037,    2, 0x0a /* Public */,
-      73,    1, 1040,    2, 0x0a /* Public */,
-      74,    0, 1043,    2, 0x0a /* Public */,
-      75,    1, 1044,    2, 0x0a /* Public */,
-      76,    1, 1047,    2, 0x0a /* Public */,
-      77,    0, 1050,    2, 0x0a /* Public */,
-      78,    1, 1051,    2, 0x0a /* Public */,
-      80,    1, 1054,    2, 0x0a /* Public */,
-      81,    0, 1057,    2, 0x0a /* Public */,
-      82,    1, 1058,    2, 0x0a /* Public */,
-      84,    0, 1061,    2, 0x0a /* Public */,
-      85,    1, 1062,    2, 0x0a /* Public */,
-      86,    0, 1065,    2, 0x0a /* Public */,
-      87,    1, 1066,    2, 0x0a /* Public */,
-      88,    1, 1069,    2, 0x0a /* Public */,
-      90,    0, 1072,    2, 0x0a /* Public */,
-      91,    1, 1073,    2, 0x0a /* Public */,
-      92,    0, 1076,    2, 0x0a /* Public */,
-      93,    1, 1077,    2, 0x0a /* Public */,
-      94,    0, 1080,    2, 0x0a /* Public */,
-      95,    1, 1081,    2, 0x0a /* Public */,
-      96,    0, 1084,    2, 0x0a /* Public */,
-      97,    1, 1085,    2, 0x0a /* Public */,
-      98,    0, 1088,    2, 0x0a /* Public */,
-      99,    1, 1089,    2, 0x0a /* Public */,
-     100,    0, 1092,    2, 0x0a /* Public */,
-     101,    1, 1093,    2, 0x0a /* Public */,
-     102,    0, 1096,    2, 0x0a /* Public */,
-     103,    1, 1097,    2, 0x0a /* Public */,
-     104,    0, 1100,    2, 0x0a /* Public */,
-     105,    1, 1101,    2, 0x0a /* Public */,
-     106,    0, 1104,    2, 0x0a /* Public */,
-     107,    1, 1105,    2, 0x0a /* Public */,
-     108,    0, 1108,    2, 0x0a /* Public */,
-     109,    1, 1109,    2, 0x0a /* Public */,
-     110,    1, 1112,    2, 0x0a /* Public */,
-     111,    0, 1115,    2, 0x0a /* Public */,
-     112,    0, 1116,    2, 0x0a /* Public */,
-     113,    1, 1117,    2, 0x0a /* Public */,
-     114,    1, 1120,    2, 0x0a /* Public */,
-     116,    0, 1123,    2, 0x0a /* Public */,
-     117,    1, 1124,    2, 0x0a /* Public */,
-     118,    1, 1127,    2, 0x0a /* Public */,
-     119,    1, 1130,    2, 0x0a /* Public */,
-     120,    1, 1133,    2, 0x0a /* Public */,
-     121,    1, 1136,    2, 0x0a /* Public */,
-     122,    1, 1139,    2, 0x0a /* Public */,
-     123,    1, 1142,    2, 0x0a /* Public */,
-     124,    1, 1145,    2, 0x0a /* Public */,
-     125,    1, 1148,    2, 0x0a /* Public */,
-     126,    1, 1151,    2, 0x0a /* Public */,
-     127,    1, 1154,    2, 0x0a /* Public */,
-     128,    1, 1157,    2, 0x0a /* Public */,
-      39,    1, 1160,    2, 0x0a /* Public */,
-     129,    0, 1163,    2, 0x0a /* Public */,
-     130,    1, 1164,    2, 0x0a /* Public */,
-     131,    0, 1167,    2, 0x0a /* Public */,
-     132,    1, 1168,    2, 0x0a /* Public */,
-     133,    0, 1171,    2, 0x0a /* Public */,
-     134,    1, 1172,    2, 0x0a /* Public */,
-     135,    0, 1175,    2, 0x0a /* Public */,
-     136,    1, 1176,    2, 0x0a /* Public */,
-     137,    0, 1179,    2, 0x0a /* Public */,
-     138,    1, 1180,    2, 0x0a /* Public */,
-     139,    0, 1183,    2, 0x0a /* Public */,
-     140,    1, 1184,    2, 0x0a /* Public */,
-     141,    0, 1187,    2, 0x0a /* Public */,
-     142,    1, 1188,    2, 0x0a /* Public */,
-     143,    0, 1191,    2, 0x0a /* Public */,
-     144,    1, 1192,    2, 0x0a /* Public */,
-     145,    1, 1195,    2, 0x0a /* Public */,
-     146,    1, 1198,    2, 0x0a /* Public */,
-     147,    1, 1201,    2, 0x0a /* Public */,
-     148,    1, 1204,    2, 0x0a /* Public */,
-     149,    1, 1207,    2, 0x0a /* Public */,
-     150,    1, 1210,    2, 0x0a /* Public */,
-     151,    1, 1213,    2, 0x0a /* Public */,
-     152,    1, 1216,    2, 0x0a /* Public */,
-     153,    1, 1219,    2, 0x0a /* Public */,
-     154,    1, 1222,    2, 0x0a /* Public */,
-     155,    1, 1225,    2, 0x0a /* Public */,
-     156,    1, 1228,    2, 0x0a /* Public */,
-     157,    1, 1231,    2, 0x0a /* Public */,
-     158,    1, 1234,    2, 0x0a /* Public */,
-     159,    1, 1237,    2, 0x0a /* Public */,
-     160,    4, 1240,    2, 0x0a /* Public */,
-     165,    1, 1249,    2, 0x0a /* Public */,
-     166,    1, 1252,    2, 0x0a /* Public */,
-      50,    1, 1255,    2, 0x0a /* Public */,
-     167,    0, 1258,    2, 0x0a /* Public */,
-     168,    1, 1259,    2, 0x0a /* Public */,
-     169,    1, 1262,    2, 0x0a /* Public */,
-     170,    1, 1265,    2, 0x0a /* Public */,
-     172,    0, 1268,    2, 0x0a /* Public */,
-     173,    1, 1269,    2, 0x0a /* Public */,
-     174,    1, 1272,    2, 0x0a /* Public */,
-     175,    0, 1275,    2, 0x0a /* Public */,
-     176,    1, 1276,    2, 0x0a /* Public */,
-     177,    1, 1279,    2, 0x0a /* Public */,
-     178,    0, 1282,    2, 0x0a /* Public */,
-     179,    1, 1283,    2, 0x0a /* Public */,
-     180,    1, 1286,    2, 0x0a /* Public */,
-     181,    0, 1289,    2, 0x0a /* Public */,
-     182,    1, 1290,    2, 0x0a /* Public */,
-     183,    0, 1293,    2, 0x0a /* Public */,
-     184,    1, 1294,    2, 0x0a /* Public */,
-     185,    1, 1297,    2, 0x0a /* Public */,
-     186,    1, 1300,    2, 0x0a /* Public */,
-     187,    0, 1303,    2, 0x0a /* Public */,
-     188,    1, 1304,    2, 0x0a /* Public */,
-     189,    1, 1307,    2, 0x0a /* Public */,
+      66,    0, 1039,    2, 0x0a /* Public */,
+      67,    0, 1040,    2, 0x0a /* Public */,
+      68,    0, 1041,    2, 0x0a /* Public */,
+      69,    0, 1042,    2, 0x0a /* Public */,
+      70,    1, 1043,    2, 0x0a /* Public */,
+      71,    1, 1046,    2, 0x0a /* Public */,
+      72,    0, 1049,    2, 0x0a /* Public */,
+      73,    1, 1050,    2, 0x0a /* Public */,
+      74,    1, 1053,    2, 0x0a /* Public */,
+      75,    0, 1056,    2, 0x0a /* Public */,
+      76,    1, 1057,    2, 0x0a /* Public */,
+      77,    1, 1060,    2, 0x0a /* Public */,
+      78,    0, 1063,    2, 0x0a /* Public */,
+      79,    1, 1064,    2, 0x0a /* Public */,
+      81,    1, 1067,    2, 0x0a /* Public */,
+      82,    0, 1070,    2, 0x0a /* Public */,
+      83,    1, 1071,    2, 0x0a /* Public */,
+      85,    0, 1074,    2, 0x0a /* Public */,
+      86,    1, 1075,    2, 0x0a /* Public */,
+      87,    0, 1078,    2, 0x0a /* Public */,
+      88,    1, 1079,    2, 0x0a /* Public */,
+      89,    1, 1082,    2, 0x0a /* Public */,
+      91,    0, 1085,    2, 0x0a /* Public */,
+      92,    1, 1086,    2, 0x0a /* Public */,
+      93,    0, 1089,    2, 0x0a /* Public */,
+      94,    1, 1090,    2, 0x0a /* Public */,
+      95,    0, 1093,    2, 0x0a /* Public */,
+      96,    1, 1094,    2, 0x0a /* Public */,
+      97,    0, 1097,    2, 0x0a /* Public */,
+      98,    1, 1098,    2, 0x0a /* Public */,
+      99,    0, 1101,    2, 0x0a /* Public */,
+     100,    1, 1102,    2, 0x0a /* Public */,
+     101,    0, 1105,    2, 0x0a /* Public */,
+     102,    1, 1106,    2, 0x0a /* Public */,
+     103,    0, 1109,    2, 0x0a /* Public */,
+     104,    1, 1110,    2, 0x0a /* Public */,
+     105,    0, 1113,    2, 0x0a /* Public */,
+     106,    1, 1114,    2, 0x0a /* Public */,
+     107,    0, 1117,    2, 0x0a /* Public */,
+     108,    1, 1118,    2, 0x0a /* Public */,
+     109,    0, 1121,    2, 0x0a /* Public */,
+     110,    1, 1122,    2, 0x0a /* Public */,
+     111,    1, 1125,    2, 0x0a /* Public */,
+     112,    0, 1128,    2, 0x0a /* Public */,
+     113,    0, 1129,    2, 0x0a /* Public */,
+     114,    1, 1130,    2, 0x0a /* Public */,
+     115,    1, 1133,    2, 0x0a /* Public */,
+     117,    0, 1136,    2, 0x0a /* Public */,
+     118,    1, 1137,    2, 0x0a /* Public */,
+     119,    1, 1140,    2, 0x0a /* Public */,
+     120,    1, 1143,    2, 0x0a /* Public */,
+     121,    1, 1146,    2, 0x0a /* Public */,
+     122,    1, 1149,    2, 0x0a /* Public */,
+     123,    1, 1152,    2, 0x0a /* Public */,
+     124,    1, 1155,    2, 0x0a /* Public */,
+     125,    1, 1158,    2, 0x0a /* Public */,
+     126,    1, 1161,    2, 0x0a /* Public */,
+     127,    1, 1164,    2, 0x0a /* Public */,
+     128,    1, 1167,    2, 0x0a /* Public */,
+     129,    1, 1170,    2, 0x0a /* Public */,
+      39,    1, 1173,    2, 0x0a /* Public */,
+     130,    0, 1176,    2, 0x0a /* Public */,
+     131,    1, 1177,    2, 0x0a /* Public */,
+     132,    0, 1180,    2, 0x0a /* Public */,
+     133,    1, 1181,    2, 0x0a /* Public */,
+     134,    0, 1184,    2, 0x0a /* Public */,
+     135,    1, 1185,    2, 0x0a /* Public */,
+     136,    0, 1188,    2, 0x0a /* Public */,
+     137,    1, 1189,    2, 0x0a /* Public */,
+     138,    0, 1192,    2, 0x0a /* Public */,
+     139,    1, 1193,    2, 0x0a /* Public */,
+     140,    0, 1196,    2, 0x0a /* Public */,
+     141,    1, 1197,    2, 0x0a /* Public */,
+     142,    0, 1200,    2, 0x0a /* Public */,
+     143,    1, 1201,    2, 0x0a /* Public */,
+     144,    0, 1204,    2, 0x0a /* Public */,
+     145,    1, 1205,    2, 0x0a /* Public */,
+     146,    1, 1208,    2, 0x0a /* Public */,
+     147,    1, 1211,    2, 0x0a /* Public */,
+     148,    1, 1214,    2, 0x0a /* Public */,
+     149,    1, 1217,    2, 0x0a /* Public */,
+     150,    1, 1220,    2, 0x0a /* Public */,
+     151,    1, 1223,    2, 0x0a /* Public */,
+     152,    1, 1226,    2, 0x0a /* Public */,
+     153,    1, 1229,    2, 0x0a /* Public */,
+     154,    1, 1232,    2, 0x0a /* Public */,
+     155,    1, 1235,    2, 0x0a /* Public */,
+     156,    1, 1238,    2, 0x0a /* Public */,
+     157,    1, 1241,    2, 0x0a /* Public */,
+     158,    1, 1244,    2, 0x0a /* Public */,
+     159,    1, 1247,    2, 0x0a /* Public */,
+     160,    1, 1250,    2, 0x0a /* Public */,
+     161,    4, 1253,    2, 0x0a /* Public */,
+     166,    1, 1262,    2, 0x0a /* Public */,
+     167,    1, 1265,    2, 0x0a /* Public */,
+      50,    1, 1268,    2, 0x0a /* Public */,
+     168,    0, 1271,    2, 0x0a /* Public */,
+     169,    1, 1272,    2, 0x0a /* Public */,
+     170,    1, 1275,    2, 0x0a /* Public */,
+     171,    1, 1278,    2, 0x0a /* Public */,
+     173,    0, 1281,    2, 0x0a /* Public */,
+     174,    1, 1282,    2, 0x0a /* Public */,
+     175,    1, 1285,    2, 0x0a /* Public */,
+     176,    0, 1288,    2, 0x0a /* Public */,
+     177,    1, 1289,    2, 0x0a /* Public */,
+     178,    1, 1292,    2, 0x0a /* Public */,
+     179,    0, 1295,    2, 0x0a /* Public */,
+     180,    1, 1296,    2, 0x0a /* Public */,
+     181,    1, 1299,    2, 0x0a /* Public */,
+     182,    0, 1302,    2, 0x0a /* Public */,
+     183,    1, 1303,    2, 0x0a /* Public */,
+     184,    0, 1306,    2, 0x0a /* Public */,
+     185,    1, 1307,    2, 0x0a /* Public */,
+     186,    1, 1310,    2, 0x0a /* Public */,
+     187,    1, 1313,    2, 0x0a /* Public */,
+     188,    0, 1316,    2, 0x0a /* Public */,
+     189,    1, 1317,    2, 0x0a /* Public */,
+     190,    1, 1320,    2, 0x0a /* Public */,
+     191,    1, 1323,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -578,6 +583,7 @@ static const uint qt_meta_data_Publisher[] = {
     QMetaType::Void, QMetaType::Float,    5,
     QMetaType::Void, QMetaType::Float,    5,
     QMetaType::Void, 0x80000000 | 64,    5,
+    QMetaType::Void, QMetaType::Int,    5,
 
  // slots: parameters
     QMetaType::Void,
@@ -593,93 +599,93 @@ static const uint qt_meta_data_Publisher[] = {
     QMetaType::Void, QMetaType::Int,   18,
     QMetaType::Void, QMetaType::Int,   18,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   79,
-    QMetaType::Void, QMetaType::Bool,   79,
+    QMetaType::Void, QMetaType::Bool,   80,
+    QMetaType::Void, QMetaType::Bool,   80,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::QString,
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Int,
     QMetaType::Void, QMetaType::Int,    5,
-    QMetaType::Void, QMetaType::Int,   89,
+    QMetaType::Void, QMetaType::Int,   90,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Float,
     QMetaType::Void, QMetaType::Float,   60,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
     0x80000000 | 42,
     QMetaType::Void, 0x80000000 | 42,    5,
-    QMetaType::Void, QMetaType::Int,  115,
+    QMetaType::Void, QMetaType::Int,  116,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,  115,
+    QMetaType::Void, QMetaType::Int,  116,
     QMetaType::Void, 0x80000000 | 42,   43,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool,   84,
     0x80000000 | 42,
     QMetaType::Void, 0x80000000 | 42,    5,
     0x80000000 | 42,
     QMetaType::Void, 0x80000000 | 42,    5,
     QMetaType::QVariantMap,
     QMetaType::Void, QMetaType::QVariantMap,    5,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
-    QMetaType::Void, QMetaType::Int,  115,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
+    QMetaType::Void, QMetaType::Int,  116,
     QMetaType::Void, 0x80000000 | 42,    5,
     QMetaType::Void, 0x80000000 | 42,    5,
-    QMetaType::Void, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool,  161,  162,  163,  164,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
-    QMetaType::Void, QMetaType::Bool,   83,
+    QMetaType::Void, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool,  162,  163,  164,  165,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
+    QMetaType::Void, QMetaType::Bool,   84,
     QMetaType::Float,
     QMetaType::Void, QMetaType::Float,    5,
     QMetaType::Void, QMetaType::Float,    5,
-    QMetaType::Void, QMetaType::Int,  171,
+    QMetaType::Void, QMetaType::Int,  172,
     QMetaType::Int,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,   34,
@@ -698,42 +704,43 @@ static const uint qt_meta_data_Publisher[] = {
     0x80000000 | 64,
     QMetaType::Void, 0x80000000 | 64,    5,
     QMetaType::Void, 0x80000000 | 64,    5,
+    QMetaType::Void, QMetaType::Int,  116,
 
  // properties: name, type, flags
-     190, QMetaType::Int, 0x00495103,
-     191, QMetaType::Bool, 0x00495103,
      192, QMetaType::Int, 0x00495103,
-     193, QMetaType::QString, 0x00495103,
-     125, QMetaType::Bool, 0x00495003,
-     119, QMetaType::Bool, 0x00495003,
+     193, QMetaType::Bool, 0x00495103,
+     194, QMetaType::Int, 0x00495103,
+     195, QMetaType::QString, 0x00495103,
+     126, QMetaType::Bool, 0x00495003,
      120, QMetaType::Bool, 0x00495003,
      121, QMetaType::Bool, 0x00495003,
      122, QMetaType::Bool, 0x00495003,
      123, QMetaType::Bool, 0x00495003,
-     126, QMetaType::Bool, 0x00495003,
+     124, QMetaType::Bool, 0x00495003,
      127, QMetaType::Bool, 0x00495003,
-     194, QMetaType::Int, 0x00495003,
-     195, QMetaType::Bool, 0x00495103,
-     196, QMetaType::Bool, 0x00495103,
-     197, 0x80000000 | 42, 0x0049510b,
+     128, QMetaType::Bool, 0x00495003,
+     196, QMetaType::Int, 0x00495003,
+     197, QMetaType::Bool, 0x00495103,
      198, QMetaType::Bool, 0x00495103,
-     199, QMetaType::Bool, 0x00495103,
+     199, 0x80000000 | 42, 0x0049510b,
      200, QMetaType::Bool, 0x00495103,
-     201, QMetaType::Bool, 0x00495003,
-     202, QMetaType::Bool, 0x00495003,
-     203, 0x80000000 | 42, 0x0049510b,
-     204, 0x80000000 | 42, 0x0049510b,
-     205, QMetaType::QVariantMap, 0x00495103,
-     206, QMetaType::Float, 0x00495103,
-     207, QMetaType::Int, 0x00495103,
-     208, QMetaType::Int, 0x00495003,
-     209, QMetaType::Int, 0x00495003,
-     124, QMetaType::Int, 0x00495003,
-     210, QMetaType::Float, 0x00495103,
-      18, QMetaType::Int, 0x00495003,
+     201, QMetaType::Bool, 0x00495103,
+     202, QMetaType::Bool, 0x00495103,
+     203, QMetaType::Bool, 0x00495003,
+     204, QMetaType::Bool, 0x00495003,
+     205, 0x80000000 | 42, 0x0049510b,
+     206, 0x80000000 | 42, 0x0049510b,
+     207, QMetaType::QVariantMap, 0x00495103,
+     208, QMetaType::Float, 0x00495103,
+     209, QMetaType::Int, 0x00495103,
+     210, QMetaType::Int, 0x00495003,
      211, QMetaType::Int, 0x00495003,
+     125, QMetaType::Int, 0x00495003,
      212, QMetaType::Float, 0x00495103,
-     213, 0x80000000 | 64, 0x0049510b,
+      18, QMetaType::Int, 0x00495003,
+     213, QMetaType::Int, 0x00495003,
+     214, QMetaType::Float, 0x00495103,
+     215, 0x80000000 | 64, 0x0049510b,
 
  // properties: notify_signal_id
       16,
@@ -833,158 +840,160 @@ void Publisher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 50: _t->batteryValueChanged((*reinterpret_cast< float(*)>(_a[1]))); break;
         case 51: _t->currentValueChanged((*reinterpret_cast< float(*)>(_a[1]))); break;
         case 52: _t->uidChanged((*reinterpret_cast< QVector<QString>(*)>(_a[1]))); break;
-        case 53: _t->initRosThread(); break;
-        case 54: _t->on_pushButton_pressed(); break;
-        case 55: _t->on_pushButton_2_pressed(); break;
-        case 56: { int _r = _t->getComStatus();
+        case 53: _t->automode((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 54: _t->initRosThread(); break;
+        case 55: _t->on_pushButton_pressed(); break;
+        case 56: _t->on_pushButton_2_pressed(); break;
+        case 57: { int _r = _t->getComStatus();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 57: _t->setComStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 58: _t->commCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 59: { int _r = _t->getangularspeedValue();
+        case 58: _t->setComStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 59: _t->commCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 60: { int _r = _t->getangularspeedValue();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 60: _t->setangularspeedValue((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 61: _t->angularspeedCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 62: { int _r = _t->getspeedsettingValue();
+        case 61: _t->setangularspeedValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 62: _t->angularspeedCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 63: { int _r = _t->getspeedsettingValue();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 63: _t->setspeedsettingValue((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 64: _t->velstatusCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 65: { bool _r = _t->getToggleValue();
+        case 64: _t->setspeedsettingValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 65: _t->velstatusCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 66: { bool _r = _t->getToggleValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 66: _t->setToggleValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 67: _t->toggleCallback((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 68: { bool _r = _t->getcameraInitValue();
+        case 67: _t->setToggleValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 68: _t->toggleCallback((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 69: { bool _r = _t->getcameraInitValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 69: _t->setcameraInitValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 70: { QString _r = _t->getToolToggle();
+        case 70: _t->setcameraInitValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 71: { QString _r = _t->getToolToggle();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 71: _t->setToolToggle((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 72: { int _r = _t->getArmToolStatus();
+        case 72: _t->setToolToggle((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 73: { int _r = _t->getArmToolStatus();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 73: _t->setArmToolStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 74: _t->armToolCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 75: { bool _r = _t->getslideCWValue();
+        case 74: _t->setArmToolStatus((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 75: _t->armToolCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 76: { bool _r = _t->getslideCWValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 76: _t->setslideCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 77: { bool _r = _t->getslideCCWValue();
+        case 77: _t->setslideCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 78: { bool _r = _t->getslideCCWValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 78: _t->setslideCCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 79: { bool _r = _t->getspeedIncrease();
+        case 79: _t->setslideCCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 80: { bool _r = _t->getspeedIncrease();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 80: _t->setspeedIncrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 81: { bool _r = _t->getjoystickonoff();
+        case 81: _t->setspeedIncrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 82: { bool _r = _t->getjoystickonoff();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 82: _t->setjoystickonoff((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 83: { bool _r = _t->getspeedDecrease();
+        case 83: _t->setjoystickonoff((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 84: { bool _r = _t->getspeedDecrease();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 84: _t->setspeedDecrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 85: { bool _r = _t->getlacCWValue();
+        case 85: _t->setspeedDecrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 86: { bool _r = _t->getlacCWValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 86: _t->setlacCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 87: { bool _r = _t->getlacCCWValue();
+        case 87: _t->setlacCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 88: { bool _r = _t->getlacCCWValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 88: _t->setlacCCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 89: { bool _r = _t->getresetTripValue();
+        case 89: _t->setlacCCWValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 90: { bool _r = _t->getresetTripValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 90: _t->setresetTripValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 91: { float _r = _t->getWaterLevel();
+        case 91: _t->setresetTripValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 92: { float _r = _t->getWaterLevel();
             if (_a[0]) *reinterpret_cast< float*>(_a[0]) = std::move(_r); }  break;
-        case 92: _t->setWaterLevel((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 93: { bool _r = _t->getStopArmValue();
+        case 93: _t->setWaterLevel((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 94: { bool _r = _t->getStopArmValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 94: _t->setStopArmValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 95: _t->setRstArmValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 96: { bool _r = _t->getRstArmValue();
+        case 95: _t->setStopArmValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 96: _t->setRstArmValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 97: { bool _r = _t->getRstArmValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 97: { QVector<int> _r = _t->getArmStatus();
+        case 98: { QVector<int> _r = _t->getArmStatus();
             if (_a[0]) *reinterpret_cast< QVector<int>*>(_a[0]) = std::move(_r); }  break;
-        case 98: _t->setArmStatus((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
-        case 99: _t->call_arminit((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 100: _t->trig_armStatus(); break;
-        case 101: _t->rst_arm((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 102: _t->armCallback((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
-        case 103: _t->slideCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 104: _t->slideCCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 105: _t->speedIncrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 106: _t->speedDecrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 107: _t->joystickonoff((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 108: _t->resetTrip((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 109: _t->cameraInit((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 110: _t->lacCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 111: _t->lacCCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 112: _t->stopArm((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 113: _t->rstArm((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 114: { bool _r = _t->getInitCrawlerValue();
+        case 99: _t->setArmStatus((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
+        case 100: _t->call_arminit((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 101: _t->trig_armStatus(); break;
+        case 102: _t->rst_arm((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 103: _t->armCallback((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
+        case 104: _t->slideCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 105: _t->slideCCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 106: _t->speedIncrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 107: _t->speedDecrease((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 108: _t->joystickonoff((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 109: _t->resetTrip((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 110: _t->cameraInit((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 111: _t->lacCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 112: _t->lacCCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 113: _t->stopArm((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 114: _t->rstArm((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 115: { bool _r = _t->getInitCrawlerValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 115: _t->setInitCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 116: { bool _r = _t->getStopCrawlerValue();
+        case 116: _t->setInitCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 117: { bool _r = _t->getStopCrawlerValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 117: _t->setStopCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 118: { bool _r = _t->getRstCrawlerValue();
+        case 118: _t->setStopCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 119: { bool _r = _t->getRstCrawlerValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 119: _t->setRstCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 120: { bool _r = _t->getshdCrawlerValue();
+        case 120: _t->setRstCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 121: { bool _r = _t->getshdCrawlerValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 121: _t->setshdCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 122: { bool _r = _t->getrstwaterlevelValue();
+        case 122: _t->setshdCrawlerValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 123: { bool _r = _t->getrstwaterlevelValue();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 123: _t->setrstwaterlevelValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 124: { QVector<int> _r = _t->getTempValue();
+        case 124: _t->setrstwaterlevelValue((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 125: { QVector<int> _r = _t->getTempValue();
             if (_a[0]) *reinterpret_cast< QVector<int>*>(_a[0]) = std::move(_r); }  break;
-        case 125: _t->setTempValue((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
-        case 126: { QVector<int> _r = _t->getErrValue();
+        case 126: _t->setTempValue((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
+        case 127: { QVector<int> _r = _t->getErrValue();
             if (_a[0]) *reinterpret_cast< QVector<int>*>(_a[0]) = std::move(_r); }  break;
-        case 127: _t->setErrValue((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
-        case 128: { QVariantMap _r = _t->getCrawlStatus();
+        case 128: _t->setErrValue((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
+        case 129: { QVariantMap _r = _t->getCrawlStatus();
             if (_a[0]) *reinterpret_cast< QVariantMap*>(_a[0]) = std::move(_r); }  break;
-        case 129: _t->setCrawlStatus((*reinterpret_cast< QVariantMap(*)>(_a[1]))); break;
-        case 130: _t->rst_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 131: _t->shd_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 132: _t->call_crawlerinit((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 133: _t->call_slidecw((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 134: _t->call_slideccw((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 135: _t->call_laccw((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 136: _t->call_lacccw((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 137: _t->call_speedIncrease((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 138: _t->call_speedDecrease((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 139: _t->call_joystickonoff((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 140: _t->call_resetTrip((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 141: _t->call_resetWaterLevel((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 142: _t->call_cameraInit((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 143: _t->errorCallback((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
-        case 144: _t->tempCallback((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
-        case 145: _t->crawlerCallback((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
-        case 146: _t->initCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 147: _t->stopCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 148: _t->rstCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 149: { float _r = _t->getBatteryValue();
+        case 130: _t->setCrawlStatus((*reinterpret_cast< QVariantMap(*)>(_a[1]))); break;
+        case 131: _t->rst_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 132: _t->shd_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 133: _t->call_crawlerinit((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 134: _t->call_slidecw((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 135: _t->call_slideccw((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 136: _t->call_laccw((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 137: _t->call_lacccw((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 138: _t->call_speedIncrease((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 139: _t->call_speedDecrease((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 140: _t->call_joystickonoff((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 141: _t->call_resetTrip((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 142: _t->call_resetWaterLevel((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 143: _t->call_cameraInit((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 144: _t->errorCallback((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
+        case 145: _t->tempCallback((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
+        case 146: _t->crawlerCallback((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
+        case 147: _t->initCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 148: _t->stopCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 149: _t->rstCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 150: { float _r = _t->getBatteryValue();
             if (_a[0]) *reinterpret_cast< float*>(_a[0]) = std::move(_r); }  break;
-        case 150: _t->setBatteryValue((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 151: _t->battCallback((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 152: _t->velCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 153: { int _r = _t->getVelocityValue();
+        case 151: _t->setBatteryValue((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 152: _t->battCallback((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 153: _t->velCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 154: { int _r = _t->getVelocityValue();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 154: _t->setVelocityValue((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 155: _t->lacCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 156: { int _r = _t->getlacValue();
+        case 155: _t->setVelocityValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 156: _t->lacCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 157: { int _r = _t->getlacValue();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 157: _t->setlacValue((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 158: _t->odomCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 159: { int _r = _t->getodomValue();
+        case 158: _t->setlacValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 159: _t->odomCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 160: { int _r = _t->getodomValue();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 160: _t->setodomValue((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 161: _t->tripCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 162: { int _r = _t->gettripValue();
+        case 161: _t->setodomValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 162: _t->tripCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 163: { int _r = _t->gettripValue();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 163: _t->settripValue((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 164: { float _r = _t->getCurrentValue();
+        case 164: _t->settripValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 165: { float _r = _t->getCurrentValue();
             if (_a[0]) *reinterpret_cast< float*>(_a[0]) = std::move(_r); }  break;
-        case 165: _t->setCurrentValue((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 166: _t->currentCallback((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 167: _t->waterCallback((*reinterpret_cast< float(*)>(_a[1]))); break;
-        case 168: { QVector<QString> _r = _t->getUid();
+        case 166: _t->setCurrentValue((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 167: _t->currentCallback((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 168: _t->waterCallback((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 169: { QVector<QString> _r = _t->getUid();
             if (_a[0]) *reinterpret_cast< QVector<QString>*>(_a[0]) = std::move(_r); }  break;
-        case 169: _t->setUid((*reinterpret_cast< QVector<QString>(*)>(_a[1]))); break;
-        case 170: _t->uidCallback((*reinterpret_cast< QVector<QString>(*)>(_a[1]))); break;
+        case 170: _t->setUid((*reinterpret_cast< QVector<QString>(*)>(_a[1]))); break;
+        case 171: _t->uidCallback((*reinterpret_cast< QVector<QString>(*)>(_a[1]))); break;
+        case 172: _t->call_automode((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -1018,35 +1027,28 @@ void Publisher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<QString> >(); break;
             }
             break;
-        case 98:
+        case 99:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
             }
             break;
-        case 102:
+        case 103:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
             }
             break;
-        case 125:
+        case 126:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
             }
             break;
-        case 127:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
-            }
-            break;
-        case 143:
+        case 128:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -1060,14 +1062,21 @@ void Publisher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
             }
             break;
-        case 169:
+        case 145:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
+            }
+            break;
+        case 170:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<QString> >(); break;
             }
             break;
-        case 170:
+        case 171:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -1448,6 +1457,13 @@ void Publisher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
                 return;
             }
         }
+        {
+            using _t = void (Publisher::*)(int );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Publisher::automode)) {
+                *result = 53;
+                return;
+            }
+        }
     } else if (_c == QMetaObject::RegisterPropertyMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
@@ -1577,13 +1593,13 @@ int Publisher::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 171)
+        if (_id < 173)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 171;
+        _id -= 173;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 171)
+        if (_id < 173)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 171;
+        _id -= 173;
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
@@ -1973,6 +1989,13 @@ void Publisher::uidChanged(QVector<QString> _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 52, _a);
+}
+
+// SIGNAL 53
+void Publisher::automode(int _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 53, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

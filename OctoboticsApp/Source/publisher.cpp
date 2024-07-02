@@ -28,7 +28,7 @@ Publisher::Publisher(QObject *parent)
     : QObject(parent)
 {
     qDebug() << "MainWindow constructor";
-    m_batteryValue = 427;
+    m_batteryValue = 40;
     m_comStatus = 0;
     m_armToolStatus = 0;
     m_toggleValue = false;
@@ -157,6 +157,8 @@ void Publisher::initRosThread()
     //image capture
 //    connect(this, SIGNAL(capImg(int)), this->rost, SLOT(capImgPub(int)));
 
+    connect(this,SIGNAL(automode(int)),this->rost,SLOT(automodePub(int)));
+
     //////////////
 
     this->rost->start();
@@ -192,6 +194,10 @@ void Publisher::commCallback(int value)
     setComStatus(value);
 }
 
+void Publisher::call_automode(int val)
+{
+    emit automode(val);
+}
 
 //---------------------------- Water Level -------------------------------
 

@@ -55,7 +55,7 @@ class RosThread : public QThread
 
 public slots:
     void addLine(QString newLine);
-
+    void automodePub(int value);
     //ros publishers
 
 
@@ -72,7 +72,7 @@ public slots:
 
     void currentCallback(const std_msgs::Float32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
-//    void voltageCallback(const std_msgs::Int16::ConstPtr &msg);
+    void batteryCallback(const std_msgs::Int16::ConstPtr &msg);
 
     //ros service servers
     bool toggleCallback(stm_client::tool_status::Request &req, stm_client::tool_status::Response &res);
@@ -131,6 +131,7 @@ signals:
     void lacCW(bool k);
     void lacCCW(bool k);
     void lacCallback(int lac_value);
+    // void batteryCallback(int voltage);
     void resetTrip(bool k);
     void speedIncrease(bool k);
     void speedDecrease(bool k);

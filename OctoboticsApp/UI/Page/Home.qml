@@ -234,17 +234,17 @@ Rectangle{
      * \brief  crawlerErr: gets crawler motors error value from ros and gives a popup on error
      */
     property variant crawlerErr: publisher.errValue
-    onCrawlerErrChanged: {
-        if(2===crawlerErr[0] || 16===crawlerErr[0] || 2===crawlerErr[1] || 16===crawlerErr[1] || 2===crawlerErr[2] || 16===crawlerErr[2] || 2===crawlerErr[3] || 16===crawlerErr[3]){
-            crawlerDialog.text =  cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n"
+//    onCrawlerErrChanged: {
+//        if(2===crawlerErr[0] || 16===crawlerErr[0] || 2===crawlerErr[1] || 16===crawlerErr[1] || 2===crawlerErr[2] || 16===crawlerErr[2] || 2===crawlerErr[3] || 16===crawlerErr[3]){
+//            crawlerDialog.text =  cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n"
 
-            crawlerDialog.title = "Crawler Error"
-            crawlerDialog.icon = StandardIcon.Critical
-            crawlerDialog.open()
-        }
+//            crawlerDialog.title = "Crawler Error"
+//            crawlerDialog.icon = StandardIcon.Critical
+//            crawlerDialog.open()
+//        }
 
 
-    }
+//    }
     /*!
      * \brief  crawlerTemp: gets crawler motors temp value from ros and gives a popup on temp error
      * \todo   make a variable for temperature value
@@ -252,7 +252,7 @@ Rectangle{
     property variant crawlerTemp: publisher.tempValue
     onCrawlerTempChanged:  {
 
-        if(crawlerTemp[0]>85 || crawlerTemp[1]>85 || crawlerTemp[2]>85 || crawlerTemp[3]>85){
+        if(crawlerTemp[0]>125 || crawlerTemp[1]>125 || crawlerTemp[2]>125 || crawlerTemp[3]>125){
             crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : Temperature greater than "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : Temperature greater than "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : Temperature greater than "+crawlerTemp[3]+" deg"+"\n"
             crawlerDialog.title = "Crawler Temperature Error"
             crawlerDialog.icon = StandardIcon.Critical
@@ -882,7 +882,8 @@ Rectangle{
                                         Layout.alignment: Qt.AlignCenter
                                         onClicked: {
 
-                                            camera_runner.startJoystick();
+                                            publisher.call_joystickonoff(isPressed ? 0 : 1);
+                                            isPressed = !isPressed
 
                                         }
                                     }
@@ -1010,7 +1011,7 @@ Rectangle{
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
                                     textFormat: Text.RichText
-                                    text: Math.round(publisher.currentValue*100)/100 + "<b style='font-size: 18px;'> mm/s<b>"
+                                    text: Math.round(publisher.currentValue*100)/100 + "<b style='font-size: 18px;'> mm<b>"
                                     font.family: "Tahoma"
                                     font.bold: true
                                     font.pixelSize:text.length < 12 ? 60 : 30
@@ -2217,25 +2218,25 @@ Rectangle{
                                 Layout.fillHeight: true
                                 width: 30
 
-//                                Button {
-//                                    id: btnON1
-//                                    text : "Record"
-//                                    width : 100
-//                                    height : 25
-//                                    anchors.centerIn: parent
+                                Button {
+                                    id: btnON1
+                                    text : "Record"
+                                    width : 100
+                                    height : 25
+                                    anchors.centerIn: parent
 
-//                                    background: Rectangle {
-//                                        color:buttonBg
-//                                        radius: 8
-//                                    }
+                                    background: Rectangle {
+                                        color:buttonBg
+                                        radius: 8
+                                    }
 
-//                                    onClicked: {
-////                                        demo.gstRecord("Recording...");
+                                    onClicked: {
+//                                        demo.gstRecord("Recording...");
 
-//                                         btnON1.text = "JoyStick Started";
+                                         btnON1.text = "Recording Started";
 
-//                                    }
-//                                }
+                                    }
+                                }
 
                             }
 
@@ -2350,23 +2351,27 @@ Rectangle{
                                 anchors.centerIn: parent
 
                                 SButton{
+                                    property bool isPressed: false
                                     height: 20
                                     name:  "AUTO MODE"
-                                    baseColor:  buttonBg
+                                    baseColor:  isPressed ? "red" : buttonBg
                                     borderColor: buttonBg
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+                                        isPressed = !isPressed
                                         publisher.call_automode(1)
 
                                     }
                                 }
                                 SButton{
+                                    property bool  isPressed: false
                                     height: 20
                                     name:  "MANUAL MODE"
-                                    baseColor:  buttonBg
+                                    baseColor:  isPressed ? "blue" : buttonBg
                                     borderColor: buttonBg
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
+                                        isPressed = !isPressed
                                         publisher.call_automode(0)
                                         init_crawler(0)
                                         stopCrawler()

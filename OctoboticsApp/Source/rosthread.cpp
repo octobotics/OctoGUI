@@ -59,7 +59,7 @@ void RosThread::run()
     current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
     lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
- // voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1,&RosThread::voltageCallback,this);
+    voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1, &RosThread::batteryCallback,this);
 
 
     // ros service servers
@@ -102,6 +102,12 @@ void RosThread::addLine(QString newLine)
     m_publisher.publish(msg);
 }
 
+void RosThread::automodePub(int value)
+{
+    std_msgs::Int32 k;
+    k.data = value;
+    automode_pub_.publish(k);
+}
 
 /*!
  * \brief RosThread::sendUtVel Publishes UT Velocity from UI to serialtoros node
@@ -196,6 +202,13 @@ void RosThread::lacCallback(const std_msgs::Int32::ConstPtr &msg)
 
 }
 
+void RosThread::batteryCallback(const std_msgs::Int16::ConstPtr &msg)
+{
+    float voltage = msg->data;
+
+    emit battCallback(voltage);
+}
+
 
 
 /*!
@@ -204,7 +217,7 @@ void RosThread::lacCallback(const std_msgs::Int32::ConstPtr &msg)
  */
 void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
 {
-    float voltage = msg->voltage;
+//    float voltage = msg->voltage;
 
 //    qDebug()<<"volt"<<voltage;
     bot_err.resize(4);
@@ -218,7 +231,7 @@ void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
     }
 
     emit crawlerCallback( (bool)msg->mode[0], (bool)msg->mode[1], (bool)msg->mode[2], (bool)msg->mode[3]);
-    emit battCallback(voltage);
+//    emit battCallback(voltage);
     emit tempCallback(act_temp);
     emit errorCallback(bot_err);
 }

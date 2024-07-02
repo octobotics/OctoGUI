@@ -84,11 +84,13 @@ Page {
             height: 50
             Layout.preferredWidth: connectROSPage.width - 20
             Layout.alignment: Qt.AlignHCenter
-            name: "Run Joystick"
+            name: "Init Crawler System"
             baseColor: mainAppColor
             borderColor: mainAppColor
             onClicked: {
                 cameraRunner.startJoystick()
+                init_crawler(0)
+                stopCrawler()
 
             }
         }
