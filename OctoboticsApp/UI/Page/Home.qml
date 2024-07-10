@@ -137,21 +137,21 @@ Rectangle{
      */
     property real battStatus: publisher.batteryValue
     onBattStatusChanged: {
-
-        if (battStatus<=29 && battStatus>28 && battCnt<=3){
+        console.log("Battery Status Changed: ", battStatus, " Count: ", battCnt);
+        if (battStatus<=36 && battStatus>35 && battCnt<=3){
+            console.log("Showing Battery Low Dialog");
             battDialog.text = "\n\n         Battery LOW         \n\n"
             battDialog.icon = StandardIcon.Critical
             battDialog.open()
             battCnt++
         }
-        else if((battStatus<= 28))
+        else if((battStatus<= 34))
         {
-            battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
+            console.log("Showing Battery Critically Low Dialog");
+            battDialog.text = "\n\n         Battery Critically LOW DD        \n         Change Batteries ASAP         \n\n"
             battDialog.icon = StandardIcon.Critical
             battDialog.open()
         }
-
-
     }
 
     /*!
@@ -2359,6 +2359,7 @@ Rectangle{
                                     implicitWidth:(widthScreen * 0.42)/2
                                     onClicked: {
                                         isPressed = !isPressed
+
                                         publisher.call_automode(1)
 
                                     }

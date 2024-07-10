@@ -205,11 +205,21 @@ void RosThread::lacCallback(const std_msgs::Int32::ConstPtr &msg)
 
 }
 
+//void RosThread::batteryCallback(const std_msgs::Int16::ConstPtr &msg)
+//{
+//    float voltage = msg->data;
+
+//    emit battCallback(voltage);
+//}
+
 void RosThread::batteryCallback(const std_msgs::Int16::ConstPtr &msg)
 {
     float voltage = msg->data;
 
-    emit battCallback(voltage);
+    // Check if voltage is not 0 and is within the range 10 to 48
+    if (voltage != 0 && voltage >= 10 && voltage <= 48) {
+        emit battCallback(voltage);
+    }
 }
 
 void RosThread::angleCallback(const geometry_msgs::Vector3::ConstPtr &msg)
