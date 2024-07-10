@@ -139,23 +139,21 @@ Rectangle{
      */
     property real battStatus: publisher.batteryValue
     onBattStatusChanged: {
-
-        if (battStatus<=24.0 && battStatus>23.5 && battCnt<=3){
-            battDialog.text = "\n\n         Battery LOW         \n\n"
-            battDialog.icon = StandardIcon.Critical
-            battDialog.open()
-            battCnt++
-            alaramEffect.play()
+        if (battStatus >= 20 && battStatus <= 40) {
+            if (battStatus <= 25.0 && battStatus >= 24.5) {
+                // Battery Low condition
+                battDialog.text = "\n\n         Battery LOW         \n\n";
+                battDialog.icon = StandardIcon.Warning; // Changed to Warning for low (not critical)
+                battDialog.open();
+                alaramEffect.play();
+            } else if (battStatus <= 24.4 && battStatus >= 23.5) {
+                // Battery Critically Low condition
+                battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n";
+                battDialog.icon = StandardIcon.Critical;
+                battDialog.open();
+                alaramEffect.play();
+            }
         }
-        else if((battStatus<= 23.5))
-        {
-            battDialog.text = "\n\n         Battery Critically LOW         \n         Change Batteries ASAP         \n\n"
-            battDialog.icon = StandardIcon.Critical
-            battDialog.open()
-            alaramEffect.play()
-        }
-
-
     }
 
     /*!
@@ -422,7 +420,7 @@ Rectangle{
      */
     function displaybatterStatus(level)
     {
-        var percentage = ((level - 22)*100) / (27 - 22);
+        var percentage = ((level - 22)*100) / (30 - 22);
 
         console.log("batt level",level)
         if (percentage < 20){
@@ -430,12 +428,12 @@ Rectangle{
             alertTimer.start();
             return "qrc:/UI/Assets/battery-status/battery-empty-solid.png" // fa-battery-empty
         }
-        else if (percentage > 20 && percentage < 40)
+        else if (percentage > 25 && percentage < 45)
         {     batt.text = " "
 
             return "qrc:/UI/Assets/battery-status/battery-quarter-solid.png" // fa-battery-quarter
         }
-        else if (percentage > 40 && percentage < 60)
+        else if (percentage > 45 && percentage < 60)
         {
             batt.text = " "
             return "qrc:/UI/Assets/battery-status/battery-half-solid.png" // fa-battery-half
