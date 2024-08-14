@@ -34,6 +34,9 @@ class Publisher : public QObject
     // communication
     Q_PROPERTY(int comStatus READ getComStatus WRITE setComStatus NOTIFY comStatusChanged)
 
+    Q_PROPERTY(QString posval READ getposval WRITE setposval NOTIFY posvalValueChanged)
+    Q_PROPERTY(QString negval READ getnegval WRITE setnegval NOTIFY negvalValueChanged)
+
     // crawler arm toggle status
     Q_PROPERTY(bool toggleValue READ getToggleValue WRITE setToggleValue NOTIFY toggleValueChanged)
 
@@ -461,7 +464,8 @@ private:
 
     QString m_toolToggle;
     QString m_utData;
-
+    QString posval;
+    QString negval;
     QVariantMap m_crawlStatus;
 
 //    QVariantMap m_utStatus;
