@@ -59,8 +59,7 @@ Publisher::Publisher(QObject *parent)
     m_cameraInit = 0;
     m_anglesettingvalue=0;
     m_angleValue = 0;
-    m_posval =0;
-    m_negval=null;
+
 
 }
 
@@ -151,6 +150,7 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(value10(int)),this->rost,SLOT(speedDecrease(int)));
     connect(this,SIGNAL(value11(int)),this->rost,SLOT(reset_water(int)));
     connect(this,SIGNAL(value12(int)),this->rost,SLOT(joystickonoff(int)));
+
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
@@ -453,7 +453,27 @@ void Publisher::setArmStatus(QVector<int> value)
 }
 
 
+QString Publisher::getposval()
+{
+    return m_posval;
+}
 
+QString Publisher::getnegval()
+{
+    return m_negval;
+}
+
+void Publisher::setposval(QString value)
+{
+    m_posval = value;
+    emit posvalValueChanged(value);
+}
+
+void Publisher::setnegval(QString value)
+{
+    m_negval = value;
+    emit negvalValueChanged(value);
+}
 
 void Publisher::call_arminit(int val)
 {
