@@ -151,6 +151,9 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(value11(int)),this->rost,SLOT(reset_water(int)));
     connect(this,SIGNAL(value12(int)),this->rost,SLOT(joystickonoff(int)));
 
+
+    connect(this,SIGNAL(posvalValueChanged(QString)),this->rost,SLOT(pos_angle(QString)));
+    connect(this,SIGNAL(negvalValueChanged(QString)),this->rost,SLOT(neg_angle(QString)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
