@@ -1691,6 +1691,7 @@ Rectangle{
                                         anchors.bottomMargin: 5
                                         onClicked: {
                                             isPressed = !isPressed
+                                            publisher.posval = angleTextField.text
                                             // Add your button click handling logic here
                                         }
                                     }
@@ -1857,6 +1858,7 @@ Rectangle{
                                       anchors.bottomMargin: 5
                                       onClicked: {
                                           isPressed = !isPressed
+                                          publisher.negval = secondTextField.text
                                           // Add your button click handling logic here
                                       }
                                   }

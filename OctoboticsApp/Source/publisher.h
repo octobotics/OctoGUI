@@ -347,8 +347,8 @@ signals:
     void value11(int value);
     void value12(int value);
 
-    void posvalValueChanged();
-    void negvalValueChanged();
+    void posvalValueChanged(QString value);
+    void negvalValueChanged(QString value);
 
 
 
@@ -472,8 +472,8 @@ private:
 
     QString m_toolToggle;
     QString m_utData;
-    QString posval;
-    QString negval;
+    QString m_posval;
+    QString m_negval;
     QVariantMap m_crawlStatus;
 
 //    QVariantMap m_utStatus;

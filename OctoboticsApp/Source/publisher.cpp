@@ -59,6 +59,9 @@ Publisher::Publisher(QObject *parent)
     m_cameraInit = 0;
     m_anglesettingvalue=0;
     m_angleValue = 0;
+    m_posval =0;
+    m_negval=null;
+
 }
 
 /*!
