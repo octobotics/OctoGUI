@@ -362,8 +362,8 @@ void RosThread::resetMapping(int value)
             emit resetmapping(1);
             }
      else
+    {
         emit resetmapping(0);
-
 
     }
 }

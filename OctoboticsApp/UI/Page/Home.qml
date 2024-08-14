@@ -1060,78 +1060,7 @@ Rectangle{
                         }
                     }
 
-//                    Rectangle{
-//                        id:rectBox4
-//                        width: widthScreen * 0.18
-//                        height: heightScreen * 0.25
-//                        border.color: borderSecondBg
-//                        color: secondBg
-//                        radius: 15
-//                        ColumnLayout{
-//                            anchors.fill: parent
-//                            anchors.topMargin: 10
-//                            Text {
-//                                Layout.fillWidth: true
-//                                height: rectBox4.height * 0.2
-//                                text: qsTr("Linear Actuator")
-//                                font.family: "Tahoma"
-//                                font.bold: true
-//                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-//                                color: textColor
-//                                verticalAlignment: Text.AlignVCenter
-//                                horizontalAlignment: Text.AlignHCenter
-//                            }
-//                            Text {
-//                                  Layout.fillWidth: true
-//                                  height: parent.height
-//                                  textFormat: Text.RichText
-//                                  text: publisher.lacValue + "<b style='font-size: 18px;'> mm<b>"
-//                                  font.family: "Tahoma"
-//                                  font.bold: true
-//                                  font.pixelSize: 30
-//                                  color: textColor
-//                                  verticalAlignment: Text.AlignVCenter
-//                                  horizontalAlignment: Text.AlignHCenter
-//                                }
-//                            Item {
-//                                width: parent.width
-//                                height: parent.height * 0.1
-//                                anchors.bottom: parent.bottom
-//                                anchors.bottomMargin: 20
 
-//                                ColumnLayout{
-//                                    width: parent.width
-//                                    anchors.centerIn: parent
-//                                    IButton{
-//                                        // Assuming no rotation is needed for the up arrow
-//                                        sourceRot: 0
-//                                        defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                        clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-//                                        onClicked: {
-//                                            publisher.call_laccw(1);
-//                                            // Add logic here
-//                                        }
-//                                    }
-//                                    IButton{
-//                                        // Rotate the image to make it a down arrow
-//                                        sourceRot: 180
-//                                        defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                        clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-//                                        onClicked: {
-//                                            publisher.call_lacccw(1);
-//                                        }
-//                                    }
-//                                }
-//                            }
-
-//                            Item {
-//                                height: parent.height * 0.1
-//                            }
-
-//                        }
-
-
-//                    }
 
 
                     Rectangle{
@@ -1497,647 +1426,6 @@ Rectangle{
                         }
                     }
 
-                // visble false
-//                    Rectangle{
-//                        width: widthScreen * 0.28
-//                        height: heightScreen * 0.25
-//                        border.color: "#6fda9c"
-//                        color: "#344955"
-//                        radius: 15
-//                        visible: false
-
-//                        ColumnLayout{
-//                            anchors.fill: parent
-//                            spacing: 0
-//                            RowLayout{
-//                                Text {
-//                                    Layout.fillWidth: true
-//                                    text: qsTr("Tool")
-//                                    font.family: "Tahoma"
-//                                    font.bold: true
-//                                    font.pixelSize: 24
-//                                    color: "#FFFFFF"
-//                                    horizontalAlignment: Text.AlignHCenter
-//                                    verticalAlignment: Text.AlignVCenter
-//                                }
-//                            }
-//                            RowLayout{
-//                                Layout.fillHeight: true
-//                                width: parent.width
-
-//                                Item{
-//                                    Layout.fillHeight: true
-//                                    Layout.fillWidth: true
-//                                    ColumnLayout{
-//                                        anchors.centerIn: parent
-//                                        RowLayout{
-
-//                                            Image {
-//                                                id:magnetStatus
-//                                                sourceSize.width: 35
-//                                                sourceSize.height: 35
-//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-//                                            }
-
-//                                            Button {
-//                                                id: magnet
-//                                                text : "Magnet"
-//                                                implicitWidth : 70
-//                                                implicitHeight : 30
-
-//                                                background: Rectangle {
-//                                                    color:"#6fda9c"
-//                                                    radius: 5
-//                                                    opacity: magnet.down ? 0.5 : 1
-
-//                                                }
-
-//                                                onClicked: {
-//                                                    publisher.toolToggle = "7"
-
-//                                                }
-//                                            }
-
-//                                            Item{
-//                                                width: 8
-//                                            }
-
-
-//                                            Image {
-//                                                id:pumpStatus
-//                                                sourceSize.width: 35
-//                                                sourceSize.height: 35
-//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-//                                            }
-
-//                                            Button {
-//                                                id: pump
-//                                                text : "Pump"
-//                                                implicitWidth : 70
-//                                                implicitHeight : 30
-
-//                                                background: Rectangle {
-//                                                    color:"#6fda9c"
-//                                                    radius: 5
-//                                                    opacity: pump.down ? 0.5 : 1
-
-//                                                }
-
-//                                                onClicked: {
-//                                                    publisher.toolToggle = "4"
-
-//                                                }
-//                                            }
-//                                            Item{
-//                                                width: 8
-//                                            }
-//                                            Image {
-//                                                id:grinderStatus
-//                                                sourceSize.width: 35
-//                                                sourceSize.height: 35
-//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-//                                            }
-
-//                                            Button {
-//                                                id: grinder
-//                                                text : "Grinder"
-//                                                implicitWidth : 70
-//                                                implicitHeight : 30
-
-//                                                background: Rectangle {
-//                                                    color:"#6fda9c"
-//                                                    radius: 5
-//                                                    opacity: grinder.down ? 0.5 : 1
-
-//                                                }
-
-//                                                onClicked: {
-//                                                    publisher.toolToggle = "0"
-
-//                                                }
-//                                            }
-//                                        }
-//                                        Item {
-//                                            height:20
-//                                        }
-//                                        RowLayout{
-
-//                                            Image {
-//                                                id:flightStatus
-//                                                sourceSize.width: 35
-//                                                sourceSize.height: 35
-//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-//                                            }
-//                                            Button {
-//                                                id: flight
-//                                                text : "Upper Light"
-//                                                implicitWidth : 120
-//                                                implicitHeight : 30
-
-//                                                background: Rectangle {
-//                                                    color:"#6fda9c"
-//                                                    radius: 5
-//                                                    opacity: flight.down ? 0.5 : 1
-
-//                                                }
-
-//                                                onClicked: {
-//                                                    publisher.toolToggle = "6"
-
-//                                                }
-//                                            }
-//                                            Item {
-//                                                width:30
-//                                            }
-
-
-
-//                                            Image {
-//                                                id:blightStatus
-//                                                sourceSize.width: 35
-//                                                sourceSize.height: 35
-//                                                source: "qrc:/UI/Assets/dashboard/remove.png"
-//                                            }
-//                                            Button {
-//                                                id: blight
-//                                                text : "Bottom Light"
-//                                                implicitWidth : 120
-//                                                implicitHeight : 30
-
-//                                                background: Rectangle {
-//                                                    color:"#6fda9c"
-//                                                    radius: 5
-//                                                    opacity: blight.down ? 0.5 : 1
-
-//                                                }
-
-//                                                onClicked: {
-//                                                    publisher.toolToggle = "5"
-
-//                                                }
-//                                            }
-
-
-//                                        }
-
-//                                    }
-
-//                                }
-//                            }
-
-//                        }
-
-//                    }
-//                    Rectangle{
-//                        width: widthScreen * 0.20
-//                        height: heightScreen * 0.25
-//                        border.color: "#6fda9c"
-//                        color: "#344955"
-//                        radius: 15
-//                        visible: false
-
-//                        ColumnLayout{
-//                            anchors.fill: parent
-//                            RowLayout{
-
-//                                Text {
-//                                    Layout.fillWidth: true
-//                                    text: qsTr("Arm")
-//                                    font.family: "Tahoma"
-//                                    font.bold: true
-//                                    font.pixelSize: 24
-//                                    color: "#FFFFFF"
-//                                    horizontalAlignment: Text.AlignHCenter
-//                                    verticalAlignment: Text.AlignVCenter
-//                                }
-
-//                            }
-
-//                            RowLayout{
-//                                Layout.fillHeight: true
-//                                Item{
-//                                    Layout.fillHeight: true
-//                                    Layout.fillWidth: true
-
-//                                    ColumnLayout{
-//                                        Layout.fillHeight: true
-//                                        anchors.fill: parent
-
-
-//                                        RowLayout{
-//                                            Layout.fillWidth: true
-
-//                                            RowLayout{
-//                                                Layout.leftMargin: 40
-
-
-//                                                Image {
-//                                                    sourceSize.width: 20
-//                                                    sourceSize.height: 20
-//                                                    source: publisher.armStatus[0] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-//                                                }
-//                                                Text {
-//                                                    color: "#6fda9c"
-//                                                    font.pixelSize: 20
-//                                                    text: qsTr("Base")
-//                                                }
-
-//                                            }
-
-//                                            RowLayout{
-//                                                Layout.leftMargin: 32
-
-//                                                Image {
-//                                                    sourceSize.width: 20
-//                                                    sourceSize.height: 20
-//                                                    source:  publisher.armStatus[1]? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-//                                                }
-//                                                Text {
-//                                                    color: "#6fda9c"
-//                                                    font.pixelSize: 20
-//                                                    text: qsTr("Shoulder")
-//                                                }
-
-
-//                                            }
-//                                        }
-//                                        RowLayout{
-//                                            RowLayout{
-
-//                                                Layout.leftMargin: 40
-
-//                                                Image {
-//                                                    sourceSize.width: 20
-//                                                    sourceSize.height: 20
-//                                                    source: publisher.armStatus[2] ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-//                                                }
-//                                                Text {
-//                                                    color: "#6fda9c"
-//                                                    font.pixelSize: 20
-//                                                    text: qsTr("Elbow")
-//                                                }
-//                                            }
-//                                            RowLayout{
-//                                                Layout.leftMargin: 20
-
-//                                                Image {
-//                                                    sourceSize.width: 20
-//                                                    sourceSize.height: 20
-//                                                    source: publisher.armStatus[3]  ? "qrc:/UI/Assets/dashboard/remove.png" : "qrc:/UI/Assets/dashboard/tick.png"
-//                                                }
-//                                                Text {
-//                                                    color: "#6fda9c"
-//                                                    font.pixelSize: 20
-//                                                    text: qsTr("Tool")
-//                                                }
-//                                            }}
-
-//                                        RowLayout{
-
-//                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
-
-//                                            SButton{
-
-//                                                id: intArm
-//                                                height: 20
-//                                                name: "Initilize"
-//                                                baseColor: mainAppColor
-//                                                borderColor: mainAppColor
-//                                                implicitWidth: 120
-//                                                onClicked: {
-//                                                    publisher.call_arminit(1)
-//                                                    initArm()
-//                                                }
-//                                            }
-
-
-//                                            SButton{
-
-//                                                id: resetArm
-//                                                height: 20
-//                                                implicitWidth: 120
-
-//                                                name: "Reset"
-//                                                baseColor: mainAppColor
-//                                                borderColor: mainAppColor
-//                                                onClicked: {
-//                                                    publisher.rst_arm(1)
-
-//                                                    rstArm()
-
-//                                                }
-
-//                                            }
-
-
-
-//                                        }
-
-//                                        RowLayout{
-
-//                                            Layout.leftMargin:(widthScreen * 0.20 -245)/2
-
-//                                            SButton{
-
-//                                                id: stpArm
-//                                                height: 20
-//                                                name: "Stop"
-//                                                baseColor: "red"
-//                                                borderColor: "red"
-//                                                implicitWidth: 120
-//                                                onClicked: {
-//                                                    publisher.call_arminit(0)
-
-//                                                    stopArm()
-//                                                }
-//                                            }
-
-
-//                                            SButton{
-
-//                                                id: armmStatus
-//                                                height: 20
-//                                                name:  "Status"
-//                                                baseColor:  mainAppColor
-//                                                borderColor: mainAppColor
-//                                                implicitWidth: 120
-
-//                                                onClicked: {
-//                                                    publisher.trig_armStatus()
-//                                                    console.log("called in button")
-
-//                                                }
-//                                            }
-
-
-//                                        }
-//                                    }
-
-
-//                                }
-
-//                            }
-
-//                        }
-//                    }
-//                    Rectangle{
-//                        width: widthScreen * 0.22
-//                        height: heightScreen * 0.25
-//                        border.color: "#6fda9c"
-//                        border.width: 2
-//                        color: "#344955"
-//                        radius: 15
-//                        visible: false
-
-//                        ColumnLayout{
-//                            anchors.fill: parent
-//                            spacing: 0
-//                            RowLayout{
-//                                Text {
-//                                    Layout.fillWidth: true
-//                                    font.family: "Tahoma"
-//                                    font.bold: true
-//                                    font.pixelSize: 50
-//                                    color: "#6fda9c"
-//                                    verticalAlignment: Text.AlignVCenter
-//                                    horizontalAlignment: Text.AlignHCenter
-//                                    topPadding: 5
-
-//                                    function calcThick()
-//                                    {
-//                                        var u= publisher.thickness.unit
-//                                        var un ="NAN"
-//                                        if(u===1)
-//                                            un= "mm"
-//                                        else if(u===0)
-//                                            un= "in"
-//                                        else
-//                                            un ="NAN"
-//                                        return(" "+ un)
-
-//                                    }
-//                                    text:   publisher.thickness.unit === -1 ? "-----" : publisher.thickness.thickness.toFixed(2) + calcThick()
-//                                }
-
-
-
-//                            }
-//                            RowLayout{
-//                                Layout.fillHeight: true
-//                                width: parent.width
-//                                Item{
-//                                    Layout.fillHeight: true
-//                                    Layout.fillWidth: true
-//                                    ColumnLayout{
-//                                        anchors.left : parent
-//                                        RowLayout{
-//                                            Text {
-//                                                color: "#6fda9c"
-//                                                font.pixelSize: 12
-//                                                text: qsTr("Velocity :")
-//                                                leftPadding: 10
-//                                            }
-//                                            Text {
-//                                                color: "#6fda9c"
-
-//                                                font.pixelSize: 12
-//                                                text: publisher.utstatus.vel === undefined ? "NAN" : publisher.utstatus.vel + " " + "m/s"
-//                                            }
-//                                            Text {
-//                                                color: "#6fda9c"
-//                                                font.pixelSize: 12
-//                                                leftPadding: 10
-
-//                                                text: qsTr("DeepCoat :")
-//                                            }
-//                                            Text {
-//                                                color: "#6fda9c"
-
-//                                                font.pixelSize: 12
-//                                                text: publisher.utstatus.deepcoat === undefined ? "NAN" : publisher.utstatus.deepcoat
-//                                            }
-
-//                                            Text {
-//                                                color: "#6fda9c"
-//                                                font.pixelSize: 12
-//                                                leftPadding: 10
-//                                                text: qsTr("Echoes :")
-//                                            }
-//                                            Text {
-//                                                color: "#6fda9c"
-
-//                                                font.pixelSize: 12
-//                                                text: publisher.utstatus.echo === undefined ? "NAN" : publisher.utstatus.echo
-//                                            }
-
-
-//                                        }
-//                                        RowLayout{
-//                                            Text {
-//                                                color: "#6fda9c"
-//                                                font.pixelSize: 20
-//                                                text: qsTr("Velocity   :")
-//                                                leftPadding: 10
-//                                            }
-
-//                                            TextField {
-//                                                id: sendVel
-//                                                Layout.preferredWidth: 80
-//                                                Layout.alignment: Qt.AlignHCenter
-//                                                color: mainTextColor
-//                                                font.pointSize: 14
-//                                                font.family: "fontawesome"
-//                                                leftPadding: 5
-//                                                activeFocusOnPress: true
-//                                                Keys.onPressed: (event)=> {
-//                                                                    if (event.key === Qt.Key_Return) {
-//                                                                        publisher.utVel = text
-
-//                                                                    }}
-//                                                background: Rectangle {
-//                                                    implicitWidth:  30
-//                                                    implicitHeight: 30
-//                                                    radius: implicitHeight / 2
-//                                                    color: "transparent"
-
-//                                                    Rectangle {
-//                                                        width: 80
-//                                                        height: 1
-//                                                        anchors.horizontalCenter: parent.horizontalCenter
-//                                                        anchors.bottom: parent.bottom
-//                                                        color: mainAppColor
-//                                                    }
-//                                                }
-//                                            }
-//                                            SButton{
-//                                                height: 15
-//                                                name: "Send"
-//                                                baseColor: mainAppColor
-//                                                borderColor: mainAppColor
-//                                                onClicked: {
-//                                                    publisher.utVel = sendVel.text
-//                                                }
-
-
-//                                            }
-//                                        }
-//                                        RowLayout{
-
-//                                            Layout.fillHeight: true
-//                                            width: parent.width/2
-//                                            Text {
-//                                                Layout.alignment: Qt.AlignCenter
-
-//                                                color: "#6fda9c"
-//                                                font.pixelSize: 20
-//                                                leftPadding: 10
-
-//                                                text: qsTr("DeepCoat :")
-//                                            }
-
-//                                            TextField {
-//                                                id: sendDC
-//                                                Layout.preferredWidth: 80
-//                                                Layout.alignment: Qt.AlignHCenter
-//                                                color: mainTextColor
-//                                                font.pointSize: 14
-//                                                font.family: "fontawesome"
-//                                                leftPadding: 5
-//                                                activeFocusOnPress: true
-//                                                Keys.onPressed: (event)=> {
-//                                                                    if (event.key === Qt.Key_Return) {
-//                                                                        publisher.utData = sendDC.text
-
-//                                                                    }}
-//                                                background: Rectangle {
-//                                                    implicitWidth:  30
-//                                                    implicitHeight: 30
-//                                                    radius: implicitHeight / 2
-//                                                    color: "transparent"
-
-//                                                    Rectangle {
-//                                                        width: 80
-//                                                        height: 1
-//                                                        anchors.horizontalCenter: parent.horizontalCenter
-//                                                        anchors.bottom: parent.bottom
-//                                                        color: mainAppColor
-//                                                    }
-//                                                }
-//                                            }
-//                                            SButton{
-//                                                height: 15
-//                                                name: "Send"
-//                                                baseColor: mainAppColor
-//                                                borderColor: mainAppColor
-//                                                onClicked: {
-
-//                                                    publisher.utData = sendDC.text
-//                                                }
-
-
-//                                            }
-//                                        }
-//                                        RowLayout{
-//                                            Text {
-//                                                color: "#6fda9c"
-//                                                font.pixelSize: 20
-//                                                leftPadding: 10
-//                                                text: qsTr("XRange :")
-//                                            }
-
-//                                            TextField {
-//                                                id: sendXR
-//                                                Layout.preferredWidth: 80
-//                                                Layout.alignment: Qt.AlignHCenter
-//                                                color: mainTextColor
-//                                                font.pointSize: 14
-//                                                font.family: "fontawesome"
-//                                                leftPadding: 5
-//                                                activeFocusOnPress: true
-//                                                Keys.onPressed: (event)=> {
-//                                                                    if (event.key === Qt.Key_Return) {
-//                                                                        publisher.utData = sendXR.text
-
-//                                                                    }}
-//                                                background: Rectangle {
-//                                                    implicitWidth:  30
-//                                                    implicitHeight: 30
-//                                                    radius: implicitHeight / 2
-//                                                    color: "transparent"
-
-//                                                    Rectangle {
-//                                                        width: 80
-//                                                        height: 1
-//                                                        anchors.horizontalCenter: parent.horizontalCenter
-//                                                        anchors.bottom: parent.bottom
-//                                                        color: mainAppColor
-//                                                    }
-//                                                }
-//                                            }
-//                                            SButton{
-//                                                height: 15
-//                                                name: "Send"
-//                                                baseColor: mainAppColor
-//                                                borderColor: mainAppColor
-//                                                onClicked: {
-//                                                    //
-//                                                    publisher.utData = sendXR.text
-//                                                }
-
-
-//                                            }
-//                                        }
-//                                        Item {
-//                                            height: 2
-//                                        }
-//                                    }
-
-//                                }
-//                            }
-
-//                        }
-
-//                    }
 
                 }
 
@@ -2247,23 +1535,7 @@ Rectangle{
                                 Layout.fillHeight: true
                                 width: 30
 
-//                                Button {
-//                                    id: btnSTOP1
-//                                    text : "Stop"
-//                                    width : 100
-//                                    height : 25
-//                                    anchors.centerIn: parent
-//                                    background: Rectangle {
-//                                        color:buttonBg
-//                                        radius: 8
-//                                    }
 
-//                                    onClicked: {
-
-//                                        demo.gstStop("Stop");
-//                                        btnON1.text = "Record";
-//                                    }
-//                                }
 
                             }
                             Item {
@@ -2341,8 +1613,85 @@ Rectangle{
                     ColumnLayout{
                         width: widthScreen * 0.60
                         height: heightScreen * 0.90
-                        Rectangle{
+
+                        RowLayout{
+                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
                             implicitWidth: widthScreen * 0.60
+
+//                            Rectangle {
+//                                  implicitWidth: widthScreen * 0.20
+//                                  implicitHeight: ((heightScreen * 0.90)/3) -5/2
+//                                  border.color: borderSecondBg
+//                                  color: secondBg
+//                                  radius: 15
+
+//                              }
+
+                            Rectangle {
+                                width: widthScreen * 0.20
+                                height: ((heightScreen * 0.90) / 3) - 5 / 2
+                                border.color: borderSecondBg
+                                color: secondBg
+                                radius: 15
+                                ColumnLayout{
+                                    anchors.fill: parent
+                                    anchors.topMargin: 10
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: qsTr("+ Shell Angle")
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 24
+                                         color: textColor
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
+
+                                    TextField {
+                                        Layout.fillWidth: true
+                                        Layout.fillHeight: true
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 45
+                                        color: "orange"
+                                        verticalAlignment: TextInput.AlignVCenter
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        placeholderText: "(300-360)"
+                                        validator: IntValidator { bottom: 0; top: 360 } // Ensure input is between 0 and 360
+                                        inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
+
+                                        // Optional: Handle text change to update the publisher's angle value
+                                        onTextChanged: {
+                                            const angle = parseInt(text);
+                                            if (!isNaN(angle) && angle >= 0 && angle <= 360) {
+                                                publisher.angleValue = angle;
+                                                // Additional logic to handle the angle value change
+                                            }
+                                        }
+                                    }
+
+                                    SButton {
+                                        property bool isPressed: false
+                                        width: parent.width * 0.5
+                                        height: parent.height * 0.27 // Set the height to match the replaced Item
+                                        name: "Set +Angle"
+                                        baseColor:  isPressed ? "green" : buttonBg
+                                        borderColor: buttonBg
+                                        anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
+                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
+                                        anchors.bottomMargin: 5
+                                        onClicked: {
+                                            isPressed = !isPressed
+                                            // Add your button click handling logic here
+                                        }
+                                    }
+                                }
+
+
+                            }
+
+                        Rectangle{
+                            implicitWidth: widthScreen * 0.20
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
                             border.color: borderSecondBg
                             color: secondBg
@@ -2356,7 +1705,7 @@ Rectangle{
                                     name:  "INIT AUTO MODE"
                                     baseColor:  isPressed ? "red" : buttonBg
                                     borderColor: buttonBg
-                                    implicitWidth:(widthScreen * 0.42)/2
+                                    implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                         isPressed = !isPressed
 
@@ -2371,7 +1720,7 @@ Rectangle{
                                     name:  "AUTO MODE"
                                     baseColor:  isPressed ? "red" : buttonBg
                                     borderColor: buttonBg
-                                    implicitWidth:(widthScreen * 0.42)/2
+                                    implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                         isPressed = !isPressed
 
@@ -2385,7 +1734,7 @@ Rectangle{
                                     name:  "MANUAL MODE"
                                     baseColor:  isPressed ? "blue" : buttonBg
                                     borderColor: buttonBg
-                                    implicitWidth:(widthScreen * 0.42)/2
+                                    implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                         isPressed = !isPressed
                                         publisher.call_automode(0)
@@ -2400,7 +1749,7 @@ Rectangle{
                                     name:  "RESET"
                                     baseColor:  buttonBg
                                     borderColor: buttonBg
-                                     implicitWidth:(widthScreen * 0.42)/2
+                                     implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                     }
                                 }
@@ -2410,19 +1759,84 @@ Rectangle{
                                     name: "SHUTDOWN"
                                     baseColor: "#FF2E2E"
                                     borderColor: "#911911"
-                                     implicitWidth:(widthScreen * 0.42)/2
+                                     implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                         publisher.shd_crawler(1)
                                     }
                                 }
                             }
                         }
+
+                        Rectangle {
+                              implicitWidth: widthScreen * 0.20
+                              implicitHeight: ((heightScreen * 0.90)/3) -5/2
+                              border.color: borderSecondBg
+                              color: secondBg
+                              radius: 15
+
+                              ColumnLayout{
+                                  anchors.fill: parent
+                                  anchors.topMargin: 10
+                                  Text {
+                                      Layout.fillWidth: true
+                                      text: qsTr("- Shell Angle")
+                                      font.family: "Tahoma"
+                                      font.bold: true
+                                      font.pixelSize: 24
+                                       color: textColor
+                                      verticalAlignment: Text.AlignVCenter
+                                      horizontalAlignment: Text.AlignHCenter
+                                  }
+
+                                  TextField {
+                                      Layout.fillWidth: true
+                                      Layout.fillHeight: true
+                                      font.family: "Tahoma"
+                                      font.bold: true
+                                      font.pixelSize: 45
+                                      color: "orange"
+                                      verticalAlignment: TextInput.AlignVCenter
+                                      horizontalAlignment: TextInput.AlignHCenter
+                                      placeholderText: "(20-50)"
+                                      validator: IntValidator { bottom: 0; top: 360 } // Ensure input is between 0 and 360
+                                      inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
+
+                                      // Optional: Handle text change to update the publisher's angle value
+                                      onTextChanged: {
+                                          const angle = parseInt(text);
+                                          if (!isNaN(angle) && angle >= 0 && angle <= 360) {
+                                              publisher.angleValue = angle;
+                                              // Additional logic to handle the angle value change
+                                          }
+                                      }
+                                  }
+
+                                  SButton {
+                                      property bool isPressed: false
+                                      width: parent.width * 0.5
+                                      height: parent.height * 0.27 // Set the height to match the replaced Item
+                                      name: "Set -Angle"
+                                      baseColor:  isPressed ? "green" : buttonBg
+                                      borderColor: buttonBg
+                                      anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
+                                      anchors.bottom: parent.bottom // Align to the bottom of the parent
+                                      anchors.bottomMargin: 5
+                                      onClicked: {
+                                          isPressed = !isPressed
+                                          // Add your button click handling logic here
+                                      }
+                                  }
+                              }
+
+                          }
+
+                        }
                         RowLayout{
                             implicitHeight: ((heightScreen * 0.90)/3 )-5/2
                             implicitWidth: widthScreen * 0.60
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.60)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.60)/4)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2472,37 +1886,12 @@ Rectangle{
                                     }
 
 
-//                                    ColumnLayout{
-//                                        anchors.bottom: parent.bottom
-//                                        anchors.horizontalCenter: parent.horizontalCenter
-//                                        SButton{
-//                                            height: 16
-//                                            name:  "RESET"
-//                                            baseColor:  buttonBg
-//                                            borderColor: buttonBg
-//                                            Layout.fillHeight: true
-//                                            Layout.alignment: Qt.AlignTop
-//                                            implicitWidth:(widthScreen * 0.42)/4
-//                                            onClicked: {
-//                                                publisher.call_resetTrip(1)
-//                                            }
-//                                        }
-//                                        Item {
-//                                            height: parent.height * 0.4
-//                                        }
 
-//                                    }
-
-
-
-//                                    Item {
-//                                        height: parent.height * 0.1
-//                                    }
                                 }
                             }
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.60)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.60)/4)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2539,7 +1928,7 @@ Rectangle{
                             }
                             Rectangle{
                                 implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.60)/3)-5/3
+                                implicitWidth: ((widthScreen * 0.60)/4)-5/3
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -2574,6 +1963,15 @@ Rectangle{
                                 }
 
                             }
+                            Rectangle {
+                                  implicitWidth: ((widthScreen * 0.60)/4)-5/3
+                                  implicitHeight: ((heightScreen * 0.90)/3 )-5/2
+                                  border.color: borderSecondBg
+                                  color: secondBg
+                                  radius: 15
+
+
+                              }
                         }
                         Rectangle{
                             id:emergencyBox
@@ -2622,447 +2020,6 @@ Rectangle{
                             }
 
                         }
-
-
-
-                        //                        TabView{
-                        //                            id: g1
-                        //                            implicitWidth: widthScreen * 0.42
-                        //                            implicitHeight: ((heightScreen * 0.90)/2 ) - 5/2
-
-
-                        //                            Tab{
-                        //                                title: " Cam 2  "
-                        //                                id: t1
-                        //                                active:true
-
-                        //                                Rectangle{
-                        //                                    id:screen2
-                        //                                    width: widthScreen * 0.42
-                        //                                    height: ((heightScreen * 0.90)/2 ) - 5/2
-                        //                                    border.color: "#6fda9c"
-                        //                                    border.width: 2
-                        //                                    color: "#344955"
-                        //                                    radius: 15
-                        //                                    property alias videoPlayer1: videoPlayer1
-
-
-                        //                                    MediaPlayer {
-                        //                                        id: videoPlayer1
-
-                        //                                        muted: true
-                        //                                        autoPlay: true
-                        //                                        playlist: Playlist {
-                        //                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                        //                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                        //                                            PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
-                        //                                        }
-                        //                                        //                                        playlist: Playlist {
-                        //                                        //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                        //                                        //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                        //                                        //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                        //                                        //                                        }
-                        //                                    }
-
-                        //                                    VideoOutput {
-                        //                                        id: camera1
-                        //                                        anchors.fill: parent
-                        //                                        source: videoPlayer1
-                        //                                        fillMode: VideoOutput.PreserveAspectCrop
-                        //                                        function save() {
-                        //                                            fullScreenRect.visible = true
-                        //                                            fullScreenView.enabled = true
-                        //                                            full_cam=arrange_cam[1]
-                        //                                            fullScreenView.sourceItem = camera1
-                        //                                            fullScreenView.save()
-                        //                                            fullScreenRect.visible = false
-                        //                                            fullScreenView.enabled = false
-                        //                                            publisher.call_capImg(arrange_cam[1])
-
-                        //                                        }
-                        //                                    }
-                        //                                    Component.onCompleted: {
-                        //                                        videoPlayer1.playlist.currentIndex = 1;
-                        //                                        videoPlayer1.play();
-                        //                                    }
-                        //                                    Rectangle{
-                        //                                        id:videoToolBar2
-                        //                                        anchors.bottom: parent.bottom
-                        //                                        width: parent.width
-                        //                                        height: parent.height*0.1
-                        //                                        opacity: 0.5
-                        //                                    }
-                        //                                    RowLayout{
-                        //                                        anchors.fill:videoToolBar2
-                        //                                        Item {
-                        //                                            width: 50
-                        //                                        }
-                        //                                        Item{
-                        //                                            Layout.fillHeight: true
-                        //                                            width: 30
-
-                        //                                            Button {
-                        //                                                id: btnON3
-                        //                                                text : "Record"
-                        //                                                width : 100
-                        //                                                height : 25
-                        //                                                anchors.centerIn: parent
-
-                        //                                                background: Rectangle {
-                        //                                                    color:"#6fda9c"
-                        //                                                    radius: 8
-                        //                                                }
-
-                        //                                                onClicked: {
-                        //                                                    recCams.gstRecord3("Recording...");
-
-                        //                                                    btnON3.text = "recording...";
-
-                        //                                                }
-                        //                                            }
-
-                        //                                        }
-
-                        //                                        Item {
-                        //                                            width: 100
-                        //                                        }
-                        //                                        Item{
-                        //                                            Layout.fillHeight: true
-                        //                                            width: 30
-
-                        //                                            Button {
-                        //                                                id: btnSTOP3
-                        //                                                text : "Stop"
-                        //                                                width : 100
-                        //                                                height : 25
-                        //                                                anchors.centerIn: parent
-                        //                                                background: Rectangle {
-                        //                                                    color:"#6fda9c"
-                        //                                                    radius: 8
-                        //                                                }
-
-                        //                                                onClicked: {
-
-                        //                                                    recCams.gstStop3("Stop");
-                        //                                                    btnON3.text = "Record";
-                        //                                                }
-                        //                                            }
-
-
-                        //                                        }
-                        //                                        Item {
-                        //                                            Layout.fillWidth: true
-                        //                                        }
-                        //                                        Item{
-                        //                                            Layout.fillHeight: true
-                        //                                            width: 30
-                        //                                            Image {
-                        //                                                id:swap1
-                        //                                                sourceSize.width: 25
-                        //                                                sourceSize.height: 25
-                        //                                                anchors.centerIn: parent
-                        //                                                source: "qrc:/UI/Assets/dashboard/swap.png"
-                        //                                            }
-                        //                                            MouseArea{
-                        //                                                anchors.fill: parent
-                        //                                                onClicked: {
-                        //                                                    swapCam(1)
-
-
-                        //                                                }
-                        //                                            }
-                        //                                        }
-                        //                                        Item{
-                        //                                            width:5
-                        //                                        }
-
-                        //                                        Item{
-                        //                                            Layout.fillHeight: true
-                        //                                            width: 30
-                        //                                            Image {
-                        //                                                id:captureIcon2Id
-                        //                                                sourceSize.width: 25
-                        //                                                sourceSize.height: 25
-                        //                                                anchors.centerIn: parent
-                        //                                                source: "qrc:/UI/Assets/dashboard/capture.png"
-                        //                                            }
-                        //                                            MouseArea{
-                        //                                                anchors.fill: parent
-                        //                                                onClicked: {
-                        //                                                    camera1.save()
-                        //                                                }
-                        //                                            }
-                        //                                        }
-                        //                                        Item {
-                        //                                            width:5
-                        //                                        }
-                        //                                        Item{
-                        //                                            Layout.fillHeight: true
-                        //                                            width: 30
-                        //                                            Image {
-                        //                                                id:screenSizeIcon2Id
-                        //                                                sourceSize.width: 25
-                        //                                                sourceSize.height: 25
-                        //                                                anchors.centerIn: parent
-                        //                                                source: "qrc:/UI/Assets/dashboard/expand.png"
-                        //                                            }
-                        //                                            MouseArea{
-                        //                                                anchors.fill: parent
-                        //                                                onClicked: {
-                        //                                                    fullScreenRect.visible = true
-                        //                                                    fullScreenView.enabled = true
-                        //                                                    fullScreenView.sourceItem = camera1
-                        //                                                    full_cam=2
-                        //                                                }
-                        //                                            }
-                        //                                        }
-
-
-                        //                                        Item {
-                        //                                            width:5
-                        //                                        }
-                        //                                    }
-
-                        //                                }
-
-
-
-                        //                            }
-                        //                            Tab{
-                        //                                id: t2
-                        //                                title: " A Scan "
-                        //                                active: true
-
-                        //                                Item {
-
-                        //                                    CustomPlotItem {
-
-                        //                                        id: customPlot
-                        //                                        anchors.fill: parent
-
-                        //                                        Component.onCompleted: initCustomPlot()
-                        //                                        MouseArea{
-                        //                                            anchors.fill: parent
-                        //                                            onClicked: {
-                        ////                                                customPlot.saveImgk(1)
-                        //                                            }
-                        //                                        }
-                        //                                    }
-                        //                                }
-
-                        //                            }
-                        //                            style: TabViewStyle {
-                        //                                frameOverlap: 1
-                        //                                tabOverlap:1
-                        //                                tabsAlignment:Qt.AlignLeft
-                        //                                tab: Rectangle {
-                        //                                    color: styleData.selected ? "green" :"white"
-                        //                                    border.color:  "green"
-                        //                                    implicitWidth: Math.max(text.width + 4, 80)
-                        //                                    implicitHeight: 20
-                        //                                    radius: 2
-                        //                                    Text {
-                        //                                        id: text
-                        //                                        anchors.centerIn: parent
-                        //                                        text: styleData.title
-                        //                                        color: styleData.selected ? "white" : "black"
-                        //                                    }
-                        //                                }
-                        //                                frame: Rectangle { color: "black" }
-                        //                            }
-
-                        //                        }
-                        //                        Rectangle{
-                        //                            id:screen3
-                        //                            width: widthScreen * 0.42
-                        //                            height: (heightScreen *0.90)/2 - 5/2
-                        //                            border.color: "#6fda9c"
-                        //                            border.width: 2
-                        //                            color: "#344955"
-                        //                            radius: 15
-
-
-                        //                            MediaPlayer {
-                        //                                id: videoPlayer2
-                        //                                muted: true
-                        //                                autoPlay: true
-
-                        //                                playlist: Playlist {
-                        //                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam2" }
-                        //                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam1" }
-                        //                                    PlaylistItem { source: "rtsp://10.223.240.0:8554/cam3" }
-                        //                                }
-                        //                                //                                        playlist: Playlist {
-                        //                                //                                            PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                        //                                //                                            PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                        //                                //                                            PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                        //                                //                                        }
-                        //                            }
-
-                        //                            VideoOutput {
-                        //                                id: camera2
-                        //                                anchors.fill: parent
-                        //                                source: videoPlayer2
-                        //                                fillMode: VideoOutput.PreserveAspectCrop
-
-                        //                                function save() {
-
-                        //                                    fullScreenRect.visible = true
-                        //                                    fullScreenView.enabled = true
-                        //                                    full_cam=arrange_cam[2]
-                        //                                    fullScreenView.sourceItem = camera2
-                        //                                    fullScreenView.save()
-                        //                                    fullScreenRect.visible = false
-                        //                                    fullScreenView.enabled = false
-                        //                                    publisher.call_capImg(arrange_cam[2])
-
-                        //                                }
-                        //                            }
-
-                        //                            Component.onCompleted: {
-                        //                                videoPlayer2.playlist.currentIndex = 2;
-                        //                                videoPlayer2.play();
-                        //                            }
-                        //                            Rectangle{
-                        //                                id:videoToolBar3
-                        //                                anchors.bottom: parent.bottom
-                        //                                width: parent.width
-                        //                                height: parent.height*0.1
-                        //                                opacity: 0.5
-                        //                            }
-                        //                            RowLayout{
-                        //                                anchors.fill:videoToolBar3
-                        //                                Item {
-                        //                                    width: 50
-                        //                                }
-
-                        //                                Item{
-                        //                                    Layout.fillHeight: true
-                        //                                    width: 30
-                        //                                    Button {
-                        //                                        id: btnON2
-                        //                                        text : "Record"
-                        //                                        width : 100
-                        //                                        height : 25
-                        //                                        anchors.centerIn: parent
-
-                        //                                        background: Rectangle {
-                        //                                            color:"#6fda9c"
-                        //                                            radius: 8
-                        //                                        }
-
-                        //                                        onClicked: {
-                        //                                            demo.gstRecord2("Recording...");
-
-                        //                                            btnON2.text = "recording...";
-
-                        //                                        }
-                        //                                    }
-                        //                                }
-                        //                                Item {
-                        //                                    width: 100
-                        //                                }
-                        //                                Item{
-                        //                                    Layout.fillHeight: true
-                        //                                    width: 30
-                        //                                    Button {
-                        //                                        id: btnSTOP2
-                        //                                        text : "Stop"
-                        //                                        width : 100
-                        //                                        height : 25
-                        //                                        anchors.centerIn: parent
-                        //                                        background: Rectangle {
-                        //                                            color:"#6fda9c"
-                        //                                            radius: 8
-                        //                                        }
-
-                        //                                        onClicked: {
-
-                        //                                            demo.gstStop2("Stop");
-                        //                                            btnON2.text = "Record";
-                        //                                        }
-                        //                                    }
-                        //                                }
-                        //                                Item {
-                        //                                    Layout.fillWidth: true
-                        //                                }
-                        //                                Item{
-                        //                                    Layout.fillHeight: true
-                        //                                    width: 30
-                        //                                    Image {
-                        //                                        id:swap2
-                        //                                        sourceSize.width: 25
-                        //                                        sourceSize.height: 25
-                        //                                        anchors.centerIn: parent
-                        //                                        source: "qrc:/UI/Assets/dashboard/swap.png"
-                        //                                    }
-                        //                                    MouseArea{
-                        //                                        anchors.fill: parent
-                        //                                        onClicked: {
-                        //                                            //swap main and third cam
-                        //                                            swapCam(2)
-
-
-                        //                                        }
-                        //                                    }
-                        //                                }
-                        //                                Item{
-                        //                                    width:5
-                        //                                }
-                        //                                Item{
-                        //                                    Layout.fillHeight: true
-                        //                                    width: 30
-                        //                                    Image {
-                        //                                        id:captureIcon3Id
-                        //                                        sourceSize.width: 25
-                        //                                        sourceSize.height: 25
-                        //                                        anchors.centerIn: parent
-                        //                                        source: "qrc:/UI/Assets/dashboard/capture.png"
-                        //                                    }
-
-
-
-                        //                                    MouseArea{
-                        //                                        anchors.fill: parent
-                        //                                        onClicked: {
-                        //                                            camera2.save()
-
-
-                        //                                        }
-                        //                                    }
-                        //                                }
-                        //                                Item{
-                        //                                    width:5
-                        //                                }
-                        //                                Item{
-                        //                                    Layout.fillHeight: true
-                        //                                    width: 30
-                        //                                    Image {
-                        //                                        id:screenSizeIcon3Id
-                        //                                        sourceSize.width: 25
-                        //                                        sourceSize.height: 25
-                        //                                        anchors.centerIn: parent
-                        //                                        source: "qrc:/UI/Assets/dashboard/expand.png"
-                        //                                    }
-
-                        //                                    MouseArea{
-                        //                                        anchors.fill: parent
-
-                        //                                        onClicked: {
-                        //                                            fullScreenRect.visible = true
-                        //                                            fullScreenView.enabled = true
-                        //                                            fullScreenView.sourceItem = camera2
-                        //                                            full_cam=3
-                        //                                        }
-                        //                                    }
-                        //                                }
-
-                        //                                Item {
-                        //                                    width:5
-                        //                                }
-                        //                            }
-
-                        //                        }
 
                     }
                 }
