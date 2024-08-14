@@ -111,6 +111,11 @@ public slots:
     void setComStatus(int value);
     void commCallback(int value);
 
+    QString getposval();
+    QString getnegval();
+    void setposval(QString value);
+    void setnegval(QString value);
+
 
 
     int getangularspeedValue();
@@ -341,6 +346,9 @@ signals:
     void value10(int value);
     void value11(int value);
     void value12(int value);
+
+    void posvalValueChanged();
+    void negvalValueChanged();
 
 
 
