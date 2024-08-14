@@ -1648,6 +1648,7 @@ Rectangle{
                                     }
 
                                     TextField {
+                                        id:angleTextField
                                         Layout.fillWidth: true
                                         Layout.fillHeight: true
                                         font.family: "Tahoma"
@@ -1668,7 +1669,15 @@ Rectangle{
                                                 // Additional logic to handle the angle value change
                                             }
                                         }
+                                        onAccepted: {
+                                               // Lock the TextField when Enter is pressed
+                                               readOnly = true; // Make the TextField read-only instead of disabling it to keep the text visible and styled
+                                               // Additional logic to handle the acceptance of the entered value
+                                           }
+
                                     }
+
+
 
                                     SButton {
                                         property bool isPressed: false
@@ -1682,6 +1691,24 @@ Rectangle{
                                         anchors.bottomMargin: 5
                                         onClicked: {
                                             isPressed = !isPressed
+                                            // Add your button click handling logic here
+                                        }
+                                    }
+
+                                    SButton {
+                                        property bool isPressed: false
+                                        width: parent.width * 0.5
+                                        height: parent.height * 0.27 // Set the height to match the replaced Item
+                                        name: "Unlock"
+                                        baseColor:  isPressed ? "green" : buttonBg
+                                        borderColor: blue
+                                        anchors.right:parent.right// Center horizontally
+                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
+                                        anchors.bottomMargin: 5
+                                        onClicked: {
+                                                     angleTextField.readOnly = false; // Unlock the TextField for editing
+                                                     angleTextField.focus = true; // Optionally, set focus to the TextField for immediate editing
+
                                             // Add your button click handling logic here
                                         }
                                     }
@@ -1789,6 +1816,7 @@ Rectangle{
                                   }
 
                                   TextField {
+                                      id:secondTextField
                                       Layout.fillWidth: true
                                       Layout.fillHeight: true
                                       font.family: "Tahoma"
@@ -1798,7 +1826,7 @@ Rectangle{
                                       verticalAlignment: TextInput.AlignVCenter
                                       horizontalAlignment: TextInput.AlignHCenter
                                       placeholderText: "(20-50)"
-                                      validator: IntValidator { bottom: 0; top: 360 } // Ensure input is between 0 and 360
+                                      validator: IntValidator { bottom: 20; top: 50 } // Ensure input is between 0 and 360
                                       inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
 
                                       // Optional: Handle text change to update the publisher's angle value
@@ -1809,6 +1837,12 @@ Rectangle{
                                               // Additional logic to handle the angle value change
                                           }
                                       }
+                                      onAccepted: {
+                                             // Lock the TextField when Enter is pressed
+                                             readOnly = true; // Make the TextField read-only instead of disabling it to keep the text visible and styled
+                                             // Additional logic to handle the acceptance of the entered value
+                                         }
+
                                   }
 
                                   SButton {
@@ -1823,6 +1857,23 @@ Rectangle{
                                       anchors.bottomMargin: 5
                                       onClicked: {
                                           isPressed = !isPressed
+                                          // Add your button click handling logic here
+                                      }
+                                  }
+                                  SButton {
+                                      property bool isPressed: false
+                                      width: parent.width * 0.5
+                                      height: parent.height * 0.27 // Set the height to match the replaced Item
+                                      name: "Unlock"
+                                      baseColor:  isPressed ? "green" : buttonBg
+                                      borderColor: blue
+                                      anchors.right:parent.right// Center horizontally
+                                      anchors.bottom: parent.bottom // Align to the bottom of the parent
+                                      anchors.bottomMargin: 5
+                                      onClicked: {
+                                                   secondTextField.readOnly = false; // Unlock the TextField for editing
+                                                   secondTextField.focus = true; // Optionally, set focus to the TextField for immediate editing
+
                                           // Add your button click handling logic here
                                       }
                                   }
