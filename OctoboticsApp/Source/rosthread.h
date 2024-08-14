@@ -58,6 +58,8 @@ public slots:
     void addLine(QString newLine);
     void automodePub(int value);
     //ros publishers
+    void pos_angle (QString value);
+    void neg_angle (QString value);
 
 
     //ros subscribers

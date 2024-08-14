@@ -42,6 +42,8 @@ void RosThread::run()
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
+    pos_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/positive_angle");
+    neg_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/negative_angle");
     automode_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/navigation_control",1);
 
 
@@ -553,6 +555,16 @@ void RosThread::slideCW(int value)
 
         }
     } 
+}
+
+void RosThread::pos_angle(QString value)
+{
+
+}
+
+void RosThread::neg_angle(QString value)
+{
+
 }
 
 void RosThread::slideCCW(int value)
