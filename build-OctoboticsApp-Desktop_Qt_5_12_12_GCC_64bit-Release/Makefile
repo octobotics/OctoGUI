@@ -279,6 +279,7 @@ DIST          = ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_pre.prf 
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_post.prf \
+		../OctoboticsApp/.qmake.stash \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/default_pre.prf \
@@ -501,6 +502,7 @@ Makefile: ../OctoboticsApp/OctoboticsApp.pro ../../../Qt5.12.12/5.12.12/gcc_64/m
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/toolchain.prf \
 		../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/default_pre.prf \
@@ -698,6 +700,7 @@ Makefile: ../OctoboticsApp/OctoboticsApp.pro ../../../Qt5.12.12/5.12.12/gcc_64/m
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/qt_config.prf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/toolchain.prf:
 ../../../Qt5.12.12/5.12.12/gcc_64/mkspecs/features/default_pre.prf:
@@ -2141,6 +2144,10 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
@@ -2381,6 +2388,10 @@ moc_publisher.cpp: ../OctoboticsApp/Source/publisher.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
@@ -3112,6 +3123,10 @@ moc_rosthread.cpp: ../OctoboticsApp/Source/rosthread.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
@@ -4096,6 +4111,10 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
@@ -4723,6 +4742,10 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
@@ -6584,6 +6607,10 @@ customplotitem.o: ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/So
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
@@ -6760,6 +6787,10 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int16.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int32.h \
 		../OctoboticsApp/ros_lib/include/std_msgs/Int64.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBool.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
+		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
 		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \

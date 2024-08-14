@@ -82,7 +82,12 @@ public slots:
     //ros service clients
     void sendToolData(QString value);
     void crawlerInitSrv(int value);
+
+    //------------------------Auto Mode--------------
     void stopautoSrv(int value);
+    void initautoSrv(int value);
+
+    //----------------------------------------------
     void reset_crawler(int val);
     void shutdown_crawler(int val);
 
@@ -148,7 +153,11 @@ signals:
     void stopArm(bool k );
     void rstArm(bool k);
     void initCrawler(bool k);
+
+    //-----------------Auto Mode---------------------
     void stopauto(bool k);
+    void initauto(bool k);
+    //-----------------Auto Mode---------------------
     void stopCrawler(bool k );
     void rstCrawler(bool k);
     void shdCrawler(bool k);
@@ -195,6 +204,9 @@ private:
     ros::ServiceClient crawler_speed_Increase_;
     ros::ServiceClient crawler_speed_Decrease_;
     ros::ServiceClient joystickonoff_;
+
+    //-------------------------Auto Mode---------------
+    ros::ServiceClient initauto_;
     ros::ServiceClient stopauto_;
 
     ros::ServiceClient hzl_slide_cw_;

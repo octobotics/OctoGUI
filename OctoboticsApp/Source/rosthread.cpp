@@ -434,6 +434,29 @@ void RosThread::stopautoSrv(int val)
     }
 }
 
+void RosThread::initautoSrv(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+
+        initauto_.call(b);
+        if (b.response.success){
+
+            emit initauto(1);
+
+        }
+        else {
+            qDebug()<<"BT NOT Running";
+
+            emit initauto(0);
+
+
+        }
+    }
+}
+
 /*!
  * \brief RosThread::reset_crawler calls a service to reset crawler
  * \param val trigger value

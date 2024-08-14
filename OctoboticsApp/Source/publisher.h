@@ -63,6 +63,7 @@ class Publisher : public QObject
     Q_PROPERTY(bool stopCrawlerValue READ getStopCrawlerValue WRITE setStopCrawlerValue NOTIFY stopCrawlerValueChanged)
     Q_PROPERTY(bool rstCrawlerValue READ getRstCrawlerValue WRITE setRstCrawlerValue NOTIFY rstCrawlerValueChanged)
     Q_PROPERTY(bool stopautoValue READ getstopautoValue WRITE setstopautoValue NOTIFY stopautoValueChanged)
+    Q_PROPERTY(bool initautoValue READ getinitautoValue WRITE setinitautoValue NOTIFY initautoValueChanged)
     Q_PROPERTY(bool shdCrawlerValue READ getshdCrawlerValue WRITE setshdCrawlerValue NOTIFY shdCrawlerValueChanged)
     Q_PROPERTY(bool rstwaterlevelValue READ getrstwaterlevelValue WRITE setshdCrawlerValue NOTIFY shdCrawlerValueChanged)
     Q_PROPERTY(QVector<int> errValue READ getErrValue WRITE setErrValue NOTIFY errValueChanged)
@@ -213,7 +214,9 @@ public slots:
     bool getshdCrawlerValue();
     void setshdCrawlerValue(bool k);
     void setstopautoValue(bool k);
+    void setinitautoValue(bool k);
     bool getstopautoValue();
+    bool getinitautoValue();
 
     bool getrstwaterlevelValue();
     void setrstwaterlevelValue(bool k);
@@ -257,7 +260,9 @@ public slots:
 
     void initCrawler(bool k);
     void stopCrawler(bool k );
+    //-----------------------Auto Mode ----------------------
     void stopautop(bool k);
+    void initautop(bool k);
     void rstCrawler(bool k);
     //void shdCrawler(bool k);
     //void rstwaterlevel(bool k);
@@ -313,8 +318,10 @@ public slots:
     //image
 //    void call_capImg(int val);
 
+    //----------------------------------Auto Mode----------------------
     void call_automode(int val);
     void call_stopautomode(int val);
+    void call_initautomode(int val);
 
 signals:
     void message(QString msg);
@@ -371,6 +378,7 @@ signals:
     void rstArmValueChanged(bool value);
     void stopArmValueChanged(bool value);
     void stopautoValueChanged(bool value);
+    void initautoValueChanged(bool value);
     void rstArm(int value);
     void trigArmStatusValueChanged();
     void armStatusChanged(QVector<int> status);
@@ -406,8 +414,10 @@ signals:
     void uidChanged(QVector<QString> value);
 
     //image capture
-//    void capImg(int value);
+    //    void capImg(int value);
 
+    //-------------------AUTO MODE------------------------------
+    void initautoSrvp(int value);
     void automode(int value);
     void stopautoSrvp(int value);
 private:
@@ -427,6 +437,7 @@ private:
     bool m_stopCrawlerValue;
     bool m_rstCrawlerValue;
     bool m_shdCrawlerValue;
+    bool m_initautoValue;
     bool m_stopautoValue;
     bool m_rstwaterlevelValue;
     bool m_cameraInit;

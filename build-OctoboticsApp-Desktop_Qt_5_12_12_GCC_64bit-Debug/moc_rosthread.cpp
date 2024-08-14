@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RosThread_t {
-    QByteArrayData data[89];
-    char stringdata0[1134];
+    QByteArrayData data[91];
+    char stringdata0[1155];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -87,40 +87,42 @@ QT_MOC_LITERAL(51, 539, 7), // "stopArm"
 QT_MOC_LITERAL(52, 547, 6), // "rstArm"
 QT_MOC_LITERAL(53, 554, 11), // "initCrawler"
 QT_MOC_LITERAL(54, 566, 8), // "stopauto"
-QT_MOC_LITERAL(55, 575, 11), // "stopCrawler"
-QT_MOC_LITERAL(56, 587, 10), // "rstCrawler"
-QT_MOC_LITERAL(57, 598, 10), // "shdCrawler"
-QT_MOC_LITERAL(58, 609, 10), // "cameraInit"
-QT_MOC_LITERAL(59, 620, 13), // "rstwaterlevel"
-QT_MOC_LITERAL(60, 634, 7), // "addLine"
-QT_MOC_LITERAL(61, 642, 7), // "newLine"
-QT_MOC_LITERAL(62, 650, 11), // "automodePub"
-QT_MOC_LITERAL(63, 662, 25), // "std_msgs::Int32::ConstPtr"
-QT_MOC_LITERAL(64, 688, 3), // "msg"
-QT_MOC_LITERAL(65, 692, 27), // "std_msgs::Float32::ConstPtr"
-QT_MOC_LITERAL(66, 720, 25), // "std_msgs::Int16::ConstPtr"
-QT_MOC_LITERAL(67, 746, 22), // "std_msgs::Int8ConstPtr"
-QT_MOC_LITERAL(68, 769, 29), // "my_actuator::vitals::ConstPtr"
-QT_MOC_LITERAL(69, 799, 30), // "octo_qt::ang_lin_arr::ConstPtr"
-QT_MOC_LITERAL(70, 830, 32), // "geometry_msgs::Vector3::ConstPtr"
-QT_MOC_LITERAL(71, 863, 39), // "launch_crawler::SerialNumbers..."
-QT_MOC_LITERAL(72, 903, 15), // "batteryCallback"
-QT_MOC_LITERAL(73, 919, 33), // "stm_client::tool_status::Requ..."
-QT_MOC_LITERAL(74, 953, 3), // "req"
-QT_MOC_LITERAL(75, 957, 34), // "stm_client::tool_status::Resp..."
-QT_MOC_LITERAL(76, 992, 3), // "res"
-QT_MOC_LITERAL(77, 996, 12), // "sendToolData"
-QT_MOC_LITERAL(78, 1009, 14), // "crawlerInitSrv"
-QT_MOC_LITERAL(79, 1024, 11), // "stopautoSrv"
-QT_MOC_LITERAL(80, 1036, 13), // "reset_crawler"
-QT_MOC_LITERAL(81, 1050, 3), // "val"
-QT_MOC_LITERAL(82, 1054, 16), // "shutdown_crawler"
-QT_MOC_LITERAL(83, 1071, 11), // "reset_water"
-QT_MOC_LITERAL(84, 1083, 13), // "joystickonoff"
-QT_MOC_LITERAL(85, 1097, 14), // "checkArmStatus"
-QT_MOC_LITERAL(86, 1112, 9), // "reset_arm"
-QT_MOC_LITERAL(87, 1122, 7), // "saveImg"
-QT_MOC_LITERAL(88, 1130, 3) // "img"
+QT_MOC_LITERAL(55, 575, 8), // "initauto"
+QT_MOC_LITERAL(56, 584, 11), // "stopCrawler"
+QT_MOC_LITERAL(57, 596, 10), // "rstCrawler"
+QT_MOC_LITERAL(58, 607, 10), // "shdCrawler"
+QT_MOC_LITERAL(59, 618, 10), // "cameraInit"
+QT_MOC_LITERAL(60, 629, 13), // "rstwaterlevel"
+QT_MOC_LITERAL(61, 643, 7), // "addLine"
+QT_MOC_LITERAL(62, 651, 7), // "newLine"
+QT_MOC_LITERAL(63, 659, 11), // "automodePub"
+QT_MOC_LITERAL(64, 671, 25), // "std_msgs::Int32::ConstPtr"
+QT_MOC_LITERAL(65, 697, 3), // "msg"
+QT_MOC_LITERAL(66, 701, 27), // "std_msgs::Float32::ConstPtr"
+QT_MOC_LITERAL(67, 729, 25), // "std_msgs::Int16::ConstPtr"
+QT_MOC_LITERAL(68, 755, 22), // "std_msgs::Int8ConstPtr"
+QT_MOC_LITERAL(69, 778, 29), // "my_actuator::vitals::ConstPtr"
+QT_MOC_LITERAL(70, 808, 30), // "octo_qt::ang_lin_arr::ConstPtr"
+QT_MOC_LITERAL(71, 839, 32), // "geometry_msgs::Vector3::ConstPtr"
+QT_MOC_LITERAL(72, 872, 39), // "launch_crawler::SerialNumbers..."
+QT_MOC_LITERAL(73, 912, 15), // "batteryCallback"
+QT_MOC_LITERAL(74, 928, 33), // "stm_client::tool_status::Requ..."
+QT_MOC_LITERAL(75, 962, 3), // "req"
+QT_MOC_LITERAL(76, 966, 34), // "stm_client::tool_status::Resp..."
+QT_MOC_LITERAL(77, 1001, 3), // "res"
+QT_MOC_LITERAL(78, 1005, 12), // "sendToolData"
+QT_MOC_LITERAL(79, 1018, 14), // "crawlerInitSrv"
+QT_MOC_LITERAL(80, 1033, 11), // "stopautoSrv"
+QT_MOC_LITERAL(81, 1045, 11), // "initautoSrv"
+QT_MOC_LITERAL(82, 1057, 13), // "reset_crawler"
+QT_MOC_LITERAL(83, 1071, 3), // "val"
+QT_MOC_LITERAL(84, 1075, 16), // "shutdown_crawler"
+QT_MOC_LITERAL(85, 1092, 11), // "reset_water"
+QT_MOC_LITERAL(86, 1104, 13), // "joystickonoff"
+QT_MOC_LITERAL(87, 1118, 14), // "checkArmStatus"
+QT_MOC_LITERAL(88, 1133, 9), // "reset_arm"
+QT_MOC_LITERAL(89, 1143, 7), // "saveImg"
+QT_MOC_LITERAL(90, 1151, 3) // "img"
 
     },
     "RosThread\0waterCallback\0\0level\0"
@@ -139,10 +141,11 @@ QT_MOC_LITERAL(88, 1130, 3) // "img"
     "velstatusCallback\0speedsetting\0"
     "angularspeedCallback\0angularspeed\0"
     "stopArm\0rstArm\0initCrawler\0stopauto\0"
-    "stopCrawler\0rstCrawler\0shdCrawler\0"
-    "cameraInit\0rstwaterlevel\0addLine\0"
-    "newLine\0automodePub\0std_msgs::Int32::ConstPtr\0"
-    "msg\0std_msgs::Float32::ConstPtr\0"
+    "initauto\0stopCrawler\0rstCrawler\0"
+    "shdCrawler\0cameraInit\0rstwaterlevel\0"
+    "addLine\0newLine\0automodePub\0"
+    "std_msgs::Int32::ConstPtr\0msg\0"
+    "std_msgs::Float32::ConstPtr\0"
     "std_msgs::Int16::ConstPtr\0"
     "std_msgs::Int8ConstPtr\0"
     "my_actuator::vitals::ConstPtr\0"
@@ -152,9 +155,10 @@ QT_MOC_LITERAL(88, 1130, 3) // "img"
     "batteryCallback\0stm_client::tool_status::Request&\0"
     "req\0stm_client::tool_status::Response&\0"
     "res\0sendToolData\0crawlerInitSrv\0"
-    "stopautoSrv\0reset_crawler\0val\0"
-    "shutdown_crawler\0reset_water\0joystickonoff\0"
-    "checkArmStatus\0reset_arm\0saveImg\0img"
+    "stopautoSrv\0initautoSrv\0reset_crawler\0"
+    "val\0shutdown_crawler\0reset_water\0"
+    "joystickonoff\0checkArmStatus\0reset_arm\0"
+    "saveImg\0img"
 };
 #undef QT_MOC_LITERAL
 
@@ -164,86 +168,88 @@ static const uint qt_meta_data_RosThread[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      70,   14, // methods
+      72,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      36,       // signalCount
+      37,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  364,    2, 0x06 /* Public */,
-       4,    1,  367,    2, 0x06 /* Public */,
-       6,    1,  370,    2, 0x06 /* Public */,
-       7,    1,  373,    2, 0x06 /* Public */,
-       8,    1,  376,    2, 0x06 /* Public */,
-      10,    1,  379,    2, 0x06 /* Public */,
-      13,    1,  382,    2, 0x06 /* Public */,
-      15,    1,  385,    2, 0x06 /* Public */,
-      17,    1,  388,    2, 0x06 /* Public */,
-      19,    1,  391,    2, 0x06 /* Public */,
-      21,    4,  394,    2, 0x06 /* Public */,
-      26,    1,  403,    2, 0x06 /* Public */,
-      28,    1,  406,    2, 0x06 /* Public */,
-      31,    1,  409,    2, 0x06 /* Public */,
-      33,    1,  412,    2, 0x06 /* Public */,
-      35,    1,  415,    2, 0x06 /* Public */,
-      37,    1,  418,    2, 0x06 /* Public */,
-      38,    1,  421,    2, 0x06 /* Public */,
-      39,    1,  424,    2, 0x06 /* Public */,
-      40,    1,  427,    2, 0x06 /* Public */,
-      41,    1,  430,    2, 0x06 /* Public */,
-      43,    1,  433,    2, 0x06 /* Public */,
-      44,    1,  436,    2, 0x06 /* Public */,
-      45,    1,  439,    2, 0x06 /* Public */,
-      46,    1,  442,    2, 0x06 /* Public */,
-      47,    1,  445,    2, 0x06 /* Public */,
-      49,    1,  448,    2, 0x06 /* Public */,
-      51,    1,  451,    2, 0x06 /* Public */,
-      52,    1,  454,    2, 0x06 /* Public */,
-      53,    1,  457,    2, 0x06 /* Public */,
-      54,    1,  460,    2, 0x06 /* Public */,
-      55,    1,  463,    2, 0x06 /* Public */,
-      56,    1,  466,    2, 0x06 /* Public */,
-      57,    1,  469,    2, 0x06 /* Public */,
-      58,    1,  472,    2, 0x06 /* Public */,
-      59,    1,  475,    2, 0x06 /* Public */,
+       1,    1,  374,    2, 0x06 /* Public */,
+       4,    1,  377,    2, 0x06 /* Public */,
+       6,    1,  380,    2, 0x06 /* Public */,
+       7,    1,  383,    2, 0x06 /* Public */,
+       8,    1,  386,    2, 0x06 /* Public */,
+      10,    1,  389,    2, 0x06 /* Public */,
+      13,    1,  392,    2, 0x06 /* Public */,
+      15,    1,  395,    2, 0x06 /* Public */,
+      17,    1,  398,    2, 0x06 /* Public */,
+      19,    1,  401,    2, 0x06 /* Public */,
+      21,    4,  404,    2, 0x06 /* Public */,
+      26,    1,  413,    2, 0x06 /* Public */,
+      28,    1,  416,    2, 0x06 /* Public */,
+      31,    1,  419,    2, 0x06 /* Public */,
+      33,    1,  422,    2, 0x06 /* Public */,
+      35,    1,  425,    2, 0x06 /* Public */,
+      37,    1,  428,    2, 0x06 /* Public */,
+      38,    1,  431,    2, 0x06 /* Public */,
+      39,    1,  434,    2, 0x06 /* Public */,
+      40,    1,  437,    2, 0x06 /* Public */,
+      41,    1,  440,    2, 0x06 /* Public */,
+      43,    1,  443,    2, 0x06 /* Public */,
+      44,    1,  446,    2, 0x06 /* Public */,
+      45,    1,  449,    2, 0x06 /* Public */,
+      46,    1,  452,    2, 0x06 /* Public */,
+      47,    1,  455,    2, 0x06 /* Public */,
+      49,    1,  458,    2, 0x06 /* Public */,
+      51,    1,  461,    2, 0x06 /* Public */,
+      52,    1,  464,    2, 0x06 /* Public */,
+      53,    1,  467,    2, 0x06 /* Public */,
+      54,    1,  470,    2, 0x06 /* Public */,
+      55,    1,  473,    2, 0x06 /* Public */,
+      56,    1,  476,    2, 0x06 /* Public */,
+      57,    1,  479,    2, 0x06 /* Public */,
+      58,    1,  482,    2, 0x06 /* Public */,
+      59,    1,  485,    2, 0x06 /* Public */,
+      60,    1,  488,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      60,    1,  478,    2, 0x0a /* Public */,
-      62,    1,  481,    2, 0x0a /* Public */,
-      41,    1,  484,    2, 0x0a /* Public */,
-       1,    1,  487,    2, 0x0a /* Public */,
-       4,    1,  490,    2, 0x0a /* Public */,
-       6,    1,  493,    2, 0x0a /* Public */,
-      15,    1,  496,    2, 0x0a /* Public */,
-      17,    1,  499,    2, 0x0a /* Public */,
-      19,    1,  502,    2, 0x0a /* Public */,
-      21,    1,  505,    2, 0x0a /* Public */,
-      47,    1,  508,    2, 0x0a /* Public */,
-       8,    1,  511,    2, 0x0a /* Public */,
-      31,    1,  514,    2, 0x0a /* Public */,
-      28,    1,  517,    2, 0x0a /* Public */,
-      72,    1,  520,    2, 0x0a /* Public */,
-      33,    2,  523,    2, 0x0a /* Public */,
-      77,    1,  528,    2, 0x0a /* Public */,
-      78,    1,  531,    2, 0x0a /* Public */,
-      79,    1,  534,    2, 0x0a /* Public */,
-      80,    1,  537,    2, 0x0a /* Public */,
-      82,    1,  540,    2, 0x0a /* Public */,
-      43,    1,  543,    2, 0x0a /* Public */,
-      83,    1,  546,    2, 0x0a /* Public */,
-      37,    1,  549,    2, 0x0a /* Public */,
-      38,    1,  552,    2, 0x0a /* Public */,
-      44,    1,  555,    2, 0x0a /* Public */,
-      45,    1,  558,    2, 0x0a /* Public */,
-      84,    1,  561,    2, 0x0a /* Public */,
-      39,    1,  564,    2, 0x0a /* Public */,
-      40,    1,  567,    2, 0x0a /* Public */,
-      58,    1,  570,    2, 0x0a /* Public */,
-      85,    0,  573,    2, 0x0a /* Public */,
-      86,    1,  574,    2, 0x0a /* Public */,
-      87,    1,  577,    2, 0x0a /* Public */,
+      61,    1,  491,    2, 0x0a /* Public */,
+      63,    1,  494,    2, 0x0a /* Public */,
+      41,    1,  497,    2, 0x0a /* Public */,
+       1,    1,  500,    2, 0x0a /* Public */,
+       4,    1,  503,    2, 0x0a /* Public */,
+       6,    1,  506,    2, 0x0a /* Public */,
+      15,    1,  509,    2, 0x0a /* Public */,
+      17,    1,  512,    2, 0x0a /* Public */,
+      19,    1,  515,    2, 0x0a /* Public */,
+      21,    1,  518,    2, 0x0a /* Public */,
+      47,    1,  521,    2, 0x0a /* Public */,
+       8,    1,  524,    2, 0x0a /* Public */,
+      31,    1,  527,    2, 0x0a /* Public */,
+      28,    1,  530,    2, 0x0a /* Public */,
+      73,    1,  533,    2, 0x0a /* Public */,
+      33,    2,  536,    2, 0x0a /* Public */,
+      78,    1,  541,    2, 0x0a /* Public */,
+      79,    1,  544,    2, 0x0a /* Public */,
+      80,    1,  547,    2, 0x0a /* Public */,
+      81,    1,  550,    2, 0x0a /* Public */,
+      82,    1,  553,    2, 0x0a /* Public */,
+      84,    1,  556,    2, 0x0a /* Public */,
+      43,    1,  559,    2, 0x0a /* Public */,
+      85,    1,  562,    2, 0x0a /* Public */,
+      37,    1,  565,    2, 0x0a /* Public */,
+      38,    1,  568,    2, 0x0a /* Public */,
+      44,    1,  571,    2, 0x0a /* Public */,
+      45,    1,  574,    2, 0x0a /* Public */,
+      86,    1,  577,    2, 0x0a /* Public */,
+      39,    1,  580,    2, 0x0a /* Public */,
+      40,    1,  583,    2, 0x0a /* Public */,
+      59,    1,  586,    2, 0x0a /* Public */,
+      87,    0,  589,    2, 0x0a /* Public */,
+      88,    1,  590,    2, 0x0a /* Public */,
+      89,    1,  593,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Float,    3,
@@ -282,29 +288,31 @@ static const uint qt_meta_data_RosThread[] = {
     QMetaType::Void, QMetaType::Bool,   36,
     QMetaType::Void, QMetaType::Bool,   36,
     QMetaType::Void, QMetaType::Bool,   36,
+    QMetaType::Void, QMetaType::Bool,   36,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,   61,
+    QMetaType::Void, QMetaType::QString,   62,
     QMetaType::Void, QMetaType::Int,    5,
-    QMetaType::Void, 0x80000000 | 63,   64,
-    QMetaType::Void, 0x80000000 | 65,   64,
-    QMetaType::Void, 0x80000000 | 66,   64,
-    QMetaType::Void, 0x80000000 | 67,   64,
-    QMetaType::Void, 0x80000000 | 66,   64,
-    QMetaType::Void, 0x80000000 | 63,   64,
-    QMetaType::Void, 0x80000000 | 63,   64,
-    QMetaType::Void, 0x80000000 | 68,   64,
-    QMetaType::Void, 0x80000000 | 69,   64,
-    QMetaType::Void, 0x80000000 | 70,   64,
-    QMetaType::Void, 0x80000000 | 65,   64,
-    QMetaType::Void, 0x80000000 | 71,   64,
-    QMetaType::Void, 0x80000000 | 66,   64,
-    QMetaType::Bool, 0x80000000 | 73, 0x80000000 | 75,   74,   76,
+    QMetaType::Void, 0x80000000 | 64,   65,
+    QMetaType::Void, 0x80000000 | 66,   65,
+    QMetaType::Void, 0x80000000 | 67,   65,
+    QMetaType::Void, 0x80000000 | 68,   65,
+    QMetaType::Void, 0x80000000 | 67,   65,
+    QMetaType::Void, 0x80000000 | 64,   65,
+    QMetaType::Void, 0x80000000 | 64,   65,
+    QMetaType::Void, 0x80000000 | 69,   65,
+    QMetaType::Void, 0x80000000 | 70,   65,
+    QMetaType::Void, 0x80000000 | 71,   65,
+    QMetaType::Void, 0x80000000 | 66,   65,
+    QMetaType::Void, 0x80000000 | 72,   65,
+    QMetaType::Void, 0x80000000 | 67,   65,
+    QMetaType::Bool, 0x80000000 | 74, 0x80000000 | 76,   75,   77,
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
-    QMetaType::Void, QMetaType::Int,   81,
-    QMetaType::Void, QMetaType::Int,   81,
+    QMetaType::Void, QMetaType::Int,    5,
+    QMetaType::Void, QMetaType::Int,   83,
+    QMetaType::Void, QMetaType::Int,   83,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
@@ -316,8 +324,8 @@ static const uint qt_meta_data_RosThread[] = {
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   81,
-    QMetaType::Void, QMetaType::QString,   88,
+    QMetaType::Void, QMetaType::Int,   83,
+    QMetaType::Void, QMetaType::QString,   90,
 
        0        // eod
 };
@@ -359,46 +367,48 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 28: _t->rstArm((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 29: _t->initCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 30: _t->stopauto((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 31: _t->stopCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 32: _t->rstCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 33: _t->shdCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 34: _t->cameraInit((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 35: _t->rstwaterlevel((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 36: _t->addLine((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 37: _t->automodePub((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 38: _t->lacCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
-        case 39: _t->waterCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
-        case 40: _t->commCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
-        case 41: _t->armToolCallback((*reinterpret_cast< const std_msgs::Int8ConstPtr(*)>(_a[1]))); break;
-        case 42: _t->velCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
-        case 43: _t->odomCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
-        case 44: _t->tripCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
-        case 45: _t->crawlerCallback((*reinterpret_cast< const my_actuator::vitals::ConstPtr(*)>(_a[1]))); break;
-        case 46: _t->velstatusCallback((*reinterpret_cast< const octo_qt::ang_lin_arr::ConstPtr(*)>(_a[1]))); break;
-        case 47: _t->angleCallback((*reinterpret_cast< const geometry_msgs::Vector3::ConstPtr(*)>(_a[1]))); break;
-        case 48: _t->currentCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
-        case 49: _t->uidCallback((*reinterpret_cast< const launch_crawler::SerialNumbers::ConstPtr(*)>(_a[1]))); break;
-        case 50: _t->batteryCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
-        case 51: { bool _r = _t->toggleCallback((*reinterpret_cast< stm_client::tool_status::Request(*)>(_a[1])),(*reinterpret_cast< stm_client::tool_status::Response(*)>(_a[2])));
+        case 31: _t->initauto((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 32: _t->stopCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 33: _t->rstCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 34: _t->shdCrawler((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 35: _t->cameraInit((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 36: _t->rstwaterlevel((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 37: _t->addLine((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 38: _t->automodePub((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 39: _t->lacCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
+        case 40: _t->waterCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
+        case 41: _t->commCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
+        case 42: _t->armToolCallback((*reinterpret_cast< const std_msgs::Int8ConstPtr(*)>(_a[1]))); break;
+        case 43: _t->velCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
+        case 44: _t->odomCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
+        case 45: _t->tripCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
+        case 46: _t->crawlerCallback((*reinterpret_cast< const my_actuator::vitals::ConstPtr(*)>(_a[1]))); break;
+        case 47: _t->velstatusCallback((*reinterpret_cast< const octo_qt::ang_lin_arr::ConstPtr(*)>(_a[1]))); break;
+        case 48: _t->angleCallback((*reinterpret_cast< const geometry_msgs::Vector3::ConstPtr(*)>(_a[1]))); break;
+        case 49: _t->currentCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
+        case 50: _t->uidCallback((*reinterpret_cast< const launch_crawler::SerialNumbers::ConstPtr(*)>(_a[1]))); break;
+        case 51: _t->batteryCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
+        case 52: { bool _r = _t->toggleCallback((*reinterpret_cast< stm_client::tool_status::Request(*)>(_a[1])),(*reinterpret_cast< stm_client::tool_status::Response(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 52: _t->sendToolData((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 53: _t->crawlerInitSrv((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 54: _t->stopautoSrv((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 55: _t->reset_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 56: _t->shutdown_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 57: _t->resetTrip((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 58: _t->reset_water((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 59: _t->slideCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 60: _t->slideCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 61: _t->speedIncrease((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 62: _t->speedDecrease((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 63: _t->joystickonoff((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 64: _t->lacCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 65: _t->lacCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 66: _t->cameraInit((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 67: _t->checkArmStatus(); break;
-        case 68: _t->reset_arm((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 69: _t->saveImg((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 53: _t->sendToolData((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 54: _t->crawlerInitSrv((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 55: _t->stopautoSrv((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 56: _t->initautoSrv((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 57: _t->reset_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 58: _t->shutdown_crawler((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 59: _t->resetTrip((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 60: _t->reset_water((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 61: _t->slideCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 62: _t->slideCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 63: _t->speedIncrease((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 64: _t->speedDecrease((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 65: _t->joystickonoff((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 66: _t->lacCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 67: _t->lacCCW((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 68: _t->cameraInit((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 69: _t->checkArmStatus(); break;
+        case 70: _t->reset_arm((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 71: _t->saveImg((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -654,36 +664,43 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         }
         {
             using _t = void (RosThread::*)(bool );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::stopCrawler)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::initauto)) {
                 *result = 31;
                 return;
             }
         }
         {
             using _t = void (RosThread::*)(bool );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::rstCrawler)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::stopCrawler)) {
                 *result = 32;
                 return;
             }
         }
         {
             using _t = void (RosThread::*)(bool );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::shdCrawler)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::rstCrawler)) {
                 *result = 33;
                 return;
             }
         }
         {
             using _t = void (RosThread::*)(bool );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::cameraInit)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::shdCrawler)) {
                 *result = 34;
                 return;
             }
         }
         {
             using _t = void (RosThread::*)(bool );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::rstwaterlevel)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::cameraInit)) {
                 *result = 35;
+                return;
+            }
+        }
+        {
+            using _t = void (RosThread::*)(bool );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::rstwaterlevel)) {
+                *result = 36;
                 return;
             }
         }
@@ -719,13 +736,13 @@ int RosThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 70)
+        if (_id < 72)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 70;
+        _id -= 72;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 70)
+        if (_id < 72)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 70;
+        _id -= 72;
     }
     return _id;
 }
@@ -948,38 +965,45 @@ void RosThread::stopauto(bool _t1)
 }
 
 // SIGNAL 31
-void RosThread::stopCrawler(bool _t1)
+void RosThread::initauto(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 31, _a);
 }
 
 // SIGNAL 32
-void RosThread::rstCrawler(bool _t1)
+void RosThread::stopCrawler(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 32, _a);
 }
 
 // SIGNAL 33
-void RosThread::shdCrawler(bool _t1)
+void RosThread::rstCrawler(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 33, _a);
 }
 
 // SIGNAL 34
-void RosThread::cameraInit(bool _t1)
+void RosThread::shdCrawler(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 34, _a);
 }
 
 // SIGNAL 35
-void RosThread::rstwaterlevel(bool _t1)
+void RosThread::cameraInit(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 35, _a);
+}
+
+// SIGNAL 36
+void RosThread::rstwaterlevel(bool _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 36, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

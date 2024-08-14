@@ -122,6 +122,7 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
     connect(this->rost, SIGNAL(shdCrawler(bool)),this, SLOT(shdCrawler(bool)));
     connect(this->rost, SIGNAL(stopauto(bool)), this, SLOT(stopautop(bool)));
+    connect(this->rost, SIGNAL(initauto(bool)),this,SLOT(initautop(bool)));
     connect(this->rost, SIGNAL(rstwaterlevel(bool)),this,SLOT(rstwaterlevel(bool)));
     connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
     connect(this->rost, SIGNAL(odomCallback(int)), this, SLOT(odomCallback(int)));
@@ -131,7 +132,9 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
     connect(this,SIGNAL(shdCrawler(int)),this->rost, SLOT(shutdown_crawler(int)));
+    //------------------AUTO MODE---------------------------------------------
     connect(this,SIGNAL(stopautoSrvp(int)),this->rost, SLOT(stopautoSrv(int)));
+    connect(this,SIGNAL(initautoSrvp(int)),this->rost,SLOT(initautoSrv(int)));
     connect(this,SIGNAL(rstWaterLevel(int)),this->rost,SLOT(reset_water(int)));
 
     connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
@@ -205,10 +208,18 @@ void Publisher::call_automode(int val)
     emit automode(val);
 }
 
+//-------------------------AUTO MODE------------------------
+
+void Publisher::call_initautomode(int val)
+{
+    emit initautoSrvp(val);
+}
+
 void Publisher::call_stopautomode(int val)
 {
     emit stopautoSrvp(val);
 }
+
 
 //---------------------------- Water Level -------------------------------
 
@@ -561,9 +572,21 @@ void Publisher::setstopautoValue(bool flag)
     emit stopautoValueChanged(flag);
 }
 
+void Publisher::setinitautoValue(bool flag )
+{
+    m_initautoValue = flag;
+    emit initautoValueChanged(flag);
+
+}
+
 bool Publisher::getstopautoValue()
 {
     return m_stopautoValue;
+}
+
+bool Publisher::getinitautoValue()
+{
+    return m_initautoValue;
 }
 
 bool Publisher::getshdCrawlerValue()
@@ -795,6 +818,11 @@ void Publisher::rstCrawler(bool flag)
 void Publisher::stopautop(bool flag)
 {
     setstopautoValue(flag);
+}
+
+void Publisher::initautop(bool flag)
+{
+    setinitautoValue(flag);
 }
 
 

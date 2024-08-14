@@ -2353,6 +2353,21 @@ Rectangle{
                                 SButton{
                                     property bool isPressed: false
                                     height: 20
+                                    name:  "INIT AUTO MODE"
+                                    baseColor:  isPressed ? "red" : buttonBg
+                                    borderColor: buttonBg
+                                    implicitWidth:(widthScreen * 0.42)/2
+                                    onClicked: {
+                                        isPressed = !isPressed
+
+                                        publisher.call_initautomode(1)
+
+                                    }
+                                }
+
+                                SButton{
+                                    property bool isPressed: false
+                                    height: 20
                                     name:  "AUTO MODE"
                                     baseColor:  isPressed ? "red" : buttonBg
                                     borderColor: buttonBg
@@ -2496,7 +2511,7 @@ Rectangle{
                                     anchors.topMargin: 10
                                     Text {
                                         Layout.fillWidth: true
-                                        text: qsTr("Angle Value")
+                                        text: qsTr("Crawler Angle")
                                         font.family: "Tahoma"
                                         font.bold: true
                                         font.pixelSize: 24
