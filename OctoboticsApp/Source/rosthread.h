@@ -22,6 +22,7 @@
 #include "serialtoros/VDE_arr.h"
 #include "ros/ros.h"
 #include "std_msgs/Float32.h"
+#include "std_msgs/Float64.h"
 #include "octo_qt/float_array.h"
 #include "octo_qt/ang_lin_arr.h"
 #include "stm_client/tool_status.h"
@@ -45,6 +46,7 @@
 #include "stm_client/cam_array.h"
 #include "zed_interfaces/start_remote_stream.h"
 #include "zed_interfaces/stop_remote_stream.h"
+#include "hector_mapping/ResetMapping.h"
 
 /*!
  * \brief The RosThread class is a QThread to run a ros node
@@ -60,6 +62,7 @@ public slots:
     //ros publishers
     void pos_angle (QString value);
     void neg_angle (QString value);
+    void lat_angle (QString value);
 
 
     //ros subscribers
@@ -84,6 +87,7 @@ public slots:
     //ros service clients
     void sendToolData(QString value);
     void crawlerInitSrv(int value);
+    void resetMapping(int value);
 
     //------------------------Auto Mode--------------
     void stopautoSrv(int value);
@@ -155,6 +159,7 @@ signals:
     void stopArm(bool k );
     void rstArm(bool k);
     void initCrawler(bool k);
+    void resetmapping(bool k);
 
     //-----------------Auto Mode---------------------
     void stopauto(bool k);
@@ -174,6 +179,9 @@ private:
     ros::Publisher m_publisher;
     ros::Publisher vel_pub_;
     ros::Publisher automode_pub_ ;
+    ros::Publisher pos_angle_pub_;
+    ros::Publisher neg_angle_pub_;
+    ros::Publisher lat_angle_pub_;
 
 //    ros::Publisher img_cap_pub_;
 
@@ -199,6 +207,7 @@ private:
 
     // ros service client
     ros::ServiceClient send_tool_srv_;
+    ros::ServiceClient restart_mapping_srv_;
     ros::ServiceClient switch_grinder_srv_;
     ros::ServiceClient crawler_init_srv_;
     ros::ServiceClient crawler_stop_srv_;

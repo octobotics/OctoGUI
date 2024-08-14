@@ -42,8 +42,9 @@ void RosThread::run()
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
-    pos_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/positive_angle");
-    neg_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/negative_angle");
+    pos_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/positive_angle",10);
+    neg_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/negative_angle",10);
+    lat_angle_pub_ = m_nodeHandler->advertise<std_msgs::Float64>("/lateral_shift_stop_angle",10);
     automode_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/navigation_control",1);
 
 
@@ -70,6 +71,7 @@ void RosThread::run()
 
     //ros service clients
     send_tool_srv_ =  m_nodeHandler->serviceClient<stm_interface::RelayControl>("/relay_toggle_channel");
+    restart_mapping_srv_ = m_nodeHandler->serviceClient<hector_mapping::ResetMapping>("/restart_mapping_with_new_pose");
     switch_grinder_srv_ =  m_nodeHandler->serviceClient<std_srvs::Trigger>("/servo_trigger_channel");
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
@@ -259,35 +261,7 @@ void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
 }
 
 
-/*!
- * \brief RosThread::thicknessCallback gets thickness from ut serial node and displays on UI
- * \param msg
- */
 
-
-/*!
- * \brief RosThread::graphCallback gets graph values from UT serial node
- * \param msg
- */
-
-
-/*!
- * \brief RosThread::utCallback gets current velocity, deepcoat and echo values from UT serial node and displays in the UI
- * \param msg
- */
-
-
-
-/*!
- * \brief RosThread::fCallback gets force value from sensor
- * \param msg
- */
-
-
-/*!
- * \brief RosThread::currentCallback gets current value from stm32 and displays on UI
- * \param msg
- */
 void RosThread::currentCallback(const std_msgs::Float32::ConstPtr &msg)
 {
     auto current = msg->data * 2083.33;
@@ -370,6 +344,28 @@ void RosThread::sendToolData(QString value)
 
     }
 
+}
+
+void RosThread::resetMapping(int value)
+{
+    int k = value;
+    hector_mapping::ResetMapping b;
+    if(k) {
+            b.request.initial_pose.position.x = 0.0;
+            b.request.initial_pose.position.y = 0.0;
+            b.request.initial_pose.position.z = 0.0;
+            b.request.initial_pose.orientation.x = 0.0;
+            b.request.initial_pose.orientation.y = 0.0;
+            b.request.initial_pose.orientation.z = 0.0;
+            b.request.initial_pose.orientation.w = 2.0;
+            restart_mapping_srv_.call(b);
+            emit resetmapping(1);
+            }
+     else
+        emit resetmapping(0);
+
+
+    }
 }
 
 
@@ -559,11 +555,28 @@ void RosThread::slideCW(int value)
 
 void RosThread::pos_angle(QString value)
 {
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    pos_angle_pub_.publish(msg);
 
 }
 
 void RosThread::neg_angle(QString value)
 {
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    neg_angle_pub_.publish(msg);
+
+}
+
+void RosThread::lat_angle (QString value)
+{
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    lat_angle_pub_.publish(msg);
 
 }
 
