@@ -113,6 +113,7 @@ public slots:
 
     QString getposval();
     QString getnegval();
+
     void setposval(QString value);
     void setnegval(QString value);
 
@@ -309,8 +310,8 @@ public slots:
 
     //current
     float getCurrentValue();
-    void setCurrentValue(float value);
-    void currentCallback(float value);
+    void setCurrentValue(int value);
+    void currentCallback(int value);
 
     void waterCallback(float level);
 
@@ -418,7 +419,7 @@ signals:
     void angleValueChanged(int value);
 
     //current
-    void currentValueChanged(float value);
+    void currentValueChanged(int value);
 
 
     //unique id
@@ -456,7 +457,7 @@ private:
     int m_armToolStatus;
     int m_velocityValue;
     float m_batteryValue;
-    float m_currentValue;
+    int m_currentValue;
     float m_waterValue;
     int m_odom;
     int m_trip;

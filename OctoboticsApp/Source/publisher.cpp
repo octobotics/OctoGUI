@@ -47,7 +47,7 @@ Publisher::Publisher(QObject *parent)
     m_shdCrawlerValue = 0;
     m_stopautoValue = 0;
     m_rstwaterlevelValue = 0;
-    m_currentValue=0.0;
+    m_currentValue=0;
     m_velocityValue=0;
     m_odom = 0;
     m_lacValue=0;
@@ -160,7 +160,7 @@ void Publisher::initRosThread()
     connect(this->rost,SIGNAL(angleCallback(int)),this , SLOT(angleCallbackp(int)));
 
     // current
-    connect(this->rost, SIGNAL(currentCallback(float)), this, SLOT(currentCallback(float)));
+    connect(this->rost, SIGNAL(currentCallback(int)), this, SLOT(currentCallback(int)));
 
     connect(this->rost, SIGNAL(waterCallback(float)),this ,SLOT(waterCallback(float)));
 
@@ -890,7 +890,7 @@ void Publisher::setAngleValue(int value)
 }
 
 // current
-void Publisher::currentCallback(float value)
+void Publisher::currentCallback(int value)
 {
     setCurrentValue(value);
 }
@@ -902,7 +902,7 @@ float Publisher::getCurrentValue()
 }
 
 
-void Publisher::setCurrentValue(float value)
+void Publisher::setCurrentValue(int value)
 {
     m_currentValue = value;
     emit currentValueChanged(value);

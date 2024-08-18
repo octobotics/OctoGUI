@@ -882,7 +882,7 @@ Rectangle{
                                         Layout.alignment: Qt.AlignCenter
                                         onClicked: {
 
-                                            publisher.call_joystickonoff(isPressed ? 0 : 1);
+                                            publisher.call_joystickonoff(isPressed ? 1 : 0);
                                             isPressed = !isPressed
 
                                         }
@@ -999,7 +999,7 @@ Rectangle{
                             Text {
                                 Layout.fillWidth: true
                                 height: rectBox3.height * 0.2
-                                text: qsTr("Horizontal Slide Position")
+                                text: qsTr("Raster Speed ")
                                 font.family: "Tahoma"
                                 font.bold: true
                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
@@ -1638,7 +1638,7 @@ Rectangle{
                                     anchors.topMargin: 10
                                     Text {
                                         Layout.fillWidth: true
-                                        text: qsTr("+ Shell Angle")
+                                        text: qsTr("Step 1 Probe Dia")
                                         font.family: "Tahoma"
                                         font.bold: true
                                         font.pixelSize: 24
@@ -1657,15 +1657,15 @@ Rectangle{
                                         color: "orange"
                                         verticalAlignment: TextInput.AlignVCenter
                                         horizontalAlignment: TextInput.AlignHCenter
-                                        placeholderText: "(300-360)"
-                                        validator: IntValidator { bottom: 0; top: 360 } // Ensure input is between 0 and 360
+                                        placeholderText: "(10-60)"
+                                        validator: IntValidator { bottom: 10; top:60  } // Ensure input is between 0 and 360
                                         inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
 
                                         // Optional: Handle text change to update the publisher's angle value
                                         onTextChanged: {
                                             const angle = parseInt(text);
                                             if (!isNaN(angle) && angle >= 0 && angle <= 360) {
-                                                publisher.angleValue = angle;
+                                                publisher.posval = angle;
                                                 // Additional logic to handle the angle value change
                                             }
                                         }
@@ -1683,7 +1683,7 @@ Rectangle{
                                         property bool isPressed: false
                                         width: parent.width * 0.5
                                         height: parent.height * 0.27 // Set the height to match the replaced Item
-                                        name: "Set +Angle"
+                                        name: "Set Dia"
                                         baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
@@ -1691,7 +1691,7 @@ Rectangle{
                                         anchors.bottomMargin: 5
                                         onClicked: {
                                             isPressed = !isPressed
-                                            publisher.posval = angleTextField.text
+
                                             // Add your button click handling logic here
                                         }
                                     }
@@ -1736,8 +1736,10 @@ Rectangle{
                                     implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                         isPressed = !isPressed
+                                        stopCrawler()
 
-                                        publisher.call_initautomode(1)
+//                                        publisher.call_initautomode(1)
+
 
                                     }
                                 }
@@ -1807,7 +1809,7 @@ Rectangle{
                                   anchors.topMargin: 10
                                   Text {
                                       Layout.fillWidth: true
-                                      text: qsTr("- Shell Angle")
+                                      text: qsTr("Step 2 Stroke Length")
                                       font.family: "Tahoma"
                                       font.bold: true
                                       font.pixelSize: 24
@@ -1826,15 +1828,15 @@ Rectangle{
                                       color: "orange"
                                       verticalAlignment: TextInput.AlignVCenter
                                       horizontalAlignment: TextInput.AlignHCenter
-                                      placeholderText: "(20-50)"
-                                      validator: IntValidator { bottom: 20; top: 50 } // Ensure input is between 0 and 360
+                                      placeholderText: "(10-480)"
+                                      validator: IntValidator { bottom:10 ; top: 450 } // Ensure input is between 0 and 360
                                       inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
 
                                       // Optional: Handle text change to update the publisher's angle value
                                       onTextChanged: {
                                           const angle = parseInt(text);
-                                          if (!isNaN(angle) && angle >= 0 && angle <= 360) {
-                                              publisher.angleValue = angle;
+                                          if (!isNaN(angle) && angle >= 0 && angle <= 480) {
+                                              publisher.negval = angle;
                                               // Additional logic to handle the angle value change
                                           }
                                       }
@@ -1850,7 +1852,7 @@ Rectangle{
                                       property bool isPressed: false
                                       width: parent.width * 0.5
                                       height: parent.height * 0.27 // Set the height to match the replaced Item
-                                      name: "Set -Angle"
+                                      name: "Set Stroke"
                                       baseColor:  isPressed ? "green" : buttonBg
                                       borderColor: buttonBg
                                       anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
@@ -1858,7 +1860,7 @@ Rectangle{
                                       anchors.bottomMargin: 5
                                       onClicked: {
                                           isPressed = !isPressed
-                                          publisher.negval = secondTextField.text
+
                                           // Add your button click handling logic here
                                       }
                                   }

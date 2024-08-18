@@ -77,7 +77,7 @@ public slots:
     void velstatusCallback(const octo_qt::ang_lin_arr::ConstPtr &msg);
     void angleCallback(const geometry_msgs::Vector3::ConstPtr &msg);
 
-    void currentCallback(const std_msgs::Float32::ConstPtr &msg);
+    void currentCallback(const std_msgs::Int32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
     void batteryCallback(const std_msgs::Int16::ConstPtr &msg);
 
@@ -134,7 +134,7 @@ signals:
     void armCallback(QVector<int> arm_status);
 
     void uidCallback(QVector<QString> uid);
-    void currentCallback(float current);
+    void currentCallback(int current);
 
     void toggleCallback(bool flag);
     void trigImg(int k);

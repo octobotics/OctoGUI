@@ -275,7 +275,7 @@ static const uint qt_meta_data_RosThread[] = {
     QMetaType::Void, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool, QMetaType::Bool,   22,   23,   24,   25,
     QMetaType::Void, 0x80000000 | 11,   27,
     QMetaType::Void, 0x80000000 | 29,   30,
-    QMetaType::Void, QMetaType::Float,   32,
+    QMetaType::Void, QMetaType::Int,   32,
     QMetaType::Void, QMetaType::Bool,   34,
     QMetaType::Void, QMetaType::Int,   36,
     QMetaType::Void, QMetaType::Bool,   36,
@@ -317,7 +317,7 @@ static const uint qt_meta_data_RosThread[] = {
     QMetaType::Void, 0x80000000 | 73,   69,
     QMetaType::Void, 0x80000000 | 74,   69,
     QMetaType::Void, 0x80000000 | 75,   69,
-    QMetaType::Void, 0x80000000 | 70,   69,
+    QMetaType::Void, 0x80000000 | 68,   69,
     QMetaType::Void, 0x80000000 | 76,   69,
     QMetaType::Void, 0x80000000 | 71,   69,
     QMetaType::Bool, 0x80000000 | 78, 0x80000000 | 80,   79,   81,
@@ -364,7 +364,7 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 10: _t->crawlerCallback((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
         case 11: _t->armCallback((*reinterpret_cast< QVector<int>(*)>(_a[1]))); break;
         case 12: _t->uidCallback((*reinterpret_cast< QVector<QString>(*)>(_a[1]))); break;
-        case 13: _t->currentCallback((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 13: _t->currentCallback((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 14: _t->toggleCallback((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 15: _t->trigImg((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 16: _t->slideCW((*reinterpret_cast< bool(*)>(_a[1]))); break;
@@ -404,7 +404,7 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 50: _t->crawlerCallback((*reinterpret_cast< const my_actuator::vitals::ConstPtr(*)>(_a[1]))); break;
         case 51: _t->velstatusCallback((*reinterpret_cast< const octo_qt::ang_lin_arr::ConstPtr(*)>(_a[1]))); break;
         case 52: _t->angleCallback((*reinterpret_cast< const geometry_msgs::Vector3::ConstPtr(*)>(_a[1]))); break;
-        case 53: _t->currentCallback((*reinterpret_cast< const std_msgs::Float32::ConstPtr(*)>(_a[1]))); break;
+        case 53: _t->currentCallback((*reinterpret_cast< const std_msgs::Int32::ConstPtr(*)>(_a[1]))); break;
         case 54: _t->uidCallback((*reinterpret_cast< const launch_crawler::SerialNumbers::ConstPtr(*)>(_a[1]))); break;
         case 55: _t->batteryCallback((*reinterpret_cast< const std_msgs::Int16::ConstPtr(*)>(_a[1]))); break;
         case 56: { bool _r = _t->toggleCallback((*reinterpret_cast< stm_client::tool_status::Request(*)>(_a[1])),(*reinterpret_cast< stm_client::tool_status::Response(*)>(_a[2])));
@@ -557,7 +557,7 @@ void RosThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             }
         }
         {
-            using _t = void (RosThread::*)(float );
+            using _t = void (RosThread::*)(int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RosThread::currentCallback)) {
                 *result = 13;
                 return;
@@ -866,7 +866,7 @@ void RosThread::uidCallback(QVector<QString> _t1)
 }
 
 // SIGNAL 13
-void RosThread::currentCallback(float _t1)
+void RosThread::currentCallback(int _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 13, _a);

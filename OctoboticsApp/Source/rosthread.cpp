@@ -42,8 +42,8 @@ void RosThread::run()
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
-    pos_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/positive_angle",10);
-    neg_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/negative_angle",10);
+    pos_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/set_joint_angle_value",10);
+    neg_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int16>("/stroke_length",10);
     lat_angle_pub_ = m_nodeHandler->advertise<std_msgs::Float64>("/lateral_shift_stop_angle",10);
     automode_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/navigation_control",1);
 
@@ -59,7 +59,7 @@ void RosThread::run()
     velstatus_ = m_nodeHandler->subscribe<octo_qt::ang_lin_arr>("/vel_status",1,&RosThread::velstatusCallback,this);
 
 
-    current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/wire_value", 1, &RosThread::currentCallback, this);
+    current_sub_ = m_nodeHandler->subscribe<std_msgs::Int32>("/scan_speed", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
     lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
     voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1, &RosThread::batteryCallback,this);
@@ -81,8 +81,8 @@ void RosThread::run()
     stopauto_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/stop_auto");
     hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
     hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
-    crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/set_linear_velocity");
-    crawler_speed_Decrease_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/decrease_linear_velocity");
+    crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/increase_raster_speed");
+    crawler_speed_Decrease_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/decrease_raster_speed");
     joystickonoff_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_joy");
     camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
@@ -262,9 +262,9 @@ void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
 
 
 
-void RosThread::currentCallback(const std_msgs::Float32::ConstPtr &msg)
+void RosThread::currentCallback(const std_msgs::Int32::ConstPtr &msg)
 {
-    auto current = msg->data * 2083.33;
+    auto current = (msg->data)/3;
 
     emit currentCallback(current);
 }
@@ -538,7 +538,7 @@ void RosThread::slideCW(int value)
     if(k){
 
         qDebug() << "init Slide";
-        hzl_slide_cw_.call(b);
+        crawler_speed_Decrease_.call(b);
         emit slideCW(0);
         if (b.response.success){
             qDebug() << "Slider DeActivated";
@@ -587,7 +587,7 @@ void RosThread::slideCCW(int value)
     if(k){
 
         qDebug() << "init Slide";
-        hzl_slide_ccw_.call(b);
+        crawler_speed_Increase_.call(b);
         emit slideCCW(0);
         if (b.response.success){
             qDebug() << "Slider DeActivated";
@@ -684,8 +684,8 @@ void RosThread::lacCCW(int value)
 void RosThread::speedIncrease(int value)
 {
     int k = value;
-    std_srvs::SetBool b;
-    b.request.data = true;
+    std_srvs::Trigger b;
+
 
     if(k) {
         crawler_speed_Increase_.call(b);
@@ -708,8 +708,8 @@ void RosThread::speedIncrease(int value)
 void RosThread::speedDecrease(int value)
 {
     int k = value;
-    std_srvs::SetBool b;
-    b.request.data = true;
+    std_srvs::Trigger b;
+
 
     if(k) {
         crawler_speed_Decrease_.call(b);
