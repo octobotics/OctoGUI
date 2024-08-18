@@ -52,6 +52,7 @@ class Publisher : public QObject
     Q_PROPERTY(bool speedIncrease READ getspeedIncrease WRITE setspeedIncrease NOTIFY speedIncreaseValueChanged)
     Q_PROPERTY(bool speedDecrease READ getspeedDecrease WRITE setspeedDecrease NOTIFY speedDecreaseValueChanged)
     Q_PROPERTY(bool joystickonoff READ getjoystickonoff WRITE setjoystickonoff NOTIFY joystickonoffValueChanged)
+    Q_PROPERTY(bool abortauto READ getabortauto WRITE setabortauto NOTIFY abortautoValueChanged)
 
     Q_PROPERTY(bool lacCW READ getlacCWValue WRITE setlacCWValue NOTIFY lacCWValueChanged)
     Q_PROPERTY(bool lacCCW READ getlacCCWValue WRITE setlacCCWValue NOTIFY lacCCWValueChanged)
@@ -158,7 +159,9 @@ public slots:
     void setspeedIncrease(bool k);
 
     bool getjoystickonoff();
+    bool getabortauto();
     void setjoystickonoff(bool k);
+    void setabortauto(bool k);
 
     bool getspeedDecrease();
     void setspeedDecrease(bool k);
@@ -202,6 +205,7 @@ public slots:
     void speedIncrease(bool k);
     void speedDecrease(bool k);
     void joystickonoff(bool k);
+    void abortauto(bool k);
 
     void resetTrip(bool k);
 
@@ -256,6 +260,7 @@ public slots:
     void call_speedIncrease(int val);
     void call_speedDecrease(int val);
     void call_joystickonoff(int val);
+    void call_abortauto(int value);
 
     void call_resetTrip(int val);
     void call_resetWaterLevel(int val);
@@ -347,6 +352,7 @@ signals:
     void value10(int value);
     void value11(int value);
     void value12(int value);
+    void value13(int value);
 
     void posvalValueChanged(QString value);
     void negvalValueChanged(QString value);
@@ -373,6 +379,7 @@ signals:
     void speedIncreaseValueChanged(bool value);
     void speedDecreaseValueChanged(bool value);
     void joystickonoffValueChanged(bool value);
+    void abortautoValueChanged(bool value);
 
 
     void cameraInitValueChanged(bool value);
@@ -443,6 +450,7 @@ private:
     bool m_speedIncrease;
     bool m_speedDecrease;
     bool m_joystickonoff;
+    bool m_abortauto;
     bool m_rstArmValue;
     bool m_stopArmValue;
     bool m_initCrawlerValue;

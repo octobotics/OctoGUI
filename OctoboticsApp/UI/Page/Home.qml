@@ -1736,9 +1736,8 @@ Rectangle{
                                     implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                         isPressed = !isPressed
-                                        stopCrawler()
+                                         init_crawler(0)
 
-//                                        publisher.call_initautomode(1)
 
 
                                     }
@@ -1754,7 +1753,7 @@ Rectangle{
                                     onClicked: {
                                         isPressed = !isPressed
 
-                                        publisher.call_automode(1)
+                                        publisher.call_initautomode(1)
 
                                     }
                                 }
@@ -1767,6 +1766,7 @@ Rectangle{
                                     implicitWidth:(widthScreen * 0.42)/3
                                     onClicked: {
                                         isPressed = !isPressed
+                                        publisher.call_abortauto(1)
                                         publisher.call_automode(0)
                                         publisher.call_stopautomode(1)
                                         init_crawler(0)

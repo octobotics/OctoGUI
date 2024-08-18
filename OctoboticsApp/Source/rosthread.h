@@ -104,6 +104,7 @@ public slots:
     void speedIncrease(int value);
     void speedDecrease(int value);
     void joystickonoff(int value);
+    void abort(int value);
     void lacCW(int value);
     void lacCCW(int value);
     void cameraInit(int value);
@@ -151,7 +152,7 @@ signals:
     void speedIncrease(bool k);
     void speedDecrease(bool k);
     void joystickonoffb(bool k);
-    //--------------------------
+    void abortautob(bool k);    //--------------------------
 
     void velstatusCallback(int speedsetting);
     void angularspeedCallback(int angularspeed);
@@ -215,6 +216,7 @@ private:
     ros::ServiceClient crawler_speed_Increase_;
     ros::ServiceClient crawler_speed_Decrease_;
     ros::ServiceClient joystickonoff_;
+    ros::ServiceClient abort_;
 
     //-------------------------Auto Mode---------------
     ros::ServiceClient initauto_;

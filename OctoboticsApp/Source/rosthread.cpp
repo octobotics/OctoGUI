@@ -84,6 +84,7 @@ void RosThread::run()
     crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/increase_raster_speed");
     crawler_speed_Decrease_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/decrease_raster_speed");
     joystickonoff_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_joy");
+    abort_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/abort_behavior_tree");
     camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
 
@@ -757,6 +758,45 @@ void RosThread::joystickonoff(int value)
         if (b.response.success)
         {
             qDebug() << "Joystick Off Called";
+
+        }
+        else {
+
+            qDebug() << "Joystick Off Called";
+
+    }
+}
+
+}
+
+void RosThread::abort(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+
+    if(k)
+    {
+        b.request.data = true;
+        abort_.call(b);
+        emit abortautob(0);
+
+        if (b.response.success)
+        {
+            qDebug() << "Auto mode Stopped";
+        }
+        else {
+
+            qDebug() << "Auto Mode Started";
+        }
+    }
+    else
+    {
+        b.request.data = false;
+        abort_.call(b);
+        emit abortautob(0);
+        if (b.response.success)
+        {
+            qDebug() << "Auto Mode Not Stopped";
 
         }
         else {
