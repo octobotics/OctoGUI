@@ -17,8 +17,9 @@ public:
 
     Q_INVOKABLE void startJoystick()
     {
-        qDebug() << " Run Joystick";
+
         QProcess::startDetached("/bin/bash",QStringList() << "/home/octo/Desktop/joystick.sh");
+        qDebug() << " Run Joystick";
     }
 };
 

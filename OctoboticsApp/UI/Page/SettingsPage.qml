@@ -89,8 +89,8 @@ Page {
             borderColor: mainAppColor
             onClicked: {
                 cameraRunner.startJoystick()
-                init_crawler(0)
-                stopCrawler()
+
+
 
             }
         }

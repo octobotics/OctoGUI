@@ -32,6 +32,7 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Extras 1.4
 import camera 1.0
 
+
 Rectangle{
 
     color: "#292D3E"
@@ -48,7 +49,7 @@ Rectangle{
     property color textColor: "#c792ea"
     property var crawler: publisher.crawlStatus
     onCrawlerChanged: {
-        console.log("crawler",crawler)
+//        console.log("crawler",crawler)
     }
 
     property var armErr: ({   0 : "NO Error [ALL OK]",
@@ -420,7 +421,7 @@ Rectangle{
     {
         var percentage = ((level - 44)*100) / (50 - 44);
 
-        console.log("batt level",level)
+//        console.log("batt level",level)
         if (percentage < 20){
             batt.text = "BATTERY LOW"
             alertTimer.start();
@@ -480,9 +481,7 @@ Rectangle{
 
     }
 
-    CameraRunner {
-        id:camera_runner;
-    }
+
 
 //    function slide_cw(cw){
 //        publisher.call_slidecw(cw)
@@ -923,6 +922,9 @@ Rectangle{
                         border.color: borderSecondBg
                         color: secondBg
                         radius: 15
+                        CameraRunner {
+                         id: cameraRunner
+                         }
                         ColumnLayout{
                             anchors.fill: parent
                             anchors.topMargin: 10
@@ -962,6 +964,8 @@ Rectangle{
                                             defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                             clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                             onClicked: {
+                                                  cameraRunner.startJoystick()
+
                                                 //add logicr
                                             }
                                         }
@@ -974,6 +978,7 @@ Rectangle{
                                             defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
                                             clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
                                             onClicked: {
+                                                  cameraRunner.startJoystick()
                                                 //add logicr
                                             }
                                         }

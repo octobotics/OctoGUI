@@ -457,6 +457,7 @@ void RosThread::initautoSrv(int val)
     }
 }
 
+
 /*!
  * \brief RosThread::reset_crawler calls a service to reset crawler
  * \param val trigger value
@@ -511,10 +512,10 @@ void RosThread::reset_water(int val)
     std_srvs::Trigger b;
     if(k){
 
-        qDebug() << "reset Waterlevel";
+//        qDebug() << "reset Waterlevel";
         reset_waterlevel_.call(b);
         if (b.response.success){
-            qDebug() << "reset Water Level";
+//            qDebug() << "reset Water Level";
             emit rstwaterlevel(1);
 
         }

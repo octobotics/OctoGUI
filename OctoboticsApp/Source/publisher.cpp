@@ -831,7 +831,7 @@ void Publisher::errorCallback(QVector<int> value)
 {
 
     setErrValue(value);
-    qDebug()<< Q_FUNC_INFO << value;
+//    qDebug()<< Q_FUNC_INFO << value;
 }
 void Publisher::tempCallback(QVector<int> value)
 {
@@ -841,13 +841,13 @@ void Publisher::tempCallback(QVector<int> value)
 
 void Publisher::crawlerCallback(bool frontLeft, bool frontRight, bool backrRight, bool backLeft)
 {
-    qDebug() << Q_FUNC_INFO << "frontLeft :" << frontLeft << "frontRight :" << frontRight << "backrRight :" << backrRight << "backLeft :" << backLeft;
+//    qDebug() << Q_FUNC_INFO << "frontLeft :" << frontLeft << "frontRight :" << frontRight << "backrRight :" << backrRight << "backLeft :" << backLeft;
     QVariantMap crawlerCallback;
     crawlerCallback.insert("frontLeft", frontLeft);
     crawlerCallback.insert("frontRight", frontRight);
     crawlerCallback.insert("backrRight", backrRight);
     crawlerCallback.insert("backLeft", backLeft);
-    qDebug()<<Q_FUNC_INFO << crawlerCallback;
+//    qDebug()<<Q_FUNC_INFO << crawlerCallback;
     setCrawlStatus(crawlerCallback);
 }
 
