@@ -40,6 +40,9 @@ Rectangle{
     property color  fg: "#27322f"
     property color  bg: "black"
     property variant arrange_cam: [0,1,2,3]
+    property bool crawlerErrorFlag: false
+    property bool armErrorFlag: false
+
 
     property var armErr: ({   0 : "NO Error [Radhe Radhe]",
                               6 : "Storage data error",
@@ -155,7 +158,10 @@ Rectangle{
             armDialog.text =  "\n\nErrors:\n\n"+armMotors[0]+" : "+armErr[armStatus[0]]+"\n"+armMotors[1]+" : "+armErr[armStatus[1]]+"\n"+armMotors[2]+" : "+armErr[armStatus[2]]+"\n"+armMotors[3]+" : "+armErr[armStatus[3]]+"\n\n\n"+
                     "\n\nTemperature:\n\n" +armMotors[0]+" : "+armStatus[4]+" deg"+"\n"+armMotors[1]+" : "+armStatus[5]+" deg"+"\n"+armMotors[2]+" : "+armStatus[6]+" deg"+"\n"+armMotors[3]+" : "+armStatus[7]+" deg"+"\n"
             armDialog.icon = StandardIcon.Information
-            armDialog.open()}
+
+            armDialog.open()
+
+        }
     }
 
 
@@ -227,7 +233,10 @@ Rectangle{
 
             crawlerDialog.title = "Crawler Error"
             crawlerDialog.icon = StandardIcon.Critical
-            crawlerDialog.open()
+            if (!crawlerErrorFlag)
+            {crawlerDialog.open()
+            crawlerErrorFlag = true
+            }
         }
 
 
@@ -243,8 +252,10 @@ Rectangle{
             crawlerDialog.text =  cMotors[0]+" : Temperature greater than "+crawlerTemp[0]+" deg"+"\n"+cMotors[1]+" : Temperature greater than "+crawlerTemp[1]+" deg"+"\n"+cMotors[2]+" : Temperature greater than "+crawlerTemp[2]+" deg"+"\n"+cMotors[3]+" : Temperature greater than "+crawlerTemp[3]+" deg"+"\n"
             crawlerDialog.title = "Crawler Temperature Error"
             crawlerDialog.icon = StandardIcon.Critical
-            crawlerDialog.open()
-        }
+            if (!crawlerErrorFlag)
+            {crawlerDialog.open()
+            crawlerErrorFlag = true
+            }        }
 
     }
 
@@ -392,7 +403,10 @@ Rectangle{
 
         videoPlayer2.playlist.currentIndex = 2
         videoPlayer2.play()
-
+        arrange_cam[0] = 0
+        arrange_cam[1] = 1
+        arrange_cam[2] = 2
+        arrange_cam[3] = 3
 
     }
 
