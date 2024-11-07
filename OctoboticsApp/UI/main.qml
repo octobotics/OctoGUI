@@ -43,7 +43,7 @@ Window {
         name: "fontawesome1"
         source: "qrc:/UI/Assets/Font Awesome 6 Brands-Regular-400.otf"
     }
-    StackView{
+        StackView{
         id: stackView
         focus: true
         anchors.fill: parent
@@ -111,10 +111,16 @@ Window {
         stackView.replace("qrc:/UI/Page/Home.qml")
     }
 
+
     function showConnect()
     {
         stackView.replace("qrc:/UI/Page/ConnectMasterURI.qml")
     }
+    //Setting Page
+    function showSettings(){
+        stackView.replace("qrc:/UI/Page/SettingsPage.qml")
+    }
+
 
 
 }

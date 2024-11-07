@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  *  \file      rosthread.cpp
  *  \brief     Communicates with ros master using publishers, subscribers and services.
  *  \details   This class is a ros node that communicates with ros master
@@ -25,6 +25,7 @@ QString GraphPath_ = "";
 void RosThread::run()
 {
 
+
     qDebug() << "RosThread run called";
 
     //ros node handler
@@ -32,44 +33,65 @@ void RosThread::run()
 
 
     //graph object
-    CustomPlotItem *m_cst = new CustomPlotItem();
+//    CustomPlotItem *m_cst = new CustomPlotItem();
     //graph signal to send data received from ros topic to customplotitem
-    connect(this, SIGNAL(graphCall(QVector<double>, QVector<double>, int64_t)), m_cst, SLOT(graphCall(QVector<double>,QVector<double>,int64_t)));
-    //graph signal to trigger graph image capture from ros service call
-    connect(this, SIGNAL(trigImg(int)), m_cst, SLOT(trigImg(int)));
+//    connect(this, SIGNAL(graphCall(QVector<double>, QVector<double>, int64_t)), m_cst, SLOT(graphCall(QVector<double>,QVector<double>,int64_t)));
+//    //graph signal to trigger graph image capture from ros service call
+//    connect(this, SIGNAL(trigImg(int)), m_cst, SLOT(trigImg(int)));
 
     // ros publishers
     m_publisher = m_nodeHandler->advertise<std_msgs::String>("/awesome_topic", 1000);
     vel_pub_ = m_nodeHandler->advertise<std_msgs::Int64>("/send_ut_velocity", 1);
-    ut_dc_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/send_ut_deepcoat", 1);
-    ut_xrange_pub_ = m_nodeHandler->advertise<std_msgs::Int16 >("/send_ut_xrange", 1);
-    img_cap_pub_ = m_nodeHandler->advertise<std_msgs::Int8>("/img_cap", 1);
+    pos_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/set_joint_angle_value",10);
+    neg_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int16>("/stroke_length",10);
+    lat_angle_pub_ = m_nodeHandler->advertise<std_msgs::Float64>("/lateral_shift_stop_angle",10);
+    automode_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/navigation_control",1);
+
 
     // ros subscribers
-    comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/comm_status", 1, &RosThread::commCallback, this);
+    water_level_ = m_nodeHandler->subscribe<std_msgs::Float32>("/cumulative_volume",1,&RosThread::waterCallback,this);
+    comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/comm_status", 1, &RosThread::commCallback, this);
     tool_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/arm_tool_status", 1, &RosThread::armToolCallback, this);
-    vel_sub_ = m_nodeHandler->subscribe<octo_qt::ang_lin_arr>("/vel_status", 1, &RosThread::velCallback, this);
+    vel_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/motor_speed", 1, &RosThread::velCallback, this);
+    odometer_ = m_nodeHandler->subscribe<std_msgs::Int32>("/odometer",1,&RosThread::odomCallback,this);
+    tripmeter_ = m_nodeHandler->subscribe<std_msgs::Int32>("/tripmeter",1, &RosThread::tripCallback,this);
     crawler_status_sub_ = m_nodeHandler->subscribe<my_actuator::vitals>("/crawler_vitals",1, &RosThread::crawlerCallback, this);
-    thick_sub_ = m_nodeHandler->subscribe<serialtoros::thick_arr>("/ut_thickness", 1, &RosThread::thicknessCallback, this);
-    graph_sub_ = m_nodeHandler->subscribe<serialtoros::graph_arr>("/ut_graph", 1, &RosThread::graphCallback, this);
-    ut_sub_ = m_nodeHandler->subscribe<serialtoros::VDE_arr>("/ut_VDE_values", 1, &RosThread::utCallback, this);
-    f_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/force_status", 1, &RosThread::fCallback, this);
-    current_sub_ = m_nodeHandler->subscribe<std_msgs::Float32>("/current_status", 1, &RosThread::currentCallback, this);
+    velstatus_ = m_nodeHandler->subscribe<octo_qt::ang_lin_arr>("/vel_status",1,&RosThread::velstatusCallback,this);
+
+
+    current_sub_ = m_nodeHandler->subscribe<std_msgs::Int32>("/scan_speed", 1, &RosThread::currentCallback, this);
     uid_sub_ = m_nodeHandler->subscribe<launch_crawler::SerialNumbers>("/serial_numbers",1,&RosThread::uidCallback, this);
+    lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
+    voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1, &RosThread::batteryCallback,this);
+    angle_measure_ = m_nodeHandler->subscribe<geometry_msgs::Vector3>("/imu/angles",1,&RosThread::angleCallback, this);
+
 
     // ros service servers
     toggle_srv_ = m_nodeHandler->advertiseService("toggle_robot", &RosThread::toggleCallback, this);
-    send_img_srv_ = m_nodeHandler->advertiseService("img_send", &RosThread::imgCallback, this);
 
     //ros service clients
-    send_tool_srv_ =  m_nodeHandler->serviceClient<stm_client::relay_control>("/relay_toggle_channel");
+    send_tool_srv_ =  m_nodeHandler->serviceClient<stm_interface::RelayControl>("/relay_toggle_channel");
+    restart_mapping_srv_ = m_nodeHandler->serviceClient<hector_mapping::ResetMapping>("/restart_mapping_with_new_pose");
     switch_grinder_srv_ =  m_nodeHandler->serviceClient<std_srvs::Trigger>("/servo_trigger_channel");
     crawler_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/init_teleop");
     crawler_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_teleop");
-    crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/stop_motors");
-    arm_init_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/init_teleop");
-    arm_stop_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/stop_teleop");
-    arm_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/octo_arm_teleop/reset_motors");
+    crawler_reset_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_motors");
+    reset_waterlevel_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reset_cumulative_volume");
+    initauto_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/launch_script");
+    stopauto_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/stop_auto");
+    hzl_slide_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/clockwise");
+    hzl_slide_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/anticlockwise");
+    crawler_speed_Increase_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/increase_raster_speed");
+    crawler_speed_Decrease_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/decrease_raster_speed");
+    joystickonoff_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/set_joy");
+    abort_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/abort_behavior_tree");
+    camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
+    camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
+
+
+    lac_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
+    lac_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reduce_three_service");
+    trip_reset_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/crawler_control_node/reset_tripmeter");
     get_arm_status_srv_ = m_nodeHandler->serviceClient<octo_arm_teleop::GUI_adra_stat>("/gui_adra_status_srv");
 
     //ros spin
@@ -89,67 +111,47 @@ void RosThread::addLine(QString newLine)
     m_publisher.publish(msg);
 }
 
+void RosThread::automodePub(int value)
+{
+    std_msgs::Int32 k;
+    k.data = value;
+    automode_pub_.publish(k);
+}
 
 /*!
  * \brief RosThread::sendUtVel Publishes UT Velocity from UI to serialtoros node
  * \param value gets value from user input in UI
  */
-void RosThread::sendUtVel(QString value)
-{
-    ros::Rate rate(10);
-    std_msgs::Int64 msg;
-    msg.data = value.toInt();
-    vel_pub_.publish(msg);
-}
+
 
 
 /*!
  * \brief RosThread::sendUtData Publishes Deepcoat and Xrange values to serialtoros node
  * \param value 0: sends 0 to deepcoat 1: sends 1 to deepcoat 128: sends 128 to xrange( to start receiving graph data from UT node)
  */
-void RosThread::sendUtData(QString value)
-{
-    ros::Rate rate(10);
-    std_msgs::Float32 xrange;
-    std_msgs::Int8 dc;
-    if(value == "0")
-    {
-        dc.data = value.toInt();
-        ut_dc_pub_.publish(dc);
 
-    }
-    else if(value == "1")
-    {
-        dc.data = value.toInt();
-        ut_dc_pub_.publish(dc);
-
-    }
-    else if(value == "128")
-    {
-        xrange.data = value.toInt();
-        ut_xrange_pub_.publish(xrange);
-    }
-}
 
 
 /*!
  * \brief RosThread::capImgPub publisher to trigger local image capture from cameras in xavier
  * \param value
  */
-void RosThread::capImgPub(int value)
-{
-    std_msgs::Int8 k;
-    k.data= value;
-    img_cap_pub_.publish(k);
 
-}
+
+//void RosThread::voltageCallback(const std_msgs::Int16::ConstPtr &msg)
+//{
+//    auto value = msg->data ;
+
+//    emit voltageCallback(value);
+
+//}
 
 
 /*!
  * \brief RosThread::commCallback Subscriber Callback for communication status
  * \param msg gets 0 if connection lost and 1 if established
  */
-void RosThread::commCallback(const std_msgs::Int8::ConstPtr &msg)
+void RosThread::commCallback(const std_msgs::Int16::ConstPtr &msg)
 {
     auto int_msg = msg->data;
 
@@ -171,13 +173,65 @@ void RosThread::armToolCallback(const std_msgs::Int8::ConstPtr &msg)
  * \brief RosThread::velCallback Receives current and max velocities from crawler node and displays on circular gauge
  * \param msg
  */
-void RosThread::velCallback(const octo_qt::ang_lin_arr::ConstPtr &msg)
+void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
 {
-    auto current_vel_linear = msg->data[0];
-    auto current_vel_angular = msg->data[1];
-    auto max_linear = msg->data[2];
-    auto max_angular = msg->data[3];
-    emit velCallback(current_vel_linear, current_vel_angular, max_linear, max_angular);
+    auto current_vel_linear = msg->data;
+
+    emit velCallback(current_vel_linear);
+}
+
+void RosThread::waterCallback(const std_msgs::Float32::ConstPtr &msg)
+{
+    auto level = msg->data;
+
+    level = level/10000 ;
+
+    emit waterCallback(level);
+}
+
+void RosThread::odomCallback(const std_msgs::Int32::ConstPtr &msg)
+{
+    auto current_odom = msg->data;
+    current_odom = current_odom/1000 ;
+//    qDebug()<<"Current_odom"<<current_odom;
+    emit odomCallback(current_odom);
+}
+void RosThread::tripCallback(const std_msgs::Int32::ConstPtr &msg)
+{
+    auto current_trip = msg->data ;
+    current_trip = current_trip/1000 ;
+//    qDebug()<<"Current_trip"<<current_trip;
+    emit tripCallback(current_trip);
+}
+
+void RosThread::lacCallback(const std_msgs::Int32::ConstPtr &msg)
+{
+    int lac_value = msg->data;
+    emit lacCallback(lac_value);
+
+}
+
+//void RosThread::batteryCallback(const std_msgs::Int16::ConstPtr &msg)
+//{
+//    float voltage = msg->data;
+
+//    emit battCallback(voltage);
+//}
+
+void RosThread::batteryCallback(const std_msgs::Int16::ConstPtr &msg)
+{
+    float voltage = msg->data;
+
+    // Check if voltage is not 0 and is within the range 10 to 48
+    if (voltage != 0 && voltage >= 10 && voltage <= 48) {
+        emit battCallback(voltage);
+    }
+}
+
+void RosThread::angleCallback(const geometry_msgs::Vector3::ConstPtr &msg)
+{
+    int angle = msg->y;
+    emit angleCallback(angle);
 }
 
 
@@ -188,8 +242,9 @@ void RosThread::velCallback(const octo_qt::ang_lin_arr::ConstPtr &msg)
  */
 void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
 {
-    float voltage = msg->voltage;
-    qDebug()<<"volt"<<voltage;
+//    float voltage = msg->voltage;
+
+//    qDebug()<<"volt"<<voltage;
     bot_err.resize(4);
     act_temp.resize(4);
     for(int i =0; i<4; i++)
@@ -201,82 +256,21 @@ void RosThread::crawlerCallback(const my_actuator::vitals::ConstPtr &msg)
     }
 
     emit crawlerCallback( (bool)msg->mode[0], (bool)msg->mode[1], (bool)msg->mode[2], (bool)msg->mode[3]);
-    emit battCallback(voltage);
+//    emit battCallback(voltage);
     emit tempCallback(act_temp);
     emit errorCallback(bot_err);
 }
 
 
-/*!
- * \brief RosThread::thicknessCallback gets thickness from ut serial node and displays on UI
- * \param msg
- */
-void RosThread::thicknessCallback(const serialtoros::thick_arr::ConstPtr &msg)
+
+void RosThread::currentCallback(const std_msgs::Int32::ConstPtr &msg)
 {
-    float thickness_ = msg->data[0];
-    thickness_  = round(thickness_ * 100) / 100;
+    auto current = (msg->data)/3;
 
-    auto unit_ = msg->data[1];
-    emit thicknessCallback(thickness_, unit_);
-}
-
-/*!
- * \brief RosThread::graphCallback gets graph values from UT serial node
- * \param msg
- */
-void RosThread::graphCallback(const serialtoros::graph_arr::ConstPtr &msg)
-{
-    auto data_ = msg->data;
-    auto tuple_ = msg->echo_arr;
-    int64_t x_range_= msg->x_range;
-
-    size_t n = sizeof(data_)/sizeof(data_[0]);
-    QVector<double> v(320), tuple(3);// initialize with entries 0..320
-
-
-    tuple[0] = tuple_[0];
-    tuple[1] = tuple_[1];
-    tuple[2] = tuple_[2];
-
-    // loop through the array elements
-    for (size_t i = 0; i < n; i++) {
-        v[i] = data_[i];
-    }
-    emit  graphCall(v, tuple,x_range_);
-}
-
-/*!
- * \brief RosThread::utCallback gets current velocity, deepcoat and echo values from UT serial node and displays in the UI
- * \param msg
- */
-void RosThread::utCallback(const serialtoros::VDE_arr::ConstPtr &msg)
-{
-    auto vel = msg->data[0];
-    auto deepcoat = msg->data[2];
-    auto echo = msg->data[1];
-    emit utCallback(vel, deepcoat, echo);
-}
-
-
-/*!
- * \brief RosThread::fCallback gets force value from sensor
- * \param msg
- */
-void RosThread::fCallback(const std_msgs::Float32::ConstPtr &msg)
-{
-    auto force = msg->data;
-    emit fCallback(force);
-}
-
-/*!
- * \brief RosThread::currentCallback gets current value from stm32 and displays on UI
- * \param msg
- */
-void RosThread::currentCallback(const std_msgs::Float32::ConstPtr &msg)
-{
-    auto current = msg->data;
     emit currentCallback(current);
 }
+
+
 
 
 /*!
@@ -292,6 +286,18 @@ void RosThread::uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg)
     }
     emit uidCallback(uids_);
 
+}
+
+void RosThread::velstatusCallback(const octo_qt::ang_lin_arr::ConstPtr &msg)
+{
+    int speedsetting = msg->data[2];
+    speedsetting = speedsetting * 10;
+    qDebug()<< "Speedsetting in mm/s%d" << speedsetting;
+
+    int angularspeed = msg->data[3];
+
+    emit velstatusCallback(speedsetting);
+    emit angularspeedCallback(angularspeed);
 }
 
 
@@ -317,21 +323,6 @@ bool RosThread::toggleCallback(stm_client::tool_status::Request &req, stm_client
  * \param res
  * \return
  */
-bool RosThread::imgCallback(serialtoros::GraphPath::Request &req, serialtoros::GraphPath::Response &res )
-{
-
-    qDebug()<< "imgcallback" << req.req;
-    if (req.req ==1 )
-    {   int i = 1;
-        emit trigImg(1);
-        qDebug()<<GraphPath_;
-        ros::Duration(0.2).sleep();
-
-        res.path = GraphPath_.toStdString();
-        GraphPath_ = "";
-    }
-    return true;
-}
 
 
 /*!
@@ -347,13 +338,35 @@ void RosThread::sendToolData(QString value)
 
     }
     else{
-        stm_client::relay_control val;
+        stm_interface::RelayControl val;
         val.request.data = value.toInt();
 //        qDebug()<<"relay_value:"<<value;
         send_tool_srv_.call(val);
 
     }
 
+}
+
+void RosThread::resetMapping(int value)
+{
+    int k = value;
+    hector_mapping::ResetMapping b;
+    if(k) {
+            b.request.initial_pose.position.x = 0.0;
+            b.request.initial_pose.position.y = 0.0;
+            b.request.initial_pose.position.z = 0.0;
+            b.request.initial_pose.orientation.x = 0.0;
+            b.request.initial_pose.orientation.y = 0.0;
+            b.request.initial_pose.orientation.z = 0.0;
+            b.request.initial_pose.orientation.w = 2.0;
+            restart_mapping_srv_.call(b);
+            emit resetmapping(1);
+            }
+     else
+    {
+        emit resetmapping(0);
+
+    }
 }
 
 
@@ -398,6 +411,52 @@ void RosThread::crawlerInitSrv(int value)
     }
 }
 
+void RosThread::stopautoSrv(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+
+        stopauto_.call(b);
+        if (b.response.success){
+
+            emit stopauto(1);
+
+        }
+        else {
+            qDebug()<<"BT NOT Running";
+
+            emit stopauto(0);
+
+
+        }
+    }
+}
+
+void RosThread::initautoSrv(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+
+        initauto_.call(b);
+        if (b.response.success){
+
+            emit initauto(1);
+
+        }
+        else {
+            qDebug()<<"BT NOT Running";
+
+            emit initauto(0);
+
+
+        }
+    }
+}
+
 
 /*!
  * \brief RosThread::reset_crawler calls a service to reset crawler
@@ -425,52 +484,330 @@ void RosThread::reset_crawler(int val)
     }
 }
 
+void RosThread::shutdown_crawler(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+
+        shutdown_.call(b);
+        if (b.response.success){
+
+            emit shdCrawler(1);
+
+        }
+        else {
+
+            emit shdCrawler(0);
+
+
+        }
+    }
+}
+
+void RosThread::reset_water(int val)
+{
+    int k = val;
+    std_srvs::Trigger b;
+    if(k){
+
+//        qDebug() << "reset Waterlevel";
+        reset_waterlevel_.call(b);
+        if (b.response.success){
+//            qDebug() << "reset Water Level";
+            emit rstwaterlevel(1);
+
+        }
+        else {
+            qDebug() << "error resetting crawler";
+            emit rstwaterlevel(0);
+
+
+        }
+    }
+}
 
 
 /*!
  * \brief RosThread::armInitSrv calls the service to initialialize and stop the arm
  * \param value 0: stop arm  1: init arm
  */
-void RosThread::armInitSrv(int value)
+void RosThread::slideCW(int value)
 {
     int k = value;
     std_srvs::Trigger b;
     if(k){
 
-        qDebug() << "init arm";
-        arm_init_srv_.call(b);
+        qDebug() << "init Slide";
+        crawler_speed_Decrease_.call(b);
+        emit slideCW(0);
         if (b.response.success){
-            qDebug() << "initialized arm";
-            emit initArm(1);
+            qDebug() << "Slider DeActivated";
+//            emit slideCW(0);
 
         }
         else {
-            qDebug() << "error initializing arm";
-            emit initArm(0);
+            qDebug() << "Moving";
+            emit slideCW(0);
+
+        }
+    } 
+}
+
+void RosThread::pos_angle(QString value)
+{
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    pos_angle_pub_.publish(msg);
+
+}
+
+void RosThread::neg_angle(QString value)
+{
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    neg_angle_pub_.publish(msg);
+
+}
+
+void RosThread::lat_angle (QString value)
+{
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    lat_angle_pub_.publish(msg);
+
+}
+
+void RosThread::slideCCW(int value)
+{
+    int k = value;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "init Slide";
+        crawler_speed_Increase_.call(b);
+        emit slideCCW(0);
+        if (b.response.success){
+            qDebug() << "Slider DeActivated";
+
+
+        }
+        else {
+            qDebug() << "Moving";
+            emit slideCCW(0);
 
         }
     }
-    else{
+}
 
-        qDebug() << "stop arm";
-        arm_stop_srv_.call(b);
+void RosThread::resetTrip(int value)
+{
+    int k =value;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "init Reset";
+        trip_reset_.call(b);
         if (b.response.success){
-            qDebug() << "stopped arm";
-            emit stopArm(1);
-
+            qDebug() << "Trip Reset";
+            emit resetTrip(0);
 
         }
         else {
-            qDebug() << "error stopping arm";
-            emit stopArm(0);
+            qDebug() << "Moving";
+            emit resetTrip(0);
 
         }
     }
 
 }
 
+void RosThread::lacCW(int value)
+{
+    int k = value;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "init LAC";
+        lac_cw_.call(b);
+        if (b.response.success){
+            qDebug() << "LAC DeActivated";
+            emit lacCW(0);
+
+        }
+        else {
+            qDebug() << "Moving";
+            emit lacCW(0);
+
+        }
+    }
+}
+
+void RosThread::cameraInit(int value)
+{
+    int k =value;
+    zed_interfaces::start_remote_stream b;
+    if (k){
+        camera_init_.call(b);
+        if(b.response.result){
+            qDebug() << "Camera Started";
+            emit cameraInit(0);
+        }
+        else
+            qDebug()<< "Camera Start Failed";
+    }
+}
+
+void RosThread::lacCCW(int value)
+{
+    int k = value;
+    std_srvs::Trigger b;
+    if(k){
+
+        qDebug() << "init LAC";
+        lac_ccw_.call(b);
+        if (b.response.success){
+            qDebug() << "LAC DeActivated";
+            emit lacCCW(0);
+
+        }
+        else {
+            qDebug() << "Moving";
+            emit lacCCW(0);
+
+        }
+    }
+}
+
+void RosThread::speedIncrease(int value)
+{
+    int k = value;
+    std_srvs::Trigger b;
 
 
+    if(k) {
+        crawler_speed_Increase_.call(b);
+        emit speedIncrease(0);
+
+        if (b.response.success){
+            qDebug() << "Speed Increased";
+        }
+
+        else {
+            qDebug() << "Speed Increasing";
+            emit speedIncrease(0);
+        }
+
+
+    }
+
+}
+
+void RosThread::speedDecrease(int value)
+{
+    int k = value;
+    std_srvs::Trigger b;
+
+
+    if(k) {
+        crawler_speed_Decrease_.call(b);
+        emit speedDecrease(0);
+
+        if (b.response.success){
+            qDebug() << "Speed Decreasing";
+        }
+
+        else {
+            qDebug() << "Speed Decreasing";
+            emit speedDecrease(0);
+        }
+
+
+    }
+
+}
+
+void RosThread::joystickonoff(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+
+    if(k)
+    {
+        b.request.data = true;
+        joystickonoff_.call(b);
+        emit joystickonoffb(0);
+
+        if (b.response.success)
+        {
+            qDebug() << "Joystick On Called";
+        }
+        else {
+
+            qDebug() << "Joystick On Called";
+        }
+    }
+    else
+    {
+        b.request.data = false;
+        joystickonoff_.call(b);
+        emit joystickonoffb(0);
+        if (b.response.success)
+        {
+            qDebug() << "Joystick Off Called";
+
+        }
+        else {
+
+            qDebug() << "Joystick Off Called";
+
+    }
+}
+
+}
+
+void RosThread::abort(int value)
+{
+    int k = value;
+    std_srvs::SetBool b;
+
+    if(k)
+    {
+        b.request.data = true;
+        abort_.call(b);
+        emit abortautob(0);
+
+        if (b.response.success)
+        {
+            qDebug() << "Auto mode Stopped";
+        }
+        else {
+
+            qDebug() << "Auto Mode Started";
+        }
+    }
+    else
+    {
+        b.request.data = false;
+        abort_.call(b);
+        emit abortautob(0);
+        if (b.response.success)
+        {
+            qDebug() << "Auto Mode Not Stopped";
+
+        }
+        else {
+
+            qDebug() << "Joystick Off Called";
+
+    }
+}
+
+}
 
 
 

@@ -24,11 +24,18 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
+       Source/ScriptRunner.h \
        Source/hellocpp.h \
        Source/include2.h \
        Source/qcustomplot.h \
        Source/customplotitem.h \
-       Source/recordcams.h
+       Source/recordcams.h \
+       Source/stm_interface/RelayControl.h \
+       Source/stm_interface/RelayControl.h \
+       Source/stm_interface/RelayControlRequest.h \
+       Source/stm_interface/RelayControlRequest.h \
+       Source/stm_interface/RelayControlResponse.h \
+       Source/stm_interface/RelayControlResponse.h
 
 
 

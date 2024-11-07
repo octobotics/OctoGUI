@@ -28,19 +28,40 @@ Publisher::Publisher(QObject *parent)
     : QObject(parent)
 {
     qDebug() << "MainWindow constructor";
-    m_batteryValue = 46;
+    m_batteryValue = 40;
     m_comStatus = 0;
     m_armToolStatus = 0;
     m_toggleValue = false;
-    m_initArmValue = 0;
+    m_slideCW = 0;
+    m_slideCCW = 0;
+    m_speedIncrease = 0;
+    m_speedDecrease = 0;
+    m_joystickonoff = 0;
+    m_abortauto = 0;
+    m_lacCCW = 0;
+    m_lacCW = 0;
     m_rstArmValue = 0 ;
     m_stopArmValue= 0 ;
-    m_initCrawlerValue= 0;
-    m_stopCrawlerValue=0;
-    m_rstCrawlerValue=0;
-    m_currentValue=0.0;
-
+    m_initCrawlerValue = 0;
+    m_stopCrawlerValue =0;
+    m_rstCrawlerValue = 0;
+    m_shdCrawlerValue = 0;
+    m_stopautoValue = 0;
+    m_rstwaterlevelValue = 0;
+    m_currentValue=0;
+    m_velocityValue=0;
+    m_odom = 0;
+    m_lacValue=0;
+    m_trip = 0;
+    m_tripReset = 0;
+    m_waterValue = 100.00;
     m_armStatus = {0,0,0,0,0,0,0,0};
+    m_speedsettingvalue = 0;
+    m_cameraInit = 0;
+    m_anglesettingvalue=0;
+    m_angleValue = 0;
+
+
 }
 
 /*!
@@ -74,10 +95,29 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(armToolCallback(int)), this, SLOT(armToolCallback(int)));
 
     // arm
-    connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
+//    connect(this, SIGNAL(value(int)), this->rost, SLOT(armInitSrv(int)));
     connect(this, SIGNAL(rstArm(int)), this->rost, SLOT(reset_arm(int)));
     connect(this, SIGNAL(trigArmStatusValueChanged()), this->rost, SLOT(checkArmStatus()));
-    connect(this->rost, SIGNAL(initArm(bool)), this, SLOT(initArm(bool)));
+
+    connect(this->rost,SIGNAL(velstatusCallback(int)),this,SLOT(velstatusCallback(int)));
+
+    connect(this->rost,SIGNAL(angularspeedCallback(int)),this,SLOT(angularspeedCallback(int)));
+
+    connect(this->rost, SIGNAL(slideCW(bool)), this, SLOT(slideCW(bool)));
+    connect(this->rost,SIGNAL(slideCCW(bool)),this,SLOT(slideCCW(bool)));
+
+    connect(this->rost,SIGNAL(speedIncrease(bool)),this, SLOT(speedIncrease(bool)));
+    connect(this->rost,SIGNAL(speedDecrease(bool)),this,SLOT(speedDecrease(bool)));
+
+    connect(this->rost,SIGNAL(joystickonoffb(bool)),this,SLOT(joystickonoff(bool)));
+     connect(this->rost,SIGNAL(abortautob(bool)),this,SLOT(abortauto(bool)));
+
+
+    connect(this->rost,SIGNAL(cameraInit(bool k)),this,SLOT(cameraInit(bool k)));
+    connect(this->rost,SIGNAL(lacCW(bool)),this,SLOT(lacCW(bool)));
+    connect(this->rost,SIGNAL(lacCCW(bool)),this,SLOT(lacCCW(bool)));
+    connect(this->rost,SIGNAL(lacCallback(int)),this, SLOT(lacCallback(int)));
+    connect(this->rost,SIGNAL(resetTrip(bool k)),this,SLOT(resetTrip(bool)));
     connect(this->rost, SIGNAL(rstArm(bool)), this, SLOT(rstArm(bool)));
     connect(this->rost, SIGNAL(stopArm(bool)), this, SLOT(stopArm(bool)));
     connect(this->rost, SIGNAL(armCallback(QVector<int>)), this, SLOT(armCallback(QVector<int>)));
@@ -86,30 +126,59 @@ void Publisher::initRosThread()
     connect(this->rost, SIGNAL(initCrawler(bool)), this, SLOT(initCrawler(bool)));
     connect(this->rost, SIGNAL(stopCrawler(bool)), this, SLOT(stopCrawler(bool)));
     connect(this->rost, SIGNAL(rstCrawler(bool)), this, SLOT(rstCrawler(bool)));
-    connect(this->rost, SIGNAL(velCallback(float, float, float, float)), this, SLOT(velCallback(float, float, float, float)));
-    connect(this->rost, SIGNAL(crawlerCallback(bool, bool,bool,bool)), this, SLOT(crawlerCallback(bool, bool,bool,bool)));
+    connect(this->rost, SIGNAL(shdCrawler(bool)),this, SLOT(shdCrawler(bool)));
+    connect(this->rost, SIGNAL(stopauto(bool)), this, SLOT(stopautop(bool)));
+    connect(this->rost, SIGNAL(initauto(bool)),this,SLOT(initautop(bool)));
+    connect(this->rost, SIGNAL(rstwaterlevel(bool)),this,SLOT(rstwaterlevel(bool)));
+    connect(this->rost, SIGNAL(velCallback(int)), this, SLOT(velCallback(int)));
+    connect(this->rost, SIGNAL(odomCallback(int)), this, SLOT(odomCallback(int)));
+    connect(this->rost, SIGNAL(tripCallback(int)), this, SLOT(tripCallback(int)));
+    connect(this->rost, SIGNAL(crawlerCallback(bool,bool,bool,bool)), this, SLOT(crawlerCallback(bool,bool,bool,bool)));
     connect(this->rost, SIGNAL(errorCallback(QVector<int>)), this, SLOT(errorCallback(QVector<int>)));
     connect(this->rost, SIGNAL(tempCallback(QVector<int>)), this, SLOT(tempCallback(QVector<int>)));
     connect(this, SIGNAL(rstCrawler(int)), this->rost, SLOT(reset_crawler(int)));
-    connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
+    connect(this,SIGNAL(shdCrawler(int)),this->rost, SLOT(shutdown_crawler(int)));
+    //------------------AUTO MODE---------------------------------------------
+    connect(this,SIGNAL(stopautoSrvp(int)),this->rost, SLOT(stopautoSrv(int)));
+    connect(this,SIGNAL(initautoSrvp(int)),this->rost,SLOT(initautoSrv(int)));
+    connect(this,SIGNAL(rstWaterLevel(int)),this->rost,SLOT(reset_water(int)));
 
+    connect(this, SIGNAL(value2(int)), this->rost, SLOT(crawlerInitSrv(int)));
+    connect(this,SIGNAL(value3(int)),this->rost,SLOT(slideCW(int)));
+    connect (this,SIGNAL(value4(int)),this->rost,SLOT(slideCCW(int)));
+    connect(this,SIGNAL(value5(int)),this->rost,SLOT(lacCW(int)));
+    connect(this,SIGNAL(value6(int)),this->rost,SLOT(lacCCW(int)));
+    connect(this,SIGNAL(value7(int)),this->rost,SLOT(resetTrip(int)));
+    connect(this,SIGNAL(value8(int)),this->rost,SLOT(cameraInit(int)));
+    connect(this,SIGNAL(value9(int)),this->rost,SLOT(speedIncrease(int)));
+    connect(this,SIGNAL(value10(int)),this->rost,SLOT(speedDecrease(int)));
+    connect(this,SIGNAL(value11(int)),this->rost,SLOT(reset_water(int)));
+    connect(this,SIGNAL(value12(int)),this->rost,SLOT(joystickonoff(int)));
+    connect(this,SIGNAL(value13(int)),this->rost,SLOT(abort(int)));
+
+
+
+    connect(this,SIGNAL(posvalValueChanged(QString)),this->rost,SLOT(pos_angle(QString)));
+    connect(this,SIGNAL(negvalValueChanged(QString)),this->rost,SLOT(neg_angle(QString)));
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
-    // current
-    connect(this->rost, SIGNAL(currentCallback(float)), this, SLOT(currentCallback(float)));
+    connect(this->rost,SIGNAL(angleCallback(int)),this , SLOT(angleCallbackp(int)));
 
-    // ut gauge
-    connect(this, SIGNAL(utVelChanged(QString)), this->rost, SLOT(sendUtVel(QString)));
-    connect(this, SIGNAL(utDataChanged(QString)), this->rost, SLOT(sendUtData(QString)));
-    connect(this->rost, SIGNAL(utCallback(int, int, int)), this, SLOT(utCallback(int, int, int)));
-    connect(this->rost,SIGNAL(thicknessCallback(float, float)), this , SLOT(thicknessCallback(float, float)));
+    // current
+    connect(this->rost, SIGNAL(currentCallback(int)), this, SLOT(currentCallback(int)));
+
+    connect(this->rost, SIGNAL(waterCallback(float)),this ,SLOT(waterCallback(float)));
+
+
 
     // unique id
     connect(this->rost, SIGNAL(uidCallback(QVector<QString>)), this, SLOT(uidCallback(QVector<QString>)));
 
     //image capture
-    connect(this, SIGNAL(capImg(int)), this->rost, SLOT(capImgPub(int)));
+//    connect(this, SIGNAL(capImg(int)), this->rost, SLOT(capImgPub(int)));
+
+    connect(this,SIGNAL(automode(int)),this->rost,SLOT(automodePub(int)));
 
     //////////////
 
@@ -144,6 +213,128 @@ void Publisher::setComStatus(int value)
 void Publisher::commCallback(int value)
 {
     setComStatus(value);
+}
+
+void Publisher::call_automode(int val)
+{
+    emit automode(val);
+}
+
+//-------------------------AUTO MODE------------------------
+
+void Publisher::call_initautomode(int val)
+{
+    emit initautoSrvp(val);
+}
+
+void Publisher::call_stopautomode(int val)
+{
+    emit stopautoSrvp(val);
+}
+
+
+//---------------------------- Water Level -------------------------------
+
+float Publisher::getWaterLevel()
+{
+    return m_waterValue;
+
+}
+void Publisher::setWaterLevel(float level)
+{
+   m_waterValue = level ;
+   emit waterlevelValueChanged(level);
+}
+
+void Publisher::waterCallback(float level)
+{
+    setWaterLevel(level);
+
+}
+
+//----------------------------Speed Increase And Decrease ------------------
+
+bool Publisher::getspeedIncrease()
+{
+    return m_speedIncrease;
+}
+
+void Publisher::setspeedIncrease(bool value)
+{
+    m_speedIncrease = value;
+    emit speedIncreaseValueChanged(value);
+}
+
+bool Publisher::getspeedDecrease()
+{
+    return m_speedDecrease;
+}
+
+void Publisher::setspeedDecrease(bool value)
+{
+    m_speedDecrease = value;
+    emit speedDecreaseValueChanged(value);
+}
+
+//-------------------------------Joystick One and OFF ----------------------------
+
+bool Publisher::getjoystickonoff()
+
+{
+    return m_joystickonoff;
+}
+
+void Publisher::setjoystickonoff(bool value)
+{
+    m_joystickonoff = value;
+    emit joystickonoffValueChanged(value);
+}
+
+
+//----------------------------Abort Auto-------------------------------------------
+
+bool Publisher::getabortauto()
+{
+    return m_abortauto;
+}
+
+void Publisher::setabortauto(bool value)
+{
+    m_abortauto = value;
+    emit abortautoValueChanged(value);
+}
+//-----------------------------Linear and Angular Speed-------------------------------------------
+
+int Publisher::getspeedsettingValue()
+{
+    return m_speedsettingvalue;
+}
+
+void Publisher::setspeedsettingValue(int speedsetting)
+{
+    m_speedsettingvalue = speedsetting;
+    emit speedsettingValueChanged(speedsetting);
+}
+
+void Publisher::velstatusCallback(int speedsetting)
+{
+    setspeedsettingValue(speedsetting);
+}
+
+int Publisher::getangularspeedValue()
+{
+    return m_anglesettingvalue;
+}
+
+void Publisher::setangularspeedValue(int angularspeed)
+{
+    m_anglesettingvalue = angularspeed;
+    emit angularspeedValueChanged(angularspeed);
+}
+
+void Publisher::angularspeedCallback(int angularspeed)
+{
+    setangularspeedValue(angularspeed);
 }
 
 // ---------------------------crawler arm toggle status---------------------------
@@ -196,14 +387,57 @@ void Publisher::armToolCallback(int arg)
 // ---------------------------arm---------------------------
 
 
-bool Publisher::getInitArmValue()
+bool Publisher::getslideCWValue()
 {
-    return m_initArmValue;
+    return m_slideCW;
 }
-void Publisher::setInitArmValue(bool flag)
+void Publisher::setslideCWValue(bool flag)
 {
-    m_initArmValue = flag;
-    emit initArmValueChanged(flag);
+    m_slideCW = flag;
+    emit slideCWValueChanged(flag);
+}
+
+bool Publisher::getslideCCWValue()
+{
+    return m_slideCCW;
+}
+
+void Publisher::setslideCCWValue(bool flag)
+{
+    m_slideCCW = flag;
+    emit slideCCWValueChanged(flag);
+}
+
+bool Publisher::getlacCWValue()
+{
+    return m_lacCW;
+}
+void Publisher::setlacCWValue(bool flag)
+{
+    m_lacCW = flag;
+    emit lacCWValueChanged(flag);
+
+}
+
+bool Publisher::getlacCCWValue()
+{
+    return m_lacCCW;
+}
+void Publisher::setlacCCWValue(bool flag)
+{
+    m_lacCCW = flag;
+    emit lacCCWValueChanged(flag);
+
+}
+
+bool Publisher::getresetTripValue()
+{
+    return m_tripReset;
+}
+void Publisher::setresetTripValue(bool flag)
+{
+    m_tripReset = flag;
+    emit resetTripValueChanged(flag);
 }
 
 
@@ -241,7 +475,27 @@ void Publisher::setArmStatus(QVector<int> value)
 }
 
 
+QString Publisher::getposval()
+{
+    return m_posval;
+}
 
+QString Publisher::getnegval()
+{
+    return m_negval;
+}
+
+void Publisher::setposval(QString value)
+{
+    m_posval = value;
+    emit posvalValueChanged(value);
+}
+
+void Publisher::setnegval(QString value)
+{
+    m_negval = value;
+    emit negvalValueChanged(value);
+}
 
 void Publisher::call_arminit(int val)
 {
@@ -261,11 +515,51 @@ void Publisher::armCallback(QVector<int> status)
     setArmStatus(status);
 }
 
-
-void Publisher::initArm(bool flag)
+void Publisher::resetTrip(bool flag)
 {
-    setInitArmValue(flag);
+    setresetTripValue(flag);
 }
+
+void Publisher::slideCW(bool flag)
+{
+    setslideCWValue(flag);
+}
+
+void Publisher::slideCCW(bool flag)
+{
+    setslideCCWValue(flag);
+}
+
+void Publisher::speedIncrease(bool flag)
+{
+    setspeedIncrease(flag);
+}
+
+void Publisher::speedDecrease(bool flag)
+{
+    setspeedDecrease(flag);
+}
+
+void Publisher::joystickonoff(bool flag)
+{
+    setjoystickonoff(flag);
+}
+
+void Publisher::abortauto(bool flag)
+{
+    setabortauto(flag);
+}
+
+void Publisher::lacCW(bool flag)
+{
+    setlacCWValue(flag);
+}
+
+void Publisher::lacCCW(bool flag)
+{
+    setlacCCWValue(flag);
+}
+
 void Publisher::stopArm(bool flag)
 {
     setStopArmValue(flag);
@@ -291,6 +585,16 @@ void Publisher::setInitCrawlerValue(bool flag)
     emit initCrawlerValueChanged(flag);
 }
 
+bool Publisher::getrstwaterlevelValue()
+{
+    return m_rstwaterlevelValue;
+}
+void Publisher::setrstwaterlevelValue(bool value)
+{
+    m_rstwaterlevelValue = value;
+    emit rstwaterlevelValueChanged(value);
+}
+
 
 bool Publisher::getStopCrawlerValue()
 {
@@ -312,6 +616,38 @@ void Publisher::setRstCrawlerValue(bool flag)
     emit rstCrawlerValueChanged(flag);
 }
 
+void Publisher::setstopautoValue(bool flag)
+{
+    m_stopautoValue = flag;
+    emit stopautoValueChanged(flag);
+}
+
+void Publisher::setinitautoValue(bool flag )
+{
+    m_initautoValue = flag;
+    emit initautoValueChanged(flag);
+
+}
+
+bool Publisher::getstopautoValue()
+{
+    return m_stopautoValue;
+}
+
+bool Publisher::getinitautoValue()
+{
+    return m_initautoValue;
+}
+
+bool Publisher::getshdCrawlerValue()
+{
+    return m_shdCrawlerValue;
+}
+void Publisher::setshdCrawlerValue(bool flag)
+{
+    m_shdCrawlerValue = flag;
+    emit shdCrawlerValueChanged(flag);
+}
 
 QVector<int> Publisher::getTempValue()
 {
@@ -334,17 +670,86 @@ void Publisher::setErrValue(QVector<int> value)
     m_errValue = value;
     emit errValueChanged(value);
 }
-
-QVariantMap Publisher::getVelocityValue()
+//-----------------------Velocity--------------------------
+int Publisher::getVelocityValue()
 {
     return m_velocityValue;
 }
-void Publisher::setVelocityValue(QVariantMap value)
+void Publisher::setVelocityValue(int value)
 {
     m_velocityValue = value;
     emit velocityValueChanged(value);
 }
+void Publisher::velCallback(int current_vel_linear)
+{
 
+    setVelocityValue(current_vel_linear);
+}
+
+//-----------------------CAMERA-------------------------------
+
+bool Publisher::getcameraInitValue()
+{
+    return m_cameraInit;
+}
+
+void Publisher::setcameraInitValue(bool k)
+{
+    m_cameraInit = k;
+    emit cameraInitValueChanged(k);
+}
+
+
+
+//-----------------------lac Value----------
+
+int Publisher::getlacValue()
+{
+    return m_lacValue;
+}
+
+void Publisher::setlacValue(int lac_value)
+{
+    m_lacValue = lac_value;
+    emit lacValueChanged(lac_value);
+}
+void Publisher::lacCallback(int lac_value)
+{
+    setlacValue(lac_value);
+}
+
+//----------------------ODOMETER---------------------------
+int Publisher::getodomValue()
+{
+    return m_odom;
+}
+void Publisher::setodomValue(int current_odom)
+{
+    m_odom = current_odom;
+    emit odomValueChanged(current_odom);
+}
+void Publisher::odomCallback(int current_odom)
+{
+    setodomValue(current_odom);
+}
+
+//----------------------TRIPMETER---------------------------
+int Publisher::gettripValue()
+{
+    return m_trip;
+}
+void Publisher::settripValue(int current_odom)
+{
+    m_trip = current_odom;
+    emit tripValueChanged(current_odom);
+}
+void Publisher::tripCallback(int current_odom)
+{
+    settripValue(current_odom);
+
+}
+
+//----------------------------------------------------------
 QVariantMap Publisher::getCrawlStatus()
 {
     return m_crawlStatus;
@@ -355,7 +760,10 @@ void Publisher::setCrawlStatus(QVariantMap value)
     emit crawlStatusChanged(value);
 }
 
-
+void Publisher::shd_crawler(int val)
+{
+    emit shdCrawler(val);
+}
 
 
 
@@ -365,33 +773,81 @@ void Publisher::rst_crawler(int val)
 void Publisher::call_crawlerinit(int val)
 {    emit value2(val);
 }
+void Publisher::call_slidecw(int val)
+{
+    emit value3(val);
+}
+void Publisher::call_slideccw(int val)
+{
+    emit value4(val);
+}
+
+void Publisher::call_laccw(int val)
+{
+    emit value5(val);
+}
+
+void Publisher::call_lacccw(int val)
+{
+    emit value6(val);
+}
+
+void Publisher::call_resetTrip(int val)
+{
+    emit value7(val);
+}
+
+void Publisher::call_cameraInit(int val)
+{
+    emit value8(val);
+}
+
+void Publisher::call_speedIncrease(int val)
+{
+    emit value9(val);
+}
+
+void Publisher::call_speedDecrease(int val)
+{
+    emit value10(val);
+}
+
+void Publisher::call_resetWaterLevel(int val)
+{
+    emit value11(val);
+}
+
+void Publisher::call_joystickonoff(int val)
+{
+    emit value12(val);
+}
+
+void Publisher::call_abortauto(int val)
+{
+    emit value13(val);
+}
 
 void Publisher::errorCallback(QVector<int> value)
 {
+
     setErrValue(value);
+//    qDebug()<< Q_FUNC_INFO << value;
 }
 void Publisher::tempCallback(QVector<int> value)
 {
     setTempValue(value);
 }
-void Publisher::velCallback(float current_vel_linear, float current_vel_angular, float max_linear, float max_angular)
-{
-    QVariantMap velocity;
-    velocity.insert("current_vel_linear", current_vel_linear);
-    velocity.insert("current_vel_angular", current_vel_angular);
-    velocity.insert("max_linear", max_linear);
-    velocity.insert("max_angular", max_angular);
-    setVelocityValue(velocity);
-}
+
 
 void Publisher::crawlerCallback(bool frontLeft, bool frontRight, bool backrRight, bool backLeft)
 {
-    qDebug() << Q_FUNC_INFO << "frontLeft :" << frontLeft << "frontRight :" << frontRight << "backrRight :" << backrRight << "backLeft :" << backLeft;
+//    qDebug() << Q_FUNC_INFO << "frontLeft :" << frontLeft << "frontRight :" << frontRight << "backrRight :" << backrRight << "backLeft :" << backLeft;
     QVariantMap crawlerCallback;
     crawlerCallback.insert("frontLeft", frontLeft);
     crawlerCallback.insert("frontRight", frontRight);
     crawlerCallback.insert("backrRight", backrRight);
     crawlerCallback.insert("backLeft", backLeft);
+//    qDebug()<<Q_FUNC_INFO << crawlerCallback;
     setCrawlStatus(crawlerCallback);
 }
 
@@ -407,11 +863,29 @@ void Publisher::stopCrawler(bool flag)
 }
 
 
+
+
 void Publisher::rstCrawler(bool flag)
 {
     setRstCrawlerValue(flag);
 }
 
+void Publisher::stopautop(bool flag)
+{
+    setstopautoValue(flag);
+}
+
+void Publisher::initautop(bool flag)
+{
+    setinitautoValue(flag);
+}
+
+
+
+void Publisher::cameraInit(bool k)
+{
+    setcameraInitValue(k);
+}
 
 // --------------------------battery--------------------------
 float Publisher::getBatteryValue()
@@ -428,8 +902,24 @@ void Publisher::battCallback(float value)
     setBatteryValue(value);
 }
 
+//------------------------ANGLE Inclination------------
+
+void Publisher::angleCallbackp(int value)
+{
+    setAngleValue(value);
+}
+int Publisher::getAngleValue()
+{
+    return m_angleValue;
+}
+void Publisher::setAngleValue(int value)
+{
+    m_angleValue = value;
+    emit angleValueChanged(value);
+}
+
 // current
-void Publisher::currentCallback(float value)
+void Publisher::currentCallback(int value)
 {
     setCurrentValue(value);
 }
@@ -441,67 +931,20 @@ float Publisher::getCurrentValue()
 }
 
 
-void Publisher::setCurrentValue(float value)
+void Publisher::setCurrentValue(int value)
 {
     m_currentValue = value;
     emit currentValueChanged(value);
 }
 
 // --------------------------ut gauge--------------------------
-QVariantMap Publisher::getUtstatus()
-{
-    return m_utStatus;
-}
-void Publisher::setUtstatus(QVariantMap value)
-{
-    m_utStatus = value;
-    emit utstatusChanged(value);
-}
 
-void Publisher::utCallback(int vel, int deepcoat, int echo)
-{
-    QVariantMap utstatus;
-    utstatus.insert("vel", vel);
-    utstatus.insert("deepcoat", deepcoat);
-    utstatus.insert("echo", echo);
-    setUtstatus(utstatus);
-}
-void Publisher::thicknessCallback(float thickness, float unit)
-{
-    QVariantMap thicknessCallback;
-    thicknessCallback.insert("thickness",thickness);
-    thicknessCallback.insert("unit",unit);
-    setThickness(thicknessCallback);
-}
-void Publisher::setThickness(QVariantMap value)
-{
-    m_thickness = value;
-    emit thicknessChanged(m_thickness);
-}
-QVariantMap Publisher::getThickness()
-{
-    return m_thickness;
-}
-QString Publisher::getUtVel()
-{
-    return m_utVel;
-}
-void Publisher::setUtVel(QString value)
-{
-    m_utVel = value;
-    emit utVelChanged(value);
-}
 
-QString Publisher::getUtData()
-{
-    return m_utData;
-}
-void Publisher::setUtData(QString value)
-{
 
-    m_utData = value;
-    emit utDataChanged(value);
-}
+
+
+
+
 
 
 
@@ -523,11 +966,8 @@ void Publisher::uidCallback(QVector<QString> value)
 
 
 //--------------------------image capture--------------------------
-void Publisher::call_capImg(int val)
-{
-    emit capImg(val);
-}
 
-//////////////
+
+
 
 
