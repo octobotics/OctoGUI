@@ -2081,6 +2081,9 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -2097,6 +2100,18 @@ moc_customplotitem.cpp: ../OctoboticsApp/Source/customplotitem.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMapping.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingRequest.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Pose.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Point.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Quaternion.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingResponse.h \
 		moc_predefs.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/Desktop/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/Desktop/OctoGUI/OctoboticsApp -I/home/octo/Desktop/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/Desktop/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/customplotitem.h -o moc_customplotitem.cpp
@@ -2317,6 +2332,9 @@ moc_publisher.cpp: ../OctoboticsApp/Source/publisher.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -2957,6 +2975,18 @@ moc_publisher.cpp: ../OctoboticsApp/Source/publisher.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMapping.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingRequest.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Pose.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Point.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Quaternion.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingResponse.h \
 		moc_predefs.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/Desktop/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/Desktop/OctoGUI/OctoboticsApp -I/home/octo/Desktop/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/Desktop/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/publisher.h -o moc_publisher.cpp
@@ -3044,6 +3074,9 @@ moc_rosthread.cpp: ../OctoboticsApp/Source/rosthread.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -3685,6 +3718,18 @@ moc_rosthread.cpp: ../OctoboticsApp/Source/rosthread.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMapping.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingRequest.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Pose.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Point.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Quaternion.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingResponse.h \
 		moc_predefs.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/home/octo/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/octo/Desktop/OctoGUI/build-OctoboticsApp-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/octo/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/octo/Desktop/OctoGUI/OctoboticsApp -I/home/octo/Desktop/OctoGUI/OctoboticsApp/ros_lib/include -I/home/octo/Desktop/OctoGUI/OctoboticsApp/ros_custom_service/include -I/usr/include/gstreamer-1.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuickControls2 -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQuick -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtMultimedia -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtOpenGL -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtPrintSupport -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtSvg -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtQml -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/octo/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../OctoboticsApp/Source/rosthread.h -o moc_rosthread.cpp
@@ -4024,6 +4069,9 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -4558,7 +4606,19 @@ publisher.o: ../OctoboticsApp/Source/publisher.cpp ../../../Qt5.12.12/5.12.12/gc
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_stat.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
+		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMapping.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingRequest.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Pose.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Point.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Quaternion.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingResponse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o publisher.o ../OctoboticsApp/Source/publisher.cpp
 
 recordcams.o: ../OctoboticsApp/Source/recordcams.cpp 
@@ -4647,6 +4707,9 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -5286,7 +5349,19 @@ rosthread.o: ../OctoboticsApp/Source/rosthread.cpp ../OctoboticsApp/Source/rosth
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_stat.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
+		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMapping.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingRequest.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Pose.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Point.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Quaternion.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingResponse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rosthread.o ../OctoboticsApp/Source/rosthread.cpp
 
 hellocpp.o: ../OctoboticsApp/Source/hellocpp.cpp 
@@ -6504,6 +6579,9 @@ customplotitem.o: ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/So
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -6518,7 +6596,19 @@ customplotitem.o: ../OctoboticsApp/Source/customplotitem.cpp ../OctoboticsApp/So
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_stat.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
-		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h
+		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMapping.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingRequest.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Pose.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Point.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Quaternion.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingResponse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o customplotitem.o ../OctoboticsApp/Source/customplotitem.cpp
 
 main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
@@ -6676,6 +6766,9 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolRequest.h \
 		../OctoboticsApp/ros_lib/include/std_srvs/SetBoolResponse.h \
 		../OctoboticsApp/ros_lib/include/geometry_msgs/Vector3.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControl.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlRequest.h \
+		../OctoboticsApp/ros_custom_service/include/stm_interface/RelayControlResponse.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPath.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathRequest.h \
 		../OctoboticsApp/ros_custom_service/include/serialtoros/GraphPathResponse.h \
@@ -7247,6 +7340,18 @@ main.o: ../OctoboticsApp/main.cpp ../OctoboticsApp/Source/connectros.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statRequest.h \
 		../OctoboticsApp/ros_custom_service/include/octo_arm_teleop/GUI_adra_statResponse.h \
 		../OctoboticsApp/ros_custom_service/include/stm_client/cam_array.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/start_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_stream.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamRequest.h \
+		../OctoboticsApp/ros_custom_service/include/zed_interfaces/stop_remote_streamResponse.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMapping.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingRequest.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Pose.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Point.h \
+		../OctoboticsApp/ros_lib/include/geometry_msgs/Quaternion.h \
+		../OctoboticsApp/ros_custom_service/include/hector_mapping/ResetMappingResponse.h \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtGui/QGuiApplication \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt5.12.12/5.12.12/gcc_64/include/QtQml/QQmlApplicationEngine \

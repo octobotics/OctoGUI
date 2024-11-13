@@ -16,6 +16,7 @@
 #include "rosthread.h"
 #include <QDebug>
 #include <bits/stdc++.h>
+#include "publisher.h"
 
 QString GraphPath_ = "";
 
@@ -46,9 +47,12 @@ void RosThread::run()
     neg_angle_pub_ = m_nodeHandler->advertise<std_msgs::Int16>("/stroke_length",10);
     lat_angle_pub_ = m_nodeHandler->advertise<std_msgs::Float64>("/lateral_shift_stop_angle",10);
     automode_pub_ = m_nodeHandler->advertise<std_msgs::Int32>("/navigation_control",1);
+    cycles_pub_ = m_nodeHandler->advertise<std_msgs::Int16>("/cycles",1);
+    ui_stroke_pub_ = m_nodeHandler->advertise<std_msgs::Int16>("/ui_stroke_length",1);
 
 
-    // ros subscribers
+ 
+    // ros subscribers 
     water_level_ = m_nodeHandler->subscribe<std_msgs::Float32>("/cumulative_volume",1,&RosThread::waterCallback,this);
     comm_sub_ = m_nodeHandler->subscribe<std_msgs::Int16>("/comm_status", 1, &RosThread::commCallback, this);
     tool_sub_ = m_nodeHandler->subscribe<std_msgs::Int8>("/arm_tool_status", 1, &RosThread::armToolCallback, this);
@@ -64,6 +68,14 @@ void RosThread::run()
     lac_pos_  = m_nodeHandler->subscribe<std_msgs::Int32>("/current_servo_pose",1,&RosThread::lacCallback,this);
     voltage_ = m_nodeHandler->subscribe<std_msgs::Int16>("/voltage",1, &RosThread::batteryCallback,this);
     angle_measure_ = m_nodeHandler->subscribe<geometry_msgs::Vector3>("/imu/angles",1,&RosThread::angleCallback, this);
+
+    // ut_thickness
+
+    ut_thickness_ = m_nodeHandler->subscribe<std_msgs::Float64>("/ut_val", 1, &RosThread::utThicknessCallback, this);
+// gridnum
+    gridnum_sub_ = m_nodeHandler->subscribe<std_msgs::Int32>("/grid_number", 1, &RosThread::gridNumSubCallback, this);
+
+
 
 
     // ros service servers
@@ -87,6 +99,14 @@ void RosThread::run()
     abort_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/abort_behavior_tree");
     camera_init_   = m_nodeHandler->serviceClient<zed_interfaces::start_remote_stream>("/zed2i/zed_node/start_remote_stream");
     camera_stop_   = m_nodeHandler->serviceClient<zed_interfaces::stop_remote_stream>("/zed2i/zed_node/stop_remote_stream");
+
+    pause_tree = m_nodeHandler->serviceClient<std_srvs::Trigger>("/pause_tree");
+    start_grid_scanning_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/start_grid_scanning");
+    start_raster_scanning_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/start_raster_scanning");
+    abort_raster_scanning_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/abort_raster_scanning");
+    abort_grid_mapping_srv_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/abort_grid_mapping");
+
+
 
 
     lac_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
@@ -175,6 +195,8 @@ void RosThread::armToolCallback(const std_msgs::Int8::ConstPtr &msg)
  */
 void RosThread::velCallback(const std_msgs::Int16::ConstPtr &msg)
 {
+    
+
     auto current_vel_linear = msg->data;
 
     emit velCallback(current_vel_linear);
@@ -567,11 +589,26 @@ void RosThread::pos_angle(QString value)
 void RosThread::neg_angle(QString value)
 {
     ros::Rate rate(100);
-    std_msgs::Int32 msg;
+    std_msgs::Int16 msg;
     msg.data = value.toInt();
     neg_angle_pub_.publish(msg);
+    ui_stroke_pub_.publish(msg);
 
 }
+
+void RosThread::cycles_val(QString value)
+{
+    ros::Rate rate(100);
+    std_msgs::Int16 msg;
+    msg.data = value.toInt();
+
+    cycles_pub_.publish(msg);
+    
+
+}
+
+
+
 
 void RosThread::lat_angle (QString value)
 {
@@ -873,3 +910,171 @@ void RosThread::saveImg(QString img)
 }
 
 
+/*!
+ * \brief RosThread::pause the behaviour tree
+ * \param value 1: init 0: stop
+ */
+ 
+void RosThread::pause_treeSrv(int val4)
+{
+
+    std_srvs::Trigger b;
+
+
+        pause_tree.call(b);
+        if (b.response.success){
+            emit pause_treeStatus(1);
+
+        }
+        else {
+            emit pause_treeStatus(0);
+
+        }
+}
+
+
+// /*!
+//  * \brief RosThread::electromagnet  calls the service 
+//  * \param value 1: init 0: stop
+//  */
+ 
+// void RosThread::emSrv(QString val4)
+// {
+  
+//     stm_interface::RelayControl val;
+//     val.request.data = val4.toInt();
+//     send_tool_srv_.call(val);
+
+
+//         // pause_tree.call(b);
+//         // if (b.response.success){
+//         //     emit emStatus(1);
+
+//         // }
+//         // else {
+//         //     emit emStatus(0);
+
+//         // }
+// }
+
+
+
+
+void RosThread::gridScanSrv(int value)
+
+{
+    int k = value;
+    std_srvs::Trigger b;
+    std_srvs::SetBool p;
+    if(k){
+    //qDebug() << "Start Grid sacn";
+        crawler_stop_srv_.call(b);
+        start_grid_scanning_srv_.call(b);
+        if (b.response.success){
+//            qDebug() << "initialized crawler";
+            emit startGridScan(1);
+
+        }
+        else {
+//            qDebug() << "error initializing crawler";
+            emit startGridScan(0);
+
+        }
+    }
+    else{
+       //  qDebug() << "stop crawler";
+        p.request.data = true;
+        abort_grid_mapping_srv_.call(p);
+        if (p.response.success){
+            qDebug() << "stopped crawler";
+            emit stopGridScan(1);
+        }
+        else {
+            //qDebug() << "error stopping crawler";
+            emit stopGridScan(0);
+        }
+      //  qDebug() << "Stop Grid Scan";
+
+    }
+}
+
+//  saveCSV
+
+// void RosThread::saveCSV(int value)
+
+// {
+//    int k = value;
+
+//     if (k) {
+//         // Example CSV data (you can replace this with actual data)
+//         std::vector<std::vector<std::string>> data ;
+//         int rows = 5;
+//         int cols =rows;
+
+//         // Loop to populate the data vector with strings
+//         for (int i = 0; i < rows; ++i) {
+//             std::vector<std::string> row;
+            
+//             for (int j = 0; j < cols; ++j) {
+//                 // Generate a random number as a string (for example, random number between 1 and 100)
+//                 int randomValue = rand() % 10 + 1;
+                
+//                 // Convert the random number to a string and store it in the row
+//                 row.push_back(std::to_string(randomValue));
+//             }
+            
+//             // Add the row to the data vector
+//             data.push_back(row);
+//         }
+//         // Open the file in append mode
+//         std::ofstream outFile("/home/octo/output.csv", std::ios::app);
+
+//         if (outFile.is_open()) {
+//             // Get the current date and time
+//             std::time_t currentTime = std::time(nullptr);
+//             char timeBuffer[100];
+//             std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
+
+//             // Write a timestamp comment at the top of the file
+//             outFile << "Ut Value saved: " << timeBuffer << "\n";
+
+//             // Writing the table data to the CSV file (new data)
+//             for (const auto& row : data) {
+//                 for (size_t i = 0; i < row.size(); ++i) {
+//                     outFile << row[i];
+//                     if (i < row.size() - 1) {
+//                         outFile << ","; // Add comma separator
+//                     }
+//                 }
+//                 outFile << "\n"; // Newline after each row
+//             }
+
+//             outFile.close();
+//             std::cout << "CSV file saved successfully!" << std::endl;
+//         } else {
+            
+//             std::cout << "j" << std::endl;
+//         }
+//     }
+// }
+
+
+
+
+// ut_thickness
+
+void RosThread::utThicknessCallback(const std_msgs::Float64::ConstPtr &msg)
+{
+    float thickness = msg->data;
+	emit utThicknessCallback(thickness);
+    
+}
+
+
+void RosThread::gridNumSubCallback(const std_msgs::Int32::ConstPtr &msg)
+{
+    auto gridnum = msg->data;
+	emit gridNumSubCallback(gridnum);
+    
+}
+	

@@ -1,0 +1,640 @@
+publisher.negval
+
+
+publisher.h
+
+    Q_PROPERTY(QString negval READ getnegval WRITE setnegval NOTIFY negvalValueChanged)
+    Q_PROPERTY(QString cyclesval READ getcyclesval WRITE setcyclesval NOTIFY cyclesvalValueChanged)
+    Q_PROPERTY(QString emval READ getemval WRITE setemval NOTIFY emvalValueChanged)
+    
+
+
+slots
+
+    QString getnegval();
+    void setnegval(QString value);
+    
+    
+    
+    QString getcyclesval();
+    void setcyclesval(QString value);
+
+
+Signal
+	    void negvalValueChanged(QString value);
+	    
+	    void cyclesvalValueChanged(QString value);
+
+
+
+private
+
+	    QString m_negval;
+	    
+	    QString m_cyclesval;
+
+
+slot rosthread.h
+
+void neg_angle (QString value);
+
+void cycles_val (QString value);
+
+
+
+
+
+
+publisher.cpp
+
+
+    connect(this,SIGNAL(negvalValueChanged(QString)),this->rost,SLOT(neg_angle(QString)));
+    
+    
+    connect(this,SIGNAL(cyclesvalValueChanged(QString)),this->rost,SLOT(cycles_val(QString)));
+
+
+
+
+QString Publisher::getnegval()
+{
+    return m_negval;
+}
+
+
+QString Publisher::getcyclesval()
+{
+    return m_cyclesval;
+}
+
+
+
+
+void Publisher::setnegval(QString value)
+{
+    m_negval = value;
+    emit negvalValueChanged(value);
+}
+
+
+
+void Publisher::setcyclesval(QString value)
+{
+    m_cyclesval = value;
+    emit cyclesvalValueChanged(value);
+}
+
+
+
+
+rosthread.cpp
+
+void RosThread::neg_angle(QString value)
+{
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    neg_angle_pub_.publish(msg);
+
+}
+
+
+
+
+void RosThread::cycles_val(QString value)
+{
+    ros::Rate rate(100);
+    std_msgs::Int32 msg;
+    msg.data = value.toInt();
+    cycles_pub_.publish(msg);
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+	pause_tree = m_nodeHandler->serviceClient<std_srvs::Trigger>("/pause_tree");
+  	start_grid_scanning = m_nodeHandler->serviceClient<std_srvs::Trigger>("/start_grid_scanning");
+    	start_raster_scanning = m_nodeHandler->serviceClient<std_srvs::Trigger>("/start_raster_scanning");
+    	abort_raster_scanning = m_nodeHandler->serviceClient<std_srvs::Trigger>("/abort_raster_scanning");
+    	abort_grid_mapping = m_nodeHandler->serviceClient<std_srvs::Trigger>("/abort_grid_mapping");
+
+abort_raster_scanning
+abort_grid_mapping
+start_grid_scanning
+start_raster_scanning
+pause_tree
+
+
+
+.................................publisher.h
+
+
+
+
+Q_PROPERTY(int pause_treeValue READ getpause_treeValue WRITE setpause_treeValue NOTIFY pause_treeValueChanged)
+    Q_PROPERTY(int emValue READ getemValue WRITE setremValue NOTIFY emValueChanged)
+
+
+Q_PROPERTY(int abort_grid_mappingValue READ getabort_grid_mappingValue WRITE setabort_grid_mappingValue NOTIFY abort_grid_mappingValueChanged)
+Q_PROPERTY(int abort_raster_scanningValue READ getabort_raster_scanningValue WRITE setabort_raster_scanningValue NOTIFY abort_raster_scanningValueChanged)
+Q_PROPERTY(int start_grid_scanningValue READ getstart_grid_scanningValue WRITE setstart_grid_scanningValue NOTIFY start_grid_scanningValueChanged)
+Q_PROPERTY(int start_raster_scanningValue READ getstart_raster_scanningValue WRITE setstart_raster_scanningValue NOTIFY start_raster_scanningValueChanged)
+
+
+
+public slots:
+    void trig_pause_tree(int val4);
+    void pause_treeStatus(int);
+    
+    void trig_em(int val4);
+    void emStatus(int);
+
+    
+    
+    
+    int getemValue();
+    void setremValue(int);
+    
+    
+
+    
+    
+    
+    void trig_abort_raster_scanning(int val4);
+    void pause_treeStatus(int);
+    
+    void trig_abort_grid_mapping(int val4);
+    void pause_treeStatus(int);
+    
+    void trig_start_grid_scanning(int val4);
+    void pause_treeStatus(int);
+    
+    void trig_start_raster_scanning(int val4);
+    void pause_treeStatus(int);
+    
+    
+    
+    
+    
+    
+singals:
+
+
+    void value44(int val4); 
+        void pause_treeValueChanged(QString value);
+        
+           void value49(int val4); 
+        void emValueChanged(QString value);
+        
+        void value45(int val4); 
+        void abort_raster_scanningValueChanged(QString value);
+        void value46(int val4); 
+        void abort_grid_mappingValueChanged(QString value);
+        void value47(int val4); 
+        void start_grid_scanningValueChanged(QString value);
+        void value48(int val4); 
+        void start_raster_scanningValueChanged(QString value);
+
+    
+private:
+
+
+    bool m_pause_treeValue;
+    
+    bool m_emValue
+    
+    
+    
+bool m_abort_raster_scanning;
+bool m_abort_grid_mapping;
+bool m_start_grid_scanning;
+bool m_start_raster_scanning;
+
+
+
+
+
+.................................................rosthread.h 
+
+
+ 
+public slots:
+           void pause_treeSrv(int val4);
+           
+           void emSrv(int val4);
+           
+           
+           
+           void abort_raster_scanningSrv(int val4);
+           void abort_raster_scanningSrv(int val4);
+           void abort_raster_scanningSrv(int val4);
+           void start_raster_scanningSrv(int val4);
+           
+public:
+    void run();
+
+signals:
+
+    void pause_treeStatus(int val4);
+        void abort_raster_scanningStatus(int val4);
+            void abort_grid_mappingStatus(int val4);
+                void start_grid_scanningStatus(int val4);
+                    void start_raster_scanningStatus(int val4);
+                    void emStatus(int val4)
+
+
+
+..................................................................publisher.cpp
+
+//constuctor
+Publisher::Publisher(QObject *parent)
+    : QObject(parent)
+{
+    qDebug() << "MainWindow constructor";
+    
+    
+    
+
+ 
+    m_pause_treeValue = 0; 
+    m_emValue = 0; 
+    m_abort_raster_scanningValue = 0; 
+    m_abort_raster_scanningValue = 0; 
+    m_abort_raster_scanningValue = 0; 
+    m_abort_raster_scanningValue = 0; 
+    }
+    
+    
+void Publisher::initRosThread()
+{    
+
+
+
+connect(this, SIGNAL(value44(int)), this->rost, SLOT(pause_treeSrv(int)));
+connect(this->rost, SIGNAL(pause_treeStatus(bool)), this, SLOT(pause_treeStatus(bool)));
+
+
+connect(this, SIGNAL(value49(int)), this->rost, SLOT(emSrv(int)));
+connect(this->rost, SIGNAL(emStatus(bool)), this, SLOT(emStatus(bool)));
+
+connect(this, SIGNAL(value45(int)), this->rost, SLOT(abort_raster_scanningSrv(int)));
+connect(this->rost, SIGNAL(pause_treeStatus(bool)), this, SLOT(pause_treeStatus(bool)));
+
+connect(this, SIGNAL(value46(int)), this->rost, SLOT(abort_grid_mappingSrv(int)));
+connect(this->rost, SIGNAL(pause_treeStatus(bool)), this, SLOT(pause_treeStatus(bool)));
+
+connect(this, SIGNAL(value47(int)), this->rost, SLOT(start_grid_scanningSrv(int)));
+connect(this->rost, SIGNAL(pause_treeStatus(bool)), this, SLOT(pause_treeStatus(bool)));
+
+connect(this, SIGNAL(value48(int)), this->rost, SLOT(start_raster_scanningSrv(int)));
+connect(this->rost, SIGNAL(pause_treeStatus(bool)), this, SLOT(pause_treeStatus(bool)));
+}
+
+
+
+
+void Publisher::trig_pause_tree(int val4)
+{
+
+    emit value44(val4);
+}
+
+
+void Publisher::trig_em(int val4)
+{
+
+    emit value49(val4);
+}
+
+
+
+void Publisher::trig_abort_raster_scanning(int val4)
+{
+
+    emit value45(val4);
+}
+
+void Publisher::trig_abort_grid_mapping(int val4)
+{
+
+    emit value46(val4);
+}
+
+void Publisher::trig_start_grid_scanning(int val4)
+{
+
+    emit value47(val4);
+}
+
+void Publisher::trig_start_raster_scanning(int val4)
+{
+
+    emit value48(val4);
+}
+
+
+
+
+
+void Publisher::pause_treeStatus(int val4)
+{
+    setpause_treeValue(val4);
+}
+
+
+void Publisher::emStatus(int val4)
+{
+    setemValue(val4);
+}
+
+
+
+void Publisher::abort_raster_scanningStatus(int val4)
+{
+    setabort_raster_scanning(val4);
+}
+
+void Publisher::abort_grid_mappingStatus(int val4)
+{
+    setabort_grid_mapping(val4);
+}
+
+void Publisher::start_grid_scanningStatus(int val4)
+{
+    setstart_grid_scanning(val4);
+}
+
+void Publisher::start_raster_scanningStatus(int val4)
+{
+    setstart_raster_scanning(val4);
+}
+
+
+
+
+void Publisher::setpause_treeValue(int val4)
+
+{
+ m_pause_treeValue = val4;
+    emit pause_treeValueChanged(val4);
+    
+}
+
+void Publisher::setemValue(int val4)
+
+{
+ m_emValue = val4;
+    emit emValueChanged(val4);
+    
+}
+
+
+
+
+void Publisher::setabort_raster_scanningValue(int val4)
+{
+m_abort_raster_scanningValue = val4;
+    emit abort_raster_scanningValueChanged(val4);
+
+
+
+void Publisher::setabort_grid_mappingValue(int val4)
+{
+        m_abort_grid_mappingValue = val4;
+    emit abort_grid_mappingValueChanged(val4);
+
+   
+}
+
+
+void Publisher::setstart_grid_scanningValue(int val4)
+{
+    m_start_grid_scanningValue = val4;
+    emit start_grid_scanningValueChanged(val4);
+}
+
+
+void Publisher::setstart_raster_scanningValue(int val4)
+{
+    m_start_raster_scanningValue = val4;
+    emit start_raster_scanningValueChanged(val4);
+}
+
+
+
+
+
+
+
+int Publisher::getpause_treeValue()
+{
+    return m_pause_treeValue;
+}
+
+int Publisher::getemValue()
+{
+    return m_emValue;
+}
+
+
+
+
+int Publisher::getabort_raster_scanningValue()
+{
+    return m_abort_raster_scanningValue;
+}
+
+
+int Publisher::getabort_grid_mappingValue()
+{
+    return m_abort_grid_mappingValue;
+}
+
+
+int Publisher::getstart_grid_scanningValue()
+{
+    return m_start_grid_scanningValue;
+}
+
+
+int Publisher::getstart_raster_scanningValue()
+{
+    return m_start_raster_scanningValue;
+}
+
+
+..................................................................rosthread.cpp
+
+
+
+
+/*!
+ * \brief RosThread::armZeroPoseSrv  calls the service to set pose
+ * \param value 1: init 0: stop
+ */
+ 
+void RosThread::pause_treeSrv(int val4)
+{
+
+    std_srvs::Trigger b;
+
+
+        pause_tree.call(b);
+        if (b.response.success){
+            emit pause_treeStatus(1);
+
+        }
+        else {
+            emit pause_treeStatus(0);
+
+        }
+}
+
+
+/*!
+ * \brief RosThread::electromagnet  calls the service 
+ * \param value 1: init 0: stop
+ */
+ 
+void RosThread::emSrv(int val4)
+{
+
+    std_srvs::Trigger b;
+
+
+        pause_tree.call(b);
+        if (b.response.success){
+            emit emStatus(1);
+
+        }
+        else {
+            emit emStatus(0);
+
+        }
+}
+
+
+
+/*!
+ * \brief RosThread::abort_raster_scanning 
+ */
+ 
+void RosThread::pause_treeSrv(int val4)
+{
+
+    std_srvs::Trigger b;
+
+
+        pause_tree.call(b);
+        if (b.response.success){
+            emit pause_treeStatus(1);
+
+        }
+        else {
+            emit pause_treeStatus(0);
+
+        }
+}
+
+
+
+
+/*!
+ * \brief RosThread::abort_grid_mapping  
+ */
+ 
+void RosThread::abort_grid_mappingSrv(int val4)
+{
+
+    std_srvs::Trigger b;
+
+
+        abort_grid_mapping.call(b);
+        if (b.response.success){
+            emit abort_grid_mappingStatus(1);
+
+        }
+        else {
+            emit abort_grid_mappingStatus(0);
+
+        }
+}
+
+
+
+
+
+/*!
+ * \brief RosThread::start_grid_scanning  
+ */
+ 
+void RosThread::start_grid_scanningSrv(int val4)
+{
+
+    std_srvs::Trigger b;
+
+
+        start_grid_scanning.call(b);
+        if (b.response.success){
+            emit start_grid_scanning(1);
+
+        }
+        else {
+            emit start_grid_scanningStatus(0);
+
+        }
+}
+
+
+
+
+
+/*!
+ * \brief RosThread::start_raster_scanning  
+ */
+ 
+void RosThread::start_raster_scanningSrv(int val4)
+{
+
+    std_srvs::Trigger b;
+
+
+        start_raster_scanning.call(b);
+        if (b.response.success){
+            emit start_raster_scanningStatus(1);
+
+        }
+        else {
+            emit start_raster_scanningStatus(0);
+
+        }
+}
+
+
+
+
+Electromagnet will be manually activated by /relay_toggle_channel data: 5
+
+
+
+emval
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

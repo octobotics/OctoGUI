@@ -62,6 +62,8 @@ public slots:
     //ros publishers
     void pos_angle (QString value);
     void neg_angle (QString value);
+    void cycles_val (QString value);
+
     void lat_angle (QString value);
 
 
@@ -80,6 +82,11 @@ public slots:
     void currentCallback(const std_msgs::Int32::ConstPtr &msg);
     void uidCallback(const launch_crawler::SerialNumbers::ConstPtr &msg);
     void batteryCallback(const std_msgs::Int16::ConstPtr &msg);
+    // ut_thickness
+    void utThicknessCallback(const std_msgs::Float64::ConstPtr &msg);
+    // gridnum
+    void gridNumSubCallback(const std_msgs::Int32::ConstPtr &msg);
+
 
     //ros service servers
     bool toggleCallback(stm_client::tool_status::Request &req, stm_client::tool_status::Response &res);
@@ -112,14 +119,27 @@ public slots:
     void reset_arm(int val);
     void saveImg(QString img);
 
+    void pause_treeSrv(int val4);
+    // void emSrv(int val4);
+
+//ut_thickness
+    //void utThicknessCallback(const std_msgs::Float64::ConstPtr &msg);
+    // grid sacn
+
+void gridScanSrv(int value);
+//void saveCSV(int value);
+
+
+
+
+
+
+
 public:
     void run();
 
 signals:
     //signals
-
-
-
 //    void voltageCallback(int value);
     void waterCallback(float level);
     void commCallback(int value);
@@ -172,7 +192,23 @@ signals:
     void cameraInit(bool k);
     void rstwaterlevel(bool k);
 
+    void pause_treeStatus(int val4);
+    // void emStatus(int val4);
 
+    // ut_thickness
+    void utThicknessCallback(float thickness);
+    //void utThicknessCallback(float thickness);
+
+    //gridnum
+        void gridNumSubCallback(int gridnum);
+
+
+
+    //grid scan
+    void startGridScan(bool k);
+    void stopGridScan(bool k);
+
+    
 
 private:
     ros::NodeHandlePtr m_nodeHandler;
@@ -184,6 +220,10 @@ private:
     ros::Publisher neg_angle_pub_;
     ros::Publisher lat_angle_pub_;
 
+    ros::Publisher cycles_pub_;
+    ros::Publisher ui_stroke_pub_;
+    
+
 //    ros::Publisher img_cap_pub_;
 
     ros::Subscriber comm_sub_;
@@ -192,7 +232,7 @@ private:
     ros::Subscriber odometer_;
     ros::Subscriber tripmeter_;
     ros::Subscriber crawler_status_sub_;
-    ros::Subscriber angle_measure_;
+    ros::Subscriber angle_measure_; 
 
 
     ros::Subscriber current_sub_;
@@ -202,6 +242,10 @@ private:
     ros::Subscriber voltage_;
     ros::Subscriber velstatus_;
 
+    // ut_thickness
+    ros::Subscriber ut_thickness_;
+    // GRIDNUM 
+    	ros::Subscriber gridnum_sub_;
     //ros Service Server
     ros::ServiceServer toggle_srv_;
     ros::ServiceServer send_img_srv_;
@@ -217,6 +261,13 @@ private:
     ros::ServiceClient crawler_speed_Decrease_;
     ros::ServiceClient joystickonoff_;
     ros::ServiceClient abort_;
+
+
+    ros::ServiceClient pause_tree;
+    ros::ServiceClient start_grid_scanning_srv_;
+    ros::ServiceClient start_raster_scanning_srv_;
+    ros::ServiceClient abort_raster_scanning_srv_;
+    ros::ServiceClient abort_grid_mapping_srv_;
 
     //-------------------------Auto Mode---------------
     ros::ServiceClient initauto_;
@@ -242,6 +293,9 @@ private:
     QMap<int, QString> error_;
     QMap<int, QString> c_motors_;
     QVector<QString> uids_;
+
+
+
 
 
 };

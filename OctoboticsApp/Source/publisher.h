@@ -14,13 +14,15 @@
  */
 
 
-#pragma once
+#pragma once 
 #ifndef PUBLISHER_H
 #define PUBLISHER_H
 #include "rosthread.h"
 #include <QDebug>
 #include <QString>
 #include <QThread>
+#include <vector>
+#include <QVector>
 
 /*!
  * \brief The Publisher class acts as a mediator between ros node and our qml page.
@@ -33,13 +35,11 @@ class Publisher : public QObject
 
     // communication
     Q_PROPERTY(int comStatus READ getComStatus WRITE setComStatus NOTIFY comStatusChanged)
-
     Q_PROPERTY(QString posval READ getposval WRITE setposval NOTIFY posvalValueChanged)
     Q_PROPERTY(QString negval READ getnegval WRITE setnegval NOTIFY negvalValueChanged)
-
+    Q_PROPERTY(QString cyclesval READ getcyclesval WRITE setcyclesval NOTIFY cyclesvalValueChanged)
     // crawler arm toggle status
     Q_PROPERTY(bool toggleValue READ getToggleValue WRITE setToggleValue NOTIFY toggleValueChanged)
-
     // arm tool
     Q_PROPERTY(int armToolStatus READ getArmToolStatus WRITE setArmToolStatus NOTIFY armToolStatusChanged)
     Q_PROPERTY(QString toolToggle READ getToolToggle WRITE setToolToggle NOTIFY toolToggleChanged)
@@ -76,6 +76,12 @@ class Publisher : public QObject
     Q_PROPERTY(float waterLevel READ getWaterLevel WRITE setWaterLevel NOTIFY waterlevelValueChanged)
 
 
+
+
+    // priyanshu
+    Q_PROPERTY(int pause_treeValue READ getpause_treeValue WRITE setpause_treeValue NOTIFY pause_treeValueChanged)
+
+
     // Velocity
     Q_PROPERTY(int velocityValue READ getVelocityValue WRITE setVelocityValue NOTIFY velocityValueChanged)
     Q_PROPERTY(int odomValue READ getodomValue WRITE setodomValue NOTIFY odomValueChanged)
@@ -91,13 +97,38 @@ class Publisher : public QObject
     Q_PROPERTY(int anglesetting READ getangularspeedValue WRITE setangularspeedValue NOTIFY angularspeedValueChanged)
     // current
     Q_PROPERTY(float currentValue READ getCurrentValue WRITE setCurrentValue NOTIFY currentValueChanged)
-//    Q_PROPERTY(int voltageValue READ getvoltageValue WRITE setvoltageValue NOTIFY voltageValueChanged)
-
-    // ut gauge
-
+//  Q_PROPERTY(int voltageValue READ getvoltageValue WRITE setvoltageValue NOTIFY voltageValueChanged)
 
     // unique id
+    
+    
     Q_PROPERTY(QVector<QString> uid READ getUid WRITE setUid NOTIFY uidChanged)
+
+// priyanshu
+    Q_PROPERTY(int pause_treeValue READ getpause_treeValue WRITE setpause_treeValue NOTIFY pause_treeValueChanged)
+    // Q_PROPERTY(int emValue READ getemValue WRITE setemValue NOTIFY emValueChanged)
+    Q_PROPERTY(int abort_grid_mappingValue READ getabort_grid_mappingValue WRITE setabort_grid_mappingValue NOTIFY abort_grid_mappingValueChanged)
+    // Q_PROPERTY(int abort_raster_scanningValue READ getabort_raster_scanningValue WRITE setabort_raster_scanningValue NOTIFY abort_raster_scanningValueChanged)
+    Q_PROPERTY(int start_grid_scanningValue READ getstart_grid_scanningValue WRITE setstart_grid_scanningValue NOTIFY start_grid_scanningValueChanged)
+    // Q_PROPERTY(int start_raster_scanningValue READ getstart_raster_scanningValue WRITE setstart_raster_scanningValue NOTIFY start_raster_scanningValueChanged)
+    //Q_PROPERTY(int grid_scanValue READ getgrid_scanValue WRITE setgrid_scanValue NOTIFY grid_scanValueChanged)
+    
+    // grid scan
+    
+    Q_PROPERTY(bool startGridScanValue READ getstartGridScanValue WRITE setstartGridScanValue NOTIFY startGridScanValueChanged)
+    Q_PROPERTY(bool stopGridScanValue READ getstopGridScanValue WRITE setstopGridScanValue NOTIFY stopGridScanValueChanged)
+    
+
+    // ut_thickness
+        Q_PROPERTY(float ut_thicknessValue READ get_ut_thicknessValue WRITE set_ut_thicknessValue NOTIFY ut_thicknessValueChanged)
+    // gridnum
+    Q_PROPERTY(float gridnumValue READ get_gridnumValue WRITE set_gridnumValue NOTIFY gridnumValueChanged)
+
+    //ut_array
+    Q_PROPERTY(QString ut_arrayValue READ getut_arrayValue WRITE setut_arrayValue NOTIFY ut_arrayValueChanged)
+        
+
+    
 public:
     explicit Publisher(QObject *parent = nullptr);
 
@@ -118,6 +149,8 @@ public slots:
     void setposval(QString value);
     void setnegval(QString value);
 
+    QString getcyclesval();
+    void setcyclesval(QString value);
 
 
     int getangularspeedValue();
@@ -128,6 +161,12 @@ public slots:
     void setspeedsettingValue(int speedsetting);
     void velstatusCallback(int speedsetting);
 
+
+    void trig_pause_tree(int val4);
+    void pause_treeStatus(int);
+
+    // void trig_em(int val4);
+    // void emStatus(int);
 
 
 
@@ -178,30 +217,18 @@ public slots:
     //Water Level
     float getWaterLevel();
     void setWaterLevel(float level);
-
-
-
-
-
-
     bool getStopArmValue();
     void setStopArmValue(bool k);
-
     void setRstArmValue(bool k);
     bool getRstArmValue();
-
-
     QVector<int> getArmStatus();
     void setArmStatus(QVector<int> value);
-
     void call_arminit(int val);
     void trig_armStatus();
     void rst_arm(int val);
     void armCallback(QVector<int> status);
-
     void slideCW(bool k);
     void slideCCW(bool k);
-
     void speedIncrease(bool k);
     void speedDecrease(bool k);
     void joystickonoff(bool k);
@@ -337,6 +364,58 @@ public slots:
     void call_stopautomode(int val);
     void call_initautomode(int val);
 
+    int getpause_treeValue();
+    void setpause_treeValue(int);
+
+    // int getemValue();
+    // void setemValue(int);
+
+
+    bool getabort_grid_mappingValue();
+    void setabort_grid_mappingValue(bool k);
+
+    bool getstart_grid_scanningValue();
+    void setstart_grid_scanningValue(bool k);
+
+    // grid scan
+    void call_grid_scan(int val);
+
+
+    void startGridScan(bool k);
+    void setstartGridScanValue(bool k);
+    bool getstartGridScanValue();
+
+
+    void stopGridScan(bool k);
+    void setstopGridScanValue(bool k);
+    bool getstopGridScanValue();
+    //save csv
+    void call_save_CSV(int val);
+
+    //ut_thickness
+    float get_ut_thicknessValue();
+    void set_ut_thicknessValue(float thickness);
+    void utThicknessCallback(float thickness);
+
+    // gridnum
+
+    int get_gridnumValue();
+    void set_gridnumValue(int gridnum);
+    void gridNumSubCallback(int gridnum);
+
+
+    //ut_array
+    QString getut_arrayValue();
+    void setut_arrayValue( QString ut_array);
+
+    // save csv
+    void saveCSV(int value);
+
+    void utValCallbackSlot(QString ut_array);
+
+
+
+
 signals:
     void message(QString msg);
     void message1(QString msg);
@@ -354,8 +433,13 @@ signals:
     void value12(int value);
     void value13(int value);
 
+    void value44(int val4); 
+
     void posvalValueChanged(QString value);
     void negvalValueChanged(QString value);
+    void cyclesvalValueChanged(QString value);
+
+    void pause_treeValueChanged(QString value);
 
 
 
@@ -439,6 +523,55 @@ signals:
     void initautoSrvp(int value);
     void automode(int value);
     void stopautoSrvp(int value);
+
+
+    // void value49(int val4); 
+    //     void emValueChanged(QString value);
+
+    void abort_grid_mappingValueChanged(bool value);
+    void start_grid_scanningValueChanged(bool value);
+//  gRID SCAN 
+    void value99(int value);
+	//void startGridScan(bool k);	
+
+    void startGridScanValueChanged(bool value);
+    void stopGridScanValueChanged(bool value);
+
+    // csv
+    void value98(int value);
+
+
+    // ut_thickness
+
+    void ut_thicknessValueChanged(float thickness);
+        // gridnum
+    void gridnumValueChanged(int gridnum);
+
+    //ut_array
+    void ut_arrayValueChanged(QString ut_array);
+
+    void utValCallbackSignal(QString ut_array);
+
+public :
+    std::vector<float> queue;
+    int front;
+    int rear;
+    int size;
+    int capacity;
+
+    void enqueue(float value , std::vector<float> queue) ;
+    void printQueue();
+    bool isEmpty();
+    int peek();
+    void clear() ;
+    void resize(int new_capacity);
+    QString convertVectorToQString(const std::vector<float>& vec);
+
+
+
+
+
+
 private:
     RosThread *rost;
     QCustomPlot*  m_CustomPlot;
@@ -474,15 +607,34 @@ private:
     int m_speedsettingvalue;
     int m_anglesettingvalue;
     int m_angleValue;
+    bool m_pause_treeValue;
+
+    // bool m_emValue;
+    bool m_abort_grid_mappingValue;
+    bool m_start_grid_scanningrValue;
+    //bool m_grid_scanValue;
+     
+    // grid scan 
+    bool m_startGridScanValue;
+    bool m_stopGridScanValue;
 
 
+    // csv file 
 
+    void exportToCSV(const std::vector<std::vector<std::string>>& table, const std::string& filename) ;
+    //void saveCSV();
 
-
+    //ut_thickness
+    float m_ut_thickness;
+    // gridnum
+	int m_gridnumValue;
+    // void it()
     QString m_toolToggle;
     QString m_utData;
     QString m_posval;
     QString m_negval;
+ 	QString m_cyclesval;   
+
     QVariantMap m_crawlStatus;
 
 //    QVariantMap m_utStatus;
@@ -492,6 +644,11 @@ private:
     QVector<int> m_errValue;
     QVector<int> m_tempValue;
     QVector<QString> m_uidValue;
+    QString m_ut_array;
+
+
+    
+
 
 };
 #endif // PUBLISHER_H

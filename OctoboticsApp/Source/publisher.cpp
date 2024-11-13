@@ -24,7 +24,7 @@
  * \brief Publisher::Publisher: constructor: initalizes variables
  * \param parent
  */
-Publisher::Publisher(QObject *parent)
+Publisher::Publisher(QObject *parent )
     : QObject(parent)
 {
     qDebug() << "MainWindow constructor";
@@ -60,6 +60,32 @@ Publisher::Publisher(QObject *parent)
     m_cameraInit = 0;
     m_anglesettingvalue=0;
     m_angleValue = 0;
+
+    m_pause_treeValue = 0;
+    // m_emValue = 0; 
+    m_abort_grid_mappingValue = 0;
+    m_start_grid_scanningrValue = 0;
+
+    m_startGridScanValue = 0;
+    m_stopGridScanValue = 0;
+    
+    //ut_thickness
+    m_ut_thickness = 500;
+    //gridnum
+    m_gridnumValue = 0;
+
+    //ut value 
+    m_ut_array  = "2.3 3.3 34 432 433 43 32 43";
+
+    
+    front = 0;
+    rear = 0;
+    size = 0;
+    capacity = 144;
+    
+    
+
+
 
 
 }
@@ -160,6 +186,9 @@ void Publisher::initRosThread()
 
     connect(this,SIGNAL(posvalValueChanged(QString)),this->rost,SLOT(pos_angle(QString)));
     connect(this,SIGNAL(negvalValueChanged(QString)),this->rost,SLOT(neg_angle(QString)));
+
+    connect(this,SIGNAL(cyclesvalValueChanged(QString)),this->rost,SLOT(cycles_val(QString)));
+
     // battery
     connect(this->rost, SIGNAL(battCallback(float)), this, SLOT(battCallback(float)));
 
@@ -181,6 +210,32 @@ void Publisher::initRosThread()
     connect(this,SIGNAL(automode(int)),this->rost,SLOT(automodePub(int)));
 
     //////////////
+
+    connect(this, SIGNAL(value44(int)), this->rost, SLOT(pause_treeSrv(int)));
+    connect(this->rost, SIGNAL(pause_treeStatus(bool)), this, SLOT(pause_treeStatus(bool)));
+
+
+
+    // connect(this, SIGNAL(value49(int)), this->rost, SLOT(emSrv(int)));
+    // connect(this->rost, SIGNAL(emStatus(bool)), this, SLOT(emStatus(bool)));
+    // grid scan
+    connect(this, SIGNAL(value99(int)), this->rost, SLOT(gridScanSrv(int)));
+
+
+    connect(this->rost, SIGNAL(startGridScan(bool)), this, SLOT(startGridScan(bool)));
+    connect(this->rost, SIGNAL(stopGridScan(bool)), this, SLOT(stopGridScan(bool)));
+
+
+    connect(this, SIGNAL(value98(int)), this, SLOT(saveCSV(int)));
+
+    //ut_thickness
+    connect(this->rost, SIGNAL(utThicknessCallback(float)), this, SLOT(utThicknessCallback(float)));
+
+    //gridnum
+        connect(this->rost, SIGNAL(gridNumSubCallback(int)), this, SLOT(gridNumSubCallback(int)));
+
+
+    connect(this, SIGNAL(utValCallbackSignal(QString)), this, SLOT(utValCallbackSlot(QString)));
 
     this->rost->start();
 }
@@ -484,6 +539,14 @@ QString Publisher::getnegval()
 {
     return m_negval;
 }
+QString Publisher::getcyclesval()
+{
+    return m_cyclesval;
+}
+
+
+
+
 
 void Publisher::setposval(QString value)
 {
@@ -496,6 +559,21 @@ void Publisher::setnegval(QString value)
     m_negval = value;
     emit negvalValueChanged(value);
 }
+
+void Publisher::setcyclesval(QString value)
+{
+    m_cyclesval = value;
+     bool ok =  false; 
+    size  = m_cyclesval.toInt(&ok);
+
+   queue.resize(size*size);
+   fill(queue.begin(), queue.end(), 0.0f);
+
+   
+   emit cyclesvalValueChanged(value);
+}
+
+
 
 void Publisher::call_arminit(int val)
 {
@@ -605,6 +683,7 @@ void Publisher::setStopCrawlerValue(bool flag)
     m_stopCrawlerValue = flag;
     emit stopCrawlerValueChanged(flag);
 }
+
 
 bool Publisher::getRstCrawlerValue()
 {
@@ -964,10 +1043,374 @@ void Publisher::uidCallback(QVector<QString> value)
     setUid(value);
 }
 
+void Publisher::trig_pause_tree(int val4)
+{
+
+    emit value44(val4);
+}
+
+
+void Publisher::pause_treeStatus(int val4)
+{
+    setpause_treeValue(val4);
+}
+
+
+
+void Publisher::setpause_treeValue(int val4)
+{
+    m_pause_treeValue = val4;
+    emit pause_treeValueChanged("val4");
+}
+
+
+
+int Publisher::getpause_treeValue()
+{
+    return m_pause_treeValue;
+}
+
+
+// void Publisher::trig_em(int val4)
+// {
+
+//     emit value49(val4);
+// }
+
+
+// void Publisher::emStatus(int val4)
+// {
+//     setemValue(val4);
+// }
+
+// void Publisher::setemValue(int val4)
+
+// {
+//  m_emValue = val4;
+//     emit emValueChanged("val4");
+    
+// }
+
+// int Publisher::getemValue()
+// {
+//     return m_emValue;
+// }
+
+
+
+bool Publisher::getabort_grid_mappingValue()
+{
+    return m_abort_grid_mappingValue;
+}
+void Publisher::setabort_grid_mappingValue(bool flag)
+{
+    m_abort_grid_mappingValue = flag;
+    emit abort_grid_mappingValueChanged(flag);
+}
+
+
+bool Publisher::getstart_grid_scanningValue()
+{
+    return m_start_grid_scanningrValue;
+}
+void Publisher::setstart_grid_scanningValue(bool flag)
+{
+    m_start_grid_scanningrValue = flag;
+    emit start_grid_scanningValueChanged(flag);
+
+
+
+
+}
+
+
+// Grid scan
+
+void Publisher::call_grid_scan(int val)
+{    emit value99(val);
+}
+
+void Publisher::startGridScan(bool flag)
+{
+    setstartGridScanValue(flag);
+}
+
+
+void Publisher::setstartGridScanValue(bool flag)
+	{
+	    m_startGridScanValue = flag;
+	    emit startGridScanValueChanged(flag);
+	}
+
+
+bool Publisher::getstartGridScanValue()
+	{
+	    return m_startGridScanValue;
+	}
+
+void Publisher::stopGridScan(bool flag)
+{
+    setstopGridScanValue(flag);
+}
+
+
+void Publisher::setstopGridScanValue(bool flag)
+	{
+        m_stopGridScanValue = flag;
+        emit stopGridScanValueChanged(flag);
+	}
+
+
+bool Publisher::getstopGridScanValue()
+	{
+	    return m_stopGridScanValue;
+	}
+	
+
+// call_grid_scan
+
+void Publisher::call_save_CSV(int val)
+{    emit value98(val);
+}
+
+
+//export the csv
+
+
+
+
+void Publisher::exportToCSV(const std::vector<std::vector<std::string>>& table, const std::string& filename) {
+    std::ofstream outFile(filename);
+    
+    // Check if the file is open
+    if (!outFile.is_open()) {
+        std::cerr << "Error opening file!" << std::endl;
+        return;
+    }
+
+    // Iterate over each row
+    for (size_t i = 0; i < table.size(); ++i) {
+        // Iterate over each column in the row
+        for (size_t j = 0; j < table[i].size(); ++j) {
+            // Write the element, followed by a comma (except for the last element in each row)
+            outFile << table[i][j];
+            if (j < table[i].size() - 1) {
+                outFile << ","; // comma separator between columns
+            }
+        }
+        outFile << "\n"; // Newline after each row
+    }
+
+    outFile.close();
+    std::cout << "Table exported to " << filename << " successfully!" << std::endl;
+}
+
+
+
+
+//ut_thickness
+
+float Publisher::get_ut_thicknessValue()
+{
+    return m_ut_thickness;
+}
+void Publisher::set_ut_thicknessValue(float thickness)
+{
+    m_ut_thickness = thickness;
+
+    emit ut_thicknessValueChanged(thickness);
+    int intValue = static_cast<int>(thickness);
+    // if (queue.size() == size) {
+    //         queue.erase(queue.begin());  // Remove the front element
+    //     }
+    int m = m_cyclesval.toInt();
+    if (queue.size() >0){
+       queue.erase(queue.begin());
+    }
+    queue.push_back(thickness* 1.0f);
+    QString utValString = convertVectorToQString(queue);
+    utValCallbackSignal(utValString);
+    //qDebug()<< intValue;
+}
+
+QString Publisher::convertVectorToQString(const std::vector<float>& vec)
+{
+    QStringList list;
+
+    // Iterate over the vector and convert each element to a QString
+    for (float value : vec)
+    {
+        list.append(QString::number(value, 'f', 2)); // 'f' for fixed-point notation, 2 decimal places
+    }
+
+    // Join all elements into a single QString, separated by a space or another delimiter
+    return list.join(" "); // You can change the separator if needed
+}
+
+
+void Publisher::utThicknessCallback(float thickness)
+	{
+		set_ut_thicknessValue(thickness);
+
+        // QString may;
+        // may = "jk sa k a d k a s k dl a s kd l a k j d l k a s dj ";
+        // utValString = convertVectorToQString(queue);
+        // utValCallbackSignal(may);
+	}
+
+
+
+//gridnum
+
+int Publisher::get_gridnumValue()
+	{
+		return m_gridnumValue;
+	}
+	void Publisher::set_gridnumValue(int gridnum)
+	{
+		m_gridnumValue = gridnum;
+		emit gridnumValueChanged(gridnum);
+	}
+
+
+
+ void Publisher::gridNumSubCallback(int gridnum)
+	{
+
+		set_gridnumValue(gridnum);
+	}
+   
+
+
+//ut_array
+
+QString Publisher::getut_arrayValue()  {
+
+return m_ut_array;
+}
+
+void Publisher::setut_arrayValue( QString ut_array){
+m_ut_array = ut_array;
+qDebug() << ut_array;
+ut_arrayValueChanged(ut_array);
+}
+
+void Publisher::utValCallbackSlot(QString ut_array)
+{
+    setut_arrayValue(ut_array);
+}
+
+
 
 //--------------------------image capture--------------------------
 
 
 
 
+
+void Publisher::saveCSV(int value)
+
+{
+   int k = value;
+
+    if (k) {
+        // Example CSV data (you can replace this with actual data)
+             std::vector<std::vector<float>> data;
+            bool ok;
+            QString row = m_cyclesval;
+            int rows = m_cyclesval.toInt(&ok);
+            int cols =rows;
+                if(cols!=0){
+                for (int r = 0; r < rows; ++r) {
+                std::vector<float> row(queue.begin() + r * cols, queue.begin() + (r + 1) * cols);
+                data.push_back(row);
+            }
+            
+
+
+            }
+        // Open the file in append mode
+            std::ofstream outFile("/home/octo/output.csv", std::ios::app);
+
+            if (outFile.is_open()) {
+                // Get the current date and time
+                std::time_t currentTime = std::time(nullptr);
+                char timeBuffer[100];
+                std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
+
+                // Write a timestamp comment at the top of the file
+                outFile << "Ut Value saved: " << timeBuffer << "\n";
+
+                // Writing the table data to the CSV file (new data)
+                for (const auto& row : data) {
+                    for (size_t i = 0; i < row.size(); ++i) {
+                        outFile << row[i];
+                        if (i < row.size() - 1) {
+                            outFile << ","; // Add comma separator
+                        }
+                    }
+                    outFile << "\n"; // Newline after each row
+                }
+
+                outFile.close();
+                std::cout << "CSV file saved successfully!" << std::endl;
+            } 
+            else {
+                
+                std::cout << "j" << std::endl;
+            }
+    }
+}
+
+void Publisher::enqueue(float value , std::vector<float> queue) {
+        if (size == capacity) {
+            // If the queue is full, remove the front element (overwriting it)
+            front = (front + 1) % capacity;
+        } else {
+            // If the queue is not full, increase the size
+            size++;
+        }
+
+        // Add the new element at the rear of the queue
+        queue[rear] = value;
+        rear = (rear + 1) % capacity;  // Circular increment
+    }
+
+    // Method to print the current queue
+    void Publisher::printQueue() {
+        std::cout << "Queue contents: ";
+        for (int i = 0; i < capacity; i++) {
+            std::cout << queue[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    // Method to check if the queue is empty
+    bool Publisher::isEmpty() {
+        return size == 0;
+    }
+
+    // Method to check the front element of the queue
+    int Publisher::peek() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty!" << std::endl;
+            return -1; // Return an invalid value for an empty queue
+        }
+        return queue[front];
+    }
+
+    // Method to clear the queue
+    void Publisher::clear() {
+        size = 0;
+        front = 0;
+        rear = 0;
+        std::fill(queue.begin(), queue.end(), 0); // Fill with zeros
+    }
+
+    // Method to resize the queue
+    void Publisher::resize(int new_capacity) {
+        capacity = new_capacity;
+        queue.resize(capacity, 0); // Resize and fill new elements with zeros
+        clear(); // Reset the state of the queue
+    }
 

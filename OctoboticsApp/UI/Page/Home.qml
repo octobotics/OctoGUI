@@ -741,6 +741,7 @@ Rectangle{
                 anchors.right:  parent.right
                 anchors.top: parent.top
                 anchors.topMargin: 5
+                anchors.leftMargin: 5
             }
 
             ColumnLayout{
@@ -749,7 +750,7 @@ Rectangle{
                 RowLayout {
                     Rectangle{
                         id:rectBox1
-                        width: widthScreen * 0.20
+                        width: widthScreen * 0.14
                         height: heightScreen * 0.25
                         border.color:borderSecondBg
                         color: secondBg
@@ -858,7 +859,7 @@ Rectangle{
                                         name:  "Motor"
                                         baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.15
+                                        implicitWidth: rectBox1.width * 0.20
                                         onClicked: {
                                             isPressed = !isPressed
                                             publisher.toolToggle = "1"
@@ -877,7 +878,7 @@ Rectangle{
                                         name:  "JoyStick OFF/ON"
                                         baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.45
+                                        implicitWidth: rectBox1.width * 0.65
                                         Layout.alignment: Qt.AlignCenter
                                         onClicked: {
 
@@ -890,23 +891,23 @@ Rectangle{
                                 }
 
                             }
-                            Item{
-                                height: rectBox1.height * 0.65
-                                width: rectBox1.width * 0.100
-                                OctoGauge {
-                                    anchors.fill: parent
-                                    minimumValue: 0
-                                    value: parseFloat(Math.round(publisher.waterLevel));
-                                    maximumValue: 100
-                                    anchors.centerIn: parent
-                                    onValueChanged: {
-                                        if(value < 10){
-                                            alaramEffect.play()
-                                        }
-                                    }
-                                }
+                            // Item{
+                            //     height: rectBox1.height * 0.65
+                            //     width: rectBox1.width * 0.100
+                            //     OctoGauge {
+                            //         anchors.fill: parent
+                            //         minimumValue: 0
+                            //         value: parseFloat(Math.round(publisher.waterLevel));
+                            //         maximumValue: 100
+                            //         anchors.centerIn: parent
+                            //         onValueChanged: {
+                            //             if(value < 10){
+                            //                 alaramEffect.play()
+                            //             }
+                            //         }
+                            //     }
 
-                            }
+                            // }
 
 
                         }
@@ -917,7 +918,7 @@ Rectangle{
 
                     Rectangle{
                         id:rectBox2
-                        width: widthScreen * 0.18
+                        width: widthScreen * 0.10
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
                         color: secondBg
@@ -992,7 +993,7 @@ Rectangle{
                     }
                     Rectangle{
                         id:rectBox3
-                        width: widthScreen * 0.19
+                        width: widthScreen * 0.10
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
                         color: secondBg
@@ -1068,177 +1069,177 @@ Rectangle{
 
 
 
-                    Rectangle{
-                        id: rectBox4
-                        width: widthScreen * 0.18
-                        height: heightScreen * 0.25
-                        border.color: borderSecondBg
-                        color: secondBg
-                        radius: 15
-                        ColumnLayout{
-                            anchors.fill: parent
-                            anchors.topMargin: 10
-                            Text {
-                                Layout.fillWidth: true
-                                height: rectBox4.height * 0.2
-                                text: qsTr("Linear Actuator")
-                                font.family: "Tahoma"
-                                font.bold: true
-                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                                color: textColor
-                                verticalAlignment: Text.AlignVCenter
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                            RowLayout {
-                                Layout.fillWidth: true
-                                spacing: 30 // Adjust spacing as needed
+//                     Rectangle{
+//                         id: rectBox4
+//                         width: widthScreen * 0.18
+//                         height: heightScreen * 0.25
+//                         border.color: borderSecondBg
+//                         color: secondBg
+//                         radius: 15
+//                         ColumnLayout{
+//                             anchors.fill: parent
+//                             anchors.topMargin: 10
+//                             Text {
+//                                 Layout.fillWidth: true
+//                                 height: rectBox4.height * 0.2
+//                                 text: qsTr("Linear Actuator")
+//                                 font.family: "Tahoma"
+//                                 font.bold: true
+//                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+//                                 color: textColor
+//                                 verticalAlignment: Text.AlignVCenter
+//                                 horizontalAlignment: Text.AlignHCenter
+//                             }
+//                             RowLayout {
+//                                 Layout.fillWidth: true
+//                                 spacing: 30 // Adjust spacing as needed
 
-                                Text {
-                                    text: publisher.lacValue + " mm"
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 30
-                                    color: textColor
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
+//                                 Text {
+//                                     text: publisher.lacValue + " mm"
+//                                     font.family: "Tahoma"
+//                                     font.bold: true
+//                                     font.pixelSize: 30
+//                                     color: textColor
+//                                     verticalAlignment: Text.AlignVCenter
+//                                     horizontalAlignment: Text.AlignHCenter
+//                                 }
 
-                                IButton{
-                                    // Assuming no rotation is needed for the up arrow
-                                    sourceRot: 0
-                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                    onClicked: {
-                                        publisher.call_lacccw(1);
-                                        // Add logic here
-                                    }
-                                }
-                                IButton{
-                                    // Rotate the image to make it a down arrow
-                                    sourceRot: 180
-                                    defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                    clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                    onClicked: {
-                                        publisher.call_laccw(1);
-                                    }
-                                }
-                            }
+//                                 IButton{
+//                                     // Assuming no rotation is needed for the up arrow
+//                                     sourceRot: 0
+//                                     defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+//                                     onClicked: {
+//                                         publisher.call_lacccw(1);
+//                                         // Add logic here
+//                                     }
+//                                 }
+//                                 IButton{
+//                                     // Rotate the image to make it a down arrow
+//                                     sourceRot: 180
+//                                     defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
+//                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
+//                                     onClicked: {
+//                                         publisher.call_laccw(1);
+//                                     }
+//                                 }
+//                             }
 
-//                            Item {
-//                                height: parent.height * 0.1
-//                            }
-                        }
-                    }
-
-
-                    Rectangle{
-                                           id:rectBox5
-                                           width: widthScreen * 0.12
-                                           height: heightScreen * 0.25
-                                           border.color: borderSecondBg
-                                           color: secondBg
-                                           radius: 15
-                                           ColumnLayout{
-
-                                               anchors.fill: parent
-                                               anchors.topMargin: 10
-                                               Text {
-                                                   Layout.fillWidth: true
-                                                   height: rectBox5.height * 0.2
-                                                   text: qsTr("Linear Speed ")
-                                                   font.family: "Tahoma"
-                                                   font.bold: true
-                                                   font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                                                   color: textColor
-                                                   verticalAlignment: Text.AlignVCenter
-                                                   horizontalAlignment: Text.AlignHCenter
-                                               }
-                                               Text {
-                                                       Layout.fillWidth: true
-                                                       height: parent.height
-                                                       textFormat: Text.RichText
-                                                       text: Math.round(publisher.speedsetting) + "<b style='font-size: 18px;'> mm/s<b>"
-                                                       font.family: "Tahoma"
-                                                       font.bold: true
-                                                       font.pixelSize:text.length < 12 ? 60 : 30
-                                                       color: textColor
-                                                       verticalAlignment: Text.AlignVCenter
-                                                       horizontalAlignment: Text.AlignHCenter
-                                                   }
-                                               Item {
-                                                   height: parent.height * 0.1
-                                               }
-                                           }
-                                           Item {
-                                               width: parent.width
-                                               height: parent.height * 0.1
-                                               anchors.bottom: colum1.bottom
-                                               anchors.bottomMargin: 28
-
-                                           }
-                                       }
-
-                    Rectangle{
-                                            id:rectBox6
-                                            width: widthScreen * 0.12
-                                            height: heightScreen * 0.25
-                                            border.color: borderSecondBg
-                                            color: secondBg
-                                            radius: 15
-                                            ColumnLayout{
-                                                anchors.fill: parent
-                                                anchors.topMargin: 10
-                                                Text {
-                                                    Layout.fillWidth: true
-                                                    height: rectBox4.height * 0.2
-                                                    text: qsTr("Angular Speed")
-                                                    font.family: "Tahoma"
-                                                    font.bold: true
-                                                    font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                                                    color: textColor
-                                                    verticalAlignment: Text.AlignVCenter
-                                                    horizontalAlignment: Text.AlignHCenter
-                                                }
-                                                Text {
-                                                      Layout.fillWidth: true
-                                                      height: parent.height
-                                                      textFormat: Text.RichText
-                                                      text: publisher.anglesetting + "<b style='font-size: 18px;'> Deg/s<b>"
-                                                      font.family: "Tahoma"
-                                                      font.bold: true
-                                                      font.pixelSize: 30
-                                                      color: textColor
-                                                      verticalAlignment: Text.AlignVCenter
-                                                      horizontalAlignment: Text.AlignHCenter
-                                                    }
-                                                Item {
-                                                          width: parent.width
-                                                          height: parent.height * 0.1
-                                                          anchors.bottom: colum1.bottom
-                                                          anchors.bottomMargin: 10
-
-                                                          RowLayout{
-                                                              height: parent.height
-                                                              anchors.right: parent.right
-                                                              anchors.left: parent.left
-                                                              anchors.rightMargin: 40
-                                                              anchors.leftMargin: 40
-
-                                                   Item {
-                                                           Layout.fillWidth: true
-                                                              }
-
-                                                          }
-                                                      }
-
-                                                Item {
-                                                    height: parent.height * 0.1
-                                                }
-
-                                            }
+// //                            Item {
+// //                                height: parent.height * 0.1
+// //                            }
+//                         }
+//                     }
 
 
-                                        }
+                    // Rectangle{
+                    //                        id:rectBox5
+                    //                        width: widthScreen * 0.12
+                    //                        height: heightScreen * 0.25
+                    //                        border.color: borderSecondBg
+                    //                        color: secondBg
+                    //                        radius: 15
+                    //                        ColumnLayout{
+
+                    //                            anchors.fill: parent
+                    //                            anchors.topMargin: 10
+                    //                            Text {
+                    //                                Layout.fillWidth: true
+                    //                                height: rectBox5.height * 0.2
+                    //                                text: qsTr("Linear Speed ")
+                    //                                font.family: "Tahoma"
+                    //                                font.bold: true
+                    //                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+                    //                                color: textColor
+                    //                                verticalAlignment: Text.AlignVCenter
+                    //                                horizontalAlignment: Text.AlignHCenter
+                    //                            }
+                    //                            Text {
+                    //                                    Layout.fillWidth: true
+                    //                                    height: parent.height
+                    //                                    textFormat: Text.RichText
+                    //                                    text: Math.round(publisher.speedsetting) + "<b style='font-size: 18px;'> mm/s<b>"
+                    //                                    font.family: "Tahoma"
+                    //                                    font.bold: true
+                    //                                    font.pixelSize:text.length < 12 ? 60 : 30
+                    //                                    color: textColor
+                    //                                    verticalAlignment: Text.AlignVCenter
+                    //                                    horizontalAlignment: Text.AlignHCenter
+                    //                                }
+                    //                            Item {
+                    //                                height: parent.height * 0.1
+                    //                            }
+                    //                        }
+                    //                        Item {
+                    //                            width: parent.width
+                    //                            height: parent.height * 0.1
+                    //                            anchors.bottom: colum1.bottom
+                    //                            anchors.bottomMargin: 28
+
+                    //                        }
+                    //                    }
+
+                    // Rectangle{
+                    //                         id:rectBox6
+                    //                         width: widthScreen * 0.12
+                    //                         height: heightScreen * 0.25
+                    //                         border.color: borderSecondBg
+                    //                         color: secondBg
+                    //                         radius: 15
+                    //                         ColumnLayout{
+                    //                             anchors.fill: parent
+                    //                             anchors.topMargin: 10
+                    //                             Text {
+                    //                                 Layout.fillWidth: true
+                    //                                 height: rectBox4.height * 0.2
+                    //                                 text: qsTr("Angular Speed")
+                    //                                 font.family: "Tahoma"
+                    //                                 font.bold: true
+                    //                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
+                    //                                 color: textColor
+                    //                                 verticalAlignment: Text.AlignVCenter
+                    //                                 horizontalAlignment: Text.AlignHCenter
+                    //                             }
+                    //                             Text {
+                    //                                   Layout.fillWidth: true
+                    //                                   height: parent.height
+                    //                                   textFormat: Text.RichText
+                    //                                   text: publisher.anglesetting + "<b style='font-size: 18px;'> Deg/s<b>"
+                    //                                   font.family: "Tahoma"
+                    //                                   font.bold: true
+                    //                                   font.pixelSize: 30
+                    //                                   color: textColor
+                    //                                   verticalAlignment: Text.AlignVCenter
+                    //                                   horizontalAlignment: Text.AlignHCenter
+                    //                                 }
+                    //                             Item {
+                    //                                       width: parent.width
+                    //                                       height: parent.height * 0.1
+                    //                                       anchors.bottom: colum1.bottom
+                    //                                       anchors.bottomMargin: 10
+
+                    //                                       RowLayout{
+                    //                                           height: parent.height
+                    //                                           anchors.right: parent.right
+                    //                                           anchors.left: parent.left
+                    //                                           anchors.rightMargin: 40
+                    //                                           anchors.leftMargin: 40
+
+                    //                                Item {
+                    //                                        Layout.fillWidth: true
+                    //                                           }
+
+                    //                                       }
+                    //                                   }
+
+                    //                             Item {
+                    //                                 height: parent.height * 0.1
+                    //                             }
+
+                    //                         }
+
+
+                    //                     }
 
 
 
@@ -1246,7 +1247,7 @@ Rectangle{
 
                     Rectangle{
                         id: crawlerr
-                        width: widthScreen * 0.24
+                        width: widthScreen * 0.22
                         height: heightScreen * 0.25
                         border.color:borderSecondBg
                         color: secondBg
@@ -1430,12 +1431,585 @@ Rectangle{
 
                         }
                     }
+                     Rectangle {
+                                width: widthScreen * 0.17
+                                height: heightScreen * 0.25
+                                border.color: borderSecondBg
+                                color: secondBg
+                                radius: 15
+                                ColumnLayout{
+                                    anchors.fill: parent
+                                    anchors.topMargin: 10
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: qsTr("Forward Distance")
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 24
+                                         color: textColor
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
+
+                                    TextField {
+                                        id:angleTextField
+                                        Layout.fillWidth: true
+                                        Layout.fillHeight: true
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 45
+                                        color: "orange"
+                                        verticalAlignment: TextInput.AlignVCenter
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        placeholderText: "(10-100)"
+                                        validator: IntValidator { bottom: 10; top:100  } // Ensure input is between 0 and 360
+                                        inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
+
+                                        // Optional: Handle text change to update the publisher's angle value
+                                        onTextChanged: {
+                                            const angle = parseInt(text);
+                                            if (!isNaN(angle) && angle >= 0 && angle <= 360) {
+                                                publisher.posval = angle;
+                                                // Additional logic to handle the angle value change
+                                            }
+                                        }
+                                        onAccepted: {
+                                               // Lock the TextField when Enter is pressed
+                                               readOnly = true; // Make the TextField read-only instead of disabling it to keep the text visible and styled
+                                               // Additional logic to handle the acceptance of the entered value
+                                           }
+                                    }
+
+                                    SButton {
+                                        property bool isPressed: false
+                                        width: parent.width * 0.5
+                                        height: parent.height * 0.27 // Set the height to match the replaced Item
+                                        name: "Set Dia"
+                                        baseColor:  isPressed ? "green" : buttonBg
+                                        borderColor: buttonBg
+                                        anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
+                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
+                                        anchors.bottomMargin: 5
+                                        onClicked: {
+                                            isPressed = !isPressed
+                                            
+
+                                            // const angleText = parseInt(angleTextField.text);
+                                            //                 if (!isNaN(angleText) && angleText >= 10 && angleText <= 100) {
+                                            //                     if (isPressed) {
+                                            //                         publisher.posval = angleText;  // Set the gridSize value
+                                            //                         console.log("Button clicked: angleText set to", angleText);
+                                            //                     } else {
+                                            //                         publisher.posval = 0;  // Reset angleText value
+                                            //                         console.log("Button clicked: angleText reset to 0");
+                                            //                     }
+                                            //                 } else {
+                                            //                     console.log("Invalid angleText value: ", angleTextField.text);
+                                            //                 }
+                                            
+                                        }
+                                    }
+
+                                    SButton {
+                                        property bool isPressed: false
+                                        width: parent.width * 0.5
+                                        height: parent.height * 0.27 // Set the height to match the replaced Item
+                                        name: "Unlock"
+                                        baseColor:  isPressed ? "green" : buttonBg
+                                        borderColor: "blue"
+                                        anchors.right:parent.right// Center horizontally
+                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
+                                        anchors.bottomMargin: 5
+                                        onClicked: {
+                                                     angleTextField.readOnly = false; // Unlock the TextField for editing
+                                                     angleTextField.focus = true; // Optionally, set focus to the TextField for immediate editing
+                                            // Add your button click handling logic here
+                                        }
+                                    }
+                                }
+                            }
+
+                          Rectangle{
+                                implicitHeight: heightScreen * 0.25
+                                implicitWidth: widthScreen * 0.10
+                                border.color: borderSecondBg
+                                color: secondBg
+                                radius: 15
+                                ColumnLayout{
+                                    anchors.fill: parent
+                                    anchors.topMargin: 10
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: qsTr("UtThickness")
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 12
+                                         color: textColor
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
+                                    Text {
+                                            Layout.fillWidth: true
+                                            Layout.fillHeight: true
+                                            textFormat: Text.RichText
+                                            text: publisher.ut_thicknessValue 
+                                            font.family: "Tahoma"
+                                            font.bold: true
+                                            font.pixelSize: 60
+                                             color: "orange"
+                                            verticalAlignment: Text.AlignVCenter
+                                            horizontalAlignment: Text.AlignHCenter
+                                        }
+                                    Item {
+                                        height: parent.height * 0.1
+                                    }
+                                }
+
+                            }
+
+                         Rectangle {
+                                  implicitWidth: ((widthScreen * 0.60)/4)-5/3 +50
+                                  implicitHeight: heightScreen * 0.25
+                                  border.color: borderSecondBg
+                                  color: secondBg
+                                  radius: 15
+                                  ColumnLayout{
+                                    anchors.fill: parent
+                                    // anchors.topMargin: 10
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: qsTr("Manual Mode")
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 24
+                                         color: textColor
+                                        verticalAlignment: Text.AlignTop
+                                        horizontalAlignment: Text.AlignHCenter
+                                    }
+
+                                    RowLayout{
+                                     Layout.fillHeight: true
+                                        Item{
+                                            Layout.fillHeight: true
+                                            Layout.fillWidth: true
+                                            ColumnLayout{
+                                                Layout.fillHeight: true
+                                                anchors.fill: parent
+
+                                               
+
+                                                RowLayout{
+                                                    Layout.fillWidth: true
+                                                    
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 10
+                                                        Layout.bottomMargin: 5
+                                                        name: "Raster Scan"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        onClicked: {
+                                                        isPressed = !isPressed;
+
+                                                        if (isPressed) {
+                                                            const angle = 10; 
+                                                            publisher.negval = angle;
+                                                        } else {
+                                                            publisher.negval = 0;
+                                                        }
+                                                    }
+
+                                
+                                                        }
+
+                                                    // SButton {
+                                                    //     property bool isPressed: false
+                                                    //     Layout.leftMargin: 1
+                                                    //     Layout.bottomMargin: 5
+                                                    //     name: "Abort Raster Scan"
+                                                    //     baseColor: isPressed ? "green" : buttonBg
+                                                    //     borderColor: buttonBg
+                                                    //     onClicked: {
+                                                    //     isPressed = !isPressed;
+
+                                                    //     if (isPressed) {
+                                                    //         const angle = 10; 
+                                                    //         publisher.negval = angle;
+                                                    //     } else {
+                                                    //         publisher.negval = 0;
+                                                    //     }
+                                                    // }
+
+                                
+                                                    //     }
+
+                                                }
+                                                RowLayout{
+                                                    Layout.fillWidth: true
+                                                    
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 10
+                                                        Layout.bottomMargin: 5
+                                                        name: "Grid Scan"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        onClicked: {
+                                                                isPressed = !isPressed;
+
+                                                                if (isPressed) {
+                                                                console.log("start Grid scan");
+                                                                publisher.call_grid_scan(1);
+
+                                                                    
+                                                                } else {
+                                                                console.log("Stop Grid scan");
+
+                                                                publisher.call_grid_scan(0);
+                                                                }
+                                                            }
+
+                                
+                                                    }
+
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 50
+                                                        Layout.bottomMargin: 5
+                                                        anchors.right : parent.right
+                                                        name: "Export Csv"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        onClicked: {
+                                                                isPressed = !isPressed;
+
+                                                                if (isPressed) {
+                                                                console.log("Export CSV");
+                                                                publisher.call_save_CSV(1);
+
+                                                                    
+                                                                } else {
+                                                                console.log("Export CSV");
+                                                                pass;
+                                                                }
+                                                            }
+
+                                
+                                                    }
+                                                }
+                                                RowLayout{
+                                                    Layout.fillWidth: true
+                                                    
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 10
+                                                        Layout.bottomMargin: 5
+                                                        name: "Electromagnet"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        onClicked: {
+                                                        isPressed = !isPressed;
+
+                                                        if (isPressed) {
+
+                                                            publisher.toolToggle = "5"
+                                                        } else {
+                                                            publisher.toolToggle = "5"
+                                                        }
+                                                    }
+
+                                
+                                                        }
+
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 10
+                                                        Layout.bottomMargin: 5
+                                                        name: "Pump"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        onClicked: {
+                                                        isPressed = !isPressed;
+
+                                                        if (isPressed) {
+                                                            publisher.toolToggle = "3"
+                                                        } else {
+                                                            publisher.toolToggle = "3"
+                                                        }
+                                                    }
+
+                                
+                                                        }
+
+                                                }
+                                                RowLayout{
+                                                    Layout.fillWidth: true
+                                                    
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 10
+                                                        Layout.bottomMargin: 5
+                                                        name: "Grinder"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        onClicked: {
+                                                        isPressed = !isPressed;
+
+                                                        if (isPressed) {
+                                                            // publisher.toolToggle = ""
+                                                        } else {
+                                                        }
+                                                    }
+
+                                
+                                                        }
+
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 10
+                                                        Layout.bottomMargin: 5
+                                                        name: "Pause_BTree"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        onClicked: {
+                                                        isPressed = !isPressed;
+
+                                                        if (isPressed) {
+                                                            const angle = 10; 
+                                                            publisher.negval = angle;
+                                                        } else {
+                                                            publisher.negval = 0;
+                                                        }
+                                                    }
+
+                                
+                                                        }
+
+                                                }
+
+
+                                            }
+
+
+
+
+
+
+                                        }
+                              }
+
+
+
+                                }  
+
+                           
+
+
+
+
+                              }    
+
+                        Rectangle {
+                              implicitWidth: widthScreen * 0.20
+                              implicitHeight: heightScreen * 0.25
+                              border.color: borderSecondBg
+                              color: secondBg
+                              radius: 15
+
+                              ColumnLayout{
+                                  anchors.fill: parent
+                                  anchors.topMargin: 10
+                                  Text {
+                                      Layout.fillWidth: true
+                                      text: qsTr("Set Variable")
+                                      font.family: "Tahoma"
+                                      font.bold: true
+                                      font.pixelSize: 24
+                                       color: textColor
+                                      verticalAlignment: Text.AlignVCenter
+                                      horizontalAlignment: Text.AlignHCenter
+                                  }
+                                    RowLayout{
+                                     Layout.fillHeight: true
+                                      Item{
+                                            Layout.fillHeight: true
+                                            Layout.fillWidth: true
+                                            ColumnLayout{
+                                                Layout.fillHeight: true
+                                                anchors.fill: parent
+                                          
+                                                    
+                                                    
+
+                                                
+
+                                               
+                                                    TextField {
+                                                        id:gridSizeTextField
+                                                        width: 10    // Specify width
+                                                        height: 30 
+                                                        Layout.topMargin:30
+                                                        Layout.leftMargin: 105 
+
+                                                        font.family: "Tahoma"
+                                                        font.bold: true
+                                                        font.pixelSize: 25
+                                                        color: "orange"
+                                                        verticalAlignment: TextInput.AlignVCenter
+                                                        horizontalAlignment: TextInput.AlignHCenter
+                                                        placeholderText: "1x1"
+                                                        validator: IntValidator { bottom: 1; top:12  } // Ensure input is between 0 and 360
+                                                        inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
+                                                        background: Rectangle {
+                                                            color: "#2C3E50" // Set the background color (e.g., dark blue-gray)
+                                                            radius: 5 // Optional: rounded corners for the background
+                                                            border.color: "white" // Optional: border color around the text field
+                                                        }
+                                                        // Optional: Handle text change to update the publisher's gridSize value
+                                                        onTextChanged: {
+                                                            const gridSize = parseInt(text);
+                                                            if (!isNaN(gridSize) && gridSize >= 1 && gridSize <= 12) {
+                                                                
+                                                                // Additional logic to handle the gridSize value change
+                                                            }
+                                                        }
+                                                        onAccepted: {
+                                                            // Lock the TextField when Enter is pressed
+                                                            readOnly = true; // Make the TextField read-only instead of disabling it to keep the text visible and styled
+                                                            // Additional logic to handle the acceptance of the entered value
+                                                        }
+
+                                                    }
+
+
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        Layout.leftMargin: 100
+                                                        Layout.bottomMargin: 5
+                                                        name: "Grid Size"
+                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        borderColor: buttonBg
+                                                        
+                                                        onClicked: {
+                                                            isPressed = !isPressed;
+
+                                                            // Access gridSize from the TextField via its ID
+                                                            const gridSize = parseInt(gridSizeTextField.text);
+                                                            if (!isNaN(gridSize) && gridSize >= 1 && gridSize <= 12) {
+                                                                if (isPressed) {
+                                                                    publisher.cyclesval = gridSize;  // Set the gridSize value
+                                                                    console.log("Button clicked: gridSize set to", gridSize);
+                                                                } else {
+                                                                    publisher.cyclesval = 0;
+                                                                    gridSizeTextField.text = "";
+                                                                      // Reset gridSize value
+                                                                    console.log("Button clicked: gridSize reset to 0");
+                                                                }
+                                                            } else {
+                                                                
+                                                                isPressed = false;
+                                                                gridSizeTextField.text = "";
+                                                                console.log("Invalid gridSize value: ", gridSizeTextField.text);
+                                                            }
+                                                        }
+                                                    }
+
+                                                    
+
+                                
+
+                                TextField {
+                                        id: secondTextField
+                                        width: parent.width // Set width to match the parent Item
+                                        height: 30
+                                        Layout.leftMargin: 10
+                                        Layout.bottomMargin: 10
+                                        font.family: "Tahoma"
+                                        font.bold: true
+                                        font.pixelSize: 20
+                                        color: "orange"
+                                        verticalAlignment: TextInput.AlignVCenter
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        anchors.bottom: parent.bottom
+
+                                        placeholderText: "(10-480)"
+                                        validator: IntValidator { bottom: 10; top: 450 }
+                                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                                        background: Rectangle {
+                                            color: "#2C3E50"
+                                            radius: 5
+                                            border.color: "white"
+                                                            }
+                                        
+                                        onTextChanged: {
+                                            const angle = parseInt(text);
+                                            if (!isNaN(angle) && angle >= 0 && angle <= 480) {
+                                                publisher.negval = angle;
+                                            }
+                                            }
+
+                                        onAccepted: {
+                                            readOnly = true;
+                                        }
+                                    }
+                                    SButton {
+                                        property bool isPressed: false
+                                        width: parent.width * 0.45
+                                        height: 130
+                                        Layout.leftMargin: 130 // Space to the left of the button
+                                        name: "Set Stroke"
+                                        baseColor: isPressed ? "green" : buttonBg
+                                        borderColor: buttonBg
+                                        // anchors.horizontalCenter: parent.horizontalCenter
+                                        anchors.bottom: parent.bottom
+                                        //anchors.right: parent.right
+
+                                        onClicked: {
+                                            isPressed = !isPressed
+                                        }
+                                    }
+
+                                    SButton {
+                                        property bool isPressed: false
+                                        width: parent.width * 0.45
+                                        height: 50
+                                        // Remove Layout.rightMargin, instead use anchors for proper placement
+                                        Layout.bottomMargin: 10 // Bottom margin for spacing
+                                        name: "Unlock"
+                                        baseColor: isPressed ? "green" : buttonBg
+                                        borderColor: blue
+                                        
+                                        // Align the button to the rightmost of the parent
+                                        anchors.right: parent.right // Anchors the right side of the button to the right side of the parent
+                                        anchors.bottom: parent.bottom // Anchors the bottom side of the button to the bottom of the parent
+
+                                        onClicked: {
+                                            secondTextField.readOnly = false; 
+                                            secondTextField.focus = true;
+                                        }
+                                    }
+
+                                
+                                            }
+
+                                      }
+                                    }
+
+
+
+
+                                 
+
+                              }
+
+                          }
 
 
                 }
 
                 RowLayout{
                     spacing: 2
+
                     Rectangle {
                         id:screen1
                         width: (widthScreen * 0.65)
@@ -1461,14 +2035,6 @@ Rectangle{
                             }
 
                         }
-//                        HelloCpp {
-//                            id: demo
-
-//                        }
-//                        RecordCams
-//                        {
-//                            id: recCams
-//                        }
 
 
                         VideoOutput {
@@ -1615,473 +2181,85 @@ Rectangle{
 
 
                     }
-                    ColumnLayout{
-                        width: widthScreen * 0.60
-                        height: heightScreen * 0.90
+                    // ColumnLayout{
+                    //     width: widthScreen 
+                    //     height: heightScreen * 0.90
 
-                        RowLayout{
-                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                            implicitWidth: widthScreen * 0.60
+                        
 
-//                            Rectangle {
-//                                  implicitWidth: widthScreen * 0.20
-//                                  implicitHeight: ((heightScreen * 0.90)/3) -5/2
-//                                  border.color: borderSecondBg
-//                                  color: secondBg
-//                                  radius: 15
-
-//                              }
-
+                       
+                        // RowLayout{
+                        //     implicitHeight: ((heightScreen * 0.90)/3 )
+                        //     implicitWidth: widthScreen 
+                        //     spacing: 1 
+                            
                             Rectangle {
-                                width: widthScreen * 0.20
-                                height: ((heightScreen * 0.90) / 3) - 5 / 2
+                                id: gridRectangle
+                                implicitHeight: heightScreen * 0.90
+                                implicitWidth: (widthScreen * 0.60)
+                                
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
-                                ColumnLayout{
+                                // Grid container (GridLayout for a grid of items)
+                                Grid {
+                                    id: gridid
                                     anchors.fill: parent
-                                    anchors.topMargin: 10
-                                    Text {
-                                        Layout.fillWidth: true
-                                        text: qsTr("Step 1 Probe Dia")
-                                        font.family: "Tahoma"
-                                        font.bold: true
-                                        font.pixelSize: 24
-                                         color: textColor
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: Text.AlignHCenter
+                                    columns: publisher.cyclesval
+                                    rows: publisher.cyclesval
+                                    
+                                    spacing: 1
+                                    // Repeater will create 25 rectangles
+                                //     property var arr: (function() {
+                                //     var size = 25; // Total number of items
+                                //     var result = [];
+                                    
+                                //     for (var i = 0; i < size; i++) {
+                                //         // Generate a random value (string) for each item, e.g., "Item X"
+                                //         result.push(Math.floor(Math.random() * 100)); // Random number between 0 and 100
+                                //     }                                    
+                                //     return result;
+                                // })()
+
+                                    Repeater {
+                                        model: publisher.cyclesval * publisher.cyclesval // Total number of items
+                                        // Rectangle {
+                                        //     width: parent.width / publisher.cyclesval // Set width dynamically based on grid size
+                                        //     height: parent.height / publisher.cyclesval // Set height dynamically based on grid size
+                                        //     color: Qt.rgba(1, 0, 0, 1)
+                                        //     // Set a border for each rectangle (optional)
+                                        //     border.color: "black"
+                                        //    text: {
+                                        //         var words = publisher.ut_arrayValue.split(" ").filter(function(item) { return item.trim() !== ""; });
+                                        //         return words[index] !== undefined ? words[index] : "";
+                                        //     }
+                                        //    }
+
+                                        Rectangle {
+                                           width: parent.width / publisher.cyclesval // Set width dynamically based on grid size
+                                           height: parent.height / publisher.cyclesval // Set height dynamically based on grid size
+                                           color: Qt.rgba(1, , 0, 1) // Set color of the rectangle
+                                           border.color: "black" // Set border for each rectangle (optional)
+
+                                         Text {
+                                          anchors.centerIn: parent // Center the text within the rectangle
+                                          // Split the string into words and filter out empty strings
+                                          text: {
+                                            var words = publisher.ut_arrayValue.split(" ").filter(function(item) { return item.trim() !== ""; });
+                                            return words[index] !== undefined ? words[index] : ""; // Return word at the current index, or empty string if not found
+                                       }
+                                            color: "white" // Set text color
+                                            font.pixelSize: parent.width*0.45 // Set text size dynamically based on the rectangle width
+        }
+    }
                                     }
-
-                                    TextField {
-                                        id:angleTextField
-                                        Layout.fillWidth: true
-                                        Layout.fillHeight: true
-                                        font.family: "Tahoma"
-                                        font.bold: true
-                                        font.pixelSize: 45
-                                        color: "orange"
-                                        verticalAlignment: TextInput.AlignVCenter
-                                        horizontalAlignment: TextInput.AlignHCenter
-                                        placeholderText: "(10-60)"
-                                        validator: IntValidator { bottom: 10; top:60  } // Ensure input is between 0 and 360
-                                        inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
-
-                                        // Optional: Handle text change to update the publisher's angle value
-                                        onTextChanged: {
-                                            const angle = parseInt(text);
-                                            if (!isNaN(angle) && angle >= 0 && angle <= 360) {
-                                                publisher.posval = angle;
-                                                // Additional logic to handle the angle value change
-                                            }
-                                        }
-                                        onAccepted: {
-                                               // Lock the TextField when Enter is pressed
-                                               readOnly = true; // Make the TextField read-only instead of disabling it to keep the text visible and styled
-                                               // Additional logic to handle the acceptance of the entered value
-                                           }
-
-                                    }
-
-
-
-                                    SButton {
-                                        property bool isPressed: false
-                                        width: parent.width * 0.5
-                                        height: parent.height * 0.27 // Set the height to match the replaced Item
-                                        name: "Set Dia"
-                                        baseColor:  isPressed ? "green" : buttonBg
-                                        borderColor: buttonBg
-                                        anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
-                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
-                                        anchors.bottomMargin: 5
-                                        onClicked: {
-                                            isPressed = !isPressed
-
-                                            // Add your button click handling logic here
-                                        }
-                                    }
-
-                                    SButton {
-                                        property bool isPressed: false
-                                        width: parent.width * 0.5
-                                        height: parent.height * 0.27 // Set the height to match the replaced Item
-                                        name: "Unlock"
-                                        baseColor:  isPressed ? "green" : buttonBg
-                                        borderColor: blue
-                                        anchors.right:parent.right// Center horizontally
-                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
-                                        anchors.bottomMargin: 5
-                                        onClicked: {
-                                                     angleTextField.readOnly = false; // Unlock the TextField for editing
-                                                     angleTextField.focus = true; // Optionally, set focus to the TextField for immediate editing
-
-                                            // Add your button click handling logic here
-                                        }
-                                    }
-                                }
-
-
+                                 }
+                     
                             }
 
-                        Rectangle{
-                            implicitWidth: widthScreen * 0.20
-                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                            border.color: borderSecondBg
-                            color: secondBg
-                            radius: 15
-                            ColumnLayout{
-                                anchors.centerIn: parent
-
-                                SButton{
-                                    property bool isPressed: false
-                                    height: 20
-                                    name:  "INIT AUTO MODE"
-                                    baseColor:  isPressed ? "red" : buttonBg
-                                    borderColor: buttonBg
-                                    implicitWidth:(widthScreen * 0.42)/3
-                                    onClicked: {
-                                        isPressed = !isPressed
-                                         init_crawler(0)
-
-
-
-                                    }
-                                }
-
-                                SButton{
-                                    property bool isPressed: false
-                                    height: 20
-                                    name:  "AUTO MODE"
-                                    baseColor:  isPressed ? "red" : buttonBg
-                                    borderColor: buttonBg
-                                    implicitWidth:(widthScreen * 0.42)/3
-                                    onClicked: {
-                                        isPressed = !isPressed
-
-                                        publisher.call_initautomode(1)
-
-                                    }
-                                }
-                                SButton{
-                                    property bool  isPressed: false
-                                    height: 20
-                                    name:  "MANUAL MODE"
-                                    baseColor:  isPressed ? "blue" : buttonBg
-                                    borderColor: buttonBg
-                                    implicitWidth:(widthScreen * 0.42)/3
-                                    onClicked: {
-                                        isPressed = !isPressed
-                                        publisher.call_abortauto(1)
-                                        publisher.call_automode(0)
-                                        publisher.call_stopautomode(1)
-                                        init_crawler(0)
-                                        stopCrawler()
-//                                        camera_runner.startJoystick();
-                                    }
-                                }
-                                SButton{
-                                    height: 20
-                                    name:  "RESET"
-                                    baseColor:  buttonBg
-                                    borderColor: buttonBg
-                                     implicitWidth:(widthScreen * 0.42)/3
-                                    onClicked: {
-                                    }
-                                }
-
-                                SButton{
-                                    height: 20
-                                    name: "SHUTDOWN"
-                                    baseColor: "#FF2E2E"
-                                    borderColor: "#911911"
-                                     implicitWidth:(widthScreen * 0.42)/3
-                                    onClicked: {
-                                        publisher.shd_crawler(1)
-                                    }
-                                }
-                            }
-                        }
-
-                        Rectangle {
-                              implicitWidth: widthScreen * 0.20
-                              implicitHeight: ((heightScreen * 0.90)/3) -5/2
-                              border.color: borderSecondBg
-                              color: secondBg
-                              radius: 15
-
-                              ColumnLayout{
-                                  anchors.fill: parent
-                                  anchors.topMargin: 10
-                                  Text {
-                                      Layout.fillWidth: true
-                                      text: qsTr("Step 2 Stroke Length")
-                                      font.family: "Tahoma"
-                                      font.bold: true
-                                      font.pixelSize: 24
-                                       color: textColor
-                                      verticalAlignment: Text.AlignVCenter
-                                      horizontalAlignment: Text.AlignHCenter
-                                  }
-
-                                  TextField {
-                                      id:secondTextField
-                                      Layout.fillWidth: true
-                                      Layout.fillHeight: true
-                                      font.family: "Tahoma"
-                                      font.bold: true
-                                      font.pixelSize: 45
-                                      color: "orange"
-                                      verticalAlignment: TextInput.AlignVCenter
-                                      horizontalAlignment: TextInput.AlignHCenter
-                                      placeholderText: "(10-480)"
-                                      validator: IntValidator { bottom:10 ; top: 450 } // Ensure input is between 0 and 360
-                                      inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
-
-                                      // Optional: Handle text change to update the publisher's angle value
-                                      onTextChanged: {
-                                          const angle = parseInt(text);
-                                          if (!isNaN(angle) && angle >= 0 && angle <= 480) {
-                                              publisher.negval = angle;
-                                              // Additional logic to handle the angle value change
-                                          }
-                                      }
-                                      onAccepted: {
-                                             // Lock the TextField when Enter is pressed
-                                             readOnly = true; // Make the TextField read-only instead of disabling it to keep the text visible and styled
-                                             // Additional logic to handle the acceptance of the entered value
-                                         }
-
-                                  }
-
-                                  SButton {
-                                      property bool isPressed: false
-                                      width: parent.width * 0.5
-                                      height: parent.height * 0.27 // Set the height to match the replaced Item
-                                      name: "Set Stroke"
-                                      baseColor:  isPressed ? "green" : buttonBg
-                                      borderColor: buttonBg
-                                      anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
-                                      anchors.bottom: parent.bottom // Align to the bottom of the parent
-                                      anchors.bottomMargin: 5
-                                      onClicked: {
-                                          isPressed = !isPressed
-
-                                          // Add your button click handling logic here
-                                      }
-                                  }
-                                  SButton {
-                                      property bool isPressed: false
-                                      width: parent.width * 0.5
-                                      height: parent.height * 0.27 // Set the height to match the replaced Item
-                                      name: "Unlock"
-                                      baseColor:  isPressed ? "green" : buttonBg
-                                      borderColor: blue
-                                      anchors.right:parent.right// Center horizontally
-                                      anchors.bottom: parent.bottom // Align to the bottom of the parent
-                                      anchors.bottomMargin: 5
-                                      onClicked: {
-                                                   secondTextField.readOnly = false; // Unlock the TextField for editing
-                                                   secondTextField.focus = true; // Optionally, set focus to the TextField for immediate editing
-
-                                          // Add your button click handling logic here
-                                      }
-                                  }
-                              }
-
-                          }
-
-                        }
-                        RowLayout{
-                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                            implicitWidth: widthScreen * 0.60
-                            Rectangle{
-                                implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.60)/4)-5/3
-                                border.color: borderSecondBg
-                                color: secondBg
-                                radius: 15
-                                ColumnLayout{
-                                    anchors.fill: parent
-                                    anchors.topMargin: 10
-                                    Text {
-                                        Layout.fillWidth: true
-                                        text: qsTr("Tripmeter")
-                                        font.family: "Tahoma"
-                                        font.bold: true
-                                        font.pixelSize: 24
-                                         color: textColor
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: Text.AlignHCenter
-                                    }
-                                    Text {
-                                            Layout.fillWidth: true
-                                            Layout.fillHeight: true
-                                            textFormat: Text.RichText
-                                            text: publisher.tripValue + "<b style='font-size: 20px;'> mtr<b>"
-                                            font.family: "Tahoma"
-                                            font.bold: true
-                                            font.pixelSize: 30
-                                             color: textColor
-                                            verticalAlignment: Text.AlignVCenter
-                                            horizontalAlignment: Text.AlignHCenter
-                                        }
-                                    Item{
-                                        height: (((heightScreen * 0.90)/3 )-5/2)*0.2
-                                        Layout.fillWidth: true
-                                        SButton{
-                                            name:  "RESET"
-                                            baseColor:  buttonBg
-                                            borderColor: buttonBg
-                                            anchors.fill: parent
-                                            anchors.leftMargin: 30
-                                            anchors.rightMargin: 30
-                                            onClicked: {
-                                                publisher.call_resetTrip(1)
-                                            }
-                                        }
-                                    }
-                                    Item{
-                                        height: 16
-                                        Layout.fillWidth: true
-                                    }
-
-
-
-                                }
-                            }
-                            Rectangle{
-                                implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.60)/4)-5/3
-                                border.color: borderSecondBg
-                                color: secondBg
-                                radius: 15
-                                ColumnLayout{
-                                    anchors.fill: parent
-                                    anchors.topMargin: 10
-                                    Text {
-                                        Layout.fillWidth: true
-                                        text: qsTr("Crawler Angle")
-                                        font.family: "Tahoma"
-                                        font.bold: true
-                                        font.pixelSize: 24
-                                         color: textColor
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: Text.AlignHCenter
-                                    }
-                                    Text {
-                                            Layout.fillWidth: true
-                                            Layout.fillHeight: true
-                                            textFormat: Text.RichText
-                                            text: publisher.angleValue + "<b style='font-size: 20px;'> Deg<b>"
-                                            font.family: "Tahoma"
-                                            font.bold: true
-                                            font.pixelSize: 60
-                                             color: "orange"
-                                            verticalAlignment: Text.AlignVCenter
-                                            horizontalAlignment: Text.AlignHCenter
-                                        }
-                                    Item {
-                                        height: parent.height * 0.1
-                                    }
-                                }
-
-                            }
-                            Rectangle{
-                                implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                implicitWidth: ((widthScreen * 0.60)/4)-5/3
-                                border.color: borderSecondBg
-                                color: secondBg
-                                radius: 15
-                                ColumnLayout{
-                                    anchors.fill: parent
-                                    anchors.topMargin: 10
-                                    Text {
-                                        Layout.fillWidth: true
-                                        text: qsTr("Odometer")
-                                        font.family: "Tahoma"
-                                        font.bold: true
-                                         font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                                         color: textColor
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: Text.AlignHCenter
-                                    }
-                                    Text {
-                                            Layout.fillWidth: true
-                                            Layout.fillHeight: true
-                                            textFormat: Text.RichText
-                                            text: publisher.odomValue + "<b style='font-size: 20px;'> mtr<b>"
-                                            font.family: "Tahoma"
-                                            font.bold: true
-                                            font.pixelSize: 30
-                                             color: textColor
-                                            verticalAlignment: Text.AlignVCenter
-                                            horizontalAlignment: Text.AlignHCenter
-                                        }
-                                    Item {
-                                        height: parent.height * 0.1
-                                    }
-                                }
-
-                            }
-                            Rectangle {
-                                  implicitWidth: ((widthScreen * 0.60)/4)-5/3
-                                  implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                                  border.color: borderSecondBg
-                                  color: secondBg
-                                  radius: 15
-
-
-                              }
-                        }
-                        Rectangle{
-                            id:emergencyBox
-                            implicitWidth: widthScreen * 0.60
-                            implicitHeight: ((heightScreen * 0.90)/3 )-5/2
-                            border.color: borderSecondBg
-                            color: secondBg
-                            radius: 15
-                            ColumnLayout{
-                                anchors.fill: parent
-                                anchors.topMargin: 10
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: qsTr("Emergency STOP")
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 24
-                                     color: textColor
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
-
-                                Item {
-                                    height: emergencyBox.height*0.30
-                                    Layout.fillWidth: true
-                                    SButton{
-                                        anchors.centerIn: parent
-                                        height: parent.height
-                                        width: parent.width * 0.5
-                                        name:  "STOP"
-                                        baseColor:  "#FF2E2E"
-                                        borderColor: "#911911"
-                                        onClicked: {
-                                           alaramEffect.play()
-                                           stopCrawler()
-                                           init_crawler(0)
-
-                                            //add logic
-                                        }
-                                    }
-                                }
-
-                                Item {
-                                    height: parent.height * 0.1
-                                }
-                            }
-
-                        }
-
-                    }
+                        // }
+                        // }
+                    
                 }
             }
 
