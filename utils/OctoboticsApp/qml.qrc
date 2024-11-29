@@ -1,0 +1,44 @@
+<RCC>
+    <qresource prefix="/">
+        <file>UI/Page/Login.qml</file>
+        <file>UI/Page/Home.qml</file>
+        <file>UI/Page/SplashScreen.qml</file>
+        <file>UI/main.qml</file>
+        <file>UI/Components/CButton.qml</file>
+        <file>UI/Assets/fontawesome-webfont.ttf</file>
+        <file>UI/Page/ConnectMasterURI.qml</file>
+        <file>UI/Assets/Font Awesome 6 Brands-Regular-400.otf</file>
+        <file>UI/Assets/signal-status/wifi-signal.png</file>
+        <file>UI/Assets/signal-status/no-wifi-signal.png</file>
+        <file>UI/Assets/dashboard/settings.png</file>
+        <file>UI/Assets/dashboard/remove.png</file>
+        <file>UI/Assets/dashboard/tick.png</file>
+        <file>UI/Assets/dashboard/robotic-arm.png</file>
+        <file>UI/Assets/octobotics_logo.png</file>
+        <file>UI/Assets/dashboard/expand.png</file>
+        <file>UI/Assets/dashboard/shrink.png</file>
+        <file>UI/Assets/dashboard/capture.png</file>
+        <file>UI/Assets/dashboard/record.png</file>
+        <file>UI/Page/ToggleButton.qml</file>
+        <file>UI/Components/SButton.qml</file>
+        <file>UI/Assets/dashboard/arrow.png</file>
+        <file>UI/Assets/battery-status/battery-empty-solid.png</file>
+        <file>UI/Assets/battery-status/battery-full-solid.png</file>
+        <file>UI/Assets/battery-status/battery-half-solid.png</file>
+        <file>UI/Assets/battery-status/battery-quarter-solid.png</file>
+        <file>UI/Assets/battery-status/battery-three-quarters-solid.png</file>
+        <file>UI/Assets/dashboard/reset.png</file>
+        <file>UI/Assets/dashboard/swap.png</file>
+        <file>Source/recordcams.cpp</file>
+        <file>Source/recordcams.h</file>
+        <file>UI/Assets/alarm.wav</file>
+        <file>UI/Assets/dashboard/info.png</file>
+        <file>UI/Page/SettingsPage.qml</file>
+        <file>UI/Assets/dashboard/up-arrow.png</file>
+        <file>UI/Assets/dashboard/up-arrow_c.png</file>
+        <file>UI/Components/IButton.qml</file>
+        <file>UI/Components/OctoGauge.qml</file>
+        <file>UI/Assets/signal-status/warning.png</file>
+    </qresource>
+</RCC>
+

@@ -146,7 +146,7 @@ Rectangle{
             battDialog.open()
             battCnt++
         }
-        else if((battStatus<= 34))
+        else if((battStatus<= 35))
         {
             console.log("Showing Battery Critically Low Dialog");
             battDialog.text = "\n\n         Battery Critically LOW DD        \n         Change Batteries ASAP         \n\n"
@@ -178,11 +178,7 @@ Rectangle{
      */
     property variant crawlStatus: publisher.crawlStatus
     onCrawlStatusChanged: {
-        //        //console.log("crawlStatus")
-        //        //console.log("frontLeft",crawlStatus.frontLeft)
-        //        //console.log("frontRight",crawlStatus.frontRight)
-        //        //console.log("backrRight",crawlStatus.backrRight)
-        //        //console.log("backLeft",crawlStatus.backLeft)
+
     }
 
 
@@ -192,11 +188,7 @@ Rectangle{
      */
     property variant velocityValue: publisher.velocityValue
     onVelocityValueChanged:  {
-        //console.log("velocity status")
-        //console.log("current_vel_linear",velocityValue.current_vel_linear)
-        //console.log("current_vel_angular",velocityValue.current_vel_angular)
-        //console.log("max_linear",velocityValue.max_linear)
-        //console.log("max_angular",velocityValue.max_angular)
+
     }
 
     /*!
@@ -235,17 +227,7 @@ Rectangle{
      * \brief  crawlerErr: gets crawler motors error value from ros and gives a popup on error
      */
     property variant crawlerErr: publisher.errValue
-//    onCrawlerErrChanged: {
-//        if(2===crawlerErr[0] || 16===crawlerErr[0] || 2===crawlerErr[1] || 16===crawlerErr[1] || 2===crawlerErr[2] || 16===crawlerErr[2] || 2===crawlerErr[3] || 16===crawlerErr[3]){
-//            crawlerDialog.text =  cMotors[0]+" : "+cErr[crawlerErr[0]]+"\n"+cMotors[1]+" : "+cErr[crawlerErr[1]]+"\n"+cMotors[2]+" : "+cErr[crawlerErr[2]]+"\n"+cMotors[3]+" : "+cErr[crawlerErr[3]]+"\n"
 
-//            crawlerDialog.title = "Crawler Error"
-//            crawlerDialog.icon = StandardIcon.Critical
-//            crawlerDialog.open()
-//        }
-
-
-//    }
     /*!
      * \brief  crawlerTemp: gets crawler motors temp value from ros and gives a popup on temp error
      * \todo   make a variable for temperature value
@@ -483,9 +465,6 @@ Rectangle{
 
 
 
-//    function slide_cw(cw){
-//        publisher.call_slidecw(cw)
-//    }
 
     ColumnLayout{
         anchors.fill: parent
@@ -520,39 +499,7 @@ Rectangle{
 
                     }
                 }
-                //                Rectangle{
-                //                    width: widthScreen * 0.1
-                //                    height: parent.height*0.2
-
-                //                    Item {
-                //                        id: connectionStatus
-                //                        width: 50
-                //                        height: 60
-
-
-                //                        Image {
-                //                            id: connectionStatusImg
-                //                            anchors.fill: connectionStatus
-                //                            anchors.topMargin: 6
-                //                            source:displayConnectionStatus(publisher.comStatus)
-                //                            onSourceChanged: {
-                //                                if(publisher.comStatus){
-                //                                    alertTimer.stop();
-                //                                    alarmTone.stop()
-                //                                    alertTimer.running = false
-
-                //                                }else{
-
-                //                                    alertTimer.start();
-                //                                    alarmTone.play()
-                //                                }
-
-
-                //                            }
-                //                        }
-                //                    }
-                //                }
-
+               
                 Rectangle{
                     width: widthScreen * 0.68
                     height: parent.height
@@ -677,31 +624,7 @@ Rectangle{
 
             }
 
-            //            Item {
-            //                id: batteryStatusId
-            //                width: 60
-            //                height: parent.height*0.95
-            //                anchors.verticalCenter: parent.verticalCenter
-            //                anchors.right: parent.right
-            //                anchors.rightMargin: 90
-
-            //                Image {
-            //                    id: batteryStatus
-            //                    anchors.fill: parent
-            //                    source:displaybatterStatus(publisher.batteryValue)
-
-            //                }
-            //                Text {
-            //                    id: batteryStatusValue
-            //                    text: parseFloat((Math.round((publisher.batteryValue)*100))/100)
-
-            //                    verticalAlignment: Text.AlignVCenter
-            //                    horizontalAlignment: Text.AlignHCenter
-            //                    anchors.fill: parent
-            //                    font.pointSize: 8
-            //                    color: "white"
-            //                }
-            //            }
+        
             Item {
                 id: uidInfo
                 width: 40
@@ -776,34 +699,10 @@ Rectangle{
                                             height: width
                                             anchors.centerIn: parent
                                             source:displayConnectionStatus(publisher.comStatus)
-//                                            onSourceChanged: {
-//                                                if(publisher.comStatus){
-//                                                    alertTimer.stop();
-//                                                   // alarmTone.stop()
-//                                                    alertTimer.running = false
-
-//                                                }else{
-
-//                                                    alertTimer.start();
-////                                                    alarmTone.play()
-//                                                }
-
-
-//                                            }
+//                                       
                                         }
                                     }
-                                    SButton{
-                                        property bool isPressed: false
-                                        height: rectBox1.height * 0.0987
-                                        name:  "TD"
-                                        baseColor: isPressed ? "green" : buttonBg
-                                        borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.13020
-                                        onClicked: {
-                                            isPressed = !isPressed
-                                            publisher.toolToggle = "3"
-                                        }
-                                    }
+                                
                                     Item {
                                         id: batteryStatusId
                                         width: rectBox1.width * 0.1302
@@ -825,46 +724,78 @@ Rectangle{
                                             color: textColor
                                         }
                                     }
+                                    SButton {
+                                        property bool isPressed: false
+                                        height: rectBox1.height * 0.0987
+                                        name: "Bot power off "
+                                        baseColor: isPressed ? "green" : buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: rectBox1.width * 0.6
+                                        Layout.alignment: Qt.AlignCenter
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: isPressed ? "On" : "Off"
+                                            color: isPressed ? "white" : "black"  // Change text color depending on isPressed
+                                        }
+
+                                        onClicked: {
+                                            isPressed = !isPressed;
+                                            if (isPressed) {
+                                                publisher.call_botservice(2);  // Joystick On
+                                            } 
+                                              // Toggle the isPressed state
+                                        }
+                                    }
+
+                                   
                                 }
                                 RowLayout{
                                     spacing: rectBox1.width * 0.05
-                                    SButton{
-                                        property bool isPressed: false
-                                        height: rectBox1.height * 0.0987
-                                        name:  "P/P"
-                                        baseColor: isPressed ? "green" : buttonBg
-                                        borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.13020
-                                        onClicked: {
-                                            isPressed = !isPressed
-                                            publisher.toolToggle = "4"
 
-                                        }
-                                    }
-                                    SButton{
-                                        property bool isPressed: false
-                                        height: rectBox1.width * 0.1
-                                        name:  "Led"
-                                        baseColor:  isPressed ? "green" : buttonBg
-                                        borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.13020
-                                        onClicked: {
-                                              isPressed = !isPressed
-                                              publisher.toolToggle = "2"
-                                        }
-                                    }
                                     SButton{
                                         property bool isPressed: false
                                         height: rectBox1.width * 0.1
                                         name:  "Motor"
                                         baseColor:  isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
-                                        implicitWidth: rectBox1.width * 0.20
+                                        implicitWidth: rectBox1.width * 0.25
                                         onClicked: {
                                             isPressed = !isPressed
                                             publisher.toolToggle = "1"
                                         }
                                     }
+
+                                    SButton {
+                                        property bool isPressed: false
+                                        height: rectBox1.height * 0.0987
+                                        name: "Bot Reboot "
+                                        baseColor: isPressed ? "green" : buttonBg
+                                        borderColor: buttonBg
+                                        implicitWidth: rectBox1.width * 0.6
+                                        Layout.alignment: Qt.AlignCenter
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: isPressed ? "On" : "Off"
+                                            color: isPressed ? "white" : "black"  // Change text color depending on isPressed
+                                        }
+
+                                        onClicked: {
+                                            isPressed = !isPressed;
+                                            if (isPressed) {
+                                                publisher.call_botservice(1);  // Joystick On
+                                            } //else {
+//                                                 // console.log("Donothig");
+// \                                            }
+                                              // Toggle the isPressed state
+                                        }
+                                    }
+
+
+
+
+
                                 }
                                 RowLayout{
                                     spacing: rectBox1.width * 0.08
@@ -872,128 +803,48 @@ Rectangle{
                                             Layout.fillWidth: true
                                         }
 
-                                    SButton{
+                                    SButton {
                                         property bool isPressed: false
                                         height: rectBox1.height * 0.0987
-                                        name:  "JoyStick OFF/ON"
-                                        baseColor:  isPressed ? "green" : buttonBg
+                                        name: "JoyStick"
+                                        baseColor: isPressed ? "green" : buttonBg
                                         borderColor: buttonBg
                                         implicitWidth: rectBox1.width * 0.65
                                         Layout.alignment: Qt.AlignCenter
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: isPressed ? "On" : "Off"
+                                            color: isPressed ? "white" : "black"  // Change text color depending on isPressed
+                                        }
+
                                         onClicked: {
-
-                                            publisher.call_joystickonoff(isPressed ? 1 : 0);
-                                            isPressed = !isPressed
-
+                                            if (isPressed) {
+                                                publisher.call_joystickonoff(0);  // Joystick On
+                                            } else {
+                                                publisher.call_joystickonoff(1);  // Joystick Off
+                                            }
+                                            isPressed = !isPressed;  // Toggle the isPressed state
                                         }
                                     }
+                                    
+
 
                                 }
 
+                                
+
                             }
-                            // Item{
-                            //     height: rectBox1.height * 0.65
-                            //     width: rectBox1.width * 0.100
-                            //     OctoGauge {
-                            //         anchors.fill: parent
-                            //         minimumValue: 0
-                            //         value: parseFloat(Math.round(publisher.waterLevel));
-                            //         maximumValue: 100
-                            //         anchors.centerIn: parent
-                            //         onValueChanged: {
-                            //             if(value < 10){
-                            //                 alaramEffect.play()
-                            //             }
-                            //         }
-                            //     }
-
-                            // }
-
+                        
 
                         }
 
 
                     }
 
-
-                    Rectangle{
-                        id:rectBox2
-                        width: widthScreen * 0.10
-                        height: heightScreen * 0.25
-                        border.color: borderSecondBg
-                        color: secondBg
-                        radius: 15
-                        CameraRunner {
-                         id: cameraRunner
-                         }
-                        ColumnLayout{
-                            anchors.fill: parent
-                            anchors.topMargin: 10
-                            Text {
-                                Layout.fillWidth: true
-                                height: rectBox2.height * 0.2
-                                text: qsTr("Speed")
-                                font.family: "Tahoma"
-                                font.bold: true
-                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                                color: textColor
-                                verticalAlignment: Text.AlignVCenter
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                            Row{
-                                Layout.fillHeight: true
-                                width: parent.width
-                                Text {
-                                    width: parent.width * 0.8
-                                    height: parent.height
-                                    textFormat: Text.RichText
-                                    text:publisher.velocityValue + "<b style='font-size: 20px;'> mm/s<b>"
-                                    font.family: "Tahoma"
-                                    font.bold: true
-                                    font.pixelSize: 60
-                                    color: textColor
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
-                                Item {
-                                    width: parent.width * 0.2
-                                    height: parent.height
-                                    ColumnLayout{
-                                        height: parent.height
-                                        width: parent.width
-                                        IButton{
-                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                            onClicked: {
-                                                  cameraRunner.startJoystick()
-
-                                                //add logicr
-                                            }
-                                        }
-
-                                        Item {
-                                            Layout.fillHeight: true
-                                        }
-                                        IButton{
-                                            sourceRot: 180
-                                            defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-                                            clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-                                            onClicked: {
-                                                  cameraRunner.startJoystick()
-                                                //add logicr
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            Item {
-                                height: parent.height * 0.1
-                            }
-                        }
-                    }
                     Rectangle{
                         id:rectBox3
-                        width: widthScreen * 0.10
+                        width: widthScreen * 0.15
                         height: heightScreen * 0.25
                         border.color: borderSecondBg
                         color: secondBg
@@ -1065,182 +916,6 @@ Rectangle{
                             }
                         }
                     }
-
-
-
-
-//                     Rectangle{
-//                         id: rectBox4
-//                         width: widthScreen * 0.18
-//                         height: heightScreen * 0.25
-//                         border.color: borderSecondBg
-//                         color: secondBg
-//                         radius: 15
-//                         ColumnLayout{
-//                             anchors.fill: parent
-//                             anchors.topMargin: 10
-//                             Text {
-//                                 Layout.fillWidth: true
-//                                 height: rectBox4.height * 0.2
-//                                 text: qsTr("Linear Actuator")
-//                                 font.family: "Tahoma"
-//                                 font.bold: true
-//                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-//                                 color: textColor
-//                                 verticalAlignment: Text.AlignVCenter
-//                                 horizontalAlignment: Text.AlignHCenter
-//                             }
-//                             RowLayout {
-//                                 Layout.fillWidth: true
-//                                 spacing: 30 // Adjust spacing as needed
-
-//                                 Text {
-//                                     text: publisher.lacValue + " mm"
-//                                     font.family: "Tahoma"
-//                                     font.bold: true
-//                                     font.pixelSize: 30
-//                                     color: textColor
-//                                     verticalAlignment: Text.AlignVCenter
-//                                     horizontalAlignment: Text.AlignHCenter
-//                                 }
-
-//                                 IButton{
-//                                     // Assuming no rotation is needed for the up arrow
-//                                     sourceRot: 0
-//                                     defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-//                                     onClicked: {
-//                                         publisher.call_lacccw(1);
-//                                         // Add logic here
-//                                     }
-//                                 }
-//                                 IButton{
-//                                     // Rotate the image to make it a down arrow
-//                                     sourceRot: 180
-//                                     defaultImage: "qrc:/UI/Assets/dashboard/up-arrow.png"
-//                                     clickedImage: "qrc:/UI/Assets/dashboard/up-arrow_c.png"
-//                                     onClicked: {
-//                                         publisher.call_laccw(1);
-//                                     }
-//                                 }
-//                             }
-
-// //                            Item {
-// //                                height: parent.height * 0.1
-// //                            }
-//                         }
-//                     }
-
-
-                    // Rectangle{
-                    //                        id:rectBox5
-                    //                        width: widthScreen * 0.12
-                    //                        height: heightScreen * 0.25
-                    //                        border.color: borderSecondBg
-                    //                        color: secondBg
-                    //                        radius: 15
-                    //                        ColumnLayout{
-
-                    //                            anchors.fill: parent
-                    //                            anchors.topMargin: 10
-                    //                            Text {
-                    //                                Layout.fillWidth: true
-                    //                                height: rectBox5.height * 0.2
-                    //                                text: qsTr("Linear Speed ")
-                    //                                font.family: "Tahoma"
-                    //                                font.bold: true
-                    //                                font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                    //                                color: textColor
-                    //                                verticalAlignment: Text.AlignVCenter
-                    //                                horizontalAlignment: Text.AlignHCenter
-                    //                            }
-                    //                            Text {
-                    //                                    Layout.fillWidth: true
-                    //                                    height: parent.height
-                    //                                    textFormat: Text.RichText
-                    //                                    text: Math.round(publisher.speedsetting) + "<b style='font-size: 18px;'> mm/s<b>"
-                    //                                    font.family: "Tahoma"
-                    //                                    font.bold: true
-                    //                                    font.pixelSize:text.length < 12 ? 60 : 30
-                    //                                    color: textColor
-                    //                                    verticalAlignment: Text.AlignVCenter
-                    //                                    horizontalAlignment: Text.AlignHCenter
-                    //                                }
-                    //                            Item {
-                    //                                height: parent.height * 0.1
-                    //                            }
-                    //                        }
-                    //                        Item {
-                    //                            width: parent.width
-                    //                            height: parent.height * 0.1
-                    //                            anchors.bottom: colum1.bottom
-                    //                            anchors.bottomMargin: 28
-
-                    //                        }
-                    //                    }
-
-                    // Rectangle{
-                    //                         id:rectBox6
-                    //                         width: widthScreen * 0.12
-                    //                         height: heightScreen * 0.25
-                    //                         border.color: borderSecondBg
-                    //                         color: secondBg
-                    //                         radius: 15
-                    //                         ColumnLayout{
-                    //                             anchors.fill: parent
-                    //                             anchors.topMargin: 10
-                    //                             Text {
-                    //                                 Layout.fillWidth: true
-                    //                                 height: rectBox4.height * 0.2
-                    //                                 text: qsTr("Angular Speed")
-                    //                                 font.family: "Tahoma"
-                    //                                 font.bold: true
-                    //                                 font.pixelSize: Math.min(parent.width, parent.height) * 0.1
-                    //                                 color: textColor
-                    //                                 verticalAlignment: Text.AlignVCenter
-                    //                                 horizontalAlignment: Text.AlignHCenter
-                    //                             }
-                    //                             Text {
-                    //                                   Layout.fillWidth: true
-                    //                                   height: parent.height
-                    //                                   textFormat: Text.RichText
-                    //                                   text: publisher.anglesetting + "<b style='font-size: 18px;'> Deg/s<b>"
-                    //                                   font.family: "Tahoma"
-                    //                                   font.bold: true
-                    //                                   font.pixelSize: 30
-                    //                                   color: textColor
-                    //                                   verticalAlignment: Text.AlignVCenter
-                    //                                   horizontalAlignment: Text.AlignHCenter
-                    //                                 }
-                    //                             Item {
-                    //                                       width: parent.width
-                    //                                       height: parent.height * 0.1
-                    //                                       anchors.bottom: colum1.bottom
-                    //                                       anchors.bottomMargin: 10
-
-                    //                                       RowLayout{
-                    //                                           height: parent.height
-                    //                                           anchors.right: parent.right
-                    //                                           anchors.left: parent.left
-                    //                                           anchors.rightMargin: 40
-                    //                                           anchors.leftMargin: 40
-
-                    //                                Item {
-                    //                                        Layout.fillWidth: true
-                    //                                           }
-
-                    //                                       }
-                    //                                   }
-
-                    //                             Item {
-                    //                                 height: parent.height * 0.1
-                    //                             }
-
-                    //                         }
-
-
-                    //                     }
-
 
 
 
@@ -1432,7 +1107,7 @@ Rectangle{
                         }
                     }
                      Rectangle {
-                                width: widthScreen * 0.17
+                                width: (widthScreen * 0.15)
                                 height: heightScreen * 0.25
                                 border.color: borderSecondBg
                                 color: secondBg
@@ -1442,7 +1117,7 @@ Rectangle{
                                     anchors.topMargin: 10
                                     Text {
                                         Layout.fillWidth: true
-                                        text: qsTr("Forward Distance")
+                                        text: qsTr("Forward")
                                         font.family: "Tahoma"
                                         font.bold: true
                                         font.pixelSize: 24
@@ -1451,87 +1126,95 @@ Rectangle{
                                         horizontalAlignment: Text.AlignHCenter
                                     }
 
-                                    TextField {
-                                        id:angleTextField
-                                        Layout.fillWidth: true
-                                        Layout.fillHeight: true
-                                        font.family: "Tahoma"
-                                        font.bold: true
-                                        font.pixelSize: 45
-                                        color: "orange"
-                                        verticalAlignment: TextInput.AlignVCenter
-                                        horizontalAlignment: TextInput.AlignHCenter
-                                        placeholderText: "(10-100)"
-                                        validator: IntValidator { bottom: 10; top:100  } // Ensure input is between 0 and 360
-                                        inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
+                                
+                                        TextField {
+                                                id: angleTextField
+                                                font.family: "Tahoma"
+                                                font.bold: true
+                                                font.pixelSize: 25
+                                                color: "orange"
+                                                verticalAlignment: TextInput.AlignVCenter
+                                                horizontalAlignment: TextInput.AlignHCenter
+                                                placeholderText: "(10-100)"
+                                                validator: IntValidator { bottom: 10; top: 100 } // Ensure input is between 10 and 100
+                                                inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
+                                                anchors.horizontalCenter: parent.horizontalCenter
 
-                                        // Optional: Handle text change to update the publisher's angle value
-                                        onTextChanged: {
-                                            const angle = parseInt(text);
-                                            if (!isNaN(angle) && angle >= 0 && angle <= 360) {
-                                                publisher.posval = angle;
-                                                // Additional logic to handle the angle value change
+                                                background: Rectangle {
+                                                    color: "#2C3E50" // Set background color (dark blue-gray)
+                                                    radius: 5 // Rounded corners
+                                                    border.color: "white" // Border color
+                                                }
+
+                                                
+
+                                                onAccepted: {
+                                                    // Lock the TextField when Enter is pressed
+                                                    readOnly = true; // Make it read-only
+                                                }
                                             }
-                                        }
-                                        onAccepted: {
-                                               // Lock the TextField when Enter is pressed
-                                               readOnly = true; // Make the TextField read-only instead of disabling it to keep the text visible and styled
-                                               // Additional logic to handle the acceptance of the entered value
-                                           }
-                                    }
 
-                                    SButton {
-                                        property bool isPressed: false
-                                        width: parent.width * 0.5
-                                        height: parent.height * 0.27 // Set the height to match the replaced Item
-                                        name: "Set Dia"
-                                        baseColor:  isPressed ? "green" : buttonBg
-                                        borderColor: buttonBg
-                                        anchors.horizontalCenter: parent.horizontalCenter // Center horizontally
-                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
-                                        anchors.bottomMargin: 5
-                                        onClicked: {
-                                            isPressed = !isPressed
-                                            
+                                            // Button for setting the angle
+                                            SButton {
+                                                id: setDiaButton
+                                                property bool isPressed: false
+                                                width: parent.width * 0.5
+                                                height: parent.height * 0.27
+                                                name:  isPressed ? "Reset" : "Set Dia"
+                                                baseColor: isPressed ? "red" : "#c792ea"  // Green when pressed, blue otherwise
+                                                borderColor: "#2980B9" // Button border color
+                                                anchors.horizontalCenter: parent.horizontalCenter
 
-                                            // const angleText = parseInt(angleTextField.text);
-                                            //                 if (!isNaN(angleText) && angleText >= 10 && angleText <= 100) {
-                                            //                     if (isPressed) {
-                                            //                         publisher.posval = angleText;  // Set the gridSize value
-                                            //                         console.log("Button clicked: angleText set to", angleText);
-                                            //                     } else {
-                                            //                         publisher.posval = 0;  // Reset angleText value
-                                            //                         console.log("Button clicked: angleText reset to 0");
-                                            //                     }
-                                            //                 } else {
-                                            //                     console.log("Invalid angleText value: ", angleTextField.text);
-                                            //                 }
-                                            
-                                        }
-                                    }
+                                                // Smooth transition for the color and scaling effect
+                                                transitions: [
+                                                    Transition {
+                                                        from: "*"
+                                                        to: "*"
+                                                        reversible: true
+                                                        ParallelAnimation {
+                                                            NumberAnimation { target: setDiaButton; property: "scale"; to: isPressed ? 1.05 : 1.0; duration: 200 }
+                                                            ColorAnimation { target: setDiaButton; property: "baseColor"; duration: 300 }
+                                                            ColorAnimation { target: setDiaButton; property: "borderColor"; duration: 300 }
+                                                        }
+                                                    }
+                                                ]
 
-                                    SButton {
-                                        property bool isPressed: false
-                                        width: parent.width * 0.5
-                                        height: parent.height * 0.27 // Set the height to match the replaced Item
-                                        name: "Unlock"
-                                        baseColor:  isPressed ? "green" : buttonBg
-                                        borderColor: "blue"
-                                        anchors.right:parent.right// Center horizontally
-                                        anchors.bottom: parent.bottom // Align to the bottom of the parent
-                                        anchors.bottomMargin: 5
-                                        onClicked: {
-                                                     angleTextField.readOnly = false; // Unlock the TextField for editing
-                                                     angleTextField.focus = true; // Optionally, set focus to the TextField for immediate editing
-                                            // Add your button click handling logic here
-                                        }
-                                    }
+                                                // When clicked, toggle the state and update the TextField's readOnly property
+                                                    onClicked: {
+                                                            isPressed = !isPressed;
+
+                                                            // Access forward_dis from the TextField via its ID
+                                                            const forward_dis = parseInt(angleTextField.text);
+                                                            if (!isNaN(forward_dis) && forward_dis >= 1 && forward_dis <= 100) {
+                                                                if (isPressed) {
+                                                                    publisher.posval = forward_dis;  // Set the forward_dis value
+                                                                    angleTextField.readOnly = true; 
+                                                                    
+                                                                } else {
+                                                                    isPressed = false;
+                                                                    angleTextField.text = "";
+                                                                    angleTextField.readOnly = false; 
+                                                                    angleTextField.focus = true;
+                                                    
+                                                                }
+                                                            } else {
+                                                                
+                                                                 isPressed = false;
+                                                                 angleTextField.text = "";
+                                                                 angleTextField.readOnly = false; 
+                                                                 angleTextField.focus = true;
+                                                                // console.log("Invalid angleTextField value: ", angleTextField.text);
+                                                            }
+                                                        }
+                                            }
+
+                              
                                 }
                             }
 
                           Rectangle{
                                 implicitHeight: heightScreen * 0.25
-                                implicitWidth: widthScreen * 0.10
+                                implicitWidth: (widthScreen * 0.10)-10
                                 border.color: borderSecondBg
                                 color: secondBg
                                 radius: 15
@@ -1543,23 +1226,23 @@ Rectangle{
                                         text: qsTr("UtThickness")
                                         font.family: "Tahoma"
                                         font.bold: true
-                                        font.pixelSize: 12
+                                        font.pixelSize: 18
                                          color: textColor
                                         verticalAlignment: Text.AlignVCenter
                                         horizontalAlignment: Text.AlignHCenter
                                     }
                                     Text {
-                                            Layout.fillWidth: true
-                                            Layout.fillHeight: true
-                                            textFormat: Text.RichText
-                                            text: publisher.ut_thicknessValue 
-                                            font.family: "Tahoma"
-                                            font.bold: true
-                                            font.pixelSize: 60
-                                             color: "orange"
-                                            verticalAlignment: Text.AlignVCenter
-                                            horizontalAlignment: Text.AlignHCenter
-                                        }
+                                    Layout.fillWidth: true
+                                    Layout.fillHeight: true
+                                    textFormat: Text.RichText
+                                    text:Number(publisher.ut_thicknessValue).toFixed(2)
+                                    font.family: "Tahoma"
+                                    font.bold: true
+                                    font.pixelSize: 50
+                                    color: "orange"
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
                                     Item {
                                         height: parent.height * 0.1
                                     }
@@ -1568,7 +1251,7 @@ Rectangle{
                             }
 
                          Rectangle {
-                                  implicitWidth: ((widthScreen * 0.60)/4)-5/3 +50
+                                  implicitWidth: ((widthScreen * 0.60)/4)-5/3 +50-10
                                   implicitHeight: heightScreen * 0.25
                                   border.color: borderSecondBg
                                   color: secondBg
@@ -1605,43 +1288,24 @@ Rectangle{
                                                         property bool isPressed: false
                                                         Layout.leftMargin: 10
                                                         Layout.bottomMargin: 5
-                                                        name: "Raster Scan"
+                                                        name: isPressed ? "Stop Raster" : "Raster Scan"
                                                         baseColor: isPressed ? "green" : buttonBg
                                                         borderColor: buttonBg
                                                         onClicked: {
-                                                        isPressed = !isPressed;
-
-                                                        if (isPressed) {
-                                                            const angle = 10; 
-                                                            publisher.negval = angle;
-                                                        } else {
-                                                            publisher.negval = 0;
+                                                            isPressed = !isPressed;
+                                                            if (isPressed) {
+                                                                console.log("Start Raster scan");
+                                                                publisher.call_raster_scan(1);
+                                                            } else {
+                                                                publisher.call_raster_scan(0);
+                                                                console.log("Stop Raster scan");
+                                                            }
                                                         }
-                                                    }
 
                                 
                                                         }
 
-                                                    // SButton {
-                                                    //     property bool isPressed: false
-                                                    //     Layout.leftMargin: 1
-                                                    //     Layout.bottomMargin: 5
-                                                    //     name: "Abort Raster Scan"
-                                                    //     baseColor: isPressed ? "green" : buttonBg
-                                                    //     borderColor: buttonBg
-                                                    //     onClicked: {
-                                                    //     isPressed = !isPressed;
-
-                                                    //     if (isPressed) {
-                                                    //         const angle = 10; 
-                                                    //         publisher.negval = angle;
-                                                    //     } else {
-                                                    //         publisher.negval = 0;
-                                                    //     }
-                                                    // }
-
-                                
-                                                    //     }
+                                                
 
                                                 }
                                                 RowLayout{
@@ -1651,7 +1315,7 @@ Rectangle{
                                                         property bool isPressed: false
                                                         Layout.leftMargin: 10
                                                         Layout.bottomMargin: 5
-                                                        name: "Grid Scan"
+                                                        name: isPressed ? "Stop Grid" : "Grid Scan"
                                                         baseColor: isPressed ? "green" : buttonBg
                                                         borderColor: buttonBg
                                                         onClicked: {
@@ -1659,12 +1323,9 @@ Rectangle{
 
                                                                 if (isPressed) {
                                                                 console.log("start Grid scan");
-                                                                publisher.call_grid_scan(1);
-
-                                                                    
+                                                                publisher.call_grid_scan(1);                                                           
                                                                 } else {
                                                                 console.log("Stop Grid scan");
-
                                                                 publisher.call_grid_scan(0);
                                                                 }
                                                             }
@@ -1681,17 +1342,11 @@ Rectangle{
                                                         baseColor: isPressed ? "green" : buttonBg
                                                         borderColor: buttonBg
                                                         onClicked: {
-                                                                isPressed = !isPressed;
-
-                                                                if (isPressed) {
                                                                 console.log("Export CSV");
                                                                 publisher.call_save_CSV(1);
 
                                                                     
-                                                                } else {
-                                                                console.log("Export CSV");
-                                                                pass;
-                                                                }
+                                                                
                                                             }
 
                                 
@@ -1810,7 +1465,7 @@ Rectangle{
                               }    
 
                         Rectangle {
-                              implicitWidth: widthScreen * 0.20
+                              implicitWidth:( widthScreen * 0.15)
                               implicitHeight: heightScreen * 0.25
                               border.color: borderSecondBg
                               color: secondBg
@@ -1821,7 +1476,7 @@ Rectangle{
                                   anchors.topMargin: 10
                                   Text {
                                       Layout.fillWidth: true
-                                      text: qsTr("Set Variable")
+                                      text: qsTr("Set")
                                       font.family: "Tahoma"
                                       font.bold: true
                                       font.pixelSize: 24
@@ -1830,26 +1485,20 @@ Rectangle{
                                       horizontalAlignment: Text.AlignHCenter
                                   }
                                     RowLayout{
-                                     Layout.fillHeight: true
-                                      Item{
+                                            Layout.fillHeight: true
+                                            Item{
                                             Layout.fillHeight: true
                                             Layout.fillWidth: true
                                             ColumnLayout{
                                                 Layout.fillHeight: true
                                                 anchors.fill: parent
-                                          
-                                                    
-                                                    
 
-                                                
-
-                                               
                                                     TextField {
                                                         id:gridSizeTextField
                                                         width: 10    // Specify width
                                                         height: 30 
                                                         Layout.topMargin:30
-                                                        Layout.leftMargin: 105 
+                                                        
 
                                                         font.family: "Tahoma"
                                                         font.bold: true
@@ -1858,8 +1507,10 @@ Rectangle{
                                                         verticalAlignment: TextInput.AlignVCenter
                                                         horizontalAlignment: TextInput.AlignHCenter
                                                         placeholderText: "1x1"
-                                                        validator: IntValidator { bottom: 1; top:12  } // Ensure input is between 0 and 360
+                                                        validator: IntValidator { bottom: 2; top:12  } // Ensure input is between 0 and 360
                                                         inputMethodHints: Qt.ImhFormattedNumbersOnly // Accept only numbers
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+
                                                         background: Rectangle {
                                                             color: "#2C3E50" // Set the background color (e.g., dark blue-gray)
                                                             radius: 5 // Optional: rounded corners for the background
@@ -1868,7 +1519,7 @@ Rectangle{
                                                         // Optional: Handle text change to update the publisher's gridSize value
                                                         onTextChanged: {
                                                             const gridSize = parseInt(text);
-                                                            if (!isNaN(gridSize) && gridSize >= 1 && gridSize <= 12) {
+                                                            if (!isNaN(gridSize) && gridSize >= 2 && gridSize <= 12) {
                                                                 
                                                                 // Additional logic to handle the gridSize value change
                                                             }
@@ -1886,30 +1537,36 @@ Rectangle{
                                                         property bool isPressed: false
                                                         Layout.leftMargin: 100
                                                         Layout.bottomMargin: 5
-                                                        name: "Grid Size"
-                                                        baseColor: isPressed ? "green" : buttonBg
+                                                        name: isPressed ? "Reset" : "Grid Size"
+                                                        baseColor: isPressed ? "red" : buttonBg
                                                         borderColor: buttonBg
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+
                                                         
                                                         onClicked: {
                                                             isPressed = !isPressed;
 
                                                             // Access gridSize from the TextField via its ID
                                                             const gridSize = parseInt(gridSizeTextField.text);
-                                                            if (!isNaN(gridSize) && gridSize >= 1 && gridSize <= 12) {
+                                                            if (!isNaN(gridSize) && gridSize >= 2 && gridSize <= 12) {
                                                                 if (isPressed) {
                                                                     publisher.cyclesval = gridSize;  // Set the gridSize value
                                                                     console.log("Button clicked: gridSize set to", gridSize);
                                                                 } else {
+                                                                    isPressed = false;
                                                                     publisher.cyclesval = 0;
                                                                     gridSizeTextField.text = "";
-                                                                      // Reset gridSize value
-                                                                    console.log("Button clicked: gridSize reset to 0");
+                                                                    gridSizeTextField.readOnly = false; 
+                                                                    gridSizeTextField.focus = true;
                                                                 }
                                                             } else {
                                                                 
-                                                                isPressed = false;
-                                                                gridSizeTextField.text = "";
-                                                                console.log("Invalid gridSize value: ", gridSizeTextField.text);
+                                          
+                                                                    isPressed = false;
+                                                                    publisher.cyclesval = 0;
+                                                                    gridSizeTextField.text = "";
+                                                                    gridSizeTextField.readOnly = false; 
+                                                                    gridSizeTextField.focus = true;
                                                             }
                                                         }
                                                     }
@@ -1918,91 +1575,143 @@ Rectangle{
 
                                 
 
-                                TextField {
-                                        id: secondTextField
-                                        width: parent.width // Set width to match the parent Item
-                                        height: 30
-                                        Layout.leftMargin: 10
-                                        Layout.bottomMargin: 10
-                                        font.family: "Tahoma"
-                                        font.bold: true
-                                        font.pixelSize: 20
-                                        color: "orange"
-                                        verticalAlignment: TextInput.AlignVCenter
-                                        horizontalAlignment: TextInput.AlignHCenter
-                                        anchors.bottom: parent.bottom
+                                                    TextField {
+                                                            id: secondTextField
+                                                            width: parent.width // Set width to match the parent Item
+                                                            height: 30
+                                                            Layout.leftMargin: 10
+                                                            Layout.bottomMargin: 10
+                                                            font.family: "Tahoma"
+                                                            font.bold: true
+                                                            font.pixelSize: 20
+                                                            color: "orange"
+                                                            verticalAlignment: TextInput.AlignVCenter
+                                                            horizontalAlignment: TextInput.AlignHCenter
+                                                            anchors.bottom: parent.bottom
 
-                                        placeholderText: "(10-480)"
-                                        validator: IntValidator { bottom: 10; top: 450 }
-                                        inputMethodHints: Qt.ImhFormattedNumbersOnly
-                                        background: Rectangle {
-                                            color: "#2C3E50"
-                                            radius: 5
-                                            border.color: "white"
+                                                            placeholderText: "(10-480)"
+                                                            validator: IntValidator { bottom: 10; top: 450 }
+                                                            inputMethodHints: Qt.ImhFormattedNumbersOnly
+                                                            background: Rectangle {
+                                                                color: "#2C3E50"
+                                                                radius: 5
+                                                                border.color: "white"
+                                                                                }
+                                                            
+                                                    
+                                                            onAccepted: {
+                                                                readOnly = true;
                                                             }
-                                        
-                                        onTextChanged: {
-                                            const angle = parseInt(text);
-                                            if (!isNaN(angle) && angle >= 0 && angle <= 480) {
-                                                publisher.negval = angle;
-                                            }
-                                            }
+                                                        }
+                                                    SButton {
+                                                        property bool isPressed: false
+                                                        width: parent.width * 0.45
+                                                        height: 130
+                                                        Layout.leftMargin: 130 // Space to the left of the button
+                                                        name: isPressed ? "Reset" : "Set Stroke"
+                                                        baseColor: isPressed ? "red" : buttonBg
+                                                        borderColor: buttonBg
+                                                        // anchors.horizontalCenter: parent.horizontalCenter
+                                                        anchors.bottom: parent.bottom
+                                                        anchors.right: parent.right 
+                                                        //anchors.right: parent.right
 
-                                        onAccepted: {
-                                            readOnly = true;
-                                        }
-                                    }
-                                    SButton {
-                                        property bool isPressed: false
-                                        width: parent.width * 0.45
-                                        height: 130
-                                        Layout.leftMargin: 130 // Space to the left of the button
-                                        name: "Set Stroke"
-                                        baseColor: isPressed ? "green" : buttonBg
-                                        borderColor: buttonBg
-                                        // anchors.horizontalCenter: parent.horizontalCenter
-                                        anchors.bottom: parent.bottom
-                                        //anchors.right: parent.right
+                                                        onClicked: {
+                                                            isPressed = !isPressed;
+                                                            
 
-                                        onClicked: {
-                                            isPressed = !isPressed
-                                        }
-                                    }
+                                                            // Access stroke from the TextField via its ID
+                                                                            const stroke = parseInt(secondTextField.text);
+                                                                            if (!isNaN(stroke) && stroke >= 1 && stroke <= 100) {
+                                                                                if (isPressed) {
+                                                                                    publisher.negval = stroke;  // Set the stroke value
+                                                                                    secondTextField.readOnly = true; 
+                                                                                    
+                                                                                } else {
+                                                                                    isPressed = false;
+                                                                                    secondTextField.text = "";
+                                                                                    secondTextField.readOnly = false; 
+                                                                                    secondTextField.focus = true;
+                                                                    
+                                                                                }
+                                                                            } else {
+                                                                                
+                                                                                isPressed = false;
+                                                                                secondTextField.text = "";
+                                                                                secondTextField.readOnly = false; 
+                                                                                secondTextField.focus = true;
+                                                                            }
+                                                        }
+                                                    }
 
-                                    SButton {
-                                        property bool isPressed: false
-                                        width: parent.width * 0.45
-                                        height: 50
-                                        // Remove Layout.rightMargin, instead use anchors for proper placement
-                                        Layout.bottomMargin: 10 // Bottom margin for spacing
-                                        name: "Unlock"
-                                        baseColor: isPressed ? "green" : buttonBg
-                                        borderColor: blue
-                                        
-                                        // Align the button to the rightmost of the parent
-                                        anchors.right: parent.right // Anchors the right side of the button to the right side of the parent
-                                        anchors.bottom: parent.bottom // Anchors the bottom side of the button to the bottom of the parent
-
-                                        onClicked: {
-                                            secondTextField.readOnly = false; 
-                                            secondTextField.focus = true;
-                                        }
-                                    }
-
+                                   
                                 
+                                             }
+
                                             }
+                                       }
 
-                                      }
-                                    }
+                                }
+
+                        }
+
+                        Rectangle {
+                              implicitWidth:( widthScreen * 0.15)
+                              implicitHeight: heightScreen * 0.25
+                              border.color: borderSecondBg
+                              color: secondBg
+                              radius: 15
+
+                              ColumnLayout{
+                                  anchors.fill: parent
+                                  anchors.topMargin: 10
+                                  Text {
+                                      Layout.fillWidth: true
+                                      text: qsTr("Set Velocity")
+                                      font.family: "Tahoma"
+                                      font.bold: true
+                                      font.pixelSize: 24
+                                       color: textColor
+                                      verticalAlignment: Text.AlignVCenter
+                                      horizontalAlignment: Text.AlignHCenter
+                                  }
+                                  Text {
+                                      Layout.fillWidth: true
+                                      text: "Linear " +Math.round(publisher.speedsetting) + "<b style='font-size: 18px;'> mm/s<b>"
+                                      font.family: "Tahoma"
+                                      font.bold: true
+                                      font.pixelSize: 18
+                                       color: textColor
+                                      verticalAlignment: Text.AlignVCenter
+                                      horizontalAlignment: Text.AlignHCenter
+                                  }
+                                  Text {
+                                      Layout.fillWidth: true
+                                      text: "Angular " + publisher.anglesetting + "<b style='font-size: 18px;'> Deg/s<b>"
+                                      font.family: "Tahoma"
+                                      font.bold: true
+                                      font.pixelSize: 18
+                                       color: textColor
+                                      verticalAlignment: Text.AlignVCenter
+                                      horizontalAlignment: Text.AlignHCenter
+                                  }
+                                //    Text {
+                                //     width: parent.width * 0.8
+                                //     height: parent.height
+                                //     textFormat: Text.RichText
+                                //     text:publisher.velocityValue + "<b style='font-size: 20px;'> mm/s<b>"
+                                //     font.family: "Tahoma"
+                                //     font.bold: true
+                                //     font.pixelSize: 60
+                                //     color: textColor
+                                //     verticalAlignment: Text.AlignVCenter
+                                //     horizontalAlignment: Text.AlignHCenter
+                                // }
 
 
+                                 }
 
-
-                                 
-
-                              }
-
-                          }
+                        }
 
 
                 }
@@ -2020,33 +1729,28 @@ Rectangle{
                         radius: 15
 
                         MediaPlayer {
-                            id: videoPlayer
+                        id: videoPlayer
 
-                            muted: true
-                            autoPlay: true
-                            //                            playlist: Playlist {
-                            //                                PlaylistItem { source: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4" }
-                            //                                PlaylistItem { source: "http://212.67.236.61/mjpg/video.mjpg?camera=1&timestamp=1561621294984"}
-                            //                                PlaylistItem { source: "http://195.196.36.242/mjpg/video.mjpg" }
-                            //                            }
-                            playlist: Playlist {
-                                   PlaylistItem { source:"gst-pipeline: udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! videoflip method=5 ! videoscale ! video/x-raw, width=(int)1280, height=(int)720 ! autovideosink"}
-
+                        muted: true
+                        autoPlay: true
+                        playlist: Playlist {
+                            PlaylistItem {
+                                source: "gst-pipeline: udpsrc port=5000 ! application/x-rtp,encoding-name=H264,payload=96 ! rtph264depay ! avdec_h264 ! videoconvert ! videoflip method=0 ! videoscale ! video/x-raw, width=(int)1280, height=(int)720 ! autovideosink"
                             }
-
                         }
+                    }
 
 
                         VideoOutput {
                             id: camera
                             anchors.fill: parent
                             source: videoPlayer
-                            fillMode:VideoOutput.PreserveAspectCrop
+                            fillMode: VideoOutput.PreserveAspectCrop
 
                             function save() {
                                 fullScreenRect.visible = true
                                 fullScreenView.enabled = true
-                                full_cam= arrange_cam[0]
+                                full_cam = arrange_cam[0]
                                 fullScreenView.sourceItem = camera
                                 fullScreenView.save()
                                 fullScreenRect.visible = false
@@ -2090,7 +1794,6 @@ Rectangle{
                                     }
 
                                     onClicked: {
-//                                        demo.gstRecord("Recording...");
 
                                          btnON1.text = "Recording Started";
 
@@ -2181,17 +1884,7 @@ Rectangle{
 
 
                     }
-                    // ColumnLayout{
-                    //     width: widthScreen 
-                    //     height: heightScreen * 0.90
-
-                        
-
-                       
-                        // RowLayout{
-                        //     implicitHeight: ((heightScreen * 0.90)/3 )
-                        //     implicitWidth: widthScreen 
-                        //     spacing: 1 
+ 
                             
                             Rectangle {
                                 id: gridRectangle
@@ -2202,58 +1895,78 @@ Rectangle{
                                 color: secondBg
                                 radius: 15
                                 // Grid container (GridLayout for a grid of items)
-                                Grid {
-                                    id: gridid
-                                    anchors.fill: parent
-                                    columns: publisher.cyclesval
-                                    rows: publisher.cyclesval
+    //                             Grid {
+    //                                 id: gridid
+    //                                 anchors.fill: parent
+    //                                 columns: publisher.cyclesval
+    //                                 rows: publisher.cyclesval
                                     
-                                    spacing: 1
-                                    // Repeater will create 25 rectangles
-                                //     property var arr: (function() {
-                                //     var size = 25; // Total number of items
-                                //     var result = [];
-                                    
-                                //     for (var i = 0; i < size; i++) {
-                                //         // Generate a random value (string) for each item, e.g., "Item X"
-                                //         result.push(Math.floor(Math.random() * 100)); // Random number between 0 and 100
-                                //     }                                    
-                                //     return result;
-                                // })()
+    //                                 spacing: 1
+                               
 
-                                    Repeater {
-                                        model: publisher.cyclesval * publisher.cyclesval // Total number of items
-                                        // Rectangle {
-                                        //     width: parent.width / publisher.cyclesval // Set width dynamically based on grid size
-                                        //     height: parent.height / publisher.cyclesval // Set height dynamically based on grid size
-                                        //     color: Qt.rgba(1, 0, 0, 1)
-                                        //     // Set a border for each rectangle (optional)
-                                        //     border.color: "black"
-                                        //    text: {
-                                        //         var words = publisher.ut_arrayValue.split(" ").filter(function(item) { return item.trim() !== ""; });
-                                        //         return words[index] !== undefined ? words[index] : "";
-                                        //     }
-                                        //    }
+    //                                 Repeater {
+    //                                     model: publisher.cyclesval * publisher.cyclesval // Total number of items
+                                       
 
-                                        Rectangle {
-                                           width: parent.width / publisher.cyclesval // Set width dynamically based on grid size
-                                           height: parent.height / publisher.cyclesval // Set height dynamically based on grid size
-                                           color: Qt.rgba(1, , 0, 1) // Set color of the rectangle
-                                           border.color: "black" // Set border for each rectangle (optional)
+    //                                     Rectangle {
+    //                                        width: parent.width / publisher.cyclesval 
+    //                                        height: parent.height / publisher.cyclesval 
+    //                                        color: Qt.rgba(0, 0, 0.5, 1)
+    //                                        border.color: "black" 
 
-                                         Text {
-                                          anchors.centerIn: parent // Center the text within the rectangle
-                                          // Split the string into words and filter out empty strings
-                                          text: {
-                                            var words = publisher.ut_arrayValue.split(" ").filter(function(item) { return item.trim() !== ""; });
-                                            return words[index] !== undefined ? words[index] : ""; // Return word at the current index, or empty string if not found
-                                       }
-                                            color: "white" // Set text color
-                                            font.pixelSize: parent.width*0.45 // Set text size dynamically based on the rectangle width
-        }
-    }
+    //                                      Text {
+    //                                       anchors.centerIn: parent
+                                          
+    //                                       text: {
+    //                                         var words = publisher.ut_arrayValue.split(" ").filter(function(item) { return item.trim() !== ""; });
+    //                                         return words[index] !== undefined ? words[index] : ""; // Return word at the current index, or empty string if not found
+    //                                          }
+    //                                         color: "white" // Set text color
+    //                                         font.pixelSize: parent.width*0.45 // Set text size dynamically based on the rectangle width
+    //                                       }
+    // }
+    //                                 }
+    //                              }
+                                    Grid {
+                                        id: gridid
+                                        anchors.fill: parent
+                                        columns: publisher.cyclesval
+                                        rows: publisher.cyclesval
+                                        spacing: 1
+
+                                        Repeater {
+                                            model: publisher.cyclesval * publisher.cyclesval // Total number of items
+
+                                            Rectangle {
+                                                width: parent.width / publisher.cyclesval
+                                                height: parent.height / publisher.cyclesval
+                                                color: {
+                                                    // Retrieve the corresponding value from the publisher array (assuming the array is a string of space-separated values)
+                                                    var words = publisher.ut_arrayValue.split(" ").filter(function(item) { return item.trim() !== ""; });
+                                                    var value = words[index]; // Get the value at the current index
+                                                    
+                                                    // Check if the value is "0.00"
+                                                    if (value === "0.00") {
+                                                        return "red";  // Set color to red if the value is 0.00
+                                                    } else {
+                                                        return "green"; // Otherwise, set the color to green
+                                                    }
+                                                }
+                                                border.color: "black" // Set border color
+
+                                                Text {
+                                                    anchors.centerIn: parent
+                                                    text: {
+                                                        var words = publisher.ut_arrayValue.split(" ").filter(function(item) { return item.trim() !== ""; });
+                                                        return words[index] !== undefined ? words[index] : ""; // Return word at the current index, or empty string if not found
+                                                    }
+                                                    color: "white" // Set text color
+                                                    font.pixelSize: parent.width * 0.45 // Set text size dynamically based on the rectangle width
+                                                }
+                                            }
+                                        }
                                     }
-                                 }
+
                      
                             }
 

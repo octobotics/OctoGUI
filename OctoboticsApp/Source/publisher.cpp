@@ -62,28 +62,30 @@ Publisher::Publisher(QObject *parent )
     m_angleValue = 0;
 
     m_pause_treeValue = 0;
-    // m_emValue = 0; 
+    // m_emValue = 0;
     m_abort_grid_mappingValue = 0;
     m_start_grid_scanningrValue = 0;
 
     m_startGridScanValue = 0;
     m_stopGridScanValue = 0;
-    
+
     //ut_thickness
-    m_ut_thickness = 500;
+    m_ut_thickness = 0.00;
     //gridnum
     m_gridnumValue = 0;
 
-    //ut value 
-    m_ut_array  = "2.3 3.3 34 432 433 43 32 43";
+    //ut value
+    m_ut_array  = "";
 
-    
+
     front = 0;
     rear = 0;
     size = 0;
     capacity = 144;
-    
-    
+
+    //m_utMatrix =
+    i_ut_index = 0;
+    j_ut_index = 0;
 
 
 
@@ -236,6 +238,12 @@ void Publisher::initRosThread()
 
 
     connect(this, SIGNAL(utValCallbackSignal(QString)), this, SLOT(utValCallbackSlot(QString)));
+    connect(this, SIGNAL(value97(int)), this->rost, SLOT(rasterScanSrv(int)));
+
+    // botservice
+    connect(this, SIGNAL(botServiceSignal(int)), this->rost, SLOT(botServiceSlotSrv(int)));
+
+
 
     this->rost->start();
 }
@@ -563,13 +571,44 @@ void Publisher::setnegval(QString value)
 void Publisher::setcyclesval(QString value)
 {
     m_cyclesval = value;
-     bool ok =  false; 
+     bool ok =  false;
     size  = m_cyclesval.toInt(&ok);
 
    queue.resize(size*size);
    fill(queue.begin(), queue.end(), 0.0f);
 
-   
+   std::random_device rd;
+   std::mt19937 gen(rd());
+   std::uniform_int_distribution<> dis(1, 100);
+
+   vec.resize(size);
+   j_ut_index = 0;
+   i_ut_index = 0;
+   for (int i = 0; i < size; ++i) {
+        vec[i].resize(size);
+        for (int j = 0; j < size; ++j) {
+            vec[i][j] = 0;
+        }
+    }
+
+
+        for (const auto& row : vec) {
+        for (int val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::vector<float> flatVector;
+
+    // Flatten the matrix into the vector
+    for (const auto& row : vec) {
+        for (int val : row) {
+            flatVector.push_back(val);
+        }
+    }
+
+    QString utValString = convertVectorToQString(flatVector);
+    utValCallbackSignal(utValString);
    emit cyclesvalValueChanged(value);
 }
 
@@ -1088,7 +1127,7 @@ int Publisher::getpause_treeValue()
 // {
 //  m_emValue = val4;
 //     emit emValueChanged("val4");
-    
+
 // }
 
 // int Publisher::getemValue()
@@ -1137,16 +1176,16 @@ void Publisher::startGridScan(bool flag)
 
 
 void Publisher::setstartGridScanValue(bool flag)
-	{
-	    m_startGridScanValue = flag;
-	    emit startGridScanValueChanged(flag);
-	}
+    {
+        m_startGridScanValue = flag;
+        emit startGridScanValueChanged(flag);
+    }
 
 
 bool Publisher::getstartGridScanValue()
-	{
-	    return m_startGridScanValue;
-	}
+    {
+        return m_startGridScanValue;
+    }
 
 void Publisher::stopGridScan(bool flag)
 {
@@ -1155,19 +1194,23 @@ void Publisher::stopGridScan(bool flag)
 
 
 void Publisher::setstopGridScanValue(bool flag)
-	{
+    {
         m_stopGridScanValue = flag;
         emit stopGridScanValueChanged(flag);
-	}
+    }
 
 
 bool Publisher::getstopGridScanValue()
-	{
-	    return m_stopGridScanValue;
-	}
-	
+    {
+        return m_stopGridScanValue;
+    }
 
-// call_grid_scan
+
+// raster Scan
+
+void Publisher::call_raster_scan(int val)
+{    emit value97(val);
+}
 
 void Publisher::call_save_CSV(int val)
 {    emit value98(val);
@@ -1181,7 +1224,7 @@ void Publisher::call_save_CSV(int val)
 
 void Publisher::exportToCSV(const std::vector<std::vector<std::string>>& table, const std::string& filename) {
     std::ofstream outFile(filename);
-    
+
     // Check if the file is open
     if (!outFile.is_open()) {
         std::cerr << "Error opening file!" << std::endl;
@@ -1216,20 +1259,140 @@ float Publisher::get_ut_thicknessValue()
 }
 void Publisher::set_ut_thicknessValue(float thickness)
 {
-    m_ut_thickness = thickness;
+    float ut_curr_val ;
+    // float random_value = (rand() % 100) / 100.0;
+    m_ut_thickness = thickness;//(thickness % 100) / 100.0; // thickness;
+    //qDebug()<<thickness;
+   // emit ut_thicknessValueChanged(thickness);
+    // int intValue = static_cast<int>(thickness);
+    // // if (queue.size() == size) {
+    // //         queue.erase(queue.begin());  // Remove the front element
+    // //     }
+    // int m = m_cyclesval.toInt();
+    // if (queue.size() >0){
+    //    queue.erase(queue.begin());
+    // }
+    // queue.push_back(thickness* 1.0f);
+    // QString utValString = convertVectorToQString(queue);
 
-    emit ut_thicknessValueChanged(thickness);
-    int intValue = static_cast<int>(thickness);
-    // if (queue.size() == size) {
-    //         queue.erase(queue.begin());  // Remove the front element
+    //vec[1][1] = 42;
+
+    std::random_device rd;
+    std::mt19937 gen(rd()); // Mersenne Twister engine
+    std::uniform_real_distribution<> dis(1.0, 100.0);
+
+    //  for (int i = 0; i < vec.size(); i++) {
+    //     for (int j = 0; j < vec[i].size(); j++) {
+    //         vec[i][j] = thickness;  // Assign the thickness value to each element
     //     }
-    int m = m_cyclesval.toInt();
-    if (queue.size() >0){
-       queue.erase(queue.begin());
+    // }
+    // qDebug()<< "i = ";
+    // qDebug()<< i_ut_index;
+    // qDebug()<< "j = ";
+    // qDebug()<< j_ut_index;
+
+
+    // if (i_ut_index== size && j_ut_index==size){
+    //     saveCSVAuto();
+    //     i_ut_index = 0;
+    //     j_ut_index = 0;
+    //     vec.resize(size);
+        // for (int i = 0; i < size; ++i) {
+        //         vec[i].resize(size);
+        //         for (int j = 0; j < size; ++j) {
+        //             vec[i][j] = 0;
+        //         }
+        // }
+    // }
+    // else{
+    // // if (vec.size()>1){
+
+    // // vec[i_ut_index][j_ut_index] = thickness;
+    // // ut_curr_val  = vec[i_ut_index][j_ut_index];
+    // // emit ut_thicknessValueChanged(ut_curr_val);
+    // // if(vec.size()-1>j_ut_index){
+    // //     j_ut_index++;
+    // // }
+    // // else{
+    // //     j_ut_index = 0;
+    // //     i_ut_index++;
+    // // }
+    // // }
+
+    // }
+
+
+
+    if (i_ut_index == size-1 && j_ut_index == size-1) {
+        // emit ut_thicknessValueChanged(ut_curr_val);
+
+        vec[i_ut_index][i_ut_index] = thickness;
+        ut_curr_val = vec[i_ut_index][j_ut_index];
+        emit ut_thicknessValueChanged(ut_curr_val);  
+        //qDebug()<<ut_curr_val;
+
+
+        saveCSVAuto(vec);  // Save the data when the matrix is full
+        i_ut_index = 0;  // Reset row index
+        j_ut_index = 0;  // Reset column 
+        std::vector<float> flatVector;
+        // Flatten the matrix into the vector
+        for (const auto& row : vec) {
+            for (float val : row) {
+                flatVector.push_back(val);
+            }
+        }
+        std::reverse(flatVector.begin(), flatVector.end());
+
+        QString utValString = convertVectorToQString(flatVector);
+        utValCallbackSignal(utValString);
+     
+        // Resize the matrix (clear it and set all elements to 0)
+        vec.resize(size);
+        for (int i = 0; i < size; ++i) {
+                vec[i].resize(size);
+                for (int j = 0; j < size; ++j) {
+                    vec[i][j] = 0;
+                }
+        }
+    } else {
+        if (vec.size() > 1) {
+            // Set the value at the current indices
+            vec[i_ut_index][j_ut_index] = thickness;
+            ut_curr_val = vec[i_ut_index][j_ut_index];
+            emit ut_thicknessValueChanged(ut_curr_val);  // Emit the updated value
+            if(j_ut_index<size-1 & i_ut_index<size){
+                j_ut_index++;
+            }
+            else if(i_ut_index<size){
+                j_ut_index = 0;
+                i_ut_index++;
+            }
+             std::vector<float> flatVector;
+        // Flatten the matrix into the vector
+        for (const auto& row : vec) {
+            for (float val : row) {
+                flatVector.push_back(val);
+            }
+        }
+        std::reverse(flatVector.begin(), flatVector.end());
+        QString utValString = convertVectorToQString(flatVector);
+        utValCallbackSignal(utValString);
+            
+        }
     }
-    queue.push_back(thickness* 1.0f);
-    QString utValString = convertVectorToQString(queue);
-    utValCallbackSignal(utValString);
+
+    // std::vector<float> flatVector;
+    // // Flatten the matrix into the vector
+    // for (const auto& row : vec) {
+    //     for (float val : row) {
+    //         flatVector.push_back(val);
+    //     }
+    // }
+    // std::reverse(flatVector.begin(), flatVector.end());
+
+    // QString utValString = convertVectorToQString(flatVector);
+    // utValCallbackSignal(utValString);
     //qDebug()<< intValue;
 }
 
@@ -1249,37 +1412,37 @@ QString Publisher::convertVectorToQString(const std::vector<float>& vec)
 
 
 void Publisher::utThicknessCallback(float thickness)
-	{
-		set_ut_thicknessValue(thickness);
+    {
+        set_ut_thicknessValue(thickness);
 
         // QString may;
         // may = "jk sa k a d k a s k dl a s kd l a k j d l k a s dj ";
         // utValString = convertVectorToQString(queue);
         // utValCallbackSignal(may);
-	}
+    }
 
 
 
 //gridnum
 
 int Publisher::get_gridnumValue()
-	{
-		return m_gridnumValue;
-	}
-	void Publisher::set_gridnumValue(int gridnum)
-	{
-		m_gridnumValue = gridnum;
-		emit gridnumValueChanged(gridnum);
-	}
+    {
+        return m_gridnumValue;
+    }
+    void Publisher::set_gridnumValue(int gridnum)
+    {
+        m_gridnumValue = gridnum;
+        emit gridnumValueChanged(gridnum);
+    }
 
 
 
  void Publisher::gridNumSubCallback(int gridnum)
-	{
+    {
 
-		set_gridnumValue(gridnum);
-	}
-   
+        set_gridnumValue(gridnum);
+    }
+
 
 
 //ut_array
@@ -1291,7 +1454,7 @@ return m_ut_array;
 
 void Publisher::setut_arrayValue( QString ut_array){
 m_ut_array = ut_array;
-qDebug() << ut_array;
+//qDebug() << ut_array;
 ut_arrayValueChanged(ut_array);
 }
 
@@ -1314,6 +1477,16 @@ void Publisher::saveCSV(int value)
    int k = value;
 
     if (k) {
+        saveCSVAuto(vec);
+            }
+            
+    
+}
+
+void Publisher::saveCSVAuto(std::vector<std::vector<float>> vec)
+
+{
+
         // Example CSV data (you can replace this with actual data)
              std::vector<std::vector<float>> data;
             bool ok;
@@ -1325,7 +1498,7 @@ void Publisher::saveCSV(int value)
                 std::vector<float> row(queue.begin() + r * cols, queue.begin() + (r + 1) * cols);
                 data.push_back(row);
             }
-            
+
 
 
             }
@@ -1340,9 +1513,13 @@ void Publisher::saveCSV(int value)
 
                 // Write a timestamp comment at the top of the file
                 outFile << "Ut Value saved: " << timeBuffer << "\n";
+                std::reverse(vec.begin(), vec.end());
+                for (auto& row : vec) {
+                    std::reverse(row.begin(), row.end());
+                }
 
                 // Writing the table data to the CSV file (new data)
-                for (const auto& row : data) {
+                for (const auto& row : vec) {
                     for (size_t i = 0; i < row.size(); ++i) {
                         outFile << row[i];
                         if (i < row.size() - 1) {
@@ -1354,13 +1531,14 @@ void Publisher::saveCSV(int value)
 
                 outFile.close();
                 std::cout << "CSV file saved successfully!" << std::endl;
-            } 
+            }
             else {
-                
+
                 std::cout << "j" << std::endl;
             }
-    }
+    
 }
+
 
 void Publisher::enqueue(float value , std::vector<float> queue) {
         if (size == capacity) {
@@ -1377,7 +1555,7 @@ void Publisher::enqueue(float value , std::vector<float> queue) {
     }
 
     // Method to print the current queue
-    void Publisher::printQueue() {
+void Publisher::printQueue() {
         std::cout << "Queue contents: ";
         for (int i = 0; i < capacity; i++) {
             std::cout << queue[i] << " ";
@@ -1385,13 +1563,13 @@ void Publisher::enqueue(float value , std::vector<float> queue) {
         std::cout << std::endl;
     }
 
-    // Method to check if the queue is empty
-    bool Publisher::isEmpty() {
+  // Method to check if the queue is empty
+bool Publisher::isEmpty() {
         return size == 0;
     }
 
     // Method to check the front element of the queue
-    int Publisher::peek() {
+int Publisher::peek() {
         if (isEmpty()) {
             std::cout << "Queue is empty!" << std::endl;
             return -1; // Return an invalid value for an empty queue
@@ -1400,7 +1578,7 @@ void Publisher::enqueue(float value , std::vector<float> queue) {
     }
 
     // Method to clear the queue
-    void Publisher::clear() {
+void Publisher::clear() {
         size = 0;
         front = 0;
         rear = 0;
@@ -1408,9 +1586,14 @@ void Publisher::enqueue(float value , std::vector<float> queue) {
     }
 
     // Method to resize the queue
-    void Publisher::resize(int new_capacity) {
+void Publisher::resize(int new_capacity) {
         capacity = new_capacity;
         queue.resize(capacity, 0); // Resize and fill new elements with zeros
         clear(); // Reset the state of the queue
     }
 
+
+
+void Publisher::call_botservice(int val){
+    emit botServiceSignal(val);
+}

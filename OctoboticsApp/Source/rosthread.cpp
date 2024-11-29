@@ -103,11 +103,13 @@ void RosThread::run()
     pause_tree = m_nodeHandler->serviceClient<std_srvs::Trigger>("/pause_tree");
     start_grid_scanning_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/start_grid_scanning");
     start_raster_scanning_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/start_raster_scanning");
-    abort_raster_scanning_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/abort_raster_scanning");
-    abort_grid_mapping_srv_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/abort_grid_mapping");
+    abort_raster_scanning_srv_ = m_nodeHandler->serviceClient<std_srvs::SetBool>("/abort_raster_scanning");
+    abort_grid_mapping_srv_    = m_nodeHandler->serviceClient<std_srvs::SetBool>("/abort_grid_mapping");
 
 
-
+    //bot servide
+    bot_reboot_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/bot/reboot_service");
+    bot_shutdown_srv_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/bot/shutdown_service");
 
     lac_cw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/add_three_service");
     lac_ccw_ = m_nodeHandler->serviceClient<std_srvs::Trigger>("/reduce_three_service");
@@ -583,7 +585,6 @@ void RosThread::pos_angle(QString value)
     std_msgs::Int32 msg;
     msg.data = value.toInt();
     pos_angle_pub_.publish(msg);
-
 }
 
 void RosThread::neg_angle(QString value)
@@ -601,9 +602,7 @@ void RosThread::cycles_val(QString value)
     ros::Rate rate(100);
     std_msgs::Int16 msg;
     msg.data = value.toInt();
-
     cycles_pub_.publish(msg);
-    
 
 }
 
@@ -616,7 +615,6 @@ void RosThread::lat_angle (QString value)
     std_msgs::Int32 msg;
     msg.data = value.toInt();
     lat_angle_pub_.publish(msg);
-
 }
 
 void RosThread::slideCCW(int value)
@@ -630,13 +628,10 @@ void RosThread::slideCCW(int value)
         emit slideCCW(0);
         if (b.response.success){
             qDebug() << "Slider DeActivated";
-
-
         }
         else {
             qDebug() << "Moving";
             emit slideCCW(0);
-
         }
     }
 }
@@ -957,9 +952,6 @@ void RosThread::pause_treeSrv(int val4)
 //         // }
 // }
 
-
-
-
 void RosThread::gridScanSrv(int value)
 
 {
@@ -986,7 +978,7 @@ void RosThread::gridScanSrv(int value)
         p.request.data = true;
         abort_grid_mapping_srv_.call(p);
         if (p.response.success){
-            qDebug() << "stopped crawler";
+            // qDebug() << "";
             emit stopGridScan(1);
         }
         else {
@@ -998,67 +990,37 @@ void RosThread::gridScanSrv(int value)
     }
 }
 
-//  saveCSV
 
-// void RosThread::saveCSV(int value)
+void RosThread::rasterScanSrv(int value)
 
-// {
-//    int k = value;
-
-//     if (k) {
-//         // Example CSV data (you can replace this with actual data)
-//         std::vector<std::vector<std::string>> data ;
-//         int rows = 5;
-//         int cols =rows;
-
-//         // Loop to populate the data vector with strings
-//         for (int i = 0; i < rows; ++i) {
-//             std::vector<std::string> row;
-            
-//             for (int j = 0; j < cols; ++j) {
-//                 // Generate a random number as a string (for example, random number between 1 and 100)
-//                 int randomValue = rand() % 10 + 1;
-                
-//                 // Convert the random number to a string and store it in the row
-//                 row.push_back(std::to_string(randomValue));
-//             }
-            
-//             // Add the row to the data vector
-//             data.push_back(row);
-//         }
-//         // Open the file in append mode
-//         std::ofstream outFile("/home/octo/output.csv", std::ios::app);
-
-//         if (outFile.is_open()) {
-//             // Get the current date and time
-//             std::time_t currentTime = std::time(nullptr);
-//             char timeBuffer[100];
-//             std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&currentTime));
-
-//             // Write a timestamp comment at the top of the file
-//             outFile << "Ut Value saved: " << timeBuffer << "\n";
-
-//             // Writing the table data to the CSV file (new data)
-//             for (const auto& row : data) {
-//                 for (size_t i = 0; i < row.size(); ++i) {
-//                     outFile << row[i];
-//                     if (i < row.size() - 1) {
-//                         outFile << ","; // Add comma separator
-//                     }
-//                 }
-//                 outFile << "\n"; // Newline after each row
-//             }
-
-//             outFile.close();
-//             std::cout << "CSV file saved successfully!" << std::endl;
-//         } else {
-            
-//             std::cout << "j" << std::endl;
-//         }
-//     }
-// }
+{
+    int k = value;
+    std_srvs::Trigger b;
+    std_srvs::SetBool p;
+    if(k){
+    qDebug() << "Start Raster Sacn";
+    p.request.data = false;
+    joystickonoff_.call(p);
+    qDebug()<<p.response.success;
+    crawler_stop_srv_.call(b);
+    qDebug()<<b.response.success;
+    start_raster_scanning_srv_.call(b);
+    qDebug()<<b.response.success;
 
 
+
+
+    }
+    else{
+     //std_srvs::SetBool p;
+     qDebug() << "Stop Raster Scan ";
+     p.request.data = true;
+     abort_raster_scanning_srv_.call(p);
+     qDebug()<<p.response.success;
+
+
+    }
+}
 
 
 // ut_thickness
@@ -1066,6 +1028,14 @@ void RosThread::gridScanSrv(int value)
 void RosThread::utThicknessCallback(const std_msgs::Float64::ConstPtr &msg)
 {
     float thickness = msg->data;
+    // thickness = thickness*100;
+    // int kthickness = thickness;
+    // thickness = kthickness/100+ kthickness%100;
+
+    thickness = round(thickness * 100.0) / 100.0;  // Rounds to 2 decimal places
+
+int kthickness = static_cast<int>(thickness * 100);  // Convert to integer after rounding
+thickness = static_cast<float>(kthickness) / 100.0;
 	emit utThicknessCallback(thickness);
     
 }
@@ -1078,3 +1048,28 @@ void RosThread::gridNumSubCallback(const std_msgs::Int32::ConstPtr &msg)
     
 }
 	
+
+
+// bot service
+
+void RosThread::botServiceSlotSrv(int val){
+    int k = val;
+    std_srvs::Trigger b;
+
+    if (k == 1){
+        if (bot_reboot_srv_.call(b)) {
+            ROS_INFO("Reboot service called successfully.");
+        } else {
+            ROS_ERROR("Failed to call reboot service.");
+        }
+    }
+    else if (k == 2){
+        if (bot_shutdown_srv_.call(b)) {
+            ROS_INFO("Shutdown service called successfully.");
+        } else {
+            ROS_ERROR("Failed to call shutdown service.");
+        }
+    } else {
+        ROS_WARN("Invalid value for bot service: %d", k);
+    }
+}

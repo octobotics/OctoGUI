@@ -23,6 +23,8 @@
 #include <QThread>
 #include <vector>
 #include <QVector>
+#include <QMatrix>
+
 
 /*!
  * \brief The Publisher class acts as a mediator between ros node and our qml page.
@@ -126,6 +128,11 @@ class Publisher : public QObject
 
     //ut_array
     Q_PROPERTY(QString ut_arrayValue READ getut_arrayValue WRITE setut_arrayValue NOTIFY ut_arrayValueChanged)
+
+
+
+
+
         
 
     
@@ -380,6 +387,9 @@ public slots:
     // grid scan
     void call_grid_scan(int val);
 
+    //raster scan
+    void call_raster_scan(int val); 
+
 
     void startGridScan(bool k);
     void setstartGridScanValue(bool k);
@@ -412,6 +422,12 @@ public slots:
     void saveCSV(int value);
 
     void utValCallbackSlot(QString ut_array);
+
+    // bot services
+
+    void call_botservice(int val);
+
+
 
 
 
@@ -542,15 +558,24 @@ signals:
 
 
     // ut_thickness
-
     void ut_thicknessValueChanged(float thickness);
-        // gridnum
+
+    // gridnum
     void gridnumValueChanged(int gridnum);
 
     //ut_array
     void ut_arrayValueChanged(QString ut_array);
 
     void utValCallbackSignal(QString ut_array);
+
+    // raster scan 
+    void value97(int value);
+
+    // botservicesignal
+    void botServiceSignal(int val);
+
+
+
 
 public :
     std::vector<float> queue;
@@ -645,6 +670,12 @@ private:
     QVector<int> m_tempValue;
     QVector<QString> m_uidValue;
     QString m_ut_array;
+
+    std::vector<std::vector<float>> vec;
+    int i_ut_index ;
+    int j_ut_index  ;
+    void saveCSVAuto(std::vector<std::vector<float>> vec);
+
 
 
     
